@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
-import { urlFor } from "../../client";
 
 const CustomNumberedList = ({ children }) => {
   let currentNumber = 1;
@@ -123,5 +122,4 @@ const RichTextComponent = ({ content }) => {
   return <PortableText value={content} components={PortableTextComponent} />;
 };
 
-export { PortableTextComponent as RichTextComponent };
 export default RichTextComponent;

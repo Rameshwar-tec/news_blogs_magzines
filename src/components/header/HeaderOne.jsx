@@ -6,89 +6,77 @@ import SocialLink from "../../data/social/SocialLink.json";
 import MenuData from "../../data/menu/HeaderMenu.json";
 import OffcanvasMenu from "./OffcanvasMenu";
 
-const HeaderOne = () => {
-  // Main Menu Toggle
-  var menuRef = useRef();
-
-  const toggleDropdownMenu = () => {
-    const dropdownSelect = menuRef.current.childNodes;
-    let dropdownList = [];
-
-    for (let i = 0; i < dropdownSelect.length; i++) {
-      const element = dropdownSelect[i];
-      if (element.classList.contains("has-dropdown")) {
-        dropdownList.push(element);
-      }
-    }
-
-    dropdownList.forEach((element) => {
-      element.children[0].addEventListener("click", () => {
-        if (element.classList.contains("active")) {
-          element.classList.remove("active");
-          element.childNodes[1].classList.remove("opened");
-        } else {
-          dropdownList.forEach((submenu) => {
-            if (element !== submenu) {
-              submenu.classList.remove("active");
-              submenu.childNodes[1].classList.remove("opened");
-            } else {
-              submenu.classList.add("active");
-              submenu.childNodes[1].classList.add("opened");
-            }
-          });
-        }
-      });
-    });
-  };
+const HeaderOne = ({ searchValue = "", setSearchValue = () => {} }) => {
+  const menuRef = useRef(null);
 
   useEffect(() => {
-    toggleDropdownMenu();
+    // safe dropdown toggle: only attach listeners if menuRef exists
+    const menuEl = menuRef.current;
+    if (!menuEl) return;
+    const items = Array.from(menuEl.childNodes || []).filter((n) => n.classList && n.classList.contains("has-dropdown"));
+    const handlers = [];
+
+    items.forEach((el) => {
+      const link = el.children[0];
+      const fn = (e) => {
+        e.preventDefault();
+        if (el.classList.contains("active")) {
+          el.classList.remove("active");
+          el.childNodes[1]?.classList?.remove("opened");
+        } else {
+          items.forEach((s) => {
+            s.classList.remove("active");
+            s.childNodes[1]?.classList?.remove("opened");
+          });
+          el.classList.add("active");
+          el.childNodes[1]?.classList?.add("opened");
+        }
+      };
+      link?.addEventListener("click", fn);
+      handlers.push({ link, fn });
+    });
+
+    return () => {
+      // cleanup listeners
+      handlers.forEach(({ link, fn }) => link?.removeEventListener("click", fn));
+    };
   }, []);
 
-  // Offcanvas Menu
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [local, setLocal] = useState(searchValue || "");
 
-  // Header Search
-  const [searchshow, setSearchShow] = useState(false);
+  useEffect(() => {
+    // keep local input in sync when parent updates searchValue
+    setLocal(searchValue || "");
+  }, [searchValue]);
 
-  const headerSearchShow = () => {
-    setSearchShow(true);
-  };
+  const headerSearchShow = () => setSearchOpen(true);
   const headerSearchClose = () => {
-    setSearchShow(false);
+    setSearchOpen(false);
+    setLocal("");
+    setSearchValue("");
   };
 
-  // Mobile Menu Toggle
-  const [mobileToggle, setMobileToggle] = useState(false);
+  const handleSearchChange = (e) => {
+    const v = e.target.value;
+    setLocal(v);
+    setSearchValue(v);
+  };
 
+  const [mobileToggle, setMobileToggle] = useState(false);
   const MobileMenuToggler = () => {
     setMobileToggle(!mobileToggle);
     const HtmlTag = document.querySelector("html");
-    const menuSelect = document.querySelectorAll(".main-navigation li");
-
-    if (HtmlTag.classList.contains("main-menu-opened")) {
-      HtmlTag.classList.remove("main-menu-opened");
-    } else {
-      setTimeout(() => {
-        HtmlTag.classList.add("main-menu-opened");
-      }, 800);
+    if (HtmlTag) {
+      if (HtmlTag.classList.contains("main-menu-opened")) HtmlTag.classList.remove("main-menu-opened");
+      else setTimeout(() => HtmlTag.classList.add("main-menu-opened"), 200);
     }
-
-    menuSelect.forEach((element) => {
-      element.addEventListener("click", function () {
-        if (!element.classList.contains("has-dropdown")) {
-          HtmlTag.classList.remove("main-menu-opened");
-          setMobileToggle(false);
-        }
-      });
-    });
   };
 
   return (
     <>
-      <OffcanvasMenu ofcshow={show} ofcHandleClose={handleClose} />
+      <OffcanvasMenu ofcshow={show} ofcHandleClose={() => setShow(false)} />
       <header className="page-header sticky-top">
         <div className="header-top bg-grey-dark-one">
           <div className="container">
@@ -96,128 +84,63 @@ const HeaderOne = () => {
               <div className="col-md">
                 <ul className="header-top-nav list-inline justify-content-center justify-content-md-start">
                   <li className="current-date">{dateFormate()}</li>
-
-                  <li>
-                    <Link href="/about-us">About</Link>
-                  </li>
-                  <li>
-                    <Link href="/contact">Contact</Link>
-                  </li>
-                  <li>
-                    <Link href="/advertise-with-us">Advertise With Us</Link>
-                  </li>
+                  <li><Link href="/about-us">About</Link></li>
+                  <li><Link href="/contact">Contact</Link></li>
+                  <li><Link href="/advertise-with-us">Advertise With Us</Link></li>
                 </ul>
               </div>
               <div className="col-md-auto">
                 <ul className="ml-auto social-share header-top__social-share">
-                  <li>
-                    <a href={SocialLink.fb.url}>
-                      <i className={SocialLink.fb.icon} />
-                    </a>
-                  </li>
-                  <li>
-                    <a href={SocialLink.twitter.url}>
-                      <i className={SocialLink.twitter.icon} />
-                    </a>
-                  </li>
-                  <li>
-                    <a href={SocialLink.instagram.url}>
-                      <i className={SocialLink.instagram.icon} />
-                    </a>
-                  </li>
-                  <li>
-                    <a href={SocialLink.linked.url}>
-                      <i className={SocialLink.linked.icon} />
-                    </a>
-                  </li>
+                  {Object.values(SocialLink).map((s, i) => (
+                    <li key={i}><a href={s.url}><i className={s.icon} /></a></li>
+                  ))}
                 </ul>
               </div>
             </div>
           </div>
         </div>
+
         <nav className="navbar bg-white">
           <div className="container">
             <div className="navbar-inner">
               <div className="brand-logo-container">
-                <Link href="/">
-                  <Image
-                    src="/logos/logo-primary.png"
-                    alt="brand-logo"
-                    width={300}
-                    height={100}
-                    style={{ objectFit: "contain" }}
-                  />
-                </Link>
+                <Link href="/"><Image src="/logos/logo-primary.png" alt="brand-logo" width={300} height={100} style={{ objectFit: "contain" }} /></Link>
               </div>
+
               <div className="main-nav-wrapper">
                 <ul className="main-navigation list-inline" ref={menuRef}>
-                  {MenuData.map((data, index) =>
-                    data.submenu ? (
-                      <li className="has-dropdown" key={index}>
-                        <Link href={data.path}>{data.label}</Link>
-                        <ul className="submenu">
-                          {data.submenu.map((data, index) => (
-                            <li key={index}>
-                              <Link href={data.subpath}>{data.sublabel}</Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </li>
-                    ) : (
-                      <li key={index}>
-                        <Link href={data.path}>{data.label}</Link>
-                      </li>
-                    )
-                  )}
+                  {MenuData.map((item, i) => item.submenu ? (
+                    <li className="has-dropdown" key={i}>
+                      <Link href={item.path}>{item.label}</Link>
+                      <ul className="submenu">
+                        {item.submenu.map((s, idx) => <li key={idx}><Link href={s.subpath}>{s.sublabel}</Link></li>)}
+                      </ul>
+                    </li>
+                  ) : <li key={i}><Link href={item.path}>{item.label}</Link></li>)}
                 </ul>
               </div>
+
               <div className="navbar-extra-features ml-auto">
-                <form
-                  action="#"
-                  className={`navbar-search ${
-                    searchshow ? "show-nav-search" : ""
-                  }`}
-                >
+                <div className={`navbar-search ${searchOpen ? "show-nav-search" : ""}`}>
                   <div className="search-field">
                     <input
                       type="text"
                       className="navbar-search-field"
-                      placeholder="Search Here..."
+                      placeholder="Search magazines..."
+                      value={local}
+                      onChange={handleSearchChange}
+                      onFocus={() => setSearchOpen(true)}
                     />
-                    <button className="navbar-search-btn" type="button">
-                      <i className="fal fa-search" />
-                    </button>
                   </div>
-                  <span
-                    className="navbar-search-close"
-                    onClick={headerSearchClose}
-                  >
-                    <i className="fal fa-times" />
-                  </span>
-                </form>
-
-                <button
-                  className="nav-search-field-toggler"
-                  onClick={headerSearchShow}
-                >
-                  <i className="far fa-search" />
-                </button>
-                <button className="side-nav-toggler" onClick={handleShow}>
-                  <span />
-                  <span />
-                  <span />
-                </button>
-              </div>
-              <div
-                className={`main-nav-toggler d-block d-lg-none ${
-                  mobileToggle ? "expanded" : ""
-                }`}
-              >
-                <div className="toggler-inner" onClick={MobileMenuToggler}>
-                  <span />
-                  <span />
-                  <span />
+                  <span className="navbar-search-close" onClick={headerSearchClose}><i className="fal fa-times" /></span>
                 </div>
+
+                <button className="nav-search-field-toggler" onClick={headerSearchShow}><i className="far fa-search" /></button>
+                <button className="side-nav-toggler" onClick={() => setShow(true)}><span/><span/><span/></button>
+              </div>
+
+              <div className={`main-nav-toggler d-block d-lg-none ${mobileToggle ? "expanded" : ""}`}>
+                <div className="toggler-inner" onClick={MobileMenuToggler}><span/><span/><span/></div>
               </div>
             </div>
           </div>

@@ -161,7 +161,7 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  const slugsQuery = `*[_type == "magazine" && defined(slug.current)].slug.current`;
+  const slugsQuery = `*[_type == "magazine"].slug.current`;
   const slugs = await client.fetch(slugsQuery);
 
   const paths = slugs.map((slug) => ({
