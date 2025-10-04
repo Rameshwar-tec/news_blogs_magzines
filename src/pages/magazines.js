@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { client } from "../client";
 import Loader from "../components/common/Loader";
 import HeaderOne from "../components/header/HeaderOne";
+import Faq from "../components/FAQ/Faq";
 import FooterTwo from "../components/footer/FooterTwo";
 import PostLayoutformag from "../components/post/layout/PostLayoutformag";
 import HeadMeta from "../components/elements/HeadMeta";
@@ -58,7 +59,7 @@ const Magazines = () => {
 
       <div style={{ width: "100%", minHeight: "100vh", background: "#000" }}>
         {/* Hero / Text Section */}
-        <div
+        {/* <div
           style={{
             width: "100%",
             backgroundImage: `url('/images/mag_bg.jpg')`,
@@ -102,7 +103,7 @@ const Magazines = () => {
               leaders with groundbreaking ideas worldwide.
             </p>
           </div>
-        </div>
+        </div> */}
 
         {/* Year Badge */}
         <div
@@ -167,6 +168,8 @@ const Magazines = () => {
           )}
         </div>
       </div>
+
+      <Faq/>
 
       <FooterTwo />
     </>
