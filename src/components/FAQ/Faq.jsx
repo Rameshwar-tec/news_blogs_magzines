@@ -5,22 +5,22 @@ const FAQSection = () => {
     {
       id: 1,
       question: "How can I read the magazine?",
-      answer: "Dive into our latest digital issues—each one is packed with stunning graphics and animations. Just tap a cover to start exploring. No sign-up needed; everyone's invited."
+      answer: `Dive into our latest digital issues—each one is packed with stunning graphics and animations. Just tap a cover to start exploring. No sign-up needed; everyone's invited.`
     },
     {
       id: 2,
       question: "Who do you feature in each issue?",
-      answer: "We highlight innovators, creators, and leaders from every background—people who are shaping the future. Every edition brings you fresh voices and bold ideas."
+      answer: `We highlight innovators, creators, and leaders from every background—people who are shaping the future. Every edition brings you fresh voices and bold ideas.`
     },
     {
       id: 3,
       question: "Can I share my story or idea?",
-      answer: "Yes! We welcome your vision. If you have a story, insight, or creative spark, connect with us through our contact page. Let's inspire the world together."
+      answer: `Yes! We welcome your vision. If you have a story, insight, or creative spark, connect with us through our contact page. Let's inspire the world together.`
     },
     {
       id: 4,
       question: "What sets your content apart?",
-      answer: "Our stories blend immersive visuals, gold accents, and powerful narratives. Each piece is crafted to ignite curiosity, celebrate vision, and connect dreamers everywhere."
+      answer: `Our stories blend immersive visuals, gold accents, and powerful narratives. Each piece is crafted to ignite curiosity, celebrate vision, and connect dreamers everywhere.`
     }
   ];
 
@@ -48,9 +48,8 @@ const FAQSection = () => {
 
       {/* Inbuilt CSS */}
       <style jsx>{`
-        /* FAQ Section Styles */
         .faq-section {
-          background-color: #000000; /* Completely black background */
+          background-color: #000000; /* Dark black background */
           color: white;
           font-family: var(--primary-font);
           line-height: 1.6;
@@ -115,7 +114,6 @@ const FAQSection = () => {
         .faq-list {
           display: flex;
           flex-direction: column;
-          gap: 0;
         }
 
         .faq-item {
@@ -125,6 +123,7 @@ const FAQSection = () => {
           position: relative;
           overflow: hidden;
           cursor: pointer;
+          animation: fadeInUp 0.6s ease-out;
         }
 
         .faq-item:last-child {
@@ -146,31 +145,34 @@ const FAQSection = () => {
           left: 100%;
         }
 
-         .faq-question {
-           font-size: 1.9rem;
-           color: white;
-           margin-bottom: 1.2rem;
-           transition: all 0.3s ease;
-           font-weight: 700;
-           position: relative;
-           z-index: 1;
-           line-height: 1.4;
-         }
+        .faq-question {
+          font-size: 1.9rem;
+          color: white;
+          margin-bottom: 1.2rem;
+          font-weight: 700;
+          line-height: 1.4;
+          position: relative;
+          z-index: 1;
+          transition: all 0.3s ease;
+        }
 
-         .faq-answer {
-           color: #e0e0e0;
-           font-size: 1.6rem;
-           transition: all 0.3s ease;
-           position: relative;
-           z-index: 1;
-           line-height: 1.8;
-           font-weight: 400;
-         }
+        .faq-answer {
+          color: #e0e0e0;
+          font-size: 1.6rem;
+          line-height: 1.8;
+          position: relative;
+          z-index: 1;
+          transition: all 0.3s ease;
+          font-weight: 400;
+        }
 
-        /* Golden temple hover effect - only for questions */
         .faq-item:hover .faq-question {
           color: #d4af37;
           text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+          background: linear-gradient(45deg, #d4af37, #f4e4bc);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
 
         .faq-item:hover {
@@ -180,73 +182,9 @@ const FAQSection = () => {
           box-shadow: 0 5px 20px rgba(212, 175, 55, 0.15);
         }
 
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-          .faq-section {
-            padding: 4rem 2rem;
-          }
-        }
-
-         @media (max-width: 768px) {
-           .faq-section {
-             padding: 3rem 1.5rem;
-           }
-
-           .faq-title {
-             font-size: 2rem;
-           }
-
-           .faq-subtitle {
-             font-size: 1.1rem;
-             margin-bottom: 2rem;
-           }
-
-           .faq-question {
-             font-size: 1.4rem;
-           }
-
-           .faq-answer {
-             font-size: 1.2rem;
-           }
-
-           .faq-item {
-             padding: 1.5rem 0;
-           }
-         }
-
-         @media (max-width: 480px) {
-           .faq-section {
-             padding: 2rem 1rem;
-           }
-
-           .faq-title {
-             font-size: 1.8rem;
-           }
-
-           .faq-subtitle {
-             font-size: 1rem;
-           }
-
-           .faq-question {
-             font-size: 1.3rem;
-           }
-
-           .faq-answer {
-             font-size: 1.1rem;
-           }
-
-           .faq-item {
-             padding: 1.25rem 0;
-           }
-
-           .faq-item:hover {
-             transform: translateX(5px);
-           }
-         }
-
-        /* Animation for FAQ items */
-        .faq-item {
-          animation: fadeInUp 0.6s ease-out;
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
         }
 
         .faq-item:nth-child(1) { animation-delay: 0.1s; }
@@ -254,29 +192,22 @@ const FAQSection = () => {
         .faq-item:nth-child(3) { animation-delay: 0.3s; }
         .faq-item:nth-child(4) { animation-delay: 0.4s; }
 
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+        @media (max-width: 768px) {
+          .faq-section { padding: 3rem 1.5rem; }
+          .faq-title { font-size: 2rem; }
+          .faq-subtitle { font-size: 1.1rem; margin-bottom: 2rem; }
+          .faq-question { font-size: 1.4rem; }
+          .faq-answer { font-size: 1.2rem; }
+          .faq-item { padding: 1.5rem 0; }
         }
 
-        /* Focus states for accessibility */
-        .faq-item:focus-within {
-          outline: 2px solid #ffd700;
-          outline-offset: 2px;
-        }
-
-        /* Enhanced golden temple glow effect */
-        .faq-item:hover .faq-question {
-          background: linear-gradient(45deg, #d4af37, #f4e4bc);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+        @media (max-width: 480px) {
+          .faq-section { padding: 2rem 1rem; }
+          .faq-title { font-size: 1.8rem; }
+          .faq-subtitle { font-size: 1rem; }
+          .faq-question { font-size: 1.3rem; }
+          .faq-answer { font-size: 1.1rem; }
+          .faq-item { padding: 1.25rem 0; transform: translateX(0); }
         }
       `}</style>
     </>
