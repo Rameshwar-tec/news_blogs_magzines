@@ -1,0 +1,439 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import Slider from "react-slick";
+import { slugify } from "../../utils";
+import { useQuery } from "@tanstack/react-query";
+import { client } from "../../client";
+import ErrorPage from "../../pages/404";
+import Loader from "../common/Loader";
+
+const SliderOne = () => {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["slider-post"],
+    queryFn: async () => {
+      const query = `*[_type == 'post' && featured == true]{
+      title,
+      slug,
+      altText,
+      publishedAt,
+      'featureImg': mainImage.asset->url,
+
+      'cate': categories[0]->title
+    }| order(publishedAt desc) [0...5]`; // Get up to 3 featured posts
+
+      const response = await client.fetch(query);
+      return response;
+    },
+  });
+
+  function SlickNextArrow(props) {
+    const { className, onClick } = props;
+    return (
+      <button className={className} onClick={onClick}>
+        <i className="feather icon-chevron-right"></i>
+      </button>
+    );
+  }
+
+  function SlickPrevArrow(props) {
+    const { className, onClick } = props;
+    return (
+      <button className={className} onClick={onClick}>
+        <i className="feather icon-chevron-left"></i>
+      </button>
+    );
+  }
+
+  const slideSettingsContent = {
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    dots: true,
+  };
+
+  const slideSettingsImage = {
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+    dots: false,
+    nextArrow: <SlickNextArrow />,
+    prevArrow: <SlickPrevArrow />,
+  };
+
+  const slideSettingsShare = {
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    dots: false,
+    vertical: true,
+  };
+
+  const [nav1, setNav1] = useState();
+  const [nav2, setNav2] = useState();
+  const [nav3, setNav3] = useState();
+
+  // Social Share Toggle
+  const ShareToggler = (e) => {
+    const targeElm = e.target.nextElementSibling;
+    targeElm.classList.toggle("show-shares");
+  };
+
+  return (
+    <div className="banner banner__home-with-slider banner__home-with-slider-one section-gap-bottom" style={{
+      background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2a2a2a 100%)',
+      position: 'relative',
+      overflow: 'hidden'
+    }}>
+      {/* Enhanced Background with Gradient Overlay */}
+      <div
+        className="banner__home-with-slider-overlay"
+        style={{ 
+          background: 'linear-gradient(135deg, rgba(174, 134, 37, 0.1) 0%, rgba(0, 0, 0, 0.8) 50%, rgba(174, 134, 37, 0.05) 100%)',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          zIndex: 1
+        }}
+      ></div>
+      
+      {/* Animated Background Elements */}
+      <div style={{
+        position: 'absolute',
+        top: '20%',
+        right: '10%',
+        width: '200px',
+        height: '200px',
+        background: 'radial-gradient(circle, rgba(174, 134, 37, 0.1) 0%, transparent 70%)',
+        borderRadius: '50%',
+        animation: 'float 6s ease-in-out infinite',
+        zIndex: 1
+      }}></div>
+      
+      <div style={{
+        position: 'absolute',
+        bottom: '30%',
+        left: '5%',
+        width: '150px',
+        height: '150px',
+        background: 'radial-gradient(circle, rgba(174, 134, 37, 0.08) 0%, transparent 70%)',
+        borderRadius: '50%',
+        animation: 'float 8s ease-in-out infinite reverse',
+        zIndex: 1
+      }}></div>
+
+      <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+        <div className="row align-items-center min-vh-75">
+          <div className="col-xl-6 col-lg-7">
+            <div className="banner-slider-container" style={{ padding: '2rem 0' }}>
+              {isLoading && <Loader />}
+              {error && <ErrorPage />}
+              {data && (
+                <Slider
+                  asNavFor={nav2}
+                  ref={(slider1) => setNav1(slider1)}
+                  {...slideSettingsContent}
+                  className="slick-slider-for slick-synced"
+                >
+                  {data.slice(0, 3).map((data) => (
+                    <div className="item" key={data.slug} style={{ padding: '1rem 0' }}>
+                      {/* Enhanced Category Badge */}
+                      <div style={{
+                        display: 'inline-block',
+                        background: 'linear-gradient(45deg, #ae8625, #f4d03f)',
+                        color: '#000',
+                        padding: '0.5rem 1.5rem',
+                        borderRadius: '25px',
+                        fontSize: '0.9rem',
+                        fontWeight: '600',
+                        textTransform: 'uppercase',
+                        letterSpacing: '1px',
+                        marginBottom: '1.5rem',
+                        boxShadow: '0 4px 15px rgba(174, 134, 37, 0.3)'
+                      }}>
+                        Featured Story
+                      </div>
+                      
+                      {/* Enhanced Title */}
+                      <h1 className="page-title m-b-xs-40 hover-line" style={{
+                        fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+                        fontWeight: '800',
+                        lineHeight: '1.2',
+                        color: '#ffffff',
+                        textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
+                        marginBottom: '2rem'
+                      }}>
+                        <Link href={`/post/${data.slug.current}`} style={{ 
+                          color: 'inherit',
+                          textDecoration: 'none',
+                          transition: 'all 0.3s ease'
+                        }}>
+                          {data.title}
+                        </Link>
+                      </h1>
+                      
+                      {/* Enhanced Button Group */}
+                      <div className="btn-group" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                        <Link
+                          className="btn btn-primary m-r-xs-30"
+                          href={`/post/${data.slug.current}`}
+                          style={{
+                            background: 'linear-gradient(45deg, #ae8625, #f4d03f)',
+                            border: 'none',
+                            padding: '1rem 2rem',
+                            borderRadius: '50px',
+                            fontWeight: '600',
+                            textTransform: 'uppercase',
+                            letterSpacing: '1px',
+                            boxShadow: '0 8px 25px rgba(174, 134, 37, 0.4)',
+                            transition: 'all 0.3s ease',
+                            textDecoration: 'none'
+                          }}
+                        >
+                          <i className="fas fa-arrow-right" style={{ marginLeft: '0.5rem' }}></i>
+                          Read Article
+                        </Link>
+                        <Link
+                          className="btn btn-outline-light"
+                          href="/magazines"
+                          style={{
+                            border: '2px solid #ae8625',
+                            color: '#ae8625',
+                            padding: '1rem 2rem',
+                            borderRadius: '50px',
+                            fontWeight: '600',
+                            textTransform: 'uppercase',
+                            letterSpacing: '1px',
+                            transition: 'all 0.3s ease',
+                            textDecoration: 'none'
+                          }}
+                        >
+                          <i className="fas fa-book" style={{ marginRight: '0.5rem' }}></i>
+                          View Magazines
+                        </Link>
+                      </div>
+                    </div>
+                  ))}
+                </Slider>
+              )}
+            </div>
+          </div>
+          
+          {/* Enhanced Image Section */}
+          <div className="col-xl-6 col-lg-5">
+            <div style={{ position: 'relative' }}>
+              <div style={{
+                background: 'linear-gradient(45deg, rgba(174, 134, 37, 0.1), rgba(174, 134, 37, 0.05))',
+                borderRadius: '20px',
+                padding: '1rem',
+                backdropFilter: 'blur(10px)',
+                border: '1px solid rgba(174, 134, 37, 0.2)'
+              }}>
+                <div className="banner-slider-container-synced">
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="banner-slider-container-synced">
+          <Slider
+            asNavFor={nav3}
+            ref={(slider2) => setNav2(slider2)}
+            {...slideSettingsImage}
+            className="slick-slider-nav slick-synced"
+          >
+            {data?.slice(0, 3).map((data) => (
+              <div className="item" key={data.slug}>
+                <Image
+                  src={data.featureImg}
+                  alt={data?.altText || data.title}
+                  width={2000}
+                  height={2000}
+                  style={{ objectFit: "contain" }}
+                />
+              </div>
+            ))}
+          </Slider>
+
+          <div className="banner-share-slider-container">
+            <Slider
+              asNavFor={nav1}
+              ref={(slider3) => setNav3(slider3)}
+              {...slideSettingsShare}
+              className="banner-share-slider"
+            >
+              {data?.slice(0, 3).map((data) => (
+                <div className="item" key={data.slug}>
+                  <div className="banner-shares slick-banner-shares">
+                    <div 
+                      className="toggle-shares" 
+                      onClick={ShareToggler}
+                      style={{
+                        background: 'linear-gradient(45deg, #ae8625, #f4d03f)',
+                        color: '#000',
+                        padding: '0.8rem 1.5rem',
+                        borderRadius: '25px',
+                        fontWeight: '600',
+                        textTransform: 'uppercase',
+                        letterSpacing: '1px',
+                        boxShadow: '0 4px 15px rgba(174, 134, 37, 0.3)',
+                        transition: 'all 0.3s ease',
+                        cursor: 'pointer',
+                        border: 'none',
+                        fontSize: '0.9rem'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'scale(1.05)';
+                        e.currentTarget.style.boxShadow = '0 6px 20px rgba(174, 134, 37, 0.5)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'scale(1)';
+                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(174, 134, 37, 0.3)';
+                      }}
+                    >
+                      Shares <span>+</span>
+                    </div>
+                    <div style={{
+                      background: 'rgba(174, 134, 37, 0.1)',
+                      borderRadius: '15px',
+                      padding: '1rem',
+                      backdropFilter: 'blur(10px)',
+                      border: '1px solid rgba(174, 134, 37, 0.2)',
+                      display: 'flex',
+                      gap: '0.5rem',
+                      justifyContent: 'center',
+                      flexWrap: 'wrap'
+                    }}>
+                      <a 
+                        href="#" 
+                        style={{
+                          background: 'linear-gradient(45deg, #ae8625, #f4d03f)',
+                          color: '#000',
+                          width: '40px',
+                          height: '40px',
+                          borderRadius: '50%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          textDecoration: 'none',
+                          transition: 'all 0.3s ease',
+                          boxShadow: '0 4px 10px rgba(174, 134, 37, 0.3)'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background = '#ffffff';
+                          e.currentTarget.style.color = '#ae8625';
+                          e.currentTarget.style.transform = 'scale(1.1)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = 'linear-gradient(45deg, #ae8625, #f4d03f)';
+                          e.currentTarget.style.color = '#000';
+                          e.currentTarget.style.transform = 'scale(1)';
+                        }}
+                      >
+                            <i className="fab fa-facebook-f" />
+                          </a>
+                      <a 
+                        href="#" 
+                        style={{
+                          background: 'linear-gradient(45deg, #ae8625, #f4d03f)',
+                          color: '#000',
+                          width: '40px',
+                          height: '40px',
+                          borderRadius: '50%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          textDecoration: 'none',
+                          transition: 'all 0.3s ease',
+                          boxShadow: '0 4px 10px rgba(174, 134, 37, 0.3)'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background = '#ffffff';
+                          e.currentTarget.style.color = '#ae8625';
+                          e.currentTarget.style.transform = 'scale(1.1)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = 'linear-gradient(45deg, #ae8625, #f4d03f)';
+                          e.currentTarget.style.color = '#000';
+                          e.currentTarget.style.transform = 'scale(1)';
+                        }}
+                      >
+                            <i className="fa-brands fa-x-twitter" />
+                          </a>
+                      <a 
+                        href="#" 
+                        style={{
+                          background: 'linear-gradient(45deg, #ae8625, #f4d03f)',
+                          color: '#000',
+                          width: '40px',
+                          height: '40px',
+                          borderRadius: '50%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          textDecoration: 'none',
+                          transition: 'all 0.3s ease',
+                          boxShadow: '0 4px 10px rgba(174, 134, 37, 0.3)'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background = '#ffffff';
+                          e.currentTarget.style.color = '#ae8625';
+                          e.currentTarget.style.transform = 'scale(1.1)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = 'linear-gradient(45deg, #ae8625, #f4d03f)';
+                          e.currentTarget.style.color = '#000';
+                          e.currentTarget.style.transform = 'scale(1)';
+                        }}
+                      >
+                            <i className="fab fa-behance" />
+                          </a>
+                      <a 
+                        href="#" 
+                        style={{
+                          background: 'linear-gradient(45deg, #ae8625, #f4d03f)',
+                          color: '#000',
+                          width: '40px',
+                          height: '40px',
+                          borderRadius: '50%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          textDecoration: 'none',
+                          transition: 'all 0.3s ease',
+                          boxShadow: '0 4px 10px rgba(174, 134, 37, 0.3)'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background = '#ffffff';
+                          e.currentTarget.style.color = '#ae8625';
+                          e.currentTarget.style.transform = 'scale(1.1)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = 'linear-gradient(45deg, #ae8625, #f4d03f)';
+                          e.currentTarget.style.color = '#000';
+                          e.currentTarget.style.transform = 'scale(1)';
+                        }}
+                      >
+                            <i className="fab fa-linkedin-in" />
+                          </a>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </Slider>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SliderOne;
