@@ -1,10 +1,9 @@
 import Image from "next/image";
-// import WidgetAd from "../../widget/WidgetAd";
 import WidgetInstagram from "../../widget/WidgetInstagram";
 import WidgetNewsletter from "../../widget/WidgetNewsletter";
 import WidgetPost from "../../widget/WidgetPost";
 import WidgetSocialShare from "../../widget/WidgetSocialShare";
-import { RichTextComponent } from "../RichTextComponent";
+import RichTextComponent from "../RichTextComponent";
 import PostComment from "./elements/PostComment";
 import SocialShareBottom from "./elements/SocialShareBottom";
 import SocialShareSide from "./elements/SocialShareSide";
