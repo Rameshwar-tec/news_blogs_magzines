@@ -5,7 +5,7 @@ const FAQSection = () => {
     {
       id: 1,
       question: "How can I read the magazine?",
-      answer: `Dive into our latest digital issues—each one is packed with stunning graphics and animations. Just tap a cover to start exploring. No sign-up needed; everyone's invited.`
+      answer: `Dive into our latest digital issues—each one is packed with stunning graphics and animations. Just tap a cover to start exploring. No sign-up needed; everyone&apos;s invited.`
     },
     {
       id: 2,
@@ -15,7 +15,7 @@ const FAQSection = () => {
     {
       id: 3,
       question: "Can I share my story or idea?",
-      answer: `Yes! We welcome your vision. If you have a story, insight, or creative spark, connect with us through our contact page. Let's inspire the world together.`
+      answer: `Yes! We welcome your vision. If you have a story, insight, or creative spark, connect with us through our contact page. Let&apos;s inspire the world together.`
     },
     {
       id: 4,
@@ -32,7 +32,7 @@ const FAQSection = () => {
           <h1 className="faq-title">Visionaries, stories, and how to join</h1>
           <p className="faq-subtitle">
             Wondering how to explore our animated magazine, discover inspiring leaders, or share your own story? 
-            Find all the details you need below—let's make your journey unforgettable.
+            Find all the details you need below—let&apos;s make your journey unforgettable.
           </p>
 
           <div className="faq-list">
@@ -49,7 +49,7 @@ const FAQSection = () => {
       {/* Inbuilt CSS */}
       <style jsx>{`
         .faq-section {
-          background-color: #000000; /* Dark black background */
+          background-color: #000000; /* Completely black background */
           color: white;
           font-family: var(--primary-font);
           line-height: 1.6;
@@ -67,7 +67,7 @@ const FAQSection = () => {
           left: 0;
           right: 0;
           bottom: 0;
-          background: none; /* removed gradient overlay */
+          background: none;
           pointer-events: none;
         }
 
@@ -114,6 +114,7 @@ const FAQSection = () => {
         .faq-list {
           display: flex;
           flex-direction: column;
+          gap: 0;
         }
 
         .faq-item {
@@ -123,7 +124,6 @@ const FAQSection = () => {
           position: relative;
           overflow: hidden;
           cursor: pointer;
-          animation: fadeInUp 0.6s ease-out;
         }
 
         .faq-item:last-child {
@@ -149,20 +149,20 @@ const FAQSection = () => {
           font-size: 1.9rem;
           color: white;
           margin-bottom: 1.2rem;
+          transition: all 0.3s ease;
           font-weight: 700;
-          line-height: 1.4;
           position: relative;
           z-index: 1;
-          transition: all 0.3s ease;
+          line-height: 1.4;
         }
 
         .faq-answer {
           color: #e0e0e0;
           font-size: 1.6rem;
-          line-height: 1.8;
+          transition: all 0.3s ease;
           position: relative;
           z-index: 1;
-          transition: all 0.3s ease;
+          line-height: 1.8;
           font-weight: 400;
         }
 
@@ -182,15 +182,9 @@ const FAQSection = () => {
           box-shadow: 0 5px 20px rgba(212, 175, 55, 0.15);
         }
 
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
+        @media (max-width: 1024px) {
+          .faq-section { padding: 4rem 2rem; }
         }
-
-        .faq-item:nth-child(1) { animation-delay: 0.1s; }
-        .faq-item:nth-child(2) { animation-delay: 0.2s; }
-        .faq-item:nth-child(3) { animation-delay: 0.3s; }
-        .faq-item:nth-child(4) { animation-delay: 0.4s; }
 
         @media (max-width: 768px) {
           .faq-section { padding: 3rem 1.5rem; }
@@ -207,7 +201,27 @@ const FAQSection = () => {
           .faq-subtitle { font-size: 1rem; }
           .faq-question { font-size: 1.3rem; }
           .faq-answer { font-size: 1.1rem; }
-          .faq-item { padding: 1.25rem 0; transform: translateX(0); }
+          .faq-item { padding: 1.25rem 0; }
+          .faq-item:hover { transform: translateX(5px); }
+        }
+
+        .faq-item {
+          animation: fadeInUp 0.6s ease-out;
+        }
+
+        .faq-item:nth-child(1) { animation-delay: 0.1s; }
+        .faq-item:nth-child(2) { animation-delay: 0.2s; }
+        .faq-item:nth-child(3) { animation-delay: 0.3s; }
+        .faq-item:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        .faq-item:focus-within {
+          outline: 2px solid #ffd700;
+          outline-offset: 2px;
         }
       `}</style>
     </>
