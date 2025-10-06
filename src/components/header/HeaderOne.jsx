@@ -862,7 +862,7 @@ const HeaderOne = () => {
             </div>
             <div className="search-suggestions-list">
               <div className="no-suggestions">
-                <p>No content found matching "{searchQuery}"</p>
+                <p>No content found matching &quot;{searchQuery}&quot;</p>
                 <div className="search-tips">
                   <p>Try searching for:</p>
                   <ul>

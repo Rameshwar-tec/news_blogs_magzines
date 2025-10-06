@@ -21,7 +21,7 @@ const Custom404 = () => {
         Page Not Found
       </h2>
       <p style={{ fontSize: '1.2rem', marginBottom: '2rem', maxWidth: '600px' }}>
-        The page you're looking for doesn't exist or has been moved.
+        The page you&apos;re looking for doesn&apos;t exist or has been moved.
       </p>
       <Link href="/" style={{ 
         background: '#D4AF37', 

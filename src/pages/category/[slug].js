@@ -171,9 +171,10 @@ export const getStaticPaths = async () => {
   const query = `*[_type == "category"]`;
   const categories = await client.fetch(query);
 
-  const paths = categories.map((category) => ({
-    params: { slug: category.slug.current },
-  }));
+  const paths = (categories || [])
+    .map((category) => category?.slug?.current)
+    .filter(Boolean)
+    .map((slug) => ({ params: { slug } }));
 
   return { paths, fallback: "blocking" };
 };

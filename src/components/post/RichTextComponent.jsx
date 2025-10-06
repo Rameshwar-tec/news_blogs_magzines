@@ -118,8 +118,10 @@ const PortableTextComponent = {
   },
 };
 
-const RichTextComponent = ({ content }) => {
+const RichTextComponentDefault = ({ content }) => {
   return <PortableText value={content} components={PortableTextComponent} />;
 };
 
-export default RichTextComponent;
+// Provide both a named export (schema/components config) and a default component wrapper
+export const RichTextComponent = PortableTextComponent;
+export default RichTextComponentDefault;
