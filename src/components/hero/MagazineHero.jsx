@@ -1,93 +1,117 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
+import { client } from "../../client";
+import Loader from "../common/Loader";
 
 const MagazineHero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   
-  // Static magazine data with your specific images from src/assest folder
-  const magazineData = [
+  // Fetch real magazine data from Sanity
+  const { data: magazineData, isLoading, error } = useQuery({
+    queryKey: ["magazine-hero"],
+    queryFn: async () => {
+      const query = `*[_type == "magazine"] | order(publishedAt desc) [0...9] {
+        title,
+        slug,
+        'featureImg': mainImage.asset->url,
+        description,
+        publishedAt
+      }`;
+      return await client.fetch(query);
+    },
+  });
+
+  // Fallback static data if Sanity data is not available
+  const fallbackData = [
     {
       id: 1,
       title: "Anchel Gupta",
-      slug: "anchel-gupta",
-      image: "/images/magzine1_anchel.webp", // Center card
+      slug: { current: "anchel-gupta" },
+      featureImg: "/images/magzine1_anchel.webp",
       description: "Featured Entrepreneur"
     },
     {
       id: 2,
       title: "Jorden",
-      slug: "jorden",
-      image: "/images/magzine2_jorden.webp", // Right side
+      slug: { current: "jorden" },
+      featureImg: "/images/magzine2_jorden.webp",
       description: "Business Leader"
     },
     {
       id: 3,
       title: "Manuel",
-      slug: "manuel",
-      image: "/images/magzine3_manuel.webp", // Third position
+      slug: { current: "manuel" },
+      featureImg: "/images/magzine3_manuel.webp",
       description: "Innovation Expert"
     },
     {
       id: 4,
       title: "Suzanne",
-      slug: "suzanne",
-      image: "/images/magzine4_suzanne.webp",
+      slug: { current: "suzanne" },
+      featureImg: "/images/magzine4_suzanne.webp",
       description: "Tech Pioneer"
     },
     {
       id: 5,
       title: "Nilmini",
-      slug: "nilmini",
-      image: "/images/magzine5_nilmini.webp",
+      slug: { current: "nilmini" },
+      featureImg: "/images/magzine5_nilmini.webp",
       description: "Startup Founder"
     },
     {
       id: 6,
       title: "Shabnam",
-      slug: "shabnam",
-      image: "/images/magzine6_shabnam.webp",
+      slug: { current: "shabnam" },
+      featureImg: "/images/magzine6_shabnam.webp",
       description: "Industry Leader"
     },
     {
       id: 7,
       title: "Valenia",
-      slug: "valenia",
-      image: "/images/magzine7_valenia.webp",
+      slug: { current: "valenia" },
+      featureImg: "/images/magzine7_valenia.webp",
       description: "Visionary CEO"
     },
     {
       id: 8,
       title: "Ross",
-      slug: "ross",
-      image: "/images/magzine8_ross.webp",
+      slug: { current: "ross" },
+      featureImg: "/images/magzine8_ross.webp",
       description: "Business Strategist"
     },
     {
       id: 9,
       title: "Khalid",
-      slug: "khalid",
-      image: "/images/magzine9_khalid.webp", // Left side near center
+      slug: { current: "khalid" },
+      featureImg: "/images/magzine9_khalid.webp",
       description: "Market Innovator"
     }
   ];
 
+  // Use Sanity data if available, otherwise use fallback
+  const displayData = magazineData && magazineData.length > 0 ? magazineData : fallbackData;
+
   // Auto-advance carousel every 3 seconds
   useEffect(() => {
-    if (!magazineData || magazineData.length === 0) return;
+    if (!displayData || displayData.length === 0) return;
     
     const interval = setInterval(() => {
       setIsTransitioning(true);
       setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % magazineData.length);
+        setCurrentIndex((prev) => (prev + 1) % displayData.length);
         setIsTransitioning(false);
       }, 300);
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [magazineData]);
+  }, [displayData]);
 
+
+  if (isLoading) return <Loader />;
+  if (error) return <div>Error loading magazines</div>;
 
   return (
     <>
@@ -95,14 +119,14 @@ const MagazineHero = () => {
         {/* Custom Carousel */}
         <div className="carousel-container">
           <div className="carousel-track">
-            {magazineData.map((magazine, index) => {
+            {displayData.map((magazine, index) => {
               const isCenter = index === currentIndex;
               const relativePosition = index - currentIndex;
               
               // Calculate position for 9-card layout: 4 left + 1 center + 4 right
               let position = relativePosition;
-              if (position > 4) position = position - magazineData.length; // Wrap around for circular effect
-              if (position < -4) position = position + magazineData.length;
+              if (position > 4) position = position - displayData.length; // Wrap around for circular effect
+              if (position < -4) position = position + displayData.length;
               
               // Only show cards within the 9-card range
               if (Math.abs(position) > 4) return null;
@@ -114,7 +138,7 @@ const MagazineHero = () => {
               
               return (
                 <div
-                  key={`${magazine.slug}-${index}`}
+                  key={`${magazine.slug?.current || magazine.slug}-${index}`}
                   className={`carousel-item ${isCenter ? 'center' : 'side'}`}
                   style={{
                     left: `calc(50% + ${offset}px)`,
@@ -124,10 +148,10 @@ const MagazineHero = () => {
                   }}
                 >
                   <div className="magazine-card">
-                    <Link href={`/magazine/${magazine.slug}`}>
+                    <Link href={`/magazine/${magazine.slug?.current || magazine.slug}`}>
                       <div className="image-container">
                         <Image
-                          src={magazine.image}
+                          src={magazine.featureImg || magazine.image}
                           alt={magazine.title}
                           width={1000}
                           height={1000}

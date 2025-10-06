@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { client } from "../../client";
  
 import SocialLink from "../../data/social/SocialLink.json";
 
@@ -13,6 +15,7 @@ const HeaderOne = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
+  const router = useRouter();
 
   // Mobile Menu
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -40,6 +43,15 @@ const HeaderOne = () => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
 
+    // If we have magazine results, go to the first one
+    if (searchResults && searchResults[0] && searchResults[0].slug) {
+      router.push(`/magazine/${searchResults[0].slug}`);
+      setSearchShow(false);
+      setSearchQuery("");
+      setShowResults(false);
+      return;
+    }
+
     // Find first match and scroll to it
     const firstMatch = findFirstMatch(searchQuery.toLowerCase());
     if (firstMatch) {
@@ -58,6 +70,33 @@ const HeaderOne = () => {
   const handleSearchInput = (e) => {
     const query = e.target.value;
     setSearchQuery(query);
+    
+    // Simple: search ONLY magazines by title from Sanity, show suggestions, navigate on click
+    if (query.trim().length > 0) {
+      const pattern = `*${query}*`;
+      client
+        .fetch(
+          `*[_type == "magazine" && title match $q][0...8]{title, 'slug': slug.current, 'image': mainImage.asset->url}`,
+          { q: pattern }
+        )
+        .then((res) => {
+          const mapped = (res || []).map((m, i) => ({
+            id: `mag-${i}`,
+            type: 'magazine',
+            text: m.title,
+            slug: m.slug,
+            hasImage: !!m.image,
+            imageSrc: m.image,
+          }));
+          setSearchResults(mapped);
+          setShowResults(true);
+        });
+      return; // Skip the old global search logic below
+    } else {
+      setSearchResults([]);
+      setShowResults(false);
+      return;
+    }
     
     if (query.trim().length > 0) {
       // Global search through entire website content
@@ -609,19 +648,14 @@ const HeaderOne = () => {
   };
 
   const handleSuggestionClick = (result) => {
-    // Scroll to the element
-    if (result.element) {
-      result.element.scrollIntoView({ 
-        behavior: 'smooth', 
-        block: 'center' 
-      });
+    if (result?.slug) {
+      router.push(`/magazine/${result.slug}`);
+      setSearchShow(false);
+      setSearchQuery("");
+      setSearchResults([]);
+      setShowResults(false);
+      return;
     }
-
-    // Close search
-    setSearchShow(false);
-    setSearchQuery("");
-    setSearchResults([]);
-    setShowResults(false);
   };
 
   const highlightSearchResults = (searchTerm) => {

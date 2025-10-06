@@ -1,66 +1,93 @@
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useState, useEffect } from "react";
 import { client } from "../client";
 import Loader from "../components/common/Loader";
 import HeaderOne from "../components/header/HeaderOne";
+import Faq from "../components/FAQ/Faq";
 import FooterTwo from "../components/footer/FooterTwo";
 import PostLayoutformag from "../components/post/layout/PostLayoutformag";
 import HeadMeta from "../components/elements/HeadMeta";
 
 const Magazines = () => {
-  // State for current year to prevent hydration mismatch
-  const [currentYear, setCurrentYear] = useState("");
-  
-  useEffect(() => {
-    setCurrentYear(new Date().getFullYear());
-  }, []);
+  const [searchValue, setSearchValue] = useState("");
 
   const query = `
-*[_type == "magazine"] 
-{
-  title,
-  slug,
-  'featureImg': mainImage.asset->url,
-  publishedAt
- 
-} | order(publishedAt desc)
-`;
+    *[_type == "magazine"] {
+      title,
+      slug,
+      'featureImg': mainImage.asset->url,
+      publishedAt,
+      _createdAt
+    } | order(_createdAt desc)
+  `;
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["allMagazines"],
     queryFn: async () => {
       const response = await client.fetch(query);
-
-      return response;
+      return response.sort((a, b) => {
+        const aKey = a._createdAt || a.publishedAt || 0;
+        const bKey = b._createdAt || b.publishedAt || 0;
+        return new Date(bKey) - new Date(aKey);
+      });
     },
   });
 
-  // if (isLoading) return <Loader />;
-  // if (error) return <div>Error fetching posts</div>;
+  if (isLoading) return <Loader />;
+  if (error)
+    return (
+      <div style={{ color: "gold", textAlign: "center" }}>
+        Error fetching magazines
+      </div>
+    );
+  if (!data) return null;
 
-  // if (!data) return null;
+  const filteredMagazines = searchValue
+    ? data.filter((mag) =>
+        (mag.title || "").toLowerCase().includes(searchValue.toLowerCase())
+      )
+    : data;
 
   return (
     <>
       <HeadMeta
-        metaTitle={
-          "Exclusive Interviews with Entrepreneurs Featured in The Entrepreneurial Chronicles Magazine"
-        }
-        metaDesc={
-          " Exclusive interviews with top entrepreneurs featured in The Entrepreneurial Chronicles Magazine. Discover their inspiring journey, business strategies, and tips for success in the entrepreneurial world "
-        }
+        metaTitle="Exclusive Interviews with Entrepreneurs Featured in The Entrepreneurial Chronicles Magazine"
+        metaDesc="Exclusive interviews with top entrepreneurs featured in The Entrepreneurial Chronicles Magazine."
       />
 
       <HeaderOne />
 
-      <div style={{ width: "100%", height: "auto" }}>
-        <div
+      <div style={{ width: "100%", minHeight: "100vh", background: "#000" }}>
+        {/* Simple local search (magazine titles only) */}
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          padding: '2rem 1rem 0',
+        }}>
+          <input
+            type="text"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            placeholder="Search magazines by name..."
+            aria-label="Search magazines by name"
+            style={{
+              width: '100%',
+              maxWidth: '640px',
+              background: '#000',
+              color: '#fff',
+              border: '1px solid #333',
+              outline: 'none',
+              padding: '12px 16px',
+              borderRadius: '8px',
+            }}
+          />
+        </div>
+        {/* Hero / Text Section */}
+        {/* <div
           style={{
             width: "100%",
-            // background: "white",
             backgroundImage: `url('/images/mag_bg.jpg')`,
             backgroundRepeat: "repeat",
-            // backgroundSize: "30%",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -72,12 +99,7 @@ const Magazines = () => {
           <div
             style={{
               width: "90%",
-              height: "100%",
               maxWidth: "1200px",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
               textAlign: "center",
               padding: "0 1rem",
             }}
@@ -94,7 +116,7 @@ const Magazines = () => {
             </p>
             <p
               style={{
-                fontSize: "2rem",
+                fontSize: "1.7rem",
                 fontWeight: "lighter",
                 color: "white",
               }}
@@ -102,16 +124,17 @@ const Magazines = () => {
               Welcome to The Entrepreneurial Chronicles Magazine, where we
               spotlight trailblazers from all sectors transforming the business
               magazine landscape. Our mission is to inspire and empower new
-              leaders with groundbreaking ideas worldwide. Count on us for
-              reliable insights, advice, and industry trends, supporting both
-              established and aspiring leaders.
+              leaders with groundbreaking ideas worldwide.
             </p>
           </div>
-        </div>
+        </div> */}
+
+        {/* Year Badge */}
         <div
           style={{
             display: "flex",
             justifyContent: "center",
+            margin: "2rem 0",
           }}
         >
           <div
@@ -119,38 +142,62 @@ const Magazines = () => {
               width: "30%",
               maxWidth: "40rem",
               height: "6rem",
-              margin: "2rem",
               borderRadius: "10rem",
               boxShadow:
                 "rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              backgroundColor: "#101820", // optional contrast
             }}
           >
-            <h2 style={{ fontSize: "2.2rem", margin: "0" }}>
-              {currentYear}
+            <h2
+              style={{
+                fontSize: "2.2rem",
+                margin: 0,
+                color: "#ae8625", // golden color for visibility
+                fontWeight: "bold",
+              }}
+            >
+              {new Date().getFullYear()}
             </h2>
           </div>
-        </div>{" "}
+        </div>
+
+        {/* Magazine Grid */}
         <div
           style={{
-            padding: "2rem",
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gridGap: "40px",
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: searchValue ? "center" : "flex-start",
+            gap: "40px",
             maxWidth: "1600px",
             margin: "0 auto",
           }}
         >
-          {data?.map((post, index) => (
-            <PostLayoutformag data={post} key={index} />
-          ))}
+          {filteredMagazines.length > 0 ? (
+            filteredMagazines.map((post, index) => (
+              <PostLayoutformag data={post} key={index} />
+            ))
+          ) : (
+            <p
+              style={{
+                color: "white",
+                textAlign: "center",
+                width: "100%",
+              }}
+            >
+              No magazines found.
+            </p>
+          )}
         </div>
       </div>
+
+      <Faq/>
+
       <FooterTwo />
     </>
   );
 };
 
-export default Magazines;
+export default Magazines; 

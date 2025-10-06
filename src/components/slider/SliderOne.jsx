@@ -59,10 +59,8 @@ const SliderOne = () => {
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: true,
+    arrows: false,
     dots: false,
-    nextArrow: <SlickNextArrow />,
-    prevArrow: <SlickPrevArrow />,
   };
 
   const slideSettingsShare = {
