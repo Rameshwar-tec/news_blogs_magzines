@@ -501,12 +501,47 @@ const HeaderOne = () => {
         }
       });
 
+      // If no results found, try a more lenient search
+      if (results.length === 0) {
+        // Try searching for partial matches
+        const partialMatches = [];
+        
+        // Search for partial matches in all text content
+        const allTextElements = document.querySelectorAll('*');
+        allTextElements.forEach((element, index) => {
+          if (element.textContent && 
+              element.textContent.toLowerCase().includes(searchTerm.substring(0, 3)) && 
+              element.textContent.trim().length > 0 && 
+              element.textContent.trim().length < 200) {
+            partialMatches.push({
+              type: 'partial-match',
+              element: element,
+              text: element.textContent.trim().substring(0, 50) + '...',
+              id: `partial-${index}`,
+              page: getCurrentPageName()
+            });
+          }
+        });
+        
+        // If still no results, add some default suggestions
+        if (partialMatches.length === 0) {
+          const defaultSuggestions = [
+            { type: 'suggestion', text: 'Try searching for "Anchel" or "Jorden"', id: 'suggestion-1' },
+            { type: 'suggestion', text: 'Search for "Home" or "About" pages', id: 'suggestion-2' },
+            { type: 'suggestion', text: 'Look for magazine content', id: 'suggestion-3' }
+          ];
+          results.push(...defaultSuggestions);
+        } else {
+          results.push(...partialMatches.slice(0, 5));
+        }
+      }
+
       // Remove duplicates and sort by relevance
       const uniqueResults = results.filter((result, index, self) => 
         index === self.findIndex(r => r.text === result.text)
       );
 
-      // Sort by type priority: magazine-person > client-magazine > magazine-grid > magazine-image > hero-magazine > heading > magazine > home-page > content > paragraph > text > link > image
+      // Sort by type priority: magazine-person > client-magazine > magazine-grid > magazine-image > hero-magazine > heading > magazine > home-page > content > paragraph > text > link > image > partial-match > suggestion
       const typePriority = {
         'magazine-person': 1,
         'client-magazine': 2,
@@ -520,7 +555,9 @@ const HeaderOne = () => {
         'paragraph': 10,
         'text': 11,
         'link': 12,
-        'image': 13
+        'image': 13,
+        'partial-match': 14,
+        'suggestion': 15
       };
 
       uniqueResults.sort((a, b) => {
@@ -828,11 +865,19 @@ const HeaderOne = () => {
         {searchshow && showResults && searchResults.length === 0 && searchQuery.trim().length > 0 && (
           <div className="search-suggestions-dropdown">
             <div className="search-suggestions-header">
-              <h4>No Suggestions Found</h4>
+              <h4>No Results Found</h4>
             </div>
             <div className="search-suggestions-list">
               <div className="no-suggestions">
                 <p>No content found matching "{searchQuery}"</p>
+                <div className="search-tips">
+                  <p>Try searching for:</p>
+                  <ul>
+                    <li>• Magazine names (Anchel, Jorden, Manuel, etc.)</li>
+                    <li>• Page sections (Home, About, Contact)</li>
+                    <li>• General keywords</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -1137,8 +1182,36 @@ const HeaderOne = () => {
 
         .no-suggestions p {
           color: #999;
-          margin: 0;
+          margin: 0 0 10px 0;
           font-size: 14px;
+        }
+        
+        .search-tips {
+          margin-top: 15px;
+          padding: 10px;
+          background: #111;
+          border-radius: 5px;
+          border: 1px solid #333;
+        }
+        
+        .search-tips p {
+          color: #D4AF37;
+          font-size: 12px;
+          font-weight: bold;
+          margin: 0 0 8px 0;
+        }
+        
+        .search-tips ul {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+        }
+        
+        .search-tips li {
+          color: #ccc;
+          font-size: 11px;
+          margin: 4px 0;
+          padding-left: 5px;
         }
 
         /* Search Highlight */
@@ -1226,6 +1299,31 @@ const HeaderOne = () => {
           border-bottom: none;
         }
 
+        /* Prevent horizontal scrolling and fix hero section */
+        body {
+          overflow-x: hidden !important;
+          max-width: 100vw !important;
+        }
+        
+        .hero-section {
+          position: relative !important;
+          width: 100vw !important;
+          max-width: 100vw !important;
+          overflow-x: hidden !important;
+          left: 0 !important;
+          right: 0 !important;
+          transform: none !important;
+        }
+        
+        .hero-content {
+          position: relative !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          left: 0 !important;
+          right: 0 !important;
+          transform: none !important;
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
           .navbar-nav-links.desktop-nav {
@@ -1239,12 +1337,99 @@ const HeaderOne = () => {
           .navbar-inner {
             justify-content: space-between;
           }
+          
+          /* Hero Section Mobile Responsive */
+          .hero-section {
+            padding: 2rem 1rem !important;
+            min-height: 60vh !important;
+            position: relative !important;
+            width: 100vw !important;
+            max-width: 100vw !important;
+            overflow-x: hidden !important;
+            left: 0 !important;
+            right: 0 !important;
+            transform: none !important;
+          }
+          
+          .hero-title {
+            font-size: 2.5rem !important;
+            line-height: 1.2 !important;
+            margin-bottom: 1rem !important;
+          }
+          
+          .hero-subtitle {
+            font-size: 1.2rem !important;
+            line-height: 1.4 !important;
+            margin-bottom: 1.5rem !important;
+          }
+          
+          .hero-content {
+            padding: 1rem !important;
+            max-width: 100% !important;
+            position: relative !important;
+            width: 100% !important;
+            left: 0 !important;
+            right: 0 !important;
+            transform: none !important;
+          }
+          
+          .hero-buttons {
+            flex-direction: column !important;
+            gap: 1rem !important;
+            align-items: center !important;
+          }
+          
+          .hero-button {
+            width: 100% !important;
+            max-width: 280px !important;
+            padding: 12px 24px !important;
+            font-size: 14px !important;
+          }
         }
         
         @media (max-width: 480px) {
           .mobile-nav-link {
             padding: 12px 15px;
             font-size: 14px;
+          }
+          
+          /* Hero Section Small Mobile Responsive */
+          .hero-section {
+            padding: 1.5rem 0.5rem !important;
+            min-height: 50vh !important;
+            position: relative !important;
+            width: 100vw !important;
+            max-width: 100vw !important;
+            overflow-x: hidden !important;
+            left: 0 !important;
+            right: 0 !important;
+            transform: none !important;
+          }
+          
+          .hero-title {
+            font-size: 2rem !important;
+            line-height: 1.1 !important;
+            margin-bottom: 0.8rem !important;
+          }
+          
+          .hero-subtitle {
+            font-size: 1rem !important;
+            line-height: 1.3 !important;
+            margin-bottom: 1.2rem !important;
+          }
+          
+          .hero-content {
+            padding: 0.8rem !important;
+            position: relative !important;
+            width: 100% !important;
+            left: 0 !important;
+            right: 0 !important;
+            transform: none !important;
+          }
+          
+          .hero-button {
+            padding: 10px 20px !important;
+            font-size: 13px !important;
           }
         }
 

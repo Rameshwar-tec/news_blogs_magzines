@@ -86,9 +86,11 @@ const SliderOne = () => {
 
   return (
     <div className="banner banner__home-with-slider banner__home-with-slider-one section-gap-bottom" style={{
-      background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2a2a2a 100%)',
+      background: '#000000',
       position: 'relative',
-      overflow: 'hidden'
+      overflow: 'hidden',
+      borderTop: 'none',
+      border: 'none'
     }}>
       {/* Enhanced Background with Gradient Overlay */}
       <div
@@ -142,7 +144,7 @@ const SliderOne = () => {
                   {...slideSettingsContent}
                   className="slick-slider-for slick-synced"
                 >
-                  {data.slice(0, 3).map((data) => (
+                  {data.slice(0, 3).map((data, index) => (
                     <div className="item" key={data.slug} style={{ padding: '1rem 0' }}>
                       {/* Enhanced Category Badge */}
                       <div style={{
@@ -197,7 +199,6 @@ const SliderOne = () => {
                             textDecoration: 'none'
                           }}
                         >
-                          <i className="fas fa-arrow-right" style={{ marginLeft: '0.5rem' }}></i>
                           Read Article
                         </Link>
                         <Link
@@ -250,7 +251,7 @@ const SliderOne = () => {
             {...slideSettingsImage}
             className="slick-slider-nav slick-synced"
           >
-            {data?.slice(0, 3).map((data) => (
+            {data?.slice(0, 3).map((data, index) => (
               <div className="item" key={data.slug}>
                 <Image
                   src={data.featureImg}
@@ -259,177 +260,131 @@ const SliderOne = () => {
                   height={2000}
                   style={{ objectFit: "contain" }}
                 />
+                {/* Social Media Icons */}
+                <div style={{
+                  display: 'flex',
+                  gap: '0.5rem',
+                  justifyContent: 'center',
+                  flexWrap: 'wrap',
+                  marginTop: '1rem'
+                }}>
+                  <a 
+                    href="#" 
+                    style={{
+                      background: 'linear-gradient(45deg, #ae8625, #f4d03f)',
+                      color: '#000',
+                      width: '40px',
+                      height: '40px',
+                      borderRadius: '50%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      textDecoration: 'none',
+                      transition: 'all 0.3s ease',
+                      boxShadow: 'none'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = '#1877f2';
+                      e.currentTarget.style.color = '#ffffff';
+                      e.currentTarget.style.transform = 'scale(1.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'linear-gradient(45deg, #ae8625, #f4d03f)';
+                      e.currentTarget.style.color = '#000';
+                      e.currentTarget.style.transform = 'scale(1)';
+                    }}
+                  >
+                    <i className="fab fa-facebook-f" />
+                  </a>
+                  <a 
+                    href="#" 
+                    style={{
+                      background: 'linear-gradient(45deg, #ae8625, #f4d03f)',
+                      color: '#000',
+                      width: '40px',
+                      height: '40px',
+                      borderRadius: '50%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      textDecoration: 'none',
+                      transition: 'all 0.3s ease',
+                      boxShadow: 'none'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = '#000000';
+                      e.currentTarget.style.color = '#ffffff';
+                      e.currentTarget.style.transform = 'scale(1.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'linear-gradient(45deg, #ae8625, #f4d03f)';
+                      e.currentTarget.style.color = '#000';
+                      e.currentTarget.style.transform = 'scale(1)';
+                    }}
+                  >
+                    <i className="fa-brands fa-x-twitter" />
+                  </a>
+                  <a 
+                    href="#" 
+                    style={{
+                      background: 'linear-gradient(45deg, #ae8625, #f4d03f)',
+                      color: '#000',
+                      width: '40px',
+                      height: '40px',
+                      borderRadius: '50%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      textDecoration: 'none',
+                      transition: 'all 0.3s ease',
+                      boxShadow: 'none'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)';
+                      e.currentTarget.style.color = '#ffffff';
+                      e.currentTarget.style.transform = 'scale(1.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'linear-gradient(45deg, #ae8625, #f4d03f)';
+                      e.currentTarget.style.color = '#000';
+                      e.currentTarget.style.transform = 'scale(1)';
+                    }}
+                  >
+                    <i className="fab fa-instagram" />
+                  </a>
+                  <a 
+                    href="#" 
+                    style={{
+                      background: 'linear-gradient(45deg, #ae8625, #f4d03f)',
+                      color: '#000',
+                      width: '40px',
+                      height: '40px',
+                      borderRadius: '50%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      textDecoration: 'none',
+                      transition: 'all 0.3s ease',
+                      boxShadow: 'none'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = '#0077b5';
+                      e.currentTarget.style.color = '#ffffff';
+                      e.currentTarget.style.transform = 'scale(1.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'linear-gradient(45deg, #ae8625, #f4d03f)';
+                      e.currentTarget.style.color = '#000';
+                      e.currentTarget.style.transform = 'scale(1)';
+                    }}
+                  >
+                    <i className="fab fa-linkedin-in" />
+                  </a>
+                </div>
               </div>
             ))}
           </Slider>
 
-          <div className="banner-share-slider-container">
-            <Slider
-              asNavFor={nav1}
-              ref={(slider3) => setNav3(slider3)}
-              {...slideSettingsShare}
-              className="banner-share-slider"
-            >
-              {data?.slice(0, 3).map((data) => (
-                <div className="item" key={data.slug}>
-                  <div className="banner-shares slick-banner-shares">
-                    <div 
-                      className="toggle-shares" 
-                      onClick={ShareToggler}
-                      style={{
-                        background: 'linear-gradient(45deg, #ae8625, #f4d03f)',
-                        color: '#000',
-                        padding: '0.8rem 1.5rem',
-                        borderRadius: '25px',
-                        fontWeight: '600',
-                        textTransform: 'uppercase',
-                        letterSpacing: '1px',
-                        boxShadow: '0 4px 15px rgba(174, 134, 37, 0.3)',
-                        transition: 'all 0.3s ease',
-                        cursor: 'pointer',
-                        border: 'none',
-                        fontSize: '0.9rem'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.transform = 'scale(1.05)';
-                        e.currentTarget.style.boxShadow = '0 6px 20px rgba(174, 134, 37, 0.5)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.transform = 'scale(1)';
-                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(174, 134, 37, 0.3)';
-                      }}
-                    >
-                      Shares <span>+</span>
-                    </div>
-                    <div style={{
-                      background: 'rgba(174, 134, 37, 0.1)',
-                      borderRadius: '15px',
-                      padding: '1rem',
-                      backdropFilter: 'blur(10px)',
-                      border: '1px solid rgba(174, 134, 37, 0.2)',
-                      display: 'flex',
-                      gap: '0.5rem',
-                      justifyContent: 'center',
-                      flexWrap: 'wrap'
-                    }}>
-                      <a 
-                        href="#" 
-                        style={{
-                          background: 'linear-gradient(45deg, #ae8625, #f4d03f)',
-                          color: '#000',
-                          width: '40px',
-                          height: '40px',
-                          borderRadius: '50%',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          textDecoration: 'none',
-                          transition: 'all 0.3s ease',
-                          boxShadow: '0 4px 10px rgba(174, 134, 37, 0.3)'
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.background = '#ffffff';
-                          e.currentTarget.style.color = '#ae8625';
-                          e.currentTarget.style.transform = 'scale(1.1)';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.background = 'linear-gradient(45deg, #ae8625, #f4d03f)';
-                          e.currentTarget.style.color = '#000';
-                          e.currentTarget.style.transform = 'scale(1)';
-                        }}
-                      >
-                            <i className="fab fa-facebook-f" />
-                          </a>
-                      <a 
-                        href="#" 
-                        style={{
-                          background: 'linear-gradient(45deg, #ae8625, #f4d03f)',
-                          color: '#000',
-                          width: '40px',
-                          height: '40px',
-                          borderRadius: '50%',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          textDecoration: 'none',
-                          transition: 'all 0.3s ease',
-                          boxShadow: '0 4px 10px rgba(174, 134, 37, 0.3)'
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.background = '#ffffff';
-                          e.currentTarget.style.color = '#ae8625';
-                          e.currentTarget.style.transform = 'scale(1.1)';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.background = 'linear-gradient(45deg, #ae8625, #f4d03f)';
-                          e.currentTarget.style.color = '#000';
-                          e.currentTarget.style.transform = 'scale(1)';
-                        }}
-                      >
-                            <i className="fa-brands fa-x-twitter" />
-                          </a>
-                      <a 
-                        href="#" 
-                        style={{
-                          background: 'linear-gradient(45deg, #ae8625, #f4d03f)',
-                          color: '#000',
-                          width: '40px',
-                          height: '40px',
-                          borderRadius: '50%',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          textDecoration: 'none',
-                          transition: 'all 0.3s ease',
-                          boxShadow: '0 4px 10px rgba(174, 134, 37, 0.3)'
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.background = '#ffffff';
-                          e.currentTarget.style.color = '#ae8625';
-                          e.currentTarget.style.transform = 'scale(1.1)';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.background = 'linear-gradient(45deg, #ae8625, #f4d03f)';
-                          e.currentTarget.style.color = '#000';
-                          e.currentTarget.style.transform = 'scale(1)';
-                        }}
-                      >
-                            <i className="fab fa-behance" />
-                          </a>
-                      <a 
-                        href="#" 
-                        style={{
-                          background: 'linear-gradient(45deg, #ae8625, #f4d03f)',
-                          color: '#000',
-                          width: '40px',
-                          height: '40px',
-                          borderRadius: '50%',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          textDecoration: 'none',
-                          transition: 'all 0.3s ease',
-                          boxShadow: '0 4px 10px rgba(174, 134, 37, 0.3)'
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.background = '#ffffff';
-                          e.currentTarget.style.color = '#ae8625';
-                          e.currentTarget.style.transform = 'scale(1.1)';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.background = 'linear-gradient(45deg, #ae8625, #f4d03f)';
-                          e.currentTarget.style.color = '#000';
-                          e.currentTarget.style.transform = 'scale(1)';
-                        }}
-                      >
-                            <i className="fab fa-linkedin-in" />
-                          </a>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </Slider>
-          </div>
         </div>
       </div>
     </div>

@@ -97,7 +97,7 @@ const AboutUs = ({ aboutData }) => {
         </div>
       </div>
       {/* <BreadcrumbBanner pageTitle="About Us" /> */}
-      <div className="axil-about-us section-gap-top p-b-xs-20">
+      <div className="axil-about-us section-gap-top p-b-xs-20" style={{ backgroundColor: '#000', color: '#fff' }}>
         <div className="container">
           <figure className="m-b-xs-40 text-center">
             <Image
@@ -110,7 +110,7 @@ const AboutUs = ({ aboutData }) => {
           </figure>
           <div className="row">
             <div className="col-lg-8">
-              <div className="about-us-content">
+              <div className="about-us-content" style={{ color: '#fff' }}>
                 <div
                   dangerouslySetInnerHTML={{ __html: aboutData.content }}
                 ></div>
@@ -125,7 +125,7 @@ const AboutUs = ({ aboutData }) => {
           </div>
         </div>
       </div>
-      <div className="axil-our-team section-gap section-gap-top__with-text bg-grey-light-three">
+      <div className="axil-our-team section-gap section-gap-top__with-text" style={{ backgroundColor: '#000', color: '#fff' }}>
         <div className="container">
           <div className="axil-team-grid-wrapper">
             <SectionTitleTwo

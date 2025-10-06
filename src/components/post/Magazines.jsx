@@ -52,6 +52,7 @@ const Magazines = () => {
             aria-label="My Favorite Images"
             options={{
               type: "loop",
+              arrows: false,
               breakpoints: {
                 2000: {
                   perPage: 3,
