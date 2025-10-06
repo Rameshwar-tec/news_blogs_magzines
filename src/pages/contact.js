@@ -13,7 +13,7 @@ import { useRef } from "react";
 
 const ContactPage = () => {
   return (
-    <>
+    <div style={{ background: '#000', color: '#fff', minHeight: '100vh' }}>
       <HeadMeta
         metaTitle="Connect and Share Your Story with The Entrepreneurial Chronicles Magazine
 "
@@ -92,7 +92,7 @@ const ContactPage = () => {
       </div>
       {/* <BreadcrumbBanner pageTitle="Contact Us" /> */}
 
-      <div className="contact-form section-gap bg-grey-light-three">
+      <div className="contact-form section-gap" style={{ background: '#000', color: '#fff' }}>
         <div className="container">
           <div className="row align-items-center">
             <div className="col-lg-7">
@@ -104,10 +104,10 @@ const ContactPage = () => {
           </div>
         </div>
       </div>
-      <div className="section-gap our-location section-gap-top__with-text">
+      <div className="section-gap our-location section-gap-top__with-text" style={{ background: '#000', color: '#fff' }}>
         <div className="container">
-          <div className="section-title">
-            <h2 className="axil-title m-b-xs-40">Our Location</h2>
+          <div className="section-title" style={{ color: '#fff' }}>
+            <h2 className="axil-title m-b-xs-40" style={{ color: '#fff' }}>Our Location</h2>
           </div>
           {/* End of .section-title */}
           <div className="axil-map-wrapper m-b-xs-30">
@@ -123,7 +123,7 @@ const ContactPage = () => {
         {/* End of .container */}
       </div>
       <FooterTwo />
-    </>
+    </div>
   );
 };
 

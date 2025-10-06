@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { dateFormate } from "../../utils";
+ 
 import SocialLink from "../../data/social/SocialLink.json";
 
 const HeaderOne = () => {
-  // State for current date to prevent hydration mismatch
-  const [currentDate, setCurrentDate] = useState("");
-
-  useEffect(() => {
-    // Set the current date only on client side to prevent hydration mismatch
-    setCurrentDate(dateFormate());
-  }, []);
+ 
 
 
   // Header Search
@@ -681,7 +675,6 @@ const HeaderOne = () => {
             <div className="row align-items-center">
               <div className="col-md">
                 <ul className="header-top-nav list-inline justify-content-center justify-content-md-start">
-                  <li className="current-date">{currentDate}</li>
 
                   <li>
                     <Link href="/about-us">About</Link>
