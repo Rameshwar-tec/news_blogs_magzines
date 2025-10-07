@@ -1,7 +1,8 @@
-import { useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useState, useEffect } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Loader from "../components/common/Loader";
 import { client } from "../client";
+import PostLayoutTwo from "../components/post/layout/PostLayoutTwo";
 import WidgetNewsletter from "../components/widget/WidgetNewsletter";
 import WidgetSocialShare from "../components/widget/WidgetSocialShare";
 import WidgetPost from "../components/widget/WidgetPost";
@@ -9,9 +10,12 @@ import WidgetCategory from "../components/widget/WidgetCategory";
 import HeaderOne from "../components/header/HeaderOne";
 import FooterTwo from "../components/footer/FooterTwo";
 import HeadMeta from "../components/elements/HeadMeta";
-import { useRouter } from "next/router";
+
+const POSTS_PER_PAGE = 6;
 
 const Blogs = () => {
+  const [page, setPage] = useState(0);
+
   const query = `
     *[_type == "post" && categories[0]._ref == *[_type == "category" && slug.current == "blogs-and-articles"][0]._id]
     {
@@ -25,20 +29,33 @@ const Blogs = () => {
         'title': categories[0]->title,
         'slug': categories[0]->slug.current
       }
-    } | order(publishedAt desc)
+    } | order(publishedAt desc)[${page * POSTS_PER_PAGE}...${
+    (page + 1) * POSTS_PER_PAGE
+  }]
   `;
 
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["allPosts"],
+  const { data, isLoading, error, isFetching, isPreviousData } = useQuery({
+    queryKey: ["allPosts", page],
     queryFn: async () => {
       const response = await client.fetch(query);
       return response;
     },
+    keepPreviousData: true,
   });
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
+  }, [page]);
+
+  const handleNextPage = () => {
+    if (!isPreviousData && data?.length === POSTS_PER_PAGE) {
+      setPage((old) => old + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    setPage((old) => Math.max(old - 1, 0));
+  };
 
   return (
     <>
@@ -48,215 +65,111 @@ const Blogs = () => {
       />
 
       <HeaderOne />
-
       <div
         style={{
+          position: "relative",
           width: "100%",
-          padding: "2rem 20px",
-          backgroundColor: "#000000",
-          minHeight: "100vh",
+          height: "auto",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "2rem 0",
         }}
       >
-        {/* TOP ROW */}
-        <div className="row g-4">
-          {/* Featured Articles LEFT — increased width */}
-          <div className="col-lg-5">
-            <h4 style={{ color: "#fff", fontWeight: "600" }}>Featured Articles</h4>
-            {isLoading ? (
-              <Loader />
-            ) : error ? (
-              <div className="alert alert-danger">Error fetching posts</div>
-            ) : (
-              data?.slice(0, 3).map((post, index) => (
-                <div key={index} className="mb-3">
-                  <div
-                    className="card shadow-sm"
-                    style={{
-                      border: "none",
-                      borderRadius: "8px",
-                      overflow: "hidden",
-                      cursor: "pointer",
-                      height: "120px",
-                      backgroundColor: "#1a1a1a",
-                      width: "100%",
-                    }}
-                    onClick={() =>
-                      (window.location.href = `/post/${post.slug.current}`)
-                    }
-                  >
-                    <div className="row g-0 h-100">
-                      <div className="col-4">
-                        <img
-                          src={post.featureImg}
-                          alt={post.altText || post.title}
-                          style={{
-                            width: "100%",
-                            height: "120px",
-                            objectFit: "cover",
-                          }}
-                        />
-                      </div>
-                      <div className="col-8">
-                        <div className="card-body p-2 h-100 d-flex flex-column justify-content-between">
-                          <h6
-                            style={{
-                              fontSize: "2rem",
-                              fontWeight: "600",
-                              color: "#fff",
-                              display: "-webkit-box",
-                              WebkitLineClamp: 2,
-                              WebkitBoxOrient: "vertical",
-                              overflow: "hidden",
-                            }}
-                          >
-                            {post.title}
-                          </h6>
-                          <span style={{ color: "#007bff", fontSize: "0.7rem" }}>
-                            Read More →
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
+        {/* Background Image with Overlay */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundImage: `url('/images/Blog.jpg')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            zIndex: -1,
+            // filter: "brightness(0.8)", // Darken the image
+          }}
+        ></div>
 
-          {/* Latest Articles RIGHT — decreased width to 7 */}
-          <div className="col-lg-7">
-    <h4 style={{ color: "#fff", fontWeight: "600" }}>Latest Articles</h4>
-    <div className="row g-3">
-      {isLoading ? (
-        <Loader />
-      ) : error ? (
-        <div className="alert alert-danger">Error fetching posts</div>
-      ) : (
-        data?.slice(3, 6).map((post, index) => (
-          <div key={index} className="col-lg-4 col-md-6">
-            <div
-              className="card shadow-sm"
-              style={{
-                border: "none",
-                borderRadius: "10px",
-                overflow: "hidden",
-                backgroundColor: "#1a1a1a",
-                cursor: "pointer",
-                transform: "scale(0.95)",
-              }}
-              onClick={() =>
-                (window.location.href = `/post/${post.slug.current}`)
-              }
-            >
-              <img
-                src={post.featureImg}
-                alt={post.altText || post.title}
-                className="card-img-top"
-                style={{
-                  height: "130px",
-                  objectFit: "cover",
-                }}
-              />
-              <div className="card-body p-2">
-                <h6
-                  style={{
-                    fontSize: "2rem",
-                    fontWeight: "600",
-                    color: "#fff",
-                    display: "-webkit-box",
-                    WebkitLineClamp: 2,
-                    WebkitBoxOrient: "vertical",
-                    overflow: "hidden",
-                  }}
-                >
-                  {post.title}
-                </h6>
-              </div>
-            </div>
-          </div>
-        ))
-      )}
-    </div>
-  </div>
-</div>
-
-
-
-        {/* SECOND ROW */}
-        <div className="row g-4 mt-4">
-          {/* Remaining Latest LEFT */}
-          <div className="col-lg-8">
-  <div className="row g-3">
-    {isLoading ? (
-      <Loader />
-    ) : error ? (
-      <div className="alert alert-danger">Error fetching posts</div>
-    ) : (
-      data?.slice(6).map((post, index) => (
-        <div key={index} className="col-lg-4 col-md-6">
-          <div
-            className="card shadow-sm"
+        <div
+          style={{
+            width: "90%",
+            height: "100%",
+            maxWidth: "1200px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+            padding: "0 1rem",
+            color: "white",
+          }}
+        >
+          <p
             style={{
-              border: "none",
-              borderRadius: "10px",
-              overflow: "hidden",
-              backgroundColor: "#1a1a1a",
-              cursor: "pointer",
-              transform: "scale(0.95)",
+              fontSize: "4rem",
+              fontWeight: "bolder",
+              marginBottom: "1rem",
+              color: "white",
             }}
-            onClick={() =>
-              (window.location.href = `/post/${post.slug.current}`)
-            }
           >
-            <img
-              src={post.featureImg}
-              alt={post.altText || post.title}
-              className="card-img-top"
-              style={{
-                height: "130px",
-                objectFit: "cover",
-              }}
-            />
-            <div className="card-body p-2">
-              <h6
-                style={{
-                  fontSize: "2.2rem",
-                  fontWeight: "600",
-                  color: "#fff",
-                  display: "-webkit-box",
-                  WebkitLineClamp: 2,
-                  WebkitBoxOrient: "vertical",
-                  overflow: "hidden",
-                }}
+            Blogs
+          </p>
+          <p
+            style={{
+              fontSize: "2rem",
+              fontWeight: "lighter",
+              color: "white",
+            }}
+          >
+            Welcome to The Entrepreneurial Chronicles Magazine, where we
+            spotlight trailblazers from all sectors transforming the business
+            magazine landscape. Our mission is to inspire and empower new
+            leaders with groundbreaking ideas worldwide. Count on us for
+            reliable insights, advice, and industry trends, supporting both
+            established and aspiring leaders.
+          </p>
+        </div>
+      </div>
+      <div className="container" style={{ marginTop: "30px" }}>
+        <div className="row">
+          <div className="col-lg-8">
+            <div className="axil-content">
+              {isLoading ? (
+                <Loader />
+              ) : error ? (
+                <div>Error fetching posts</div>
+              ) : (
+                data?.map((post, index) => (
+                  <PostLayoutTwo data={post} postSizeMd={true} key={index} />
+                ))
+              )}
+            </div>
+            <div className="pagination">
+              <button
+                className="btn btn-primary btn-small"
+                onClick={handlePreviousPage}
+                disabled={page === 0}
               >
-                {post.title}
-              </h6>
+                Previous Page
+              </button>
+              <span>Page {page + 1}</span>
+              <button
+                className="btn btn-primary btn-small"
+                onClick={handleNextPage}
+                disabled={isPreviousData || data?.length < POSTS_PER_PAGE}
+              >
+                Next Page
+              </button>
             </div>
           </div>
-        </div>
-      ))
-    )}
-  </div>
-</div>
-
-          {/* Sidebar RIGHT */}
           <div className="col-lg-4">
-            <div className="newsletter-section mb-4">
-              <h4 style={{ color: "#fff", fontWeight: "600" }}>
-                Subscribe To Our Weekly Newsletter
-              </h4>
+            <div className="post-sidebar">
               <WidgetNewsletter />
-            </div>
-            <div className="categories-section mb-4">
-              <h4 style={{ color: "#fff", fontWeight: "600" }}>Categories</h4>
               <WidgetCategory />
-            </div>
-            <div className="social-share-section mb-4">
-              <h4 style={{ color: "#fff", fontWeight: "600" }}>Social Share</h4>
               <WidgetSocialShare />
-            </div>
-            <div className="web-profile-section mb-4">
-              <h4 style={{ color: "#fff", fontWeight: "600" }}>Web Profile</h4>
               <WidgetPost />
             </div>
           </div>
