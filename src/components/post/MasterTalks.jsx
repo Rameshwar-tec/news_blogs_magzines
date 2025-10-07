@@ -41,22 +41,25 @@ const MasterTalks = ({ postData, adBanner, pClass }) => {
 
   if (!data) return null;
   return (
-    <div className="container " style={{ marginTop: "30px" }}>
+  <div className="container " style={{ marginTop: "8px" }}>
       <div className="row">
         <div className="col-lg-8">
           <SectionTitle
             title={data[0]?.category.title || "Business Bulletin"}
             btnText="ALL Posts"
             btnUrl={`/category/${data[0]?.category?.slug}`}
+            pClass="m-b-xs-10"
           />
           <div className="axil-content">
             {data.slice(0, 8).map((post, index) => (
-              <PostLayoutTwo data={post} postSizeMd={true} key={index} />
+              <div key={index} style={{ marginBottom: "8px" }}>
+                <PostLayoutTwo data={post} postSizeMd={true} />
+              </div>
             ))}
           </div>
         </div>
         <div className="col-lg-4">
-          <div className="post-sidebar">
+          <div className="post-sidebar" style={{ display: "grid", rowGap: "12px" }}>
             <WidgetNewsletter />
             <WidgetCategory cateData={data} /> {/* Pass the fetched data */}
             <WidgetSocialShare />

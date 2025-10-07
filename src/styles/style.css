@@ -7957,6 +7957,87 @@ ul.gallery img {
 .join-us {
   margin-top: -1.4rem;
 }
+/* Team social icons: always visible, gold by default, animate on view/hover */
+.axil-team-block .axil-team-share-wrapper .social-share__vertical li {
+  transform: none !important;
+  opacity: 1 !important;
+  animation: icon-pop-in 600ms ease both;
+}
+.axil-team-block .axil-team-share-wrapper .social-share__vertical li:nth-child(1) { animation-delay: 60ms; }
+.axil-team-block .axil-team-share-wrapper .social-share__vertical li:nth-child(2) { animation-delay: 120ms; }
+.axil-team-block .axil-team-share-wrapper .social-share__vertical li:nth-child(3) { animation-delay: 180ms; }
+.axil-team-block .axil-team-share-wrapper .social-share__vertical li:nth-child(4) { animation-delay: 240ms; }
+
+.axil-team-block .axil-team-share-wrapper .social-share__vertical li a i {
+  color: #fff !important; /* default white */
+  transition: color 220ms ease, transform 220ms ease, filter 220ms ease;
+}
+/* Increase badge size */
+.axil-team-block .axil-team-share-wrapper .social-share__vertical li a {
+  width: 3.4rem !important;
+  height: 3.4rem !important;
+}
+.axil-team-block .axil-team-share-wrapper .social-share__vertical li a i {
+  font-size: 1.6rem !important;
+}
+
+/* Ensure circular background stays gold */
+.axil-team-block .axil-team-share-wrapper .social-share.social-share__with-bg li a,
+.axil-team-block .axil-team-share-wrapper .social-share__with-bg-white li a {
+  background: #D4AF37 !important;
+  border-color: #D4AF37 !important;
+}
+
+/* Hover interaction: slight lift/scale */
+.axil-team-block .axil-team-share-wrapper .social-share__vertical li a:hover i {
+  transform: translateY(-2px) scale(1.08);
+  color: #fff !important; /* keep icon white on hover */
+}
+
+/* Keep circle gold on hover as well */
+.axil-team-block .axil-team-share-wrapper .social-share__with-bg li a:hover,
+.axil-team-block .axil-team-share-wrapper .social-share__with-bg-white li a:hover {
+  background: #D4AF37 !important;
+  border-color: #D4AF37 !important;
+}
+
+/* Brand hover backgrounds (full circle), keeping icon white */
+/* Uses :has() to detect the icon class inside the anchor */
+.axil-team-block .axil-team-share-wrapper .social-share__vertical li a:hover:has(i.fa-facebook),
+.axil-team-block .axil-team-share-wrapper .social-share__vertical li a:hover:has(i.fa-facebook-f) {
+  background: #1877F2 !important;
+  border-color: #1877F2 !important;
+}
+.axil-team-block .axil-team-share-wrapper .social-share__vertical li a:hover:has(i.fa-twitter),
+.axil-team-block .axil-team-share-wrapper .social-share__vertical li a:hover:has(i.fa-x-twitter) {
+  background: #1DA1F2 !important;
+  border-color: #1DA1F2 !important;
+}
+.axil-team-block .axil-team-share-wrapper .social-share__vertical li a:hover:has(i.fa-linkedin),
+.axil-team-block .axil-team-share-wrapper .social-share__vertical li a:hover:has(i.fa-linkedin-in) {
+  background: #0A66C2 !important;
+  border-color: #0A66C2 !important;
+}
+.axil-team-block .axil-team-share-wrapper .social-share__vertical li a:hover:has(i.fa-instagram) {
+  background: #E1306C !important;
+  border-color: #E1306C !important;
+}
+.axil-team-block .axil-team-share-wrapper .social-share__vertical li a:hover:has(i.fa-youtube) {
+  background: #FF0000 !important;
+  border-color: #FF0000 !important;
+}
+.axil-team-block .axil-team-share-wrapper .social-share__vertical li a:hover:has(i.fa-pinterest) {
+  background: #E60023 !important;
+  border-color: #E60023 !important;
+}
+
+/* Brand hover colors */
+/* Brand colors disabled; using uniform gold on hover */
+
+@keyframes icon-pop-in {
+  0% { opacity: 0; transform: translateY(8px) scale(0.96); }
+  100% { opacity: 1; transform: none; }
+}
 /*--Contacts--*/
 .axil-map-wrapper {
   height: 55rem;

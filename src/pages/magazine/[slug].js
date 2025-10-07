@@ -1,175 +1,181 @@
-import HeaderOne from "../../components/header/HeaderOne";
-import FooterTwo from "../../components/footer/FooterTwo";
-import RelatedArticles from "../../components/post/RelatedArticles";
-import { useRouter } from "next/router";
-import { useQuery } from "@tanstack/react-query";
 
+import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
+import FooterTwo from "../../components/footer/FooterTwo";
+import HeaderOne from "../../components/header/HeaderOne";
+import Breadcrumb from "../../components/common/Breadcrumb";
+import HeadMeta from "../../components/elements/HeadMeta";
+import AdBanner from "../../components/common/AdBanner";
+import WidgetAd from "../../components/widget/WidgetAd";
+import WidgetSocialShare from "../../components/widget/WidgetSocialShare";
+import WidgetPost from "../../components/widget/WidgetPost";
+import PostLayoutTwo from "../../components/post/layout/PostLayoutTwo";
+import WidgetCategory from "../../components/widget/WidgetCategory";
 import { client } from "../../client";
 import Loader from "../../components/common/Loader";
-import HeadMetaDynamic from "../../components/elements/HeadMetaDynamic";
+import { useState, useEffect } from "react";
 
-const fetchMagazineContent = async (slug) => {
-  const magazineContentQuery = `*[_type == "magazine" && slug.current == '${slug}']{
+const POSTS_PER_PAGE = 6;
+
+const fetchPostsByCategory = async (category, page) => {
+  const query = `*[_type == "post" && categories[0]._ref == *[_type == "category" && slug.current == "${category}"][0]._id] {
     title,
     slug,
-    keywords,
-    description,
+    altText,
     'featureImg': mainImage.asset->url,
-    issuuLink
-  }`;
-  return await client.fetch(magazineContentQuery);
-};
-
-const fetchAllArticles = async () => {
-  const allArticlesQuery = `*[_type == "post" && categories[0]._ref == *[_type == "category" && slug.current == "web-profiles"][0]._id] {
-    title,
-    slug,
     publishedAt,
-    'featureImg': mainImage.asset->url,
+    description,
     'category': {
       'title': categories[0]->title,
       'slug': categories[0]->slug.current
     }
-  } | order(publishedAt desc)[0...3]`;
-  return await client.fetch(allArticlesQuery);
+  } | order(publishedAt desc)[${page * POSTS_PER_PAGE}...${
+    (page + 1) * POSTS_PER_PAGE
+  }]`;
+
+  const posts = await client.fetch(query);
+  return posts;
 };
 
-const fetchCurrentMagArticle = async (slug) => {
-  const currentMagArticleQuery = `*[_type == "post" && _id == *[_type == "magazine" && slug.current == '${slug}'][0].linkedArticle[0]._ref]{
-    title,
-    slug,
-    'featureImg': mainImage.asset->url
-  }`;
-  return await client.fetch(currentMagArticleQuery);
-};
-
-const MagazineDetails = ({
-  initialMagazineContent,
-  initialAllArticles,
-  initialCurrentMagArticle,
-}) => {
-  const router = useRouter();
-  const { slug } = router.query;
+const PostCategory = ({ initialCategory, initialAllPosts }) => {
+  const [page, setPage] = useState(0);
 
   const {
-    data: magazineContent,
-    isLoading: isLoadingMagazine,
-    error: errorMagazine,
+    data: postData,
+    isLoading,
+    isPreviousData,
   } = useQuery({
-    queryKey: ["magazineContent", slug],
-    queryFn: () => fetchMagazineContent(slug),
-    enabled: !!slug,
-    initialData: initialMagazineContent,
+    queryKey: ["postData", initialCategory, page],
+    queryFn: () => fetchPostsByCategory(initialCategory, page),
+    keepPreviousData: true,
   });
 
-  const {
-    data: allArticles,
-    isLoading: isLoadingAllArticles,
-    error: errorAllArticles,
-  } = useQuery({
-    queryKey: ["web-profiles"],
-    queryFn: fetchAllArticles,
-    initialData: initialAllArticles,
+  const { data: allPosts } = useQuery({
+    queryKey: ["allPosts"],
+    queryFn: () => fetchPostsByCategory(initialCategory, 0),
+    initialData: initialAllPosts,
   });
 
-  const {
-    data: currentMagArticle,
-    isLoading: isLoadingCurrentArticle,
-    error: errorCurrentArticle,
-  } = useQuery({
-    queryKey: ["currentMagArticle", slug],
-    queryFn: () => fetchCurrentMagArticle(slug),
-    enabled: !!slug,
-    initialData: initialCurrentMagArticle,
-  });
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [page]);
 
-  if (isLoadingMagazine || isLoadingAllArticles || isLoadingCurrentArticle)
+  const handleNextPage = () => {
+    if (!isPreviousData && postData?.length === POSTS_PER_PAGE) {
+      setPage((old) => old + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    setPage((old) => Math.max(old - 1, 0));
+  };
+
+  if (isLoading || !postData) {
     return <Loader />;
-  if (errorMagazine)
-    return <div>Error fetching magazine content: {errorMagazine.message}</div>;
-  if (errorAllArticles)
-    return <div>Error fetching articles: {errorAllArticles.message}</div>;
-  if (errorCurrentArticle)
-    return (
-      <div>
-        Error fetching current magazine article: {errorCurrentArticle.message}
-      </div>
-    );
-  if (!magazineContent || magazineContent.length === 0)
-    return <div>No magazine content found</div>;
+  }
 
-  const { issuuLink } = magazineContent[0];
+  const cateContent = postData[0];
 
   return (
     <>
-      <HeadMetaDynamic metaData={magazineContent[0]} />
-
+      <HeadMeta metaTitle={cateContent?.category?.title || "Web Profiles"} />
       <HeaderOne />
-      <div
-        style={{
-          position: "relative",
-          height: "90vh",
-          width: "100%",
-          paddingBottom: "0px",
-          border: "2px solid black",
-        }}
-      >
-        <iframe
-          allow="clipboard-write"
-          sandbox="allow-top-navigation allow-top-navigation-by-user-activation allow-downloads allow-scripts allow-same-origin allow-popups allow-modals allow-popups-to-escape-sandbox allow-forms"
-          allowFullScreen={true}
-          style={{
-            position: "absolute",
-            border: "none",
-            width: "100%",
-            height: "100%",
-            left: 0,
-            right: 0,
-            top: 0,
-            bottom: 0,
-          }}
-          src={issuuLink}
-        />
+      <Breadcrumb aPage={cateContent?.category?.title || "Web Profile"} />
+
+      <div className="banner banner__default bg-grey-light-three">
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-lg-12">
+              <div className="post-title-wrapper">
+                <h2 className="m-b-xs-0 axil-post-title hover-line">
+                  {cateContent?.category.title || "Web Profiles"}
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div style={{ marginTop: 0 }}>
-        <RelatedArticles
-          currentMagArticle={currentMagArticle}
-          allMagazinesArticles={allArticles}
-        />
-        <FooterTwo />
+      {/* Banner End here */}
+      <div className="random-posts section-gap">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-8">
+              <div className="axil-content">
+                {postData.map((data) => (
+                  <PostLayoutTwo
+                    data={data}
+                    postSizeMd={true}
+                    key={data.slug.current}
+                  />
+                ))}
+              </div>
+              <div className="pagination">
+                <button
+                  className="btn btn-primary btn-small"
+                  onClick={handlePreviousPage}
+                  disabled={page === 0}
+                >
+                  Previous Page
+                </button>
+                <span>Page {page + 1}</span>
+                <button
+                  className="btn btn-primary btn-small"
+                  onClick={handleNextPage}
+                  disabled={isPreviousData || postData?.length < POSTS_PER_PAGE}
+                >
+                  Next Page
+                </button>
+              </div>
+            </div>
+            <div className="col-lg-4">
+              <div className="post-sidebar">
+                <WidgetAd />
+                <WidgetSocialShare />
+                <WidgetCategory cateData={allPosts} />
+                <WidgetPost dataPost={allPosts} />
+                <WidgetAd
+                  img="/images/clientbanner/clientbanner3.jpg"
+                  height={492}
+                  width={320}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+      <FooterTwo />
     </>
   );
 };
 
-export default MagazineDetails;
+export default PostCategory;
 
-export async function getStaticProps({ params }) {
-  const { slug } = params;
+export const getStaticProps = async ({ params }) => {
+  const queryClient = new QueryClient();
+  const category = params.slug;
 
-  const initialMagazineContent = await fetchMagazineContent(slug);
-  const initialAllArticles = await fetchAllArticles();
-  const initialCurrentMagArticle = await fetchCurrentMagArticle(slug);
+  await queryClient.prefetchQuery(["postData", category, 0], () =>
+    fetchPostsByCategory(category, 0)
+  );
+  await queryClient.prefetchQuery(["allPosts"], () =>
+    fetchPostsByCategory(category, 0)
+  );
 
   return {
     props: {
-      initialMagazineContent,
-      initialAllArticles,
-      initialCurrentMagArticle,
+      initialCategory: category,
+      initialAllPosts: dehydrate(queryClient),
     },
   };
-}
+};
 
-export async function getStaticPaths() {
-  const slugsQuery = `*[_type == "magazine"].slug.current`;
-  const slugs = await client.fetch(slugsQuery);
+export const getStaticPaths = async () => {
+  const slugs = await client.fetch(
+    `*[_type == "category" && defined(slug.current)][].slug.current`
+  );
 
   const paths = slugs.map((slug) => ({
     params: { slug },
   }));
 
-  return {
-    paths,
-    fallback: "blocking",
-  };
-}
+  return { paths, fallback: "blocking" };
+};

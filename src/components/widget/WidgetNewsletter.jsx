@@ -1,7 +1,20 @@
-import { useRef, useEffect } from "react";
-import FormGroup from "../contact/FormGroup";
+import { useState } from "react";
 
 const WidgetNewsletter = () => {
+  const [emailAddress, setEmailAddress] = useState("");
+  const [submitMessage, setSubmitMessage] = useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (!emailAddress) {
+      setSubmitMessage("Please enter a valid email.");
+      setTimeout(() => setSubmitMessage(""), 5000);
+      return;
+    }
+    setSubmitMessage("Subscribed");
+    setTimeout(() => setSubmitMessage(""), 5000);
+  };
+
   return (
     <div className="newsletter-widget weekly-newsletter m-b-xs-40" style={{
       background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2a2a2a 100%)',
@@ -85,9 +98,10 @@ const WidgetNewsletter = () => {
           </p>
         </div>
         
-        {/* Enhanced Form Styling */}
+        {/* Enhanced Form Styling */
+        }
         <div className="subscription-form-wrapper">
-          <form action="#" className="subscription-form">
+          <form action="#" className="subscription-form" onSubmit={handleSubmit}>
             <div className="form-group" style={{ marginBottom: '1.5rem' }}>
               <input
                 type="email"
@@ -106,6 +120,8 @@ const WidgetNewsletter = () => {
                   transition: 'all 0.3s ease',
                   backdropFilter: 'blur(10px)'
                 }}
+                value={emailAddress}
+                onChange={(e) => setEmailAddress(e.target.value)}
                 onFocus={(e) => {
                   e.target.style.borderColor = '#ae8625';
                   e.target.style.background = 'rgba(255, 255, 255, 0.15)';
@@ -148,6 +164,19 @@ const WidgetNewsletter = () => {
                 <i className="feather icon-send" style={{ marginRight: '0.5rem' }}></i>
                 SUBSCRIBE
               </button>
+              {submitMessage && (
+                <div
+                  role="status"
+                  aria-live="polite"
+                  style={{
+                    marginTop: '0.75rem',
+                    color: submitMessage === 'Subscribed' ? '#7CFC00' : '#ff6b6b',
+                    fontWeight: 600
+                  }}
+                >
+                  {submitMessage}
+                </div>
+              )}
             </div>
           </form>
         </div>

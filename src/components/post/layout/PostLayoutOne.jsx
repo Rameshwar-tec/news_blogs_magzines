@@ -12,19 +12,28 @@ const PostLayoutOne = ({ data }) => {
       }
     >
       <div className="media post-block m-b-xs-20">
-        <figure className="fig-container">
+        <figure className="fig-container" style={{ position: "relative", display: "inline-block", margin: 0 }}>
           <Link href={`/Magazine/${data?.slug.current}`}>
             <Image
               src={data?.featureImg}
               alt={data?.altText || data?.title}
-              width={540}
-              height={540}
+              width={0}
+              height={0}
+              sizes="100vw"
               placeholder="blur"
               blurDataURL="/images/placeholder.png"
-              style={{ objectFit: "contain" }}
+              style={{ width: "100%", height: "auto", objectFit: "contain" }}
             />
           </Link>
-          <div className="post-cat-group m-b-xs-10">
+          <div
+            className="post-cat-group m-b-xs-10"
+            style={{
+              position: "absolute",
+              left: 16,
+              bottom: -12,
+              zIndex: 2
+            }}
+          >
             <Link
               className={`post-cat cat-btn ${"bg-color-blue-one"}`}
               href={`/category/${data?.category.slug}`}
@@ -33,7 +42,7 @@ const PostLayoutOne = ({ data }) => {
             </Link>
           </div>
         </figure>
-        <div className="media-body">
+        <div className="media-body" style={{ marginTop: 4 }}>
           <h3 className="axil-post-title hover-line hover-line">
             <Link href={`/post/${data?.slug.current}`}>{data?.title}</Link>
           </h3>

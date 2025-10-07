@@ -224,7 +224,7 @@ const FooterTwo = () => {
         </div>
       </div>
       <p style={{ textAlign: "center", marginTop: "3rem", fontWeight: 400 }}>
-        &copy;Copyright 2024 | The Entrepreneurial Chronicles| All Rights
+        &copy;Copyright 2025 | The Entrepreneurial Chronicles| All Rights
         Reserved.
       </p>
     </footer>
