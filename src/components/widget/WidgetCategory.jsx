@@ -87,7 +87,7 @@ const WidgetCategory = () => {
                     }}
                   >
                     <Image
-                      src={urlFor(data.category_image).url()}
+                      src={data.category_image ? urlFor(data.category_image).url() : '/images/placeholder.png'}
                       alt={data?.altText || data.title}
                       layout="fill"
                       objectFit="cover"
