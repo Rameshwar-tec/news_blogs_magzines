@@ -113,11 +113,11 @@ const FooterTwo = () => {
                 className="number"
                 style={{ fontWeight: 400, marginBottom: "1rem" }}
               >
-                Call Us :<a href="tel:+16143567697"> +1 (614) 602-2959</a>
+                Call Us :<a href="tel:+91 8421174213"> +91 8421174213</a>
               </div>
 
               <div className="axil-social-title" style={{ fontWeight: 400 }}>
-                Bandra West, Mumbai, Maharashtra, India
+                Hinjawadi, Pune, Maharashtra, India
               </div>
             </div>
           </div>

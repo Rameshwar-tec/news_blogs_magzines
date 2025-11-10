@@ -8,7 +8,7 @@ const ContactInfo = () => {
         <div className="axil-contact-info" style={{ color: '#fff' }}>
           <address className="address">
             <p className="mid m-b-xs-30" style={{ color: '#ccc' }}>
-              Bandra West, Mumbai, Maharashtra, India
+              Hinjawadi, Pune, Maharashtra, India
               <br />
               
             </p>
@@ -16,9 +16,9 @@ const ContactInfo = () => {
               We&apos;re Available 24/ 7. Call Now.
             </div>
             <div>
-              <a className="tel" href="tel:8884562790" style={{ color: '#fff', textDecoration: 'none' }}>
+              <a className="tel" href="tel:+91 8421174213" style={{ color: '#fff', textDecoration: 'none' }}>
                 <i className="fas fa-phone" style={{ color: '#D4AF37', marginRight: '8px' }} />
-                +1 (614) 602-2959
+                +91 8421174213
               </a>
             </div>
             <div></div>
