@@ -117,7 +117,7 @@ const FooterTwo = () => {
               </div>
 
               <div className="axil-social-title" style={{ fontWeight: 400 }}>
-                6605 Longshore St, Dublin, OH 43017, USA
+                Bandra West, Mumbai, Maharashtra, India
               </div>
             </div>
           </div>
