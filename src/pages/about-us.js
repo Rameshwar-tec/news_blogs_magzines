@@ -125,7 +125,7 @@ const AboutUs = ({ aboutData }) => {
           </div>
         </div>
       </div>
-      {/* <div className="axil-our-team section-gap section-gap-top__with-text" style={{ backgroundColor: '#000', color: '#fff' }}>
+      <div className="axil-our-team section-gap section-gap-top__with-text" style={{ backgroundColor: '#000', color: '#fff' }}>
         <div className="container">
           <div className="axil-team-grid-wrapper">
             <SectionTitleTwo
@@ -141,7 +141,7 @@ const AboutUs = ({ aboutData }) => {
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
       <FooterTwo />
     </>
   );

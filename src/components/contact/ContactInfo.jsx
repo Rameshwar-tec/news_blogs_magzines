@@ -8,9 +8,9 @@ const ContactInfo = () => {
         <div className="axil-contact-info" style={{ color: '#fff' }}>
           <address className="address">
             <p className="mid m-b-xs-30" style={{ color: '#ccc' }}>
-              Hinjawadi, Pune, Maharashtra, India
+              6605 Longshore st, Dublin
               <br />
-              
+              OH 43017, USA
             </p>
             <div className="h5 m-b-xs-10" style={{ color: '#fff' }}>
               We&apos;re Available 24/ 7. Call Now.
@@ -18,7 +18,7 @@ const ContactInfo = () => {
             <div>
               <a className="tel" href="tel:+91 8421174213" style={{ color: '#fff', textDecoration: 'none' }}>
                 <i className="fas fa-phone" style={{ color: '#D4AF37', marginRight: '8px' }} />
-                +91 8421174213
+                +1 (614) 602-2959
               </a>
             </div>
             <div></div>
