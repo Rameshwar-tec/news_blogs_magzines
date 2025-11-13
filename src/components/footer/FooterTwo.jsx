@@ -120,6 +120,14 @@ const FooterTwo = () => {
                 6605 Longshore st, Dublin
               <br />
               OH 43017, USA
+              <br></br>
+              
+              </div>
+              <div className="axil-social-title" style={{ fontWeight: 400 }}>
+Home Branch - Gera Imperim rise, 328-B, wipro circle,<br></br> opp. to wipro company, Hinjawadi Phase II,<br></br> Hinjawadi Rajiv Gandhi Infotech Park,Hinjawadi, <br></br>Pune, Pimpri-Chinchwad, Maharashtra 411057
+              
+              <br></br>
+              
               </div>
             </div>
           </div>

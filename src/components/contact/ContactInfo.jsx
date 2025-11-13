@@ -12,6 +12,10 @@ const ContactInfo = () => {
               <br />
               OH 43017, USA
             </p>
+
+            <p className="mid m-b-xs-30" style={{ color: '#ccc' }}>
+              Home Branch - Gera Imperim rise, 328-B, wipro circle, opp. to wipro company, Hinjawadi Phase II, Hinjawadi Rajiv Gandhi Infotech Park, Hinjawadi, Pune, Pimpri-Chinchwad, Maharashtra 411057
+            </p>
             <div className="h5 m-b-xs-10" style={{ color: '#fff' }}>
               We&apos;re Available 24/ 7. Call Now.
             </div>
