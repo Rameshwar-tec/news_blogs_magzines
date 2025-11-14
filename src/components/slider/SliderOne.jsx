@@ -9,6 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import { client } from "../../client";
 import ErrorPage from "../../pages/404";
 import Loader from "../common/Loader";
+import SocialLink from "../../data/social/SocialLink.json";
 
 const SliderOne = () => {
   const { data, isLoading, error } = useQuery({
@@ -267,7 +268,9 @@ const SliderOne = () => {
                   marginTop: '1rem'
                 }}>
                   <a 
-                    href="#" 
+                    href={SocialLink.fb.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     style={{
                       background: 'linear-gradient(45deg, #ae8625, #f4d03f)',
                       color: '#000',
@@ -292,38 +295,12 @@ const SliderOne = () => {
                       e.currentTarget.style.transform = 'scale(1)';
                     }}
                   >
-                    <i className="fab fa-facebook-f" />
+                    <i className={SocialLink.fb.icon} />
                   </a>
                   <a 
-                    href="#" 
-                    style={{
-                      background: 'linear-gradient(45deg, #ae8625, #f4d03f)',
-                      color: '#000',
-                      width: '40px',
-                      height: '40px',
-                      borderRadius: '50%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      textDecoration: 'none',
-                      transition: 'all 0.3s ease',
-                      boxShadow: 'none'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = '#000000';
-                      e.currentTarget.style.color = '#ffffff';
-                      e.currentTarget.style.transform = 'scale(1.1)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = 'linear-gradient(45deg, #ae8625, #f4d03f)';
-                      e.currentTarget.style.color = '#000';
-                      e.currentTarget.style.transform = 'scale(1)';
-                    }}
-                  >
-                    <i className="fa-brands fa-x-twitter" />
-                  </a>
-                  <a 
-                    href="#" 
+                    href={SocialLink.instagram.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     style={{
                       background: 'linear-gradient(45deg, #ae8625, #f4d03f)',
                       color: '#000',
@@ -348,10 +325,12 @@ const SliderOne = () => {
                       e.currentTarget.style.transform = 'scale(1)';
                     }}
                   >
-                    <i className="fab fa-instagram" />
+                    <i className={SocialLink.instagram.icon} />
                   </a>
                   <a 
-                    href="#" 
+                    href={SocialLink.linked.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     style={{
                       background: 'linear-gradient(45deg, #ae8625, #f4d03f)',
                       color: '#000',
@@ -376,7 +355,37 @@ const SliderOne = () => {
                       e.currentTarget.style.transform = 'scale(1)';
                     }}
                   >
-                    <i className="fab fa-linkedin-in" />
+                    <i className={SocialLink.linked.icon} />
+                  </a>
+                  <a 
+                    href={SocialLink.yt.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      background: 'linear-gradient(45deg, #ae8625, #f4d03f)',
+                      color: '#000',
+                      width: '40px',
+                      height: '40px',
+                      borderRadius: '50%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      textDecoration: 'none',
+                      transition: 'all 0.3s ease',
+                      boxShadow: 'none'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = '#FF0000';
+                      e.currentTarget.style.color = '#ffffff';
+                      e.currentTarget.style.transform = 'scale(1.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'linear-gradient(45deg, #ae8625, #f4d03f)';
+                      e.currentTarget.style.color = '#000';
+                      e.currentTarget.style.transform = 'scale(1)';
+                    }}
+                  >
+                    <i className={SocialLink.yt.icon} />
                   </a>
                 </div>
               </div>

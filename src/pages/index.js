@@ -22,7 +22,7 @@ const Home = () => {
       />
       <HeaderOne />
       <MagazineHero />
-      <LogoSlider />
+      {/* <LogoSlider /> */}
       <SliderOne />
       <Magazines />
       <WebProfiles />

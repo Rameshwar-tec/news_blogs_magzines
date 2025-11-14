@@ -37,6 +37,12 @@ const FooterTwo = () => {
       className="page-footer bg-grey-dark-key"
       style={{ color: "white", paddingBottom: "1px" }}
     >
+      <style jsx>{`
+        .footer-description-paragraph {
+          word-spacing: -1px !important;
+          letter-spacing: -0.3px !important;
+        }
+      `}</style>
       <div
         className={`${styles.footer_start} footer_start`}
         style={{
@@ -46,9 +52,11 @@ const FooterTwo = () => {
           marginLeft: "2rem",
           flexWrap: "wrap",
           justifyContent: "center",
+          alignItems: "flex-start",
         }}
       >
-        <div className="logo">
+        {/* Column 1: Logo + Description */}
+        <div className="logo" style={{ flex: "1 1 280px", minWidth: "280px", maxWidth: "350px" }}>
           <div className="footer-logo-container">
             <Link href="/">
               <Image
@@ -56,112 +64,38 @@ const FooterTwo = () => {
                 alt="brand-logo"
                 width={300}
                 height={100}
-                style={{ objectFit: "contain" }}
+                style={{ objectFit: "contain", marginBottom: "1rem" }}
               />
             </Link>
-            <div className="footer-social-share-wrapper">
-              <div
-                className="footer-social-share"
-                style={{ marginBottom: "1rem" }}
-              >
-                <div className="axil-social-title" style={{ fontWeight: 400 }}>
-                  Social Media :
-                </div>
-                <ul className="social-share social-share__with-bg">
-                  <li>
-                    <a href={SocialLink.fb.url}>
-                      <i className={SocialLink.fb.icon} />
-                    </a>
-                  </li>
-                  <li>
-                    <a href={SocialLink.twitter.url}>
-                      <i className={SocialLink.twitter.icon} />
-                    </a>
-                  </li>
-                  <li>
-                    <a href={SocialLink.yt.url}>
-                      <i className={SocialLink.yt.icon} />
-                    </a>
-                  </li>
-                  <li>
-                    <a href={SocialLink.linked.url}>
-                      <i className={SocialLink.linked.icon} />
-                    </a>
-                  </li>
-                  <li>
-                    <a href={SocialLink.pinterest.url}>
-                      <i className={SocialLink.pinterest.icon} />
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div
-                className="mail"
-                style={{ fontWeight: 400, marginBottom: "1rem" }}
-              >
-                Reach Us:
-                <a
-                  href="mailto:info@theentrepreneurialchronicle.com"
-                  className="bold"
-                >
-                  {" "}
-                  Info@theentrepreneurialchronicle.com
-                </a>
-              </div>
-
-              <div
-                className="number"
-                style={{ fontWeight: 400, marginBottom: "1rem" }}
-              >
-                Call Us :<a href="tel:+1 (614) 602-2959"> +1 (614) 602-2959</a>
-              </div>
-
-              <div className="axil-social-title" style={{ fontWeight: 400 }}>
-                6605 Longshore st, Dublin
-              <br />
-              OH 43017, USA
-              <br></br>
-              
-              </div>
-              <div className="axil-social-title" style={{ fontWeight: 400 }}>
-Home Branch - Gera Imperim rise, 328-B, wipro circle,<br></br> opp. to wipro company, Hinjawadi Phase II,<br></br> Hinjawadi Rajiv Gandhi Infotech Park,Hinjawadi, <br></br>Pune, Pimpri-Chinchwad, Maharashtra 411057
-              
-              <br></br>
-              
-              </div>
-            </div>
+            <p className="footer-description-paragraph" style={{ width: "100%", color: "white", fontWeight: 200, lineHeight: "1.4", textAlign: "justify", wordSpacing: "-1px", letterSpacing: "-0.3px" }}>
+              The Entrepreneurial Chronicles is a business magazine that shares
+              inspiring success stories of entrepreneurs, transforming intriguing
+              tales into captivating narratives. With a skilled storytelling team
+              and extensive industry expertise, we amplify untold stories from the
+              business world, making our magazine both compelling and insightful.
+            </p>
           </div>
         </div>
-        <div
-          className={`${styles.footer_content} footer_content`}
-          style={{ margin: "1rem", color: "white" }}
-        >
-          <p style={{ width: "100%", color: "white", fontWeight: 200 }}>
-            The Entrepreneurial Chronicles is a business magazine that shares
-            inspiring success stories of entrepreneurs, transforming intriguing
-            tales into captivating narratives. With a skilled storytelling team
-            and extensive industry expertise, we amplify untold stories from the
-            business world, making our magazine both compelling and insightful.
-          </p>
-        </div>
-        <div>
+
+        {/* Column 2: Quick Links */}
+        <div style={{ flex: "1 1 200px", minWidth: "200px" }}>
           <h4
             style={{
               color: "white",
               fontWeight: "bold",
-              position:
-                "relative" /* Ensure position relative for absolute positioning */,
+              position: "relative",
               fontStyle: "initial",
+              marginBottom: "1.5rem",
+              textAlign: "center",
             }}
           >
             QUICK LINKS
             <div
               style={{
                 position: "absolute",
-                bottom: "-5px" /* Adjust as needed to position the line */,
-                left: "50%" /* Center the line horizontally */,
-                transform:
-                  "translateX(-50%)" /* Center the line horizontally */,
+                bottom: "-5px",
+                left: "50%",
+                transform: "translateX(-50%)",
                 width: "50%",
                 height: "1px",
                 backgroundColor: "white",
@@ -169,18 +103,27 @@ Home Branch - Gera Imperim rise, 328-B, wipro circle,<br></br> opp. to wipro com
             />
           </h4>
           <ul
-            style={{ color: "white", fontWeight: 200, fontSize: "medium" }}
+            style={{ 
+              color: "white", 
+              fontWeight: 200, 
+              fontSize: "medium",
+              listStyle: "none",
+              padding: 0,
+              lineHeight: "2",
+              textAlign: "center"
+            }}
             className="footer-bottom-links "
           >
             <li>
               <Link href="/">Home</Link>
             </li>
             <li>
-              <Link href="/about-us">About Us</Link>
-            </li>
-            <li>
               <Link href="/magazines">Magazine</Link>
             </li>
+            <li>
+              <Link href="/about-us">About Us</Link>
+            </li>
+          
             <li>
               <Link href="/blogs">Blogs</Link>
             </li>
@@ -192,25 +135,26 @@ Home Branch - Gera Imperim rise, 328-B, wipro circle,<br></br> opp. to wipro com
             </li>
           </ul>
         </div>
-        <div style={{ width: "20%", textAlign: "center" }}>
+
+        {/* Column 3: Magazines */}
+        <div style={{ flex: "1 1 250px", minWidth: "250px", textAlign: "center" }}>
           <h4
             style={{
               color: "white",
               fontWeight: "bold",
               fontStyle: "initial",
-              position:
-                "relative" /* Ensure position relative for absolute positioning */,
+              position: "relative",
+              marginBottom: "1.5rem",
             }}
           >
             MAGAZINES
             <div
               style={{
                 position: "absolute",
-                bottom: "-5px" /* Adjust as needed to position the line */,
-                left: "50%" /* Center the line horizontally */,
-                transform:
-                  "translateX(-50%)" /* Center the line horizontally */,
-                width: "30%",
+                bottom: "-5px",
+                left: "50%",
+                transform: "translateX(-50%)",
+                width: "40%",
                 height: "1px",
                 backgroundColor: "white",
               }}
@@ -226,16 +170,97 @@ Home Branch - Gera Imperim rise, 328-B, wipro circle,<br></br> opp. to wipro com
                     height={200}
                     alt="magazines"
                     className="object-fit-contain"
+                    style={{ width: "100%", height: "auto", maxWidth: "250px", margin: "0 auto" }}
                   />
                 </Carousel.Item>
               );
             })}
           </Carousel>
         </div>
+
+        {/* Column 4: Social Links + Contact Info */}
+        <div className="footer-social-share-wrapper" style={{ flex: "1 1 250px", minWidth: "250px" }}>
+          <div
+            className="footer-social-share"
+            style={{ marginBottom: "1.5rem" }}
+          >
+            <div className="axil-social-title" style={{ fontWeight: 400, marginBottom: "0.5rem" }}>
+              Social Media :
+            </div>
+            <ul className="social-share social-share__with-bg" style={{ listStyle: "none", padding: 0, display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+              <li>
+                <a href={SocialLink.fb.url} target="_blank" rel="noopener noreferrer">
+                  <i className={SocialLink.fb.icon} />
+                </a>
+              </li>
+              <li>
+                <a href={SocialLink.twitter.url} target="_blank" rel="noopener noreferrer">
+                  <i className={SocialLink.twitter.icon} />
+                </a>
+              </li>
+              <li>
+                <a href={SocialLink.yt.url} target="_blank" rel="noopener noreferrer">
+                  <i className={SocialLink.yt.icon} />
+                </a>
+              </li>
+              <li>
+                <a href={SocialLink.linked.url} target="_blank" rel="noopener noreferrer">
+                  <i className={SocialLink.linked.icon} />
+                </a>
+              </li>
+              <li>
+                <a href={SocialLink.pinterest.url} target="_blank" rel="noopener noreferrer">
+                  <i className={SocialLink.pinterest.icon} />
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div
+            className="mail"
+            style={{ fontWeight: 400, marginBottom: "1rem", lineHeight: "1.6" }}
+          >
+            Reach Us:
+            <a
+              href="mailto:info@theentrepreneurialchronicle.com"
+              className="bold"
+              style={{ display: "block", marginTop: "0.25rem", color: "white" }}
+            >
+              Info@theentrepreneurialchronicle.com
+            </a>
+          </div>
+
+          <div
+            className="number"
+            style={{ fontWeight: 400, marginBottom: "1rem", lineHeight: "1.6" }}
+          >
+            Call Us :
+            <a href="tel:+1 (614) 602-2959" style={{ display: "block", marginTop: "0.25rem", color: "white" }}> +1 (614) 602-2959</a>
+          </div>
+
+          <div className="axil-social-title" style={{ fontWeight: 400, marginBottom: "1rem", lineHeight: "1.6" }}>
+            6605 Longshore st, Dublin
+            <br />
+            OH 43017, USA
+          </div>
+          <div className="axil-social-title" style={{ fontWeight: 400, lineHeight: "1.6" }}>
+            Home Branch - office no 328B, Gera imperium Rise, Wipro circle, opp to wipro company, Hinjewadi phase 2, Pune
+          </div>
+        </div>
       </div>
       <p style={{ textAlign: "center", marginTop: "3rem", fontWeight: 400 }}>
         &copy;Copyright 2025 | The Entrepreneurial Chronicles| All Rights
         Reserved.
+      </p>
+      <p style={{ textAlign: "center", marginTop: "1rem", fontWeight: 400 }}>
+        Designed by{" "}
+        <a
+          href="https://www.intellisysitsolutions.com/index.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "white", textDecoration: "underline" }}
+        >
+          team Intellisys
+        </a>
       </p>
     </footer>
   );

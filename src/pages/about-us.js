@@ -126,7 +126,7 @@ const AboutUs = ({ aboutData }) => {
         </div>
       </div>
       <div className="axil-our-team section-gap section-gap-top__with-text" style={{ backgroundColor: '#000', color: '#fff' }}>
-        <div className="container">
+        {/* <div className="container">
           <div className="axil-team-grid-wrapper">
             <SectionTitleTwo
               title="Meet Our Company Pillars"
@@ -140,7 +140,7 @@ const AboutUs = ({ aboutData }) => {
               ))}
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
       <FooterTwo />
     </>
