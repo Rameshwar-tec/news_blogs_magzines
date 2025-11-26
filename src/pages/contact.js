@@ -9,9 +9,25 @@ import SectionTitleTwo from "../components/elements/SectionTitleTwo";
 import HeaderOne from "../components/header/HeaderOne";
 import FooterTwo from "../components/footer/FooterTwo";
 import emailjs from "@emailjs/browser";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
+import { useRouter } from "next/router";
 
 const ContactPage = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    // Handle scroll to map when hash is present in URL
+    if (router.asPath.includes('#')) {
+      const hash = router.asPath.split('#')[1];
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  }, [router.asPath]);
+
   return (
     <div style={{ background: '#000', color: '#fff', minHeight: '100vh' }}>
       <HeadMeta
@@ -107,39 +123,70 @@ const ContactPage = () => {
       <div className="section-gap our-location section-gap-top__with-text" style={{ background: '#000', color: '#fff' }}>
         <div className="container">
           <div className="section-title" style={{ color: '#fff' }}>
-            <h2 className="axil-title m-b-xs-40" style={{ color: '#fff' }}>Our Location</h2>
+            <h2 className="axil-title m-b-xs-40" style={{ color: '#fff' }}>Our Locations</h2>
           </div> 
           {/* End of .section-title */}
         </div>
         {/* End of .container */}
         <div className="container">
-          <div className="axil-map-wrapper m-b-xs-30" style={{ 
-            width: "100%", 
-            margin: "0 auto",
-            border: "2px solid #D4AF37",
-            borderRadius: "8px",
-            overflow: "hidden",
-            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.3)"
+          <div style={{ 
+            display: "flex",
+            gap: "2rem",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            alignItems: "stretch"
           }}>
-            {/* Previous US Address Map - Commented Out */}
-            {/* <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d65323685.5466851!2d-90.41887654143267!3d2.137822078029002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8838935d05ab2f23%3A0x9c971993f29450fc!2s6555%2C%206605%20Longshore%20St%2C%20Dublin%2C%20OH%2043017%2C%20USA!5e0!3m2!1sen!2sin!4v1715191335841!5m2!1sen!2sin"
-              width={600}
-              height={450}
-              allowFullScreen
-            /> */}
-            
-            {/* India Address Map - Gera Imperim Rise, Hinjawadi, Pune */}
-            <iframe
-              src="https://www.google.com/maps?q=Gera+Imperim+Rise,+328-B,+Wipro+Circle,+Opp.+to+Wipro+Company,+Hinjawadi+Phase+II,+Hinjawadi+Rajiv+Gandhi+Infotech+Park,+Hinjawadi,+Pune,+Pimpri-Chinchwad,+Maharashtra+411057&output=embed"
-              width="100%"
-              height={350}
-              style={{ border: 0, width: "100%", display: "block" }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Gera Imperim Rise, Hinjawadi, Pune Location"
-            />
+            {/* USA Location Map */}
+            <div id="usa-map" style={{ 
+              flex: "1 1 45%",
+              minWidth: "300px",
+              marginBottom: "2rem"
+            }}>
+              <div className="axil-map-wrapper" style={{ 
+                width: "100%", 
+                border: "2px solid #D4AF37",
+                borderRadius: "8px",
+                overflow: "hidden",
+                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.3)"
+              }}>
+                <iframe
+                  src="https://www.google.com/maps?q=6605+Longshore+St,+Dublin,+OH+43017,+USA&output=embed"
+                  width="100%"
+                  height={350}
+                  style={{ border: 0, width: "100%", display: "block" }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="6605 Longshore St, Dublin, OH 43017, USA"
+                />
+              </div>
+            </div>
+
+            {/* Germany Location Map */}
+            <div id="germany-map" style={{ 
+              flex: "1 1 45%",
+              minWidth: "300px",
+              marginBottom: "2rem"
+            }}>
+              <div className="axil-map-wrapper" style={{ 
+                width: "100%", 
+                border: "2px solid #D4AF37",
+                borderRadius: "8px",
+                overflow: "hidden",
+                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.3)"
+              }}>
+                <iframe
+                  src="https://www.google.com/maps?q=He%C3%9Fstra%C3%9Fe+36,+80798+M%C3%BCnchen,+Germany&output=embed"
+                  width="100%"
+                  height={350}
+                  style={{ border: 0, width: "100%", display: "block" }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Heßstraße 36, 80798 München, Germany"
+                />
+              </div>
+            </div>
           </div>
         </div>
         {/* End of .container */}

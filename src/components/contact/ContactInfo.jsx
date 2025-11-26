@@ -14,6 +14,10 @@ const ContactInfo = () => {
             </p>
 
             <p className="mid m-b-xs-30" style={{ color: '#ccc' }}>
+              Heßstraße 36, 80798 München, Germany
+            </p>
+
+            <p className="mid m-b-xs-30" style={{ color: '#ccc' }}>
               Home Branch - office no 328B, Gera imperium Rise,Wipro circle,opp to wipro company, Hinjewadi phase 2, Pune
             </p>
             <div className="h5 m-b-xs-10" style={{ color: '#fff' }}>

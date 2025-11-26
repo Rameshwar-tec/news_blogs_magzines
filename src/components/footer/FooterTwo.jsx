@@ -237,11 +237,28 @@ const FooterTwo = () => {
             <a href="tel:+1 (614) 602-2959" style={{ display: "block", marginTop: "0.25rem", color: "white" }}> +1 (614) 602-2959</a>
           </div>
 
-          <div className="axil-social-title" style={{ fontWeight: 400, marginBottom: "1rem", lineHeight: "1.6" }}>
-            6605 Longshore st, Dublin
-            <br />
-            OH 43017, USA
-          </div>
+          <a 
+            href="https://www.google.com/maps/search/?api=1&query=6605+Longshore+St,+Dublin,+OH+43017,+USA" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            <div className="axil-social-title" style={{ fontWeight: 400, marginBottom: "1rem", lineHeight: "1.6", cursor: "pointer" }}>
+              6605 Longshore st, Dublin
+              <br />
+              OH 43017, USA
+            </div>
+          </a>
+          <a 
+            href="https://www.google.com/maps/search/?api=1&query=He%C3%9Fstra%C3%9Fe+36,+80798+M%C3%BCnchen,+Germany" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            <div className="axil-social-title" style={{ fontWeight: 400, marginBottom: "1rem", lineHeight: "1.6", cursor: "pointer" }}>
+              Heßstraße 36, 80798 München, Germany
+            </div>
+          </a>
           <div className="axil-social-title" style={{ fontWeight: 400, lineHeight: "1.6" }}>
             Home Branch - office no 328B, Gera imperium Rise, Wipro circle, opp to wipro company, Hinjewadi phase 2, Pune
           </div>
