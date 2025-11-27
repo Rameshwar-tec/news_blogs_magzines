@@ -1,3 +1,4 @@
+import Head from "next/head";
 import HeadMeta from "../components/elements/HeadMeta";
 import FooterTwo from "../components/footer/FooterTwo";
 import HeaderOne from "../components/header/HeaderOne";
@@ -16,6 +17,9 @@ const Home = () => {
   
   return (
     <div suppressHydrationWarning style={{ background: '#000', color: '#fff', minHeight: '100vh' }}>
+      <Head>
+        <meta name="google-site-verification" content="Hb-PBtfDrWImSPQKiNhfbw0JxtOLWsPKDEbfz_WJ8ZE" />
+      </Head>
       <HeadMeta
         metaTitle="The Entrepreneurial Chronicles: A Business Magazine for Inspiring Entrepreneur Stories"
         metaDesc="The Entrepreneurial Chronicles is a business magazine that brings inspiring stories of entrepreneurs who have turned their dreams into reality."
