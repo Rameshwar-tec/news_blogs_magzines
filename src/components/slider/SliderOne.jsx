@@ -13,19 +13,53 @@ import SocialLink from "../../data/social/SocialLink.json";
 
 const SliderOne = () => {
   const { data, isLoading, error } = useQuery({
-    queryKey: ["slider-post"],
+    queryKey: ["slider-magazine"],
     queryFn: async () => {
-      const query = `*[_type == 'post' && featured == true]{
-      title,
-      slug,
-      altText,
-      publishedAt,
-      'featureImg': mainImage.asset->url,
-
-      'cate': categories[0]->title
-    }| order(publishedAt desc) [0...5]`; // Get up to 3 featured posts
+      // Fetch magazines instead of featured posts
+      const query = `*[_type == "magazine"] {
+        title,
+        slug,
+        altText,
+        publishedAt,
+        'featureImg': mainImage.asset->url,
+        description
+      } | order(publishedAt desc) [0...5]`;
 
       const response = await client.fetch(query);
+      
+      // Ensure Magnolia Yace is included and positioned first
+      if (response && response.length > 0) {
+        const reorderedData = [...response];
+        
+        // Find Magnolia Yace - check both title and slug
+        const magnoliaItem = reorderedData.find(item => {
+          const title = (item.title || '').toLowerCase();
+          const slug = (item.slug?.current || '').toLowerCase();
+          return title.includes('magnolia') || title.includes('yace') ||
+                 slug.includes('magnolia') || slug.includes('yace');
+        });
+        
+        // Remove Magnolia Yace from its original position
+        if (magnoliaItem) {
+          const index = reorderedData.indexOf(magnoliaItem);
+          if (index > -1) reorderedData.splice(index, 1);
+        }
+        
+        // Insert Magnolia Yace first
+        if (magnoliaItem) {
+          reorderedData.unshift(magnoliaItem);
+        }
+        
+        // Debug logging
+        console.log('Magazine slider data:', {
+          magnoliaFound: !!magnoliaItem,
+          firstItem: reorderedData[0]?.title,
+          totalItems: reorderedData.length
+        });
+        
+        return reorderedData;
+      }
+      
       return response;
     },
   });
@@ -144,7 +178,7 @@ const SliderOne = () => {
                   className="slick-slider-for slick-synced"
                 >
                   {data.slice(0, 3).map((data, index) => (
-                    <div className="item" key={data.slug} style={{ padding: '1rem 0' }}>
+                    <div className="item" key={data.slug?.current || data.slug || index} style={{ padding: '1rem 0' }}>
                       {/* Enhanced Category Badge */}
                       <div style={{
                         display: 'inline-block',
@@ -159,7 +193,7 @@ const SliderOne = () => {
                         marginBottom: '1.5rem',
                         boxShadow: '0 4px 15px rgba(174, 134, 37, 0.3)'
                       }}>
-                        Featured Story
+                        Featured Magazine
                       </div>
                       
                       {/* Enhanced Title */}
@@ -171,7 +205,7 @@ const SliderOne = () => {
                         textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
                         marginBottom: '2rem'
                       }}>
-                        <Link href={`/post/${data.slug.current}`} style={{ 
+                        <Link href={`/magazine/${data.slug?.current || data.slug}`} style={{ 
                           color: 'inherit',
                           textDecoration: 'none',
                           transition: 'all 0.3s ease'
@@ -184,7 +218,7 @@ const SliderOne = () => {
                       <div className="btn-group" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                         <Link
                           className="btn btn-primary m-r-xs-30"
-                          href={`/post/${data.slug.current}`}
+                          href={`/magazine/${data.slug?.current || data.slug}`}
                           style={{
                             background: 'linear-gradient(45deg, #ae8625, #f4d03f)',
                             border: 'none',
@@ -198,7 +232,7 @@ const SliderOne = () => {
                             textDecoration: 'none'
                           }}
                         >
-                          Read Article
+                          View Magazine
                         </Link>
                         <Link
                           className="btn btn-outline-light"
@@ -251,7 +285,7 @@ const SliderOne = () => {
             className="slick-slider-nav slick-synced"
           >
             {data?.slice(0, 3).map((data, index) => (
-              <div className="item" key={data.slug}>
+              <div className="item" key={data.slug?.current || data.slug || index}>
                 <Image
                   src={data.featureImg}
                   alt={data?.altText || data.title}

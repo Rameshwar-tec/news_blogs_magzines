@@ -37,17 +37,48 @@ const WebProfiles = () => {
 
   if (!data) return null;
 
-  // Reorder data to put Anchel first
+  // Reorder data: Magnolia Yace first, Devang Raja second, Aanchal Gupta third
   const reorderedData = [...data];
-  const anchelIndex = reorderedData.findIndex(item => 
-    item.title.toLowerCase().includes('anchel') || 
-    item.title.toLowerCase().includes('aanchal')
+  
+  // Find and extract items
+  const magnoliaItem = reorderedData.find(item => 
+    item.title.toLowerCase().includes('magnolia') || 
+    item.title.toLowerCase().includes('yace')
   );
   
-  if (anchelIndex > 0) {
-    const anchelItem = reorderedData.splice(anchelIndex, 1)[0];
-    reorderedData.unshift(anchelItem);
+  const devangItem = reorderedData.find(item => 
+    item.title.toLowerCase().includes('devang') || 
+    item.title.toLowerCase().includes('raja')
+  );
+  
+  const anchelItem = reorderedData.find(item => 
+    item.title.toLowerCase().includes('anchel') || 
+    item.title.toLowerCase().includes('aanchal') ||
+    item.title.toLowerCase().includes('gupta')
+  );
+  
+  // Remove found items from array
+  if (magnoliaItem) {
+    const index = reorderedData.indexOf(magnoliaItem);
+    if (index > -1) reorderedData.splice(index, 1);
   }
+  if (devangItem) {
+    const index = reorderedData.indexOf(devangItem);
+    if (index > -1) reorderedData.splice(index, 1);
+  }
+  if (anchelItem) {
+    const index = reorderedData.indexOf(anchelItem);
+    if (index > -1) reorderedData.splice(index, 1);
+  }
+  
+  // Insert items at the beginning in the correct order
+  const orderedItems = [];
+  if (magnoliaItem) orderedItems.push(magnoliaItem);
+  if (devangItem) orderedItems.push(devangItem);
+  if (anchelItem) orderedItems.push(anchelItem);
+  
+  // Combine ordered items with remaining items
+  reorderedData.unshift(...orderedItems);
 
   const handleProfileClick = (index) => {
     setSelectedProfile(index);

@@ -707,44 +707,6 @@ const HeaderOne = () => {
         <div className="header-top bg-grey-dark-one">
           <div className="container">
             <div className="row align-items-center">
-              <div className="col-md">
-                <ul className="header-top-nav list-inline justify-content-center justify-content-md-start">
-
-                  <li>
-                    <Link href="/about-us">About</Link>
-                  </li>
-                  <li>
-                    <Link href="/contact">Contact</Link>
-                  </li>
-                  <li>
-                    <Link href="/advertise-with-us">Advertise With Us</Link>
-                  </li>
-                </ul>
-              </div>
-              <div className="col-md-auto">
-                <ul className="ml-auto social-share header-top__social-share">
-                  <li>
-                    <a href={SocialLink.fb.url}>
-                      <i className={SocialLink.fb.icon} />
-                    </a>
-                  </li>
-                  <li>
-                    <a href={SocialLink.twitter.url}>
-                      <i className={SocialLink.twitter.icon} />
-                    </a>
-                  </li>
-                  <li>
-                    <a href={SocialLink.instagram.url}>
-                      <i className={SocialLink.instagram.icon} />
-                    </a>
-                  </li>
-                  <li>
-                    <a href={SocialLink.linked.url}>
-                      <i className={SocialLink.linked.icon} />
-                    </a>
-                  </li>
-                </ul>
-              </div>
             </div>
           </div>
         </div>
