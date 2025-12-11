@@ -8454,7 +8454,7 @@ address .tel i {
 }
 .social-share-list-wrapper li {
   width: 25%;
-  height: 10rem;
+  height: 6rem;
   padding: 0.5rem;
   color: #fff;
 }
@@ -8471,7 +8471,7 @@ address .tel i {
   transform: translateY(-2px);
 }
 .social-share-list-wrapper li i {
-  font-size: 1.8rem;
+  font-size: 3rem;
 }
 .social-share-list-wrapper li .counts {
   font-size: 1.4rem;

@@ -17,7 +17,6 @@ const SocialShareBottom = () => {
             className="btn bg-color-facebook"
           >
             <i className="fab fa-facebook-f" />
-            1K+
           </a>
         </li>
         <li>
@@ -26,7 +25,6 @@ const SocialShareBottom = () => {
             className="btn bg-color-twitter"
           >
             <i className="fa-brands fa-x-twitter" />
-            1000+
           </a>
         </li>
 
@@ -36,7 +34,6 @@ const SocialShareBottom = () => {
             className="btn bg-color-linkedin"
           >
             <i className="fab fa-linkedin-in" />
-            1M+
           </a>
         </li>
       </ul>
