@@ -36,16 +36,15 @@ const ContactInfo = () => {
             <div className="axil-social-title h5" style={{ color: '#fff' }}>Follow Us</div>
             <ul className="social-share social-share__with-bg" style={{ gap: '8px' }}>
               <li>
-                <a href={SocialLink.fb.url} style={{ color: '#fff' }}>
-                  <i className={SocialLink.fb.icon} style={{ color: '#D4AF37' }} />
+                <a href={SocialLink.yt.url} style={{ color: '#fff' }}>
+                  <i className={SocialLink.yt.icon} style={{ color: '#D4AF37' }} />
                 </a>
               </li>
               <li>
-                <a href={SocialLink.twitter.url} style={{ color: '#fff' }}>
-                  <i className={SocialLink.twitter.icon} style={{ color: '#D4AF37' }} />
+                <a href={SocialLink.instagram.url} style={{ color: '#fff' }}>
+                  <i className={SocialLink.instagram.icon} style={{ color: '#D4AF37' }} />
                 </a>
               </li>
-
               <li>
                 <a href={SocialLink.linked.url} style={{ color: '#fff' }}>
                   <i className={SocialLink.linked.icon} style={{ color: '#D4AF37' }} />

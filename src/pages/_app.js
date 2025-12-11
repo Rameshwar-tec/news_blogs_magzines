@@ -4,6 +4,7 @@ import "../styles/magazines.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import LoadingPage from "../components/common/LoadingPage";
+import ScrollToTop from "../components/common/ScrollToTop";
 import { useState, useEffect } from "react";
 
 const queryClient = new QueryClient(); // Create a query client instance
@@ -25,6 +26,7 @@ function MyApp({ Component, pageProps }) {
       <QueryClientProvider client={queryClient}>
         {isLoading && <LoadingPage />}
         <Component {...pageProps} />
+        <ScrollToTop />
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </div>

@@ -194,11 +194,6 @@ const FooterTwo = () => {
                 </a>
               </li>
               <li>
-                <a href={SocialLink.twitter.url} target="_blank" rel="noopener noreferrer">
-                  <i className={SocialLink.twitter.icon} />
-                </a>
-              </li>
-              <li>
                 <a href={SocialLink.yt.url} target="_blank" rel="noopener noreferrer">
                   <i className={SocialLink.yt.icon} />
                 </a>
@@ -206,11 +201,6 @@ const FooterTwo = () => {
               <li>
                 <a href={SocialLink.linked.url} target="_blank" rel="noopener noreferrer">
                   <i className={SocialLink.linked.icon} />
-                </a>
-              </li>
-              <li>
-                <a href={SocialLink.pinterest.url} target="_blank" rel="noopener noreferrer">
-                  <i className={SocialLink.pinterest.icon} />
                 </a>
               </li>
             </ul>

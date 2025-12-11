@@ -9,6 +9,7 @@ import WidgetSocialShare from "../../components/widget/WidgetSocialShare";
 import WidgetPost from "../../components/widget/WidgetPost";
 import PostLayoutTwo from "../../components/post/layout/PostLayoutTwo";
 import WidgetCategory from "../../components/widget/WidgetCategory";
+import SectionTitle from "../../components/elements/SectionTitle";
 import { client } from "../../client";
 import Loader from "../../components/common/Loader";
 import { useState, useEffect } from "react";
@@ -35,6 +36,12 @@ const fetchPostsByCategory = async (category, page) => {
   return posts;
 };
 
+const fetchTotalPostsCount = async (category) => {
+  const query = `count(*[_type == "post" && categories[0]._ref == *[_type == "category" && slug.current == "${category}"][0]._id])`;
+  const count = await client.fetch(query);
+  return count;
+};
+
 const PostCategory = ({ initialCategory, initialAllPosts }) => {
   const [page, setPage] = useState(0);
 
@@ -54,18 +61,19 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
     initialData: initialAllPosts,
   });
 
+  const { data: totalPosts } = useQuery({
+    queryKey: ["totalPosts", initialCategory],
+    queryFn: () => fetchTotalPostsCount(initialCategory),
+  });
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [page]);
 
-  const handleNextPage = () => {
-    if (!isPreviousData && postData?.length === POSTS_PER_PAGE) {
-      setPage((old) => old + 1);
-    }
-  };
-
-  const handlePreviousPage = () => {
-    setPage((old) => Math.max(old - 1, 0));
+  const totalPages = totalPosts ? Math.ceil(totalPosts / POSTS_PER_PAGE) : 1;
+  
+  const handlePageClick = (pageNumber) => {
+    setPage(pageNumber);
   };
 
   if (isLoading || !postData) {
@@ -75,22 +83,18 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
   const cateContent = postData[0];
 
   return (
-    <>
-      <HeadMeta metaTitle={cateContent?.category?.title || "Web Profiles"} />
+    <div>
+      <HeadMeta metaTitle={cateContent?.category?.title || "Category"} />
       <HeaderOne />
-      <Breadcrumb aPage={cateContent?.category?.title || "Web Profile"} />
 
-      <div className="banner banner__default bg-grey-light-three">
+      <div className="axil-video-posts" style={{ background: '#000', color: '#fff', paddingTop: '2rem', paddingBottom: '0' }}>
         <div className="container">
-          <div className="row align-items-center">
-            <div className="col-lg-12">
-              <div className="post-title-wrapper">
-                <h2 className="m-b-xs-0 axil-post-title hover-line">
-                  {cateContent?.category.title || "Web Profiles"}
-                </h2>
-              </div>
-            </div>
-          </div>
+          <SectionTitle
+            btnUrl={`/category/${cateContent?.category?.slug || initialCategory}`}
+            title={cateContent?.category?.title || "Category"}
+            btnText="Read all Articles"
+            pClass="title-white m-b-xs-40"
+          />
         </div>
       </div>
       {/* Banner End here */}
@@ -107,22 +111,48 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
                   />
                 ))}
               </div>
-              <div className="pagination">
-                <button
-                  className="btn btn-primary btn-small"
-                  onClick={handlePreviousPage}
-                  disabled={page === 0}
-                >
-                  Previous Page
-                </button>
-                <span>Page {page + 1}</span>
-                <button
-                  className="btn btn-primary btn-small"
-                  onClick={handleNextPage}
-                  disabled={isPreviousData || postData?.length < POSTS_PER_PAGE}
-                >
-                  Next Page
-                </button>
+              <div className="pagination" style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap', marginTop: '2rem', alignItems: 'center' }}>
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNumber) => (
+                  <button
+                    key={pageNumber}
+                    onClick={() => handlePageClick(pageNumber - 1)}
+                    disabled={isPreviousData && page === pageNumber - 1}
+                    style={{
+                      background: 'transparent',
+                      border: 'none',
+                      padding: '0',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      position: 'relative',
+                      color: page === pageNumber - 1 ? '#D4AF37' : '#333',
+                      fontSize: '18px',
+                      fontWeight: page === pageNumber - 1 ? 'bold' : 'normal',
+                      minWidth: '30px'
+                    }}
+                  >
+                    <span style={{ lineHeight: '1.2', display: 'block', marginBottom: '0' }}>{pageNumber}</span>
+                    <span 
+                      className="pagination-underline"
+                      style={{
+                        marginTop: '6px',
+                        width: '30px',
+                        height: '3px',
+                        backgroundColor: page === pageNumber - 1 ? '#D4AF37' : '#333',
+                        display: 'block',
+                        visibility: 'visible',
+                        opacity: 1,
+                        flexShrink: 0,
+                        minHeight: '3px',
+                        minWidth: '30px',
+                        border: 'none',
+                        padding: '0'
+                      }}
+                    ></span>
+                  </button>
+                ))}
               </div>
             </div>
             <div className="col-lg-4">
@@ -142,7 +172,51 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
         </div>
       </div>
       <FooterTwo />
-    </>
+      <style jsx global>{`
+        /* Hide breadcrumb on category pages */
+        .breadcrumb {
+          display: none !important;
+        }
+        
+        /* Heading section styling - black background with white text */
+        .axil-video-posts .section-title {
+          display: flex !important;
+          flex-direction: row !important;
+          align-items: center !important;
+          justify-content: space-between !important;
+          position: relative !important;
+          margin-bottom: 0 !important;
+        }
+        
+        .axil-video-posts .section-title .axil-title {
+          text-align: left !important;
+          margin-bottom: 0 !important;
+        }
+        
+        .axil-video-posts .section-title .btn-link {
+          margin-top: 0 !important;
+          align-self: center !important;
+          font-size: 1rem !important;
+        }
+        
+        /* Pagination Underline Styles - Force visibility */
+        .pagination button .pagination-underline,
+        .pagination button span:last-child {
+          display: block !important;
+          visibility: visible !important;
+          opacity: 1 !important;
+          height: 3px !important;
+          min-height: 3px !important;
+          width: 30px !important;
+        }
+        
+        .pagination button {
+          background: transparent !important;
+          border: none !important;
+          padding: 0 !important;
+        }
+      `}</style>
+    </div>
   );
 };
 

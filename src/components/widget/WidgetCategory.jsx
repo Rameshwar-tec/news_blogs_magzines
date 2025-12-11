@@ -44,15 +44,17 @@ const WidgetCategory = () => {
             className="custom-owl-prev"
             onClick={prevSlide}
             disabled={currentSlide === 0}
+            style={{ color: '#000' }}
           >
-            <i className="feather icon-chevron-left"></i>
+            <i className="feather icon-chevron-left" style={{ color: '#000' }}></i>
           </button>
           <button
             className="custom-owl-next"
             onClick={nextSlide}
             disabled={currentSlide === totalSlides}
+            style={{ color: '#000' }}
           >
-            <i className="feather icon-chevron-right"></i>
+            <i className="feather icon-chevron-right" style={{ color: '#000' }}></i>
           </button>
         </div>
       </div>
@@ -105,6 +107,12 @@ const WidgetCategory = () => {
           ))}
         </div>
       </div>
+      <style jsx>{`
+        .category-widget .owl-nav button.custom-owl-prev i,
+        .category-widget .owl-nav button.custom-owl-next i {
+          color: #000 !important;
+        }
+      `}</style>
     </div>
   );
 };

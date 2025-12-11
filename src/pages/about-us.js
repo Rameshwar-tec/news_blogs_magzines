@@ -143,6 +143,24 @@ const AboutUs = ({ aboutData }) => {
         </div> */}
       </div>
       <FooterTwo />
+      <style jsx global>{`
+        /* Ensure 3-column layout for social media icons on about us page */
+        .axil-about-us .social-share-list-wrapper li {
+          width: 33.333% !important;
+          height: 6rem !important;
+        }
+        
+        .axil-about-us .social-share-list-wrapper {
+          display: flex !important;
+          flex-wrap: wrap !important;
+        }
+        
+        @media (max-width: 768px) {
+          .axil-about-us .social-share-list-wrapper li {
+            width: 33.333% !important;
+          }
+        }
+      `}</style>
     </>
   );
 };

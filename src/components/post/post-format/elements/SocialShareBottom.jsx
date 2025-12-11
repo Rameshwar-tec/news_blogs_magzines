@@ -21,15 +21,6 @@ const SocialShareBottom = () => {
         </li>
         <li>
           <a
-            href={`https://twitter.com/intent/tweet?text=${windowPath}`}
-            className="btn bg-color-twitter"
-          >
-            <i className="fa-brands fa-x-twitter" />
-          </a>
-        </li>
-
-        <li>
-          <a
             href={`https://www.linkedin.com/shareArticle?mini=true&url=${windowPath}`}
             className="btn bg-color-linkedin"
           >

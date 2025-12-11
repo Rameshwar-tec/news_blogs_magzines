@@ -1,7 +1,7 @@
 import SocialLink from '../../data/social/SocialLink.json';
 
 
-const WidgetSocialShare = () => {
+const WidgetSocialShareWebProfiles = () => {
 
   return (
     <div className="sidebar-social-share-widget m-b-xs-40">
@@ -48,4 +48,5 @@ const WidgetSocialShare = () => {
   );
 };
 
-export default WidgetSocialShare;
+export default WidgetSocialShareWebProfiles;
+

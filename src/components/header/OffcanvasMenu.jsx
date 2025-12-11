@@ -87,11 +87,6 @@ const OffcanvasMenu = ({ ofcshow, ofcHandleClose }) => {
                           </a>
                         </li>
                         <li>
-                          <a href={SocialLink.twitter.url}>
-                            <i className={SocialLink.twitter.icon} />
-                          </a>
-                        </li>
-                        <li>
                           <a href={SocialLink.behance.url}>
                             <i className={SocialLink.behance.icon} />
                           </a>

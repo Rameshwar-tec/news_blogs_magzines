@@ -2,7 +2,7 @@
 featuredImg: "/images/bg-mag.png"
 ---
 
-## The Professional Magzine Platform
+## The Professional Magazine Platform
 
 Welcome to The Entrepreneurial Chronicles, your ultimate destination for all things entrepreneurship, innovation, and success. As a magazine, we're dedicated to capturing the essence of the entrepreneurial journey, from the initial spark of an idea to the triumphant realization of business goals.
 

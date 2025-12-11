@@ -41,13 +41,8 @@ const Home = () => {
       <div className="fixed-social-icons">
         <ul className="social-share-vertical" style={{ display: "flex", flexDirection: "column", gap: "1rem", listStyle: "none", padding: 0, margin: 0 }}>
           <li>
-            <a href={SocialLink.fb.url} target="_blank" rel="noopener noreferrer">
-              <i className={SocialLink.fb.icon} />
-            </a>
-          </li>
-          <li>
-            <a href={SocialLink.twitter.url} target="_blank" rel="noopener noreferrer">
-              <i className={SocialLink.twitter.icon} />
+            <a href={SocialLink.yt.url} target="_blank" rel="noopener noreferrer">
+              <i className={SocialLink.yt.icon} />
             </a>
           </li>
           <li>
@@ -107,26 +102,20 @@ const Home = () => {
           transform: scale(1.1);
         }
 
-        /* Facebook hover - Blue */
+        /* YouTube hover - Red */
         .social-share-vertical li:nth-child(1) a:hover {
-          background: #1877f2;
-          color: #fff;
-        }
-
-        /* Twitter/X hover - Twitter Blue */
-        .social-share-vertical li:nth-child(2) a:hover {
-          background: #1DA1F2;
+          background: #FF0000;
           color: #fff;
         }
 
         /* Instagram hover - Gradient */
-        .social-share-vertical li:nth-child(3) a:hover {
+        .social-share-vertical li:nth-child(2) a:hover {
           background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
           color: #fff;
         }
 
         /* LinkedIn hover - Blue */
-        .social-share-vertical li:nth-child(4) a:hover {
+        .social-share-vertical li:nth-child(3) a:hover {
           background: #0077b5;
           color: #fff;
         }
