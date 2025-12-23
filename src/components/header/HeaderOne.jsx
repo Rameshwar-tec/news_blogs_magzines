@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { client } from "../../client";
+import NavbarLogo from "../../assest/1766492936158.png";
  
 import SocialLink from "../../data/social/SocialLink.json";
 
@@ -716,11 +717,11 @@ const HeaderOne = () => {
               <div className="brand-logo-container">
                 <Link href="/">
                   <Image
-                    src="/logos/chronicle_logo.png"
+                    src={NavbarLogo}
                     alt="chronicles-logo"
-                    width={200}
-                    height={80}
-                    style={{ objectFit: "contain" }}
+                    width={300}
+                    height={90}
+                    style={{ objectFit: "contain", transform: "translateY(-0.5px) scale(1.35)", transformOrigin: "left center" }}
                   />
                 </Link>
               </div>
