@@ -39,6 +39,12 @@ const MarketNews = () => {
   return (
   <div className="recent-news-wrapper section-gap p-t-xs-15 p-t-sm-60" style={{ paddingTop: "8px", paddingBottom: "8px" }}>
       <div className="container">
+        <SectionTitle
+          title={`${data[0]?.category.title}` || "Market News"}
+          btnUrl={`/category/${data[0]?.category?.slug}`}
+          btnText="all posts"
+          pClass="m-b-xs-10"
+        />
         <div className="row align-items-stretch">
           <div className="col-lg-6" style={{ display: "flex" }}>
             <div style={{ marginBottom: "2px", width: "100%", height: "100%", display: "flex", flexDirection: "column" }}>
@@ -47,12 +53,6 @@ const MarketNews = () => {
           </div>
           <div className="col-lg-6" style={{ display: "flex" }}>
             <div className="axil-recent-news" style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column" }}>
-              <SectionTitle
-                title={`${data[0]?.category.title}` || "Market News"} // Dynamic title
-                btnUrl={`/category/${data[0]?.category?.slug}`}
-                btnText="all posts"
-                pClass="m-b-xs-10"
-              />
               <div className="axil-content" style={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
                 {data.slice(1).map((post, index) => (
                   <div key={index} style={{ marginBottom: "10px" }}>

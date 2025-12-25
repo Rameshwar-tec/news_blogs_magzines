@@ -1,21 +1,31 @@
 // components/LogoSlider.js
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Image from "next/image";
-import { client } from "../../client";
 
-const LogoSlider = () => {
-  const [images, setImages] = useState([]);
+import Logo8FigureFirm from "../../assest/8figurefirm_logo 6.jpg";
+import LogoAlloyPersonalTraining from "../../assest/alloypersonaltraining_logo 4.jpg";
+import LogoCubeSoftware from "../../assest/cube_software_logo.jpeg";
+import LogoExePresence from "../../assest/exepresence_logo.jpeg";
+import LogoMiyazaki from "../../assest/miyazaki_logo.jpeg";
+import LogoNewWorldWind from "../../assest/newworldwind_logo.jpeg";
+import LogoPickupUsa from "../../assest/pickup_usa_franchise_company_logo.jpeg";
+import LogoTimePlast from "../../assest/timeplast_logo 3.jpg";
 
-  useEffect(() => {
-    const query = '*[_type == "brand"] { "imageUrl": image.asset->url }';
-    client.fetch(query).then((data) => {
-      setImages(data);
-    });
-  }, []);
+const LogoSlider = ({ title = "Our Partner Brands", showTitle = true, wrapperClassName = "" }) => {
+  const images = [
+    { src: Logo8FigureFirm, alt: "8 Figure Firm" },
+    { src: LogoAlloyPersonalTraining, alt: "Alloy Personal Training" },
+    { src: LogoCubeSoftware, alt: "Cube Software" },
+    { src: LogoExePresence, alt: "Exe Presence" },
+    { src: LogoMiyazaki, alt: "Miyazaki" },
+    { src: LogoNewWorldWind, alt: "New World Wind" },
+    { src: LogoPickupUsa, alt: "Pickup USA Franchise Company" },
+    { src: LogoTimePlast, alt: "TimePlast" },
+  ];
 
   return (
-    <div className="container my-5 ">
-      <h2 className="text-center mb-4">Our Partner Brands</h2>
+    <div className={`container my-5 ${wrapperClassName}`.trim()}>
+      {showTitle ? <h2 className="text-center mb-4">{title}</h2> : null}
       <div className="row">
         <div className="col">
           <div className="logo-slider">
@@ -24,10 +34,10 @@ const LogoSlider = () => {
                 <div key={index} className="logo-slide">
                   <div className="logo-container">
                     <Image
-                      src={image.imageUrl}
-                      alt={`Brand logo ${index + 1}`}
-                      width={120}
-                      height={50}
+                      src={image.src}
+                      alt={image.alt}
+                      width={80}
+                      height={80}
                       quality={100}
                       objectFit="contain"
                     />
@@ -59,16 +69,16 @@ const LogoSlider = () => {
           justify-content: center;
         }
         .logo-container {
-          background: #fff;
-          padding: 10px 15px;
-          border-radius: 6px;
-          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 60px;
-          width: 150px;
-          border: 1px solid #e0e0e0;
+          // background: #fff;
+          // padding: 10px 15px;
+          // border-radius: 6px;
+          // box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+          // display: flex;
+          // align-items: center;
+          // justify-content: center;
+          // height: 60px;
+          // width: 150px;
+          // border: 1px solid #e0e0e0;
         }
         @keyframes scroll {
           0% {

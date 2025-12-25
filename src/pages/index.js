@@ -107,11 +107,13 @@ const Home = () => {
       <MagazineHero />
       {/* <LogoSlider /> */}
       <SliderOne />
-      <Magazines />
+      <LogoSlider title="Our Partner Brands" showTitle={true} />
+      <BusinessBulletin />
       <WebProfiles />
       <MarketNews />
-      <BusinessBulletin />
+      <Magazines />
       <MasterTalks />
+      <LogoSlider title="Our Partner Brands" showTitle={true} />
       <FooterTwo />
       <ScrollToTop />
       

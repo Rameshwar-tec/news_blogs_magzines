@@ -21,6 +21,9 @@ const HeaderOne = () => {
   // Mobile Menu
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const [industriesOpen, setIndustriesOpen] = useState(false);
+  const [techAiOpen, setTechAiOpen] = useState(false);
+
   const headerSearchShow = () => {
     setSearchShow(true);
   };
@@ -39,6 +42,21 @@ const HeaderOne = () => {
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
   };
+
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      const target = e.target;
+      if (!(target instanceof Element)) return;
+      if (target.closest(".nav-dropdown")) return;
+      setIndustriesOpen(false);
+      setTechAiOpen(false);
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -725,13 +743,135 @@ const HeaderOne = () => {
                   />
                 </Link>
               </div>
-              
+
               {/* Navigation Links - Desktop Only */}
               <div className="navbar-nav-links desktop-nav">
                 <Link href="/" className="nav-link">Home</Link>
                 <Link href="/magazines" className="nav-link">Magazines</Link>
                 <Link href="/blogs" className="nav-link">Blogs</Link>
-                <Link href="/about-us" className="nav-link">About Us</Link>
+                <div className="nav-dropdown">
+                  <button
+                    type="button"
+                    className="nav-link nav-dropdown-toggle"
+                    aria-expanded={industriesOpen}
+                    onClick={() => {
+                      setIndustriesOpen((v) => !v);
+                      setTechAiOpen(false);
+                    }}
+                  >
+                    Industries
+                  </button>
+                  <div className={`nav-dropdown-menu ${industriesOpen ? "is-open" : ""}`.trim()}>
+                    <Link
+                      href="/industries/healthcare"
+                      className="nav-dropdown-item"
+                      onClick={() => {
+                        setIndustriesOpen(false);
+                        setTechAiOpen(false);
+                      }}
+                    >
+                      Healthcare
+                    </Link>
+                    <Link
+                      href="/industries/legal"
+                      className="nav-dropdown-item"
+                      onClick={() => {
+                        setIndustriesOpen(false);
+                        setTechAiOpen(false);
+                      }}
+                    >
+                      Legal
+                    </Link>
+
+                    <div className="nav-submenu">
+                      <button
+                        type="button"
+                        className="nav-dropdown-item nav-submenu-toggle"
+                        aria-expanded={techAiOpen}
+                        onClick={() => setTechAiOpen((v) => !v)}
+                      >
+                        Tech/AI
+                        <span className="nav-submenu-arrow">›</span>
+                      </button>
+                      <div className={`nav-submenu-menu ${techAiOpen ? "is-open" : ""}`.trim()}>
+                        <Link
+                          href="/industries/tech-ai/ai"
+                          className="nav-dropdown-item"
+                          onClick={() => {
+                            setIndustriesOpen(false);
+                            setTechAiOpen(false);
+                          }}
+                        >
+                          AI
+                        </Link>
+                        <Link
+                          href="/industries/tech-ai/cybersecurity"
+                          className="nav-dropdown-item"
+                          onClick={() => {
+                            setIndustriesOpen(false);
+                            setTechAiOpen(false);
+                          }}
+                        >
+                          Cybersecurity
+                        </Link>
+                        <Link
+                          href="/industries/tech-ai/e-commerce"
+                          className="nav-dropdown-item"
+                          onClick={() => {
+                            setIndustriesOpen(false);
+                            setTechAiOpen(false);
+                          }}
+                        >
+                          E-commerce
+                        </Link>
+                        <Link
+                          href="/industries/tech-ai/security"
+                          className="nav-dropdown-item"
+                          onClick={() => {
+                            setIndustriesOpen(false);
+                            setTechAiOpen(false);
+                          }}
+                        >
+                          Security
+                        </Link>
+                        <Link
+                          href="/industries/tech-ai/robotics"
+                          className="nav-dropdown-item"
+                          onClick={() => {
+                            setIndustriesOpen(false);
+                            setTechAiOpen(false);
+                          }}
+                        >
+                          Robotics
+                        </Link>
+                      </div>
+                    </div>
+
+                    <Link
+                      href="/industries/manufacturing-products"
+                      className="nav-dropdown-item"
+                      onClick={() => {
+                        setIndustriesOpen(false);
+                        setTechAiOpen(false);
+                      }}
+                    >
+                      Manufacturing/Products
+                    </Link>
+                    <Link
+                      href="/industries/transportation"
+                      className="nav-dropdown-item"
+                      onClick={() => {
+                        setIndustriesOpen(false);
+                        setTechAiOpen(false);
+                      }}
+                    >
+                      Transportation
+                    </Link>
+                  </div>
+                </div>
+                <span className="nav-link nav-link--disabled" aria-disabled="true">Media Kit</span>
+                <span className="nav-link nav-link--disabled" aria-disabled="true">Podcast</span>
+                {/* <Link href="/about-us" className="nav-link">About Us</Link> */}
                 <Link href="/contact" className="nav-link">Contact</Link>
                 <Link href="/advertise-with-us" className="nav-link">Advertise</Link>
               </div>
@@ -795,7 +935,24 @@ const HeaderOne = () => {
               <Link href="/" className="mobile-nav-link" onClick={closeMobileMenu}>Home</Link>
               <Link href="/magazines" className="mobile-nav-link" onClick={closeMobileMenu}>Magazines</Link>
               <Link href="/blogs" className="mobile-nav-link" onClick={closeMobileMenu}>Blogs</Link>
-              <Link href="/about-us" className="mobile-nav-link" onClick={closeMobileMenu}>About Us</Link>
+              <div className="mobile-nav-group">
+                <div className="mobile-nav-group-title">Industries</div>
+                <Link href="/industries/healthcare" className="mobile-nav-link" onClick={closeMobileMenu}>Healthcare</Link>
+                <Link href="/industries/legal" className="mobile-nav-link" onClick={closeMobileMenu}>Legal</Link>
+                <div className="mobile-nav-subgroup">
+                  <div className="mobile-nav-subgroup-title">Tech/AI</div>
+                  <Link href="/industries/tech-ai/ai" className="mobile-nav-link" onClick={closeMobileMenu}>AI</Link>
+                  <Link href="/industries/tech-ai/cybersecurity" className="mobile-nav-link" onClick={closeMobileMenu}>Cybersecurity</Link>
+                  <Link href="/industries/tech-ai/e-commerce" className="mobile-nav-link" onClick={closeMobileMenu}>E-commerce</Link>
+                  <Link href="/industries/tech-ai/security" className="mobile-nav-link" onClick={closeMobileMenu}>Security</Link>
+                  <Link href="/industries/tech-ai/robotics" className="mobile-nav-link" onClick={closeMobileMenu}>Robotics</Link>
+                </div>
+                <Link href="/industries/manufacturing-products" className="mobile-nav-link" onClick={closeMobileMenu}>Manufacturing/Products</Link>
+                <Link href="/industries/transportation" className="mobile-nav-link" onClick={closeMobileMenu}>Transportation</Link>
+              </div>
+              <span className="mobile-nav-link mobile-nav-link--disabled" aria-disabled="true">Media Kit</span>
+              <span className="mobile-nav-link mobile-nav-link--disabled" aria-disabled="true">Podcast</span>
+              {/* <Link href="/about-us" className="mobile-nav-link" onClick={closeMobileMenu}>About Us</Link> */}
               <Link href="/contact" className="mobile-nav-link" onClick={closeMobileMenu}>Contact</Link>
               <Link href="/advertise-with-us" className="mobile-nav-link" onClick={closeMobileMenu}>Advertise With Us</Link>
             </div>
@@ -889,6 +1046,8 @@ const HeaderOne = () => {
 
         .brand-logo-container {
           flex-shrink: 0;
+          margin-left: 0;
+          padding-left: 0;
         }
 
         .navbar-nav-links {
@@ -913,6 +1072,101 @@ const HeaderOne = () => {
 
         .navbar-nav-links .nav-link:hover {
           color: #D4AF37 !important;
+          text-decoration: none;
+        }
+
+        .nav-link--disabled {
+          opacity: 0.45;
+          cursor: not-allowed;
+          pointer-events: none;
+        }
+
+        .nav-dropdown {
+          position: relative;
+          display: flex;
+          align-items: center;
+        }
+
+        .nav-dropdown-toggle {
+          user-select: none;
+          background: transparent;
+          border: none;
+          cursor: pointer;
+        }
+
+        .nav-dropdown-menu {
+          position: absolute;
+          top: calc(100% + 10px);
+          left: 0;
+          min-width: 180px;
+          background: #000;
+          border: 1px solid #333;
+          border-radius: 10px;
+          padding: 8px;
+          display: none;
+          flex-direction: column;
+          z-index: 2000;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+        }
+
+        .nav-dropdown-menu.is-open {
+          display: flex;
+        }
+
+        .nav-submenu {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .nav-submenu-toggle {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          background: transparent;
+          border: none;
+          cursor: pointer;
+        }
+
+        .nav-submenu-arrow {
+          opacity: 0.9;
+          margin-left: 10px;
+        }
+
+        .nav-submenu-menu {
+          position: absolute;
+          top: 0;
+          left: calc(100% + 8px);
+          min-width: 200px;
+          background: #000;
+          border: 1px solid #333;
+          border-radius: 10px;
+          padding: 8px;
+          display: none;
+          flex-direction: column;
+          z-index: 2100;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+        }
+
+        .nav-submenu-menu.is-open {
+          display: flex;
+        }
+
+        .nav-dropdown-item {
+          color: #fff !important;
+          font-size: 14px !important;
+          font-weight: 500;
+          padding: 10px 12px;
+          border-radius: 8px;
+          text-decoration: none;
+          transition: all 0.2s ease;
+          white-space: nowrap;
+        }
+
+        .nav-dropdown-item:hover {
+          color: #D4AF37 !important;
+          background: rgba(212, 175, 55, 0.08);
           text-decoration: none;
         }
 
@@ -1322,18 +1576,6 @@ const HeaderOne = () => {
           
           .mobile-menu-toggle {
             display: block;
-          }
-          
-          .navbar-inner {
-            justify-content: space-between;
-          }
-          
-          /* Hero Section Mobile Responsive */
-          .hero-section {
-            padding: 2rem 1rem !important;
-            min-height: 60vh !important;
-            position: relative !important;
-            width: 100vw !important;
             max-width: 100vw !important;
             overflow-x: hidden !important;
             left: 0 !important;
