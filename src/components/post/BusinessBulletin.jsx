@@ -45,7 +45,7 @@ const BusinessBulletin = () => {
         />
         <div className="row">
           {data.map((post, index) => (
-            <div className="col-lg-6" key={index}>
+            <div className="col-lg-4 col-md-6" key={index}>
               <PostLayoutTwo1 data={post} />
             </div>
           ))}
