@@ -105,10 +105,10 @@ const Home = () => {
       <HeaderOne />
       <canvas id="snow-canvas" ref={snowCanvasRef}></canvas>
       <MagazineHero />
+      <BusinessBulletin />
       {/* <LogoSlider /> */}
       <SliderOne />
       <LogoSlider title="Our Partner Brands" showTitle={true} />
-      <BusinessBulletin />
       <WebProfiles />
       <MarketNews />
       <Magazines />
