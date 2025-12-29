@@ -869,8 +869,8 @@ const HeaderOne = () => {
                     </Link>
                   </div>
                 </div>
-                <span className="nav-link nav-link--disabled" aria-disabled="true">Media Kit</span>
-                <span className="nav-link nav-link--disabled" aria-disabled="true">Podcast</span>
+                {/* <span className="nav-link nav-link--disabled" aria-disabled="true">Media Kit</span>
+                <span className="nav-link nav-link--disabled" aria-disabled="true">Podcast</span> */}
                 {/* <Link href="/about-us" className="nav-link">About Us</Link> */}
                 <Link href="/contact" className="nav-link">Contact</Link>
                 <Link href="/advertise-with-us" className="nav-link">Advertise</Link>

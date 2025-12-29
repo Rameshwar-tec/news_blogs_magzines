@@ -113,7 +113,6 @@ const Home = () => {
       <MarketNews />
       <Magazines />
       <MasterTalks />
-      <LogoSlider title="Our Partner Brands" showTitle={true} />
       <FooterTwo />
       <ScrollToTop />
       
