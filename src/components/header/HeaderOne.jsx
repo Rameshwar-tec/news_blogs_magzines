@@ -22,7 +22,6 @@ const HeaderOne = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const [industriesOpen, setIndustriesOpen] = useState(false);
-  const [techAiOpen, setTechAiOpen] = useState(false);
 
   const headerSearchShow = () => {
     setSearchShow(true);
@@ -49,7 +48,6 @@ const HeaderOne = () => {
       if (!(target instanceof Element)) return;
       if (target.closest(".nav-dropdown")) return;
       setIndustriesOpen(false);
-      setTechAiOpen(false);
     };
 
     document.addEventListener("mousedown", handleOutsideClick);
@@ -756,7 +754,6 @@ const HeaderOne = () => {
                     aria-expanded={industriesOpen}
                     onClick={() => {
                       setIndustriesOpen((v) => !v);
-                      setTechAiOpen(false);
                     }}
                   >
                     Industries
@@ -767,7 +764,6 @@ const HeaderOne = () => {
                       className="nav-dropdown-item"
                       onClick={() => {
                         setIndustriesOpen(false);
-                        setTechAiOpen(false);
                       }}
                     >
                       Healthcare
@@ -777,82 +773,26 @@ const HeaderOne = () => {
                       className="nav-dropdown-item"
                       onClick={() => {
                         setIndustriesOpen(false);
-                        setTechAiOpen(false);
                       }}
                     >
                       Legal
                     </Link>
 
-                    <div className="nav-submenu">
-                      <button
-                        type="button"
-                        className="nav-dropdown-item nav-submenu-toggle"
-                        aria-expanded={techAiOpen}
-                        onClick={() => setTechAiOpen((v) => !v)}
-                      >
-                        Tech/AI
-                        <span className="nav-submenu-arrow">›</span>
-                      </button>
-                      <div className={`nav-submenu-menu ${techAiOpen ? "is-open" : ""}`.trim()}>
-                        <Link
-                          href="/industries/tech-ai/ai"
-                          className="nav-dropdown-item"
-                          onClick={() => {
-                            setIndustriesOpen(false);
-                            setTechAiOpen(false);
-                          }}
-                        >
-                          AI
-                        </Link>
-                        <Link
-                          href="/industries/tech-ai/cybersecurity"
-                          className="nav-dropdown-item"
-                          onClick={() => {
-                            setIndustriesOpen(false);
-                            setTechAiOpen(false);
-                          }}
-                        >
-                          Cybersecurity
-                        </Link>
-                        <Link
-                          href="/industries/tech-ai/e-commerce"
-                          className="nav-dropdown-item"
-                          onClick={() => {
-                            setIndustriesOpen(false);
-                            setTechAiOpen(false);
-                          }}
-                        >
-                          E-commerce
-                        </Link>
-                        <Link
-                          href="/industries/tech-ai/security"
-                          className="nav-dropdown-item"
-                          onClick={() => {
-                            setIndustriesOpen(false);
-                            setTechAiOpen(false);
-                          }}
-                        >
-                          Security
-                        </Link>
-                        <Link
-                          href="/industries/tech-ai/robotics"
-                          className="nav-dropdown-item"
-                          onClick={() => {
-                            setIndustriesOpen(false);
-                            setTechAiOpen(false);
-                          }}
-                        >
-                          Robotics
-                        </Link>
-                      </div>
-                    </div>
+                    <Link
+                      href="/industries/tech-ai"
+                      className="nav-dropdown-item"
+                      onClick={() => {
+                        setIndustriesOpen(false);
+                      }}
+                    >
+                      Tech/AI
+                    </Link>
 
                     <Link
                       href="/industries/manufacturing-products"
                       className="nav-dropdown-item"
                       onClick={() => {
                         setIndustriesOpen(false);
-                        setTechAiOpen(false);
                       }}
                     >
                       Manufacturing/Products
@@ -862,7 +802,6 @@ const HeaderOne = () => {
                       className="nav-dropdown-item"
                       onClick={() => {
                         setIndustriesOpen(false);
-                        setTechAiOpen(false);
                       }}
                     >
                       Transportation
@@ -939,14 +878,7 @@ const HeaderOne = () => {
                 <div className="mobile-nav-group-title">Industries</div>
                 <Link href="/industries/healthcare" className="mobile-nav-link" onClick={closeMobileMenu}>Healthcare</Link>
                 <Link href="/industries/legal" className="mobile-nav-link" onClick={closeMobileMenu}>Legal</Link>
-                <div className="mobile-nav-subgroup">
-                  <div className="mobile-nav-subgroup-title">Tech/AI</div>
-                  <Link href="/industries/tech-ai/ai" className="mobile-nav-link" onClick={closeMobileMenu}>AI</Link>
-                  <Link href="/industries/tech-ai/cybersecurity" className="mobile-nav-link" onClick={closeMobileMenu}>Cybersecurity</Link>
-                  <Link href="/industries/tech-ai/e-commerce" className="mobile-nav-link" onClick={closeMobileMenu}>E-commerce</Link>
-                  <Link href="/industries/tech-ai/security" className="mobile-nav-link" onClick={closeMobileMenu}>Security</Link>
-                  <Link href="/industries/tech-ai/robotics" className="mobile-nav-link" onClick={closeMobileMenu}>Robotics</Link>
-                </div>
+                <Link href="/industries/tech-ai" className="mobile-nav-link" onClick={closeMobileMenu}>Tech/AI</Link>
                 <Link href="/industries/manufacturing-products" className="mobile-nav-link" onClick={closeMobileMenu}>Manufacturing/Products</Link>
                 <Link href="/industries/transportation" className="mobile-nav-link" onClick={closeMobileMenu}>Transportation</Link>
               </div>
