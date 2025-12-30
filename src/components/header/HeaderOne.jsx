@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { client } from "../../client";
-import NavbarLogo from "../../assest/1766492936158.png";
+import NavbarLogo from "../../assest/chronicle_logo.png";
  
 import SocialLink from "../../data/social/SocialLink.json";
 
@@ -20,6 +20,11 @@ const HeaderOne = () => {
 
   // Mobile Menu
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const [mobileIndustriesOpen, setMobileIndustriesOpen] = useState(false);
+  const [mobileTechAiOpen, setMobileTechAiOpen] = useState(false);
+
+  const [hoverCapable, setHoverCapable] = useState(false);
 
   const [industriesOpen, setIndustriesOpen] = useState(false);
   const [techAiOpen, setTechAiOpen] = useState(false);
@@ -41,6 +46,8 @@ const HeaderOne = () => {
 
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
+    setMobileIndustriesOpen(false);
+    setMobileTechAiOpen(false);
   };
 
   useEffect(() => {
@@ -57,6 +64,31 @@ const HeaderOne = () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mql = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const update = () => setHoverCapable(!!mql.matches);
+    update();
+    if (typeof mql.addEventListener === "function") {
+      mql.addEventListener("change", update);
+      return () => mql.removeEventListener("change", update);
+    }
+    mql.addListener(update);
+    return () => mql.removeListener(update);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!mobileMenuOpen) return;
+    const onScroll = () => {
+      setMobileMenuOpen(false);
+      setMobileIndustriesOpen(false);
+      setMobileTechAiOpen(false);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [mobileMenuOpen]);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -738,8 +770,8 @@ const HeaderOne = () => {
                     src={NavbarLogo}
                     alt="chronicles-logo"
                     width={300}
-                    height={90}
-                    style={{ objectFit: "contain", transform: "translateY(-0.5px) scale(1.35)", transformOrigin: "left center" }}
+                    height={100}
+                    style={{ objectFit: "contain" }}
                   />
                 </Link>
               </div>
@@ -760,6 +792,9 @@ const HeaderOne = () => {
                     }}
                   >
                     Industries
+                    <span className={`nav-dropdown-arrow ${industriesOpen ? "is-open" : ""}`.trim()} aria-hidden="true">
+                      <i className="far fa-chevron-down" />
+                    </span>
                   </button>
                   <div className={`nav-dropdown-menu ${industriesOpen ? "is-open" : ""}`.trim()}>
                     <Link
@@ -767,7 +802,6 @@ const HeaderOne = () => {
                       className="nav-dropdown-item"
                       onClick={() => {
                         setIndustriesOpen(false);
-                        setTechAiOpen(false);
                       }}
                     >
                       Healthcare
@@ -777,7 +811,6 @@ const HeaderOne = () => {
                       className="nav-dropdown-item"
                       onClick={() => {
                         setIndustriesOpen(false);
-                        setTechAiOpen(false);
                       }}
                     >
                       Legal
@@ -788,14 +821,28 @@ const HeaderOne = () => {
                         type="button"
                         className="nav-dropdown-item nav-submenu-toggle"
                         aria-expanded={techAiOpen}
-                        onClick={() => setTechAiOpen((v) => !v)}
+                        onClick={() => {
+                          setTechAiOpen((v) => !v);
+                        }}
                       >
                         Tech/AI
-                        <span className="nav-submenu-arrow">›</span>
+                        <span className={`nav-submenu-arrow ${techAiOpen ? "is-open" : ""}`.trim()} aria-hidden="true">
+                          <i className="far fa-chevron-right" />
+                        </span>
                       </button>
                       <div className={`nav-submenu-menu ${techAiOpen ? "is-open" : ""}`.trim()}>
                         <Link
-                          href="/industries/tech-ai/ai"
+                          href="/industries/tech-ai"
+                          className="nav-dropdown-item"
+                          onClick={() => {
+                            setIndustriesOpen(false);
+                            setTechAiOpen(false);
+                          }}
+                        >
+                          All Tech/AI
+                        </Link>
+                        <Link
+                          href="/industries/tech-ai#ai"
                           className="nav-dropdown-item"
                           onClick={() => {
                             setIndustriesOpen(false);
@@ -805,44 +852,14 @@ const HeaderOne = () => {
                           AI
                         </Link>
                         <Link
-                          href="/industries/tech-ai/cybersecurity"
+                          href="/industries/tech-ai#technology"
                           className="nav-dropdown-item"
                           onClick={() => {
                             setIndustriesOpen(false);
                             setTechAiOpen(false);
                           }}
                         >
-                          Cybersecurity
-                        </Link>
-                        <Link
-                          href="/industries/tech-ai/e-commerce"
-                          className="nav-dropdown-item"
-                          onClick={() => {
-                            setIndustriesOpen(false);
-                            setTechAiOpen(false);
-                          }}
-                        >
-                          E-commerce
-                        </Link>
-                        <Link
-                          href="/industries/tech-ai/security"
-                          className="nav-dropdown-item"
-                          onClick={() => {
-                            setIndustriesOpen(false);
-                            setTechAiOpen(false);
-                          }}
-                        >
-                          Security
-                        </Link>
-                        <Link
-                          href="/industries/tech-ai/robotics"
-                          className="nav-dropdown-item"
-                          onClick={() => {
-                            setIndustriesOpen(false);
-                            setTechAiOpen(false);
-                          }}
-                        >
-                          Robotics
+                          Technology
                         </Link>
                       </div>
                     </div>
@@ -852,7 +869,6 @@ const HeaderOne = () => {
                       className="nav-dropdown-item"
                       onClick={() => {
                         setIndustriesOpen(false);
-                        setTechAiOpen(false);
                       }}
                     >
                       Manufacturing/Products
@@ -862,7 +878,6 @@ const HeaderOne = () => {
                       className="nav-dropdown-item"
                       onClick={() => {
                         setIndustriesOpen(false);
-                        setTechAiOpen(false);
                       }}
                     >
                       Transportation
@@ -915,12 +930,16 @@ const HeaderOne = () => {
                 <button 
                   className="mobile-menu-toggle"
                   onClick={toggleMobileMenu}
+                  onMouseEnter={() => {
+                    if (!hoverCapable) return;
+                    setMobileMenuOpen(true);
+                  }}
                   aria-label="Toggle mobile menu"
                 >
                   <span className={`hamburger ${mobileMenuOpen ? 'active' : ''}`}>
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <span style={{ backgroundColor: "#fff" }}></span>
+                    <span style={{ backgroundColor: "#fff" }}></span>
+                    <span style={{ backgroundColor: "#fff" }}></span>
                   </span>
                 </button>
               </div>
@@ -930,28 +949,67 @@ const HeaderOne = () => {
 
         {/* Mobile Menu Dropdown */}
         {mobileMenuOpen && (
-          <div className="mobile-menu-dropdown">
+          <div
+            className="mobile-menu-dropdown"
+            onMouseLeave={() => {
+              if (!hoverCapable) return;
+              closeMobileMenu();
+            }}
+          >
             <div className="mobile-menu-content">
               <Link href="/" className="mobile-nav-link" onClick={closeMobileMenu}>Home</Link>
               <Link href="/magazines" className="mobile-nav-link" onClick={closeMobileMenu}>Magazines</Link>
               <Link href="/blogs" className="mobile-nav-link" onClick={closeMobileMenu}>Blogs</Link>
-              <div className="mobile-nav-group">
-                <div className="mobile-nav-group-title">Industries</div>
-                <Link href="/industries/healthcare" className="mobile-nav-link" onClick={closeMobileMenu}>Healthcare</Link>
-                <Link href="/industries/legal" className="mobile-nav-link" onClick={closeMobileMenu}>Legal</Link>
-                <div className="mobile-nav-subgroup">
-                  <div className="mobile-nav-subgroup-title">Tech/AI</div>
-                  <Link href="/industries/tech-ai/ai" className="mobile-nav-link" onClick={closeMobileMenu}>AI</Link>
-                  <Link href="/industries/tech-ai/cybersecurity" className="mobile-nav-link" onClick={closeMobileMenu}>Cybersecurity</Link>
-                  <Link href="/industries/tech-ai/e-commerce" className="mobile-nav-link" onClick={closeMobileMenu}>E-commerce</Link>
-                  <Link href="/industries/tech-ai/security" className="mobile-nav-link" onClick={closeMobileMenu}>Security</Link>
-                  <Link href="/industries/tech-ai/robotics" className="mobile-nav-link" onClick={closeMobileMenu}>Robotics</Link>
-                </div>
-                <Link href="/industries/manufacturing-products" className="mobile-nav-link" onClick={closeMobileMenu}>Manufacturing/Products</Link>
-                <Link href="/industries/transportation" className="mobile-nav-link" onClick={closeMobileMenu}>Transportation</Link>
+
+              <div className="mobile-nav-accordion">
+                <button
+                  type="button"
+                  className={`mobile-nav-accordion-toggle ${mobileIndustriesOpen ? "is-open" : ""}`.trim()}
+                  aria-expanded={mobileIndustriesOpen}
+                  onClick={() => {
+                    setMobileIndustriesOpen((v) => !v);
+                    setMobileTechAiOpen(false);
+                  }}
+                >
+                  Industries
+                  <i className="far fa-chevron-down" aria-hidden="true" />
+                </button>
+
+                {mobileIndustriesOpen && (
+                  <div className="mobile-submenu">
+                    <Link href="/industries/healthcare" className="mobile-nav-link" onClick={closeMobileMenu}>Healthcare</Link>
+                    <Link href="/industries/legal" className="mobile-nav-link" onClick={closeMobileMenu}>Legal</Link>
+
+                    <div className="mobile-nav-accordion">
+                      <button
+                        type="button"
+                        className={`mobile-nav-accordion-toggle ${mobileTechAiOpen ? "is-open" : ""}`.trim()}
+                        aria-expanded={mobileTechAiOpen}
+                        onClick={() => {
+                          setMobileTechAiOpen((v) => !v);
+                        }}
+                      >
+                        Tech/AI
+                        <i className="far fa-chevron-down" aria-hidden="true" />
+                      </button>
+
+                      {mobileTechAiOpen && (
+                        <div className="mobile-submenu">
+                          <Link href="/industries/tech-ai" className="mobile-nav-link" onClick={closeMobileMenu}>All Tech/AI</Link>
+                          <Link href="/industries/tech-ai#ai" className="mobile-nav-link" onClick={closeMobileMenu}>AI</Link>
+                          <Link href="/industries/tech-ai#technology" className="mobile-nav-link" onClick={closeMobileMenu}>Technology</Link>
+                        </div>
+                      )}
+                    </div>
+
+                    <Link href="/industries/manufacturing-products" className="mobile-nav-link" onClick={closeMobileMenu}>Manufacturing/Products</Link>
+                    <Link href="/industries/transportation" className="mobile-nav-link" onClick={closeMobileMenu}>Transportation</Link>
+                  </div>
+                )}
               </div>
-              <span className="mobile-nav-link mobile-nav-link--disabled" aria-disabled="true">Media Kit</span>
-              <span className="mobile-nav-link mobile-nav-link--disabled" aria-disabled="true">Podcast</span>
+
+              {/* <span className="mobile-nav-link mobile-nav-link--disabled" aria-disabled="true">Media Kit</span>
+              <span className="mobile-nav-link mobile-nav-link--disabled" aria-disabled="true">Podcast</span> */}
               {/* <Link href="/about-us" className="mobile-nav-link" onClick={closeMobileMenu}>About Us</Link> */}
               <Link href="/contact" className="mobile-nav-link" onClick={closeMobileMenu}>Contact</Link>
               <Link href="/advertise-with-us" className="mobile-nav-link" onClick={closeMobileMenu}>Advertise With Us</Link>
@@ -1050,6 +1108,26 @@ const HeaderOne = () => {
           padding-left: 0;
         }
 
+        @media (min-width: 992px) {
+          .navbar {
+            padding-top: 6px;
+            padding-bottom: 6px;
+          }
+
+          .navbar-inner {
+            min-height: 72px;
+          }
+
+          .brand-logo-container {
+            margin-left: -12px;
+          }
+
+          .brand-logo-container img {
+            max-width: 240px !important;
+            height: auto !important;
+          }
+        }
+
         .navbar-nav-links {
           display: flex;
           align-items: center;
@@ -1092,6 +1170,23 @@ const HeaderOne = () => {
           background: transparent;
           border: none;
           cursor: pointer;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .nav-dropdown-arrow {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 18px;
+          height: 18px;
+          transition: transform 0.2s ease;
+          opacity: 0.9;
+        }
+
+        .nav-dropdown-arrow.is-open {
+          transform: rotate(180deg);
         }
 
         .nav-dropdown-menu {
@@ -1132,6 +1227,11 @@ const HeaderOne = () => {
         .nav-submenu-arrow {
           opacity: 0.9;
           margin-left: 10px;
+          transition: transform 0.2s ease;
+        }
+
+        .nav-submenu-arrow.is-open {
+          transform: rotate(90deg);
         }
 
         .nav-submenu-menu {
@@ -1175,6 +1275,8 @@ const HeaderOne = () => {
           align-items: center;
           gap: 15px;
           flex-shrink: 0;
+          position: relative;
+          z-index: 1100;
         }
 
         .navbar-extra-features button {
@@ -1191,6 +1293,14 @@ const HeaderOne = () => {
           background: #000 !important;
           color: #fff !important;
           border: 1px solid #333 !important;
+        }
+
+        .navbar-search {
+          pointer-events: none;
+        }
+
+        .navbar-search.show-nav-search {
+          pointer-events: auto;
         }
 
         .navbar .navbar-search-field:focus {
@@ -1469,12 +1579,25 @@ const HeaderOne = () => {
 
         /* Mobile Menu Styles */
         .mobile-menu-toggle {
-          display: none;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
           background: none;
           border: none;
           cursor: pointer;
           padding: 10px;
-          z-index: 1001;
+          z-index: 5000;
+          opacity: 1 !important;
+          visibility: visible !important;
+          position: relative;
+        }
+
+
+
+        @media (min-width: 992px) {
+          .mobile-menu-toggle {
+            display: none;
+          }
         }
         
         .hamburger {
@@ -1483,16 +1606,33 @@ const HeaderOne = () => {
           width: 25px;
           height: 20px;
           position: relative;
+          opacity: 1 !important;
+          visibility: visible !important;
+          background: repeating-linear-gradient(
+            to bottom,
+            #fff 0,
+            #fff 2px,
+            transparent 2px,
+            transparent 6px
+          ) !important;
+          border-radius: 2px;
         }
         
         .hamburger span {
           display: block;
           height: 3px;
           width: 100%;
-          background: #fff;
+          background: #fff !important;
+          background-color: #fff !important;
+          opacity: 1 !important;
           margin: 3px 0;
           transition: all 0.3s ease;
           border-radius: 2px;
+        }
+
+        .navbar .mobile-menu-toggle .hamburger span {
+          background: #fff !important;
+          background-color: #fff !important;
         }
         
         .hamburger.active span:nth-child(1) {
@@ -1508,10 +1648,11 @@ const HeaderOne = () => {
         }
         
         .mobile-menu-dropdown {
-          position: absolute;
-          top: 100%;
+          position: fixed;
+          top: 52px;
           left: 0;
           right: 0;
+          width: 100vw;
           background: #000;
           border-top: 1px solid #333;
           z-index: 1000;
@@ -1519,18 +1660,56 @@ const HeaderOne = () => {
         }
         
         .mobile-menu-content {
-          padding: 20px 0;
+          padding: 8px 0;
+          max-height: calc(100vh - 52px);
+          overflow-y: auto;
         }
         
         .mobile-nav-link {
           display: block;
-          padding: 15px 20px;
+          padding: 12px 16px;
           color: #fff;
           text-decoration: none;
           font-size: 16px;
           font-weight: 500;
           border-bottom: 1px solid #222;
           transition: all 0.3s ease;
+        }
+
+        .mobile-nav-accordion {
+          border-bottom: 1px solid #222;
+        }
+
+        .mobile-nav-accordion-toggle {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 12px 16px;
+          background: transparent;
+          border: none;
+          color: #fff;
+          font-size: 16px;
+          font-weight: 600;
+          cursor: pointer;
+        }
+
+        .mobile-nav-accordion-toggle i {
+          transition: transform 0.2s ease;
+        }
+
+        .mobile-nav-accordion-toggle.is-open i {
+          transform: rotate(180deg);
+        }
+
+        .mobile-submenu {
+          padding-left: 12px;
+          background: rgba(255, 255, 255, 0.02);
+        }
+
+        .mobile-submenu .mobile-nav-link {
+          padding: 10px 16px;
+          font-size: 14px;
         }
         
         .mobile-nav-link:hover {
@@ -1568,19 +1747,64 @@ const HeaderOne = () => {
           transform: none !important;
         }
 
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
+        /* Mobile/Tablet Responsive */
+        @media (max-width: 991px) {
+          .navbar {
+            padding-top: 6px;
+            padding-bottom: 6px;
+          }
+
           .navbar-nav-links.desktop-nav {
             display: none;
           }
+
+          .navbar-inner {
+            flex-wrap: nowrap;
+            gap: 12px;
+            min-height: 52px;
+          }
+
+          .brand-logo-container {
+            max-width: 150px;
+          }
+
+          .brand-logo-container img {
+            max-width: 150px !important;
+            height: auto !important;
+          }
+
+          .navbar-extra-features {
+            margin-left: auto;
+            flex-shrink: 0;
+            gap: 10px;
+          }
+
+          .nav-search-field-toggler {
+            font-size: 18px;
+            padding: 8px;
+            line-height: 1;
+          }
           
           .mobile-menu-toggle {
-            display: block;
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
             max-width: 100vw !important;
             overflow-x: hidden !important;
             left: 0 !important;
             right: 0 !important;
             transform: none !important;
+          }
+
+          .hamburger {
+            width: 22px;
+            height: 18px;
+          }
+
+          .hamburger span {
+            height: 2px;
+            margin: 3px 0;
           }
           
           .hero-title {
@@ -1620,9 +1844,48 @@ const HeaderOne = () => {
         }
         
         @media (max-width: 480px) {
+          .navbar-inner {
+            gap: 10px;
+            min-height: 46px;
+          }
+
+          .brand-logo-container {
+            max-width: 150px;
+          }
+
+          .brand-logo-container img {
+            max-width: 150px !important;
+          }
+
+          .navbar-extra-features {
+            gap: 8px;
+          }
+
+          .navbar {
+            padding-top: 3px;
+            padding-bottom: 3px;
+          }
+
+          .nav-search-field-toggler {
+            padding: 6px;
+          }
+
+          .mobile-menu-toggle {
+            padding: 6px;
+          }
+
           .mobile-nav-link {
-            padding: 12px 15px;
+            padding: 10px 14px;
             font-size: 14px;
+          }
+
+          .mobile-nav-accordion-toggle {
+            padding: 10px 14px;
+            font-size: 14px;
+          }
+
+          .mobile-menu-dropdown {
+            top: 46px;
           }
           
           /* Hero Section Small Mobile Responsive */
@@ -1665,6 +1928,25 @@ const HeaderOne = () => {
           }
         }
 
+        @media (max-width: 360px) {
+          .brand-logo-container {
+            max-width: 130px;
+          }
+
+          .brand-logo-container img {
+            max-width: 130px !important;
+          }
+
+          .navbar-extra-features {
+            gap: 6px;
+          }
+
+          .mobile-menu-dropdown {
+            top: 46px;
+          }
+        }
+
+        
       `}</style>
     </>
   );

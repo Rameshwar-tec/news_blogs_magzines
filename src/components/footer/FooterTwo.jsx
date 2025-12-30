@@ -78,7 +78,7 @@ const FooterTwo = () => {
         </div>
 
         {/* Column 2: Quick Links */}
-        <div style={{ flex: "1 1 200px", minWidth: "200px" }}>
+        <div className={styles.footer_center_mobile} style={{ flex: "1 1 200px", minWidth: "200px" }}>
           <h4
             style={{
               color: "white",
@@ -137,7 +137,7 @@ const FooterTwo = () => {
         </div>
 
         {/* Column 3: Magazines */}
-        <div style={{ flex: "1 1 250px", minWidth: "250px", textAlign: "center" }}>
+        <div className={styles.footer_center_mobile} style={{ flex: "1 1 250px", minWidth: "250px", textAlign: "center" }}>
           <h4
             style={{
               color: "white",

@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import HeadMeta from "../components/elements/HeadMeta";
 import FooterTwo from "../components/footer/FooterTwo";
 import HeaderOne from "../components/header/HeaderOne";
@@ -16,81 +16,9 @@ import SocialLink from "../data/social/SocialLink.json";
 
 const Home = () => {
   console.log("Home component rendering");
-  const snowCanvasRef = useRef(null);
 
   useEffect(() => {
-    const canvas = snowCanvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let rafId = null;
-    const snowflakes = [];
-    const snowflakeShapes = ["❄", "✶", "✻", "✼", "✺"];
-
-    function setCanvasSize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-
-    function createSnowflakes() {
-      snowflakes.length = 0;
-      const total = 140;
-      for (let i = 0; i < total; i++) {
-        snowflakes.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          size: Math.random() * 24 + 8,
-          speed: Math.random() * 1 + 0.5,
-          shape: snowflakeShapes[Math.floor(Math.random() * snowflakeShapes.length)],
-          opacity: Math.random() * 0.8 + 0.2,
-        });
-      }
-    }
-
-    function updateSnowflakes() {
-      snowflakes.forEach((flake) => {
-        flake.y += flake.speed;
-        if (flake.y > canvas.height) {
-          flake.y = 0;
-          flake.x = Math.random() * canvas.width;
-        }
-      });
-    }
-
-    function drawSnowflakes() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      snowflakes.forEach((flake) => {
-        ctx.globalAlpha = flake.opacity;
-        ctx.font = `${flake.size}px Arial`;
-        ctx.fillStyle = "white";
-        ctx.fillText(flake.shape, flake.x, flake.y);
-      });
-      ctx.globalAlpha = 1;
-      updateSnowflakes();
-    }
-
-    function animateSnowflakes() {
-      drawSnowflakes();
-      rafId = window.requestAnimationFrame(animateSnowflakes);
-    }
-
-    setCanvasSize();
-    createSnowflakes();
-    animateSnowflakes();
-
-    const handleResize = () => {
-      setCanvasSize();
-      createSnowflakes();
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      if (rafId) window.cancelAnimationFrame(rafId);
-    };
+    return () => {};
   }, []);
   
   return (
@@ -103,7 +31,7 @@ const Home = () => {
         metaDesc="The Entrepreneurial Chronicles is a business magazine that brings inspiring stories of entrepreneurs who have turned their dreams into reality."
       />
       <HeaderOne />
-      <canvas id="snow-canvas" ref={snowCanvasRef}></canvas>
+
       <MagazineHero />
       <BusinessBulletin />
       {/* <LogoSlider /> */}
@@ -138,16 +66,6 @@ const Home = () => {
       </div>
 
       <style jsx global>{`
-        #snow-canvas {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100vw;
-          height: 100vh;
-          pointer-events: none;
-          z-index: 9999;
-        }
-
         /* Fixed Social Icons - Right Side */
         .fixed-social-icons {
           position: fixed;
