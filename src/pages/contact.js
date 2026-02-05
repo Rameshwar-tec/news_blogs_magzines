@@ -128,16 +128,17 @@ const ContactPage = () => {
           {/* End of .section-title */}
         </div>
         {/* End of .container */}
-        <div className="container">
+        <div className="container" style={{ paddingLeft: "3rem", paddingRight: "3rem" }}>
           <div style={{ 
             display: "flex",
             gap: "2rem",
             flexWrap: "wrap",
-            justifyContent: "center",
+            justifyContent: "flex-start",
             alignItems: "stretch"
           }}>
             {/* USA Location Map */}
-            <div id="usa-map" style={{ 
+            {/* USA Location Map - Commented Out */}
+            {/* <div id="usa-map" style={{ 
               flex: "1 1 45%",
               minWidth: "300px",
               marginBottom: "2rem"
@@ -160,12 +161,11 @@ const ContactPage = () => {
                   title="6605 Longshore St, Dublin, OH 43017, USA"
                 />
               </div>
-            </div>
+            </div> */}
 
             {/* Germany Location Map */}
             <div id="germany-map" style={{ 
-              flex: "1 1 45%",
-              minWidth: "300px",
+              width: "100%",
               marginBottom: "2rem"
             }}>
               <div className="axil-map-wrapper" style={{ 
@@ -178,7 +178,7 @@ const ContactPage = () => {
                 <iframe
                   src="https://www.google.com/maps?q=He%C3%9Fstra%C3%9Fe+36,+80798+M%C3%BCnchen,+Germany&output=embed"
                   width="100%"
-                  height={350}
+                  height={120}
                   style={{ border: 0, width: "100%", display: "block" }}
                   allowFullScreen
                   loading="lazy"

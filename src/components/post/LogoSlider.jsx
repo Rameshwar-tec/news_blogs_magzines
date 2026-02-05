@@ -10,6 +10,12 @@ import LogoMiyazaki from "../../assest/miyazaki_logo.jpeg";
 import LogoNewWorldWind from "../../assest/newworldwind_logo.jpeg";
 import LogoPickupUsa from "../../assest/pickup_usa_franchise_company_logo.jpeg";
 import LogoTimePlast from "../../assest/timeplast_logo 3.jpg";
+import LogoShoumo from "../../assest/Shoumo.jpg";
+import LogoSurbhi from "../../assest/Surbhi.jpg";
+import LogoSlendy from "../../assest/Slendy.jpg";
+import LogoMagnolia from "../../assest/magnolia.jpg";
+import LogoDevang from "../../assest/devang.jpg";
+import LogoBen from "../../assest/ben.jpg";
 
 const LogoSlider = ({ title = "Our Partner Brands", showTitle = true, wrapperClassName = "" }) => {
   const images = [
@@ -21,6 +27,12 @@ const LogoSlider = ({ title = "Our Partner Brands", showTitle = true, wrapperCla
     { src: LogoNewWorldWind, alt: "New World Wind" },
     { src: LogoPickupUsa, alt: "Pickup USA Franchise Company" },
     { src: LogoTimePlast, alt: "TimePlast" },
+    { src: LogoShoumo, alt: "Shoumo" },
+    { src: LogoSurbhi, alt: "Surbhi" },
+    { src: LogoSlendy, alt: "Slendy" },
+    { src: LogoMagnolia, alt: "Magnolia" },
+    { src: LogoDevang, alt: "Devang" },
+    { src: LogoBen, alt: "Ben" },
   ];
 
   return (
@@ -36,8 +48,8 @@ const LogoSlider = ({ title = "Our Partner Brands", showTitle = true, wrapperCla
                     <Image
                       src={image.src}
                       alt={image.alt}
-                      width={80}
-                      height={80}
+                      width={image.customWidth || 80}
+                      height={image.customHeight || 80}
                       quality={100}
                       objectFit="contain"
                     />

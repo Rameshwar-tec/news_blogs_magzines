@@ -7,11 +7,11 @@ const ContactInfo = () => {
         <h2 className="h4 m-b-xs-10" style={{ color: '#fff' }}>Contact Information</h2>
         <div className="axil-contact-info" style={{ color: '#fff' }}>
           <address className="address">
-            <p className="mid m-b-xs-30" style={{ color: '#ccc' }}>
+            {/* <p className="mid m-b-xs-30" style={{ color: '#ccc' }}>
               6605 Longshore st, Dublin
               <br />
               OH 43017, USA
-            </p>
+            </p> */}
 
             <p className="mid m-b-xs-30" style={{ color: '#ccc' }}>
               Heßstraße 36, 80798 München, Germany
