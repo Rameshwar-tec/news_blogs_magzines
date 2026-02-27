@@ -8,6 +8,7 @@ import HeadMeta from "../../components/elements/HeadMeta";
 import { client } from "../../client";
 import WidgetNewsletter from "../../components/widget/WidgetNewsletter";
 import WidgetSocialShare from "../../components/widget/WidgetSocialShare";
+import Image from "next/image";
 
 const fetchIndustryPostsByIndustry = async (industrySlug) => {
   const query = `
@@ -85,10 +86,12 @@ const IndustryPosts = () => {
                     onClick={() => handlePostClick(post.slug.current)}
                   >
                     <div className="featured-article-image">
-                      <img
+                      <Image
                         src={post.featureImg}
                         alt={post.altText || post.title}
-                        loading="lazy"
+                        fill
+                        sizes="(max-width: 767px) 100vw, 160px"
+                        unoptimized
                       />
                     </div>
                     <div className="featured-article-content">
@@ -119,10 +122,12 @@ const IndustryPosts = () => {
                     onClick={() => handlePostClick(post.slug.current)}
                   >
                     <div className="latest-article-image">
-                      <img
+                      <Image
                         src={post.featureImg}
                         alt={post.altText || post.title}
-                        loading="lazy"
+                        fill
+                        sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                        unoptimized
                       />
                     </div>
                     <div className="latest-article-content">
@@ -153,10 +158,12 @@ const IndustryPosts = () => {
                     onClick={() => handlePostClick(post.slug.current)}
                   >
                     <div className="remaining-article-image">
-                      <img
+                      <Image
                         src={post.featureImg}
                         alt={post.altText || post.title}
-                        loading="lazy"
+                        fill
+                        sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                        unoptimized
                       />
                     </div>
                     <div className="remaining-article-content">

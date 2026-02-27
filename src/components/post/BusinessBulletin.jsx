@@ -7,26 +7,32 @@ import PostLayoutTwo1 from "./layout/PostLayoutTwo1";
 
 const BusinessBulletin = () => {
   const query = `
-*[_type == "post" && categories[0]._ref == *[_type == "category" && slug.current == "business-bulletin"][0]._id] 
+*[
+  _type == "post" &&
+  "business-bulletin" in categories[]->slug.current
+]
 {
   title,
   slug,
    altText,
   'featureImg': mainImage.asset->url,
   publishedAt,
+  _updatedAt,
   description,
   'category': {
-    'title': categories[0]->title,
-    'slug': categories[0]->slug.current
+    'title': "Business Bulletin",
+    'slug': "business-bulletin"
   }
-} | order(publishedAt desc)[0...6] 
+} | order(coalesce(publishedAt, _updatedAt) desc, _updatedAt desc)[0...6]
 `;
   const { data, isLoading, error } = useQuery({
-    queryKey: ["business-bulletin"],
+    queryKey: ["business-bulletin-home"],
     queryFn: async () => {
       const response = await client.fetch(query);
       return response;
     },
+    refetchOnMount: "always",
+    refetchOnWindowFocus: true,
   });
 
   if (isLoading) return <Loader />;

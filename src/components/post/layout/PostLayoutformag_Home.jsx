@@ -36,12 +36,9 @@ const PostLayoutformag_Home = ({ data }) => {
                 padding: "0",
               }}
             >
-              <Link
-                href={`/magazine/${data.slug.current}`}
-                style={{ color: "#101820", textDecoration: "none" }}
-              >
+              <span style={{ color: "#101820", textDecoration: "none" }}>
                 {data.title}
-              </Link>
+              </span>
             </h4>
           </div>
         </div>

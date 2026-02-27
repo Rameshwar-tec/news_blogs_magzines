@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
 
 const LoadingPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -20,16 +19,15 @@ const LoadingPage = () => {
       <div className="loading-page">
         <div className="loading-container">
           <div className="loading-logo">
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src="/logos/chronicle_logo.png"
               alt="Chronicles Logo"
-              width={300}
-              height={120}
               style={{ 
-                objectFit: "contain",
                 width: "100%",
                 height: "auto",
-                maxWidth: "300px"
+                maxWidth: "300px",
+                objectFit: "contain"
               }}
             />
           </div>

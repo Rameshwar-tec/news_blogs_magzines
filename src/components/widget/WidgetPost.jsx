@@ -29,7 +29,10 @@ const WidgetPost = () => {
   });
 
   const queryMarketNews = `
-*[_type == "post" && categories[0]._ref == *[_type == "category" && slug.current == "market-news"][0]._id] 
+*[
+  _type == "post" &&
+  "market-news" in categories[]->slug.current
+]
  {
     title,
     slug,
@@ -39,39 +42,48 @@ const WidgetPost = () => {
     altText,
     'slug': categories[0]->slug.current,
     },
-    publishedAt
+    publishedAt,
+    _updatedAt
 
-} | order(publishedAt desc)[0...5] 
+} | order(coalesce(publishedAt, _updatedAt) desc, _updatedAt desc)[0...5]
 `;
   const { data: marketNewsData } = useQuery({
-    queryKey: ["market-news"],
+    queryKey: ["market-news-widget"],
     queryFn: async () => {
       const response = await client.fetch(queryMarketNews);
       return response;
     },
+    refetchOnMount: "always",
+    refetchOnWindowFocus: true,
   });
 
   const queryBusinessBulletins = `
-*[_type == "post" && categories[0]._ref == *[_type == "category" && slug.current == "business-bulletin"][0]._id] 
+*[
+  _type == "post" &&
+  "business-bulletin" in categories[]->slug.current
+]
  {
     title,
     slug,
     'featureImg': mainImage.asset->url,
      'category': {
-    'title': categories[0]->title,
+    'title': "Business Bulletin",
     altText,
-    'slug': categories[0]->slug.current,
+    'slug': "business-bulletin",
     },
-    publishedAt
+    publishedAt,
+    _updatedAt
 
-} | order(publishedAt desc)[0...5] 
+} | order(coalesce(publishedAt, _updatedAt) desc, _updatedAt desc)[0...5]
 `;
   const { data: businessBulletinData } = useQuery({
-    queryKey: ["business-bulletin"],
+    queryKey: ["business-bulletin-widget"],
     queryFn: async () => {
       const response = await client.fetch(queryBusinessBulletins);
       return response;
     },
+    refetchOnMount: "always",
+    refetchOnWindowFocus: true,
   });
 
   return (

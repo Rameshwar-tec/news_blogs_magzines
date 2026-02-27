@@ -133,8 +133,8 @@ const Magazines = () => {
                 alt="CI3FAME Advertisement Placements"
                 width={600}
                 height={800}
-                layout="responsive"
                 className="shadow-black img-fluid object-fit-cover"
+                style={{ width: "100%", height: "auto" }}
               />
             </div>
           </div>
@@ -151,8 +151,8 @@ const Magazines = () => {
                   alt="CI3FAME Advertisement Placements"
                   width={600}
                   height={800}
-                  layout="responsive"
                   className="shadow-black img-fluid object-fit-cover"
+                  style={{ width: "100%", height: "auto" }}
                 />
               </div>
             </div>
@@ -163,8 +163,8 @@ const Magazines = () => {
                   alt="CI3FAME Advertisement Placements"
                   width={600}
                   height={800}
-                  layout="responsive"
                   className="shadow-black img-fluid object-fit-cover"
+                  style={{ width: "100%", height: "auto" }}
                 />
               </div>
             </div>

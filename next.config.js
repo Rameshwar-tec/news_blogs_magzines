@@ -1,3 +1,5 @@
+const path = require("path");
+
 const nextConfig = {
   async rewrites() {
     return [
@@ -16,6 +18,13 @@ const nextConfig = {
         pathname: "/vi/**",
       },
     ],
+  },
+  webpack: (config) => {
+    config.resolve.alias["next/image"] = path.resolve(
+      __dirname,
+      "src/components/common/CompatImage.jsx"
+    );
+    return config;
   },
 };
 

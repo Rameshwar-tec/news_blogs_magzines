@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { client } from "../../client";
 import Loader from "../common/Loader";
 import { useState } from "react";
+import Image from "next/image";
 
 const WebProfiles = () => {
   const [selectedProfile, setSelectedProfile] = useState(0);
@@ -108,11 +109,12 @@ const WebProfiles = () => {
                 >
                   <div className="name-content">
                     <div className="name-image">
-                      <img 
+                      <Image
                         src={post.featureImg} 
                         alt={post.title}
                         width={60}
                         height={60}
+                        unoptimized
                       />
                     </div>
                     <span className="name-text">{post.title}</span>

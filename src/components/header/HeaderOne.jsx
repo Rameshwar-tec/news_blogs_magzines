@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { client } from "../../client";
 import NavbarLogo from "../../assest/chronicle_logo.png";
@@ -766,12 +765,13 @@ const HeaderOne = () => {
             <div className="navbar-inner">
               <div className="brand-logo-container">
                 <Link href="/">
-                  <Image
-                    src={NavbarLogo}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={NavbarLogo.src}
                     alt="chronicles-logo"
-                    width={300}
-                    height={100}
-                    style={{ objectFit: "contain" }}
+                    width="300"
+                    height="100"
+                    style={{ objectFit: "contain", width: "300px", height: "100px" }}
                   />
                 </Link>
               </div>
@@ -1034,9 +1034,12 @@ const HeaderOne = () => {
                   <div className="suggestion-content">
                     {result.hasImage && result.imageSrc && (
                       <div className="suggestion-image">
-                        <img 
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
                           src={result.imageSrc} 
                           alt={result.imageAlt || result.text}
+                          width={50}
+                          height={50}
                           className="suggestion-img"
                         />
                       </div>

@@ -1,6 +1,5 @@
 // components/LogoSlider.js
 import React from "react";
-import Image from "next/image";
 
 import Logo8FigureFirm from "../../assest/8figurefirm_logo 6.jpg";
 import LogoAlloyPersonalTraining from "../../assest/alloypersonaltraining_logo 4.jpg";
@@ -45,13 +44,13 @@ const LogoSlider = ({ title = "Our Partner Brands", showTitle = true, wrapperCla
               {[...images, ...images].map((image, index) => (
                 <div key={index} className="logo-slide">
                   <div className="logo-container">
-                    <Image
-                      src={image.src}
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={image.src.src}
                       alt={image.alt}
                       width={image.customWidth || 80}
                       height={image.customHeight || 80}
-                      quality={100}
-                      objectFit="contain"
+                      style={{ objectFit: "contain", width: "auto", height: "auto" }}
                     />
                   </div>
                 </div>

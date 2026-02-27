@@ -30,9 +30,10 @@ const PostFormatText = ({ postData, allData }) => {
                     className="mb-4 w-full h-auto object-cover"
                     src={postData?.featureImg}
                     alt={postData?.altText || postData?.title}
-                    layout="responsive"
                     width={500}
                     height={300}
+                    sizes="(max-width: 768px) 100vw, 700px"
+                    style={{ width: "100%", height: "auto" }}
                   />
 
                   <PortableText

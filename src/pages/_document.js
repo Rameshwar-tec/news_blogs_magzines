@@ -40,22 +40,6 @@ class MyDocument extends Document {
             crossOrigin="anonymous"
           />
 
-          {/* Google tag (gtag.js) */}
-          <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=G-JVLEYSXEX7"
-          />
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', 'G-JVLEYSXEX7');
-              `,
-            }}
-          />
-
           {/* JSON-LD Script */}
           <script
             type="application/ld+json"
@@ -144,20 +128,6 @@ class MyDocument extends Document {
             }}
           />
 
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', 'G-CFTSB5X8JY');
-              `,
-            }}
-          />
-          <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=G-CFTSB5X8JY"
-          />
         </Head>
         <body>
           <Main />

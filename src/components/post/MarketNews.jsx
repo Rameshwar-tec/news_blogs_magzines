@@ -7,28 +7,34 @@ import Loader from "../common/Loader";
 
 const MarketNews = () => {
   const query = `
-*[_type == "post" && categories[0]._ref == *[_type == "category" && slug.current == "market-news"][0]._id] 
+*[
+  _type == "post" &&
+  "market-news" in categories[]->slug.current
+]
  {
     title,
     slug,
      altText,
     'featureImg': mainImage.asset->url,
     publishedAt,
+    _updatedAt,
     description,
      'category': {
     'title': categories[0]->title,
     'slug': categories[0]->slug.current
   }
 
-} | order(publishedAt desc)[0...4] 
+} | order(coalesce(publishedAt, _updatedAt) desc, _updatedAt desc)[0...4]
 `;
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["market-news"],
+    queryKey: ["market-news-home"],
     queryFn: async () => {
       const response = await client.fetch(query);
       return response;
     },
+    refetchOnMount: "always",
+    refetchOnWindowFocus: true,
   });
 
   if (isLoading) return <Loader />;

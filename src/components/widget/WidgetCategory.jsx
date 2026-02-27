@@ -91,8 +91,9 @@ const WidgetCategory = () => {
                     <Image
                       src={data.category_image ? urlFor(data.category_image).url() : '/images/placeholder.png'}
                       alt={data?.altText || data.title}
-                      layout="fill"
-                      objectFit="cover"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 320px"
+                      style={{ objectFit: "cover" }}
                     />
                   </div>
                   <div

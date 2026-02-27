@@ -33,14 +33,16 @@ const Home = () => {
       <HeaderOne />
 
       <MagazineHero />
-      <BusinessBulletin />
-      {/* <LogoSlider /> */}
-      <SliderOne />
-      <LogoSlider title="Our Partner Brands" showTitle={true} />
-      <WebProfiles />
-      <MarketNews />
-      <Magazines />
-      <MasterTalks />
+      <div className="home-main-fullwidth">
+        <BusinessBulletin />
+        {/* <LogoSlider /> */}
+        <SliderOne />
+        <LogoSlider title="Our Partner Brands" showTitle={true} />
+        <WebProfiles />
+        <MarketNews />
+        <Magazines />
+        <MasterTalks />
+      </div>
       <FooterTwo />
       <ScrollToTop />
       
@@ -66,6 +68,48 @@ const Home = () => {
       </div>
 
       <style jsx global>{`
+        .home-main-fullwidth .container,
+        .home-main-fullwidth .container-fluid {
+          max-width: 100% !important;
+          width: 100% !important;
+          padding-left: 10px !important;
+          padding-right: 10px !important;
+        }
+
+        .home-main-fullwidth .row {
+          margin-left: 0 !important;
+          margin-right: 0 !important;
+        }
+
+        .home-main-fullwidth .row > [class*="col"] {
+          padding-left: 6px !important;
+          padding-right: 6px !important;
+        }
+
+        @media (min-width: 768px) {
+          .home-main-fullwidth .container,
+          .home-main-fullwidth .container-fluid {
+            padding-left: 14px !important;
+            padding-right: 14px !important;
+          }
+          .home-main-fullwidth .row > [class*="col"] {
+            padding-left: 8px !important;
+            padding-right: 8px !important;
+          }
+        }
+
+        @media (min-width: 1200px) {
+          .home-main-fullwidth .container,
+          .home-main-fullwidth .container-fluid {
+            padding-left: 18px !important;
+            padding-right: 18px !important;
+          }
+          .home-main-fullwidth .row > [class*="col"] {
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+          }
+        }
+
         /* Fixed Social Icons - Right Side */
         .fixed-social-icons {
           position: fixed;
