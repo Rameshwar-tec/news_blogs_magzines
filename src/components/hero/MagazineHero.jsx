@@ -131,8 +131,9 @@ const MagazineHero = () => {
               // Only show cards within the 9-card range
               if (Math.abs(position) > 4) return null;
               
-              // Create horizontal row with progressive scaling - no rotation, cards stay upright
-              const offset = position * 150; // Horizontal spacing between cards
+              // Use progressive offsets so edge cards don't drift too far from neighbors
+              const offsetMap = [0, 150, 280, 390, 480];
+              const offset = (position < 0 ? -1 : 1) * offsetMap[Math.abs(position)];
               const scale = isCenter ? 1.0 : Math.max(0.2, 1.0 - Math.abs(position) * 0.2); // Progressive scaling: 100%, 80%, 60%, 40%, 20%
               const opacity = isCenter ? 1.0 : Math.max(0.2, 1.0 - Math.abs(position) * 0.2); // Progressive opacity: 100%, 80%, 60%, 40%, 20%
               
