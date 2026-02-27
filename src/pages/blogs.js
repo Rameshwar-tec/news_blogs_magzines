@@ -199,7 +199,9 @@ const Blogs = () => {
       <style jsx>{`
         .blogs-container {
           width: 100%;
-          padding: 2rem 1rem;
+          max-width: 100%;
+          margin: 0;
+          padding: 2rem 10px;
           background-color: #070a0e;
           min-height: 100vh;
         }
@@ -542,7 +544,7 @@ const Blogs = () => {
         /* Tablet Styles */
         @media (min-width: 768px) {
           .blogs-container {
-            padding: 2rem 1.5rem;
+            padding: 2rem 14px;
           }
 
           .section-title {
@@ -562,7 +564,7 @@ const Blogs = () => {
         /* Desktop Styles */
         @media (min-width: 1024px) {
           .blogs-container {
-            padding: 2rem 2rem;
+            padding: 2rem 14px;
           }
 
           .blogs-top-row {
@@ -599,9 +601,7 @@ const Blogs = () => {
         /* Large Desktop Styles */
         @media (min-width: 1440px) {
           .blogs-container {
-            padding: 2rem 3rem;
-            max-width: 1400px;
-            margin: 0 auto;
+            padding: 2rem 18px;
           }
 
           .featured-article-image {
@@ -624,7 +624,7 @@ const Blogs = () => {
         /* Mobile Optimization */
         @media (max-width: 767px) {
           .blogs-container {
-            padding: 1rem 0.5rem;
+            padding: 1rem 10px;
           }
 
           .section-title {
@@ -679,7 +679,7 @@ const Blogs = () => {
         /* Small Mobile Optimization */
         @media (max-width: 480px) {
           .blogs-container {
-            padding: 0.5rem;
+            padding: 0.5rem 10px;
           }
 
           .featured-article-image {
