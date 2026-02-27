@@ -1,29 +1,32 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../components/common/Loader";
 import { client } from "../client";
 import HeaderOne from "../components/header/HeaderOne";
 import FooterTwo from "../components/footer/FooterTwo";
 import HeadMeta from "../components/elements/HeadMeta";
-import { useRouter } from "next/router";
 import Image from "next/image";
 import SharedSidebarWidgets from "../components/widget/SharedSidebarWidgets";
 
 const Blogs = () => {
   const query = `
-    *[_type == "post" && categories[0]._ref == *[_type == "category" && slug.current == "blogs-and-articles"][0]._id]
+    *[
+      _type == "post" &&
+      "blogs-and-articles" in categories[]->slug.current
+    ]
     {
       title,
       slug,
       altText,
       publishedAt,
+      _updatedAt,
       'featureImg': mainImage.asset->url,
       description,
       'category': {
         'title': categories[0]->title,
         'slug': categories[0]->slug.current
       }
-    } | order(publishedAt desc)
+    } | order(coalesce(publishedAt, _updatedAt) desc, _updatedAt desc)
   `;
 
   const { data, isLoading, error } = useQuery({
@@ -95,7 +98,7 @@ const Blogs = () => {
                         {post.title}
                       </h6>
                       <span className="read-more-link">
-                        Read More →
+                        Read More &rarr;
                       </span>
                     </div>
                   </div>
@@ -206,7 +209,8 @@ const Blogs = () => {
           color: #f3f5f7;
           font-weight: 600;
           margin-bottom: 1.5rem;
-          font-size: clamp(1.25rem, 2vw, 1.5rem);
+          font-size: 2.8rem;
+          line-height: 3.8rem;
         }
 
         /* Top Row Layout */
@@ -277,20 +281,20 @@ const Blogs = () => {
         }
 
         .featured-article-title {
-          font-size: clamp(1.6rem, 1.5vw, 1.1rem);
+          font-size: 1.8rem;
           font-weight: 600;
           color: #e8edf3;
           display: -webkit-box;
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
           overflow: hidden;
-          line-height: 1.3;
+          line-height: 2.6rem;
           margin: 0;
         }
 
         .read-more-link {
           color: #d7c08a;
-          font-size: 0.8rem;
+          font-size: 1.3rem;
           font-weight: 500;
           margin-top: 0.5rem;
         }
@@ -356,14 +360,14 @@ const Blogs = () => {
         }
 
         .latest-article-title {
-          font-size: clamp(1.6rem, 1.5vw, 1.1rem);
+          font-size: 1.8rem;
           font-weight: 600;
           color: #e8edf3;
           display: -webkit-box;
           -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
           overflow: hidden;
-          line-height: 1.4;
+          line-height: 2.6rem;
           margin: 0;
         }
 
@@ -429,14 +433,14 @@ const Blogs = () => {
         }
 
         .remaining-article-title {
-          font-size: clamp(1.6rem, 1.5vw, 1rem);
+          font-size: 1.8rem;
           font-weight: 600;
           color: #e8edf3;
           display: -webkit-box;
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
           overflow: hidden;
-          line-height: 1.3;
+          line-height: 2.6rem;
           margin: 0;
         }
 
@@ -469,7 +473,8 @@ const Blogs = () => {
           }
           to {
             opacity: 1;
-          transform: translateX(0);
+            transform: translateX(0);
+          }
         }
 
         /* Hard-imposed home-style sidebar theme for blogs shared widgets */
@@ -516,7 +521,6 @@ const Blogs = () => {
         .blogs-page :global(.blogs-shared-sidebar .sidebar-post-widget .media-body p) {
           color: #aeb6c1 !important;
         }
-        }
 
         /* Loader and Error States */
         .loader-container {
@@ -539,6 +543,11 @@ const Blogs = () => {
         @media (min-width: 768px) {
           .blogs-container {
             padding: 2rem 1.5rem;
+          }
+
+          .section-title {
+            font-size: 2.6rem;
+            line-height: 3.4rem;
           }
 
           .latest-articles-grid {
@@ -618,6 +627,11 @@ const Blogs = () => {
             padding: 1rem 0.5rem;
           }
 
+          .section-title {
+            font-size: 2.3rem;
+            line-height: 3.1rem;
+          }
+
           .featured-article-card {
             flex-direction: column;
             min-height: auto;
@@ -630,6 +644,13 @@ const Blogs = () => {
 
           .featured-article-content {
             padding: 0.75rem;
+          }
+
+          .featured-article-title,
+          .latest-article-title,
+          .remaining-article-title {
+            font-size: 1.6rem;
+            line-height: 2.3rem;
           }
 
           .latest-articles-grid {
@@ -679,6 +700,8 @@ const Blogs = () => {
 
           .section-title {
             margin-bottom: 1rem;
+            font-size: 2rem;
+            line-height: 2.7rem;
           }
         }
       `}</style>
@@ -687,3 +710,4 @@ const Blogs = () => {
 };
 
 export default Blogs;
+

@@ -1,20 +1,19 @@
-import FormGroup from "./FormGroup";
+﻿import FormGroup from "./FormGroup";
 import emailjs from "@emailjs/browser";
 import Alert from "react-bootstrap/Alert";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Result = () => {
   return (
     <Alert variant="success" className="success-msg">
-      Your Message has been successfully sent.
+      Your message has been successfully sent.
     </Alert>
   );
 };
 
 const ContactForm = () => {
   const form = useRef();
-
-  const [result, showresult] = useState(false);
+  const [result, showResult] = useState(false);
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -27,35 +26,29 @@ const ContactForm = () => {
         "QYncFYwURx7oPBVab"
       )
       .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
+        () => showResult(true),
+        () => showResult(false)
       );
+
     form.current.reset();
-    showresult(true);
   };
 
-  setTimeout(() => {
-    showresult(false);
-  }, 2000);
+  useEffect(() => {
+    if (!result) return;
+    const timer = setTimeout(() => showResult(false), 2000);
+    return () => clearTimeout(timer);
+  }, [result]);
 
   return (
-    <div className="axil-contact-form-block m-b-xs-30" style={{ background: '#000', color: '#fff' }}>
-      <div className="section-title d-block" style={{ color: '#fff' }}>
-        <h2 className="h3 axil-title m-b-xs-20" style={{ color: '#fff' }}>Send Us a Message</h2>
-        <p style={{ color: '#ccc' }}>
-          Your email address will not be published. All the fields are required.
+    <div className="axil-contact-form-block m-b-xs-30 contact-form-card">
+      <div className="section-title d-block">
+        <h2 className="h3 axil-title m-b-xs-20">Send Us a Message</h2>
+        <p className="contact-form-note">
+          Your email address will not be published. All fields are required.
         </p>
       </div>
-      <div className="axil-contact-form-wrapper p-t-xs-10" style={{ color: '#fff' }}>
-        <form
-          className="axil-contact-form row no-gutters"
-          ref={form}
-          onSubmit={sendEmail}
-        >
+      <div className="axil-contact-form-wrapper p-t-xs-10">
+        <form className="axil-contact-form row no-gutters" ref={form} onSubmit={sendEmail}>
           <FormGroup
             pClass="col-12"
             type="text"
@@ -81,42 +74,55 @@ const ContactForm = () => {
             placeholder="Enter your message here"
           />
           <div className="col-12">
-            <button className="btn btn-primary m-t-xs-0 m-t-lg-20">
-              SUBMIT
-            </button>
+            <button className="btn btn-primary m-t-xs-0 m-t-lg-20">SUBMIT</button>
           </div>
           <div className="col-12 form-group">{result ? <Result /> : null}</div>
         </form>
       </div>
+
       <style jsx global>{`
-        .axil-contact-form input,
-        .axil-contact-form textarea,
-        .axil-contact-form .form-control {
-          background: #000 !important;
-          color: #fff !important;
-          border: 1px solid #D4AF37 !important;
-          border-radius: 6px;
+        .contact-form-card {
+          background: linear-gradient(180deg, #0d1116 0%, #090c11 100%) !important;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 12px;
+        }
+
+        .contact-form-card .section-title .axil-title {
+          color: #f3f6fa !important;
+        }
+
+        .contact-form-card .contact-form-note {
+          color: #b9c4cf;
+        }
+
+        .contact-form-card .axil-contact-form input,
+        .contact-form-card .axil-contact-form textarea,
+        .contact-form-card .axil-contact-form .form-control {
+          background: #0a0d12 !important;
+          color: #eef2f6 !important;
+          border: 1px solid rgba(212, 175, 55, 0.5) !important;
+          border-radius: 8px;
           padding: 12px 15px;
         }
-        
-        .axil-contact-form input::placeholder,
-        .axil-contact-form textarea::placeholder {
-          color: #ccc !important;
+
+        .contact-form-card .axil-contact-form input::placeholder,
+        .contact-form-card .axil-contact-form textarea::placeholder {
+          color: #a3afbc !important;
           opacity: 1 !important;
         }
-        
-        .axil-contact-form input:focus,
-        .axil-contact-form textarea:focus,
-        .axil-contact-form .form-control:focus {
-          background: #000 !important;
-          color: #fff !important;
-          border-color: #D4AF37 !important;
+
+        .contact-form-card .axil-contact-form input:focus,
+        .contact-form-card .axil-contact-form textarea:focus,
+        .contact-form-card .axil-contact-form .form-control:focus {
+          background: #0a0d12 !important;
+          color: #eef2f6 !important;
+          border-color: #d4af37 !important;
           box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
           outline: none;
         }
-        
-        .axil-contact-form label {
-          color: #fff !important;
+
+        .contact-form-card .axil-contact-form label {
+          color: #e3e8ee !important;
         }
       `}</style>
     </div>

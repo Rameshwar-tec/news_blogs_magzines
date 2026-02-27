@@ -5,12 +5,24 @@ const PostComment = () => {
   return (
     <div className="post-comment-area">
       <style jsx global>{`
+        .post-comment-area .comment-box h2 {
+          color: #f1f5fa !important;
+          font-size: clamp(2.2rem, 3vw, 3rem);
+          margin-bottom: 0.5rem;
+        }
+
+        .post-comment-area .comment-box p {
+          color: #b9c5d2 !important;
+          font-size: 1.5rem;
+          line-height: 2.4rem;
+        }
+
         .comment-form input[type="text"],
         .comment-form input[type="email"],
         .comment-form textarea {
           color: #ffffff !important;
-          background: #000000 !important;
-          border-color: #D4AF37 !important;
+          background: #0a0d12 !important;
+          border-color: rgba(212, 175, 55, 0.75) !important;
           border-width: 1px !important;
         }
         .comment-form input[type="text"]::placeholder,
@@ -23,8 +35,9 @@ const PostComment = () => {
         .comment-form input[type="email"]:focus,
         .comment-form textarea:focus {
           color: #ffffff !important;
-          background: #000000 !important;
+          background: #0a0d12 !important;
           border-color: #D4AF37 !important;
+          box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2) !important;
         }
         .comment-form .form-group label {
           color: #ffffff !important;
@@ -36,7 +49,7 @@ const PostComment = () => {
           z-index: -1 !important;
         }
         .comment-form .form-group.focused label {
-          background: #000000 !important;
+          background: #0a0d12 !important;
           color: #D4AF37 !important;
           opacity: 1 !important;
           z-index: 10 !important;
@@ -45,6 +58,10 @@ const PostComment = () => {
         .comment-form .form-group.focused textarea::placeholder {
           opacity: 0 !important;
           color: transparent !important;
+        }
+
+        .post-comment-area .comment-form .btn.btn-primary {
+          min-width: 170px;
         }
       `}</style>
       <div className="comment-box">

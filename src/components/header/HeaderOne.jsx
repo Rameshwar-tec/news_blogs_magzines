@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { client } from "../../client";
@@ -15,6 +15,8 @@ const HeaderOne = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
+  const searchFormRef = useRef(null);
+  const searchToggleRef = useRef(null);
   const router = useRouter();
 
   // Mobile Menu
@@ -63,6 +65,28 @@ const HeaderOne = () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, []);
+
+  useEffect(() => {
+    if (!searchshow) return;
+
+    const handleSearchOutsideClick = (e) => {
+      const target = e.target;
+      if (!(target instanceof Element)) return;
+
+      const clickedInsideSearch = searchFormRef.current?.contains(target);
+      const clickedSearchToggle = searchToggleRef.current?.contains(target);
+      const clickedSuggestion = target.closest(".search-suggestions-dropdown");
+
+      if (!clickedInsideSearch && !clickedSearchToggle && !clickedSuggestion) {
+        headerSearchClose();
+      }
+    };
+
+    document.addEventListener("mousedown", handleSearchOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleSearchOutsideClick);
+    };
+  }, [searchshow]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -894,6 +918,7 @@ const HeaderOne = () => {
               {/* Search and Mobile Menu */}
               <div className="navbar-extra-features">
                 <form
+                  ref={searchFormRef}
                   onSubmit={handleSearch}
                   className={`navbar-search ${
                     searchshow ? "show-nav-search" : ""
@@ -920,6 +945,7 @@ const HeaderOne = () => {
                 </form>
 
                 <button
+                  ref={searchToggleRef}
                   className="nav-search-field-toggler"
                   onClick={headerSearchShow}
                 >

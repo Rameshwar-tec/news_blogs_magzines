@@ -85,19 +85,24 @@ const Magazines = () => {
           >
             <p
               style={{
-                fontSize: "4rem",
-                fontWeight: "bolder",
+                fontSize: "clamp(2.5rem, 5vw, 4rem)",
+                fontWeight: 700,
                 marginBottom: "1rem",
                 color: "white",
+                fontFamily: "var(--primary-font)",
+                lineHeight: 1.2,
               }}
             >
               ADVERTISE WITH US
             </p>
             <p
               style={{
-                fontSize: "2rem",
-                fontWeight: "lighter",
+                fontSize: "1.4rem",
+                fontWeight: 400,
                 color: "white",
+                fontFamily: "var(--secondary-font)",
+                lineHeight: "2.4rem",
+                maxWidth: "980px",
               }}
             >
               Welcome to The Entrepreneurial Chronicles Magazine, where we
@@ -111,18 +116,18 @@ const Magazines = () => {
         </div>
 
         <div className="container mt-5">
-          <h3 className="mb-4">Website Placement Advertise :</h3>
-          <p className="mb-3">
+          <h3 className="mb-4 advertise-heading">Website Placement Advertise :</h3>
+          <p className="mb-3 advertise-copy">
             A wise businessman once said, &quot;The toothpaste you use to the
             shiny shoes you wear to the car you drive to the bed you sleep in is
             advertised,&quot; and adding to that we say, &quot;and you, my
             friend are afraid to advertise with us!&quot;
           </p>
-          <p className="mb-3">
+          <p className="mb-3 advertise-copy">
             Being a magazine that strives to bring new age businesses to light,
             it makes a perfect hub of new blood in the market to recognise you!
           </p>
-          <p className="mb-4">
+          <p className="mb-4 advertise-copy">
             Advertise with us and connect yourself with the brand leaders of the
             paradigm shift in the business world.
           </p>
@@ -138,8 +143,8 @@ const Magazines = () => {
               />
             </div>
           </div>
-          <h3 className="mb-4 mt-5">Digital Magazine Placement Advertise :</h3>
-          <p className="mb-3">
+          <h3 className="mb-4 mt-5 advertise-heading">Digital Magazine Placement Advertise :</h3>
+          <p className="mb-3 advertise-copy">
             The space and dimension of the Ad on the print and digital platforms
             are mentioned below.
           </p>
@@ -184,6 +189,36 @@ const Magazines = () => {
         </div>
       </div>
       <FooterTwo />
+      <style jsx>{`
+        .advertise-heading {
+          color: #f2f5f8;
+          font-family: var(--primary-font);
+          font-size: 2.4rem;
+          line-height: 3.6rem;
+          font-weight: 600;
+        }
+
+        .advertise-copy {
+          color: #c2ccd8;
+          font-family: var(--secondary-font);
+          font-size: 1.4rem;
+          line-height: 2.4rem;
+          font-weight: 400;
+          max-width: 980px;
+        }
+
+        @media (max-width: 991px) {
+          .advertise-heading {
+            font-size: 2rem;
+            line-height: 3rem;
+          }
+
+          .advertise-copy {
+            font-size: 1.2rem;
+            line-height: 2rem;
+          }
+        }
+      `}</style>
     </>
   );
 };
