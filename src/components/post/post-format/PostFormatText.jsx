@@ -155,8 +155,20 @@ const PostFormatText = ({ postData, allData }) => {
 
           .post-detail-page .post-shares li a {
             border-radius: 8px;
-            min-width: 52px;
+            width: 46px;
+            height: 46px;
+            min-width: 46px;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
             justify-content: center;
+          }
+
+          .post-detail-page .post-shares li a i {
+            display: block;
+            line-height: 1;
+            margin: 0;
+            transform: translateY(0);
           }
 
           .post-detail-page hr {

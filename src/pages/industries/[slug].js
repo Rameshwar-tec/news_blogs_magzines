@@ -18,13 +18,14 @@ const fetchIndustryPostsByIndustry = async (industrySlug) => {
       slug,
       altText,
       publishedAt,
+      _updatedAt,
       'featureImg': mainImage.asset->url,
       description,
       'category': {
         'title': industryCategory->title,
         'slug': industryCategory->slug.current
       }
-    } | order(publishedAt desc)
+    } | order(coalesce(publishedAt, _updatedAt) desc, _updatedAt desc)
   `;
 
   return client.fetch(query, { industrySlug });
@@ -61,13 +62,12 @@ const IndustryPosts = () => {
   return (
     <>
       <HeadMeta metaTitle={categoryTitle} />
-
       <HeaderOne />
 
-      <div className="blogs-container">
-        <div className="blogs-top-row">
+      <div className="industry-page-container">
+        <div className="industry-top-row">
           <div className="featured-articles-section">
-            <h4 className="section-title">Featured Articles</h4>
+            <h4 className="page-section-title">Featured Articles</h4>
             <div className="featured-articles-grid">
               {isLoading ? (
                 <div className="loader-container">
@@ -78,7 +78,7 @@ const IndustryPosts = () => {
               ) : !data || data.length === 0 ? (
                 <div className="error-alert">No posts found.</div>
               ) : (
-                data?.slice(0, 3).map((post, index) => (
+                data.slice(0, 3).map((post, index) => (
                   <div
                     key={post?.slug?.current || index}
                     className={`featured-article-card ${isVisible ? "animate-in" : ""}`}
@@ -96,7 +96,7 @@ const IndustryPosts = () => {
                     </div>
                     <div className="featured-article-content">
                       <h6 className="featured-article-title">{post.title}</h6>
-                      <span className="read-more-link">Read More →</span>
+                      <span className="read-more-link">Read More &rarr;</span>
                     </div>
                   </div>
                 ))
@@ -105,7 +105,7 @@ const IndustryPosts = () => {
           </div>
 
           <div className="latest-articles-section">
-            <h4 className="section-title">Latest Articles</h4>
+            <h4 className="page-section-title">Latest Articles</h4>
             <div className="latest-articles-grid">
               {isLoading ? (
                 <div className="loader-container">
@@ -140,7 +140,7 @@ const IndustryPosts = () => {
           </div>
         </div>
 
-        <div className="blogs-bottom-row">
+        <div className="industry-bottom-row">
           <div className="remaining-articles-section">
             <div className="remaining-articles-grid">
               {isLoading ? (
@@ -177,11 +177,11 @@ const IndustryPosts = () => {
 
           <div className="sidebar-section">
             <div className={`sidebar-widget ${isVisible ? "animate-in" : ""}`} style={{ animationDelay: "0.2s" }}>
-              <h4 className="section-title">Subscribe To Our Weekly Newsletter</h4>
+              <h4 className="widget-title">Subscribe To Our Weekly Newsletter</h4>
               <WidgetNewsletter />
             </div>
             <div className={`sidebar-widget ${isVisible ? "animate-in" : ""}`} style={{ animationDelay: "0.3s" }}>
-              <h4 className="section-title">Social Share</h4>
+              <h4 className="widget-title">Social Share</h4>
               <WidgetSocialShare />
             </div>
           </div>
@@ -191,21 +191,24 @@ const IndustryPosts = () => {
       <FooterTwo />
 
       <style jsx>{`
-        .blogs-container {
+        .industry-page-container {
           width: 100%;
-          padding: 2rem 1rem;
-          background-color: #000000ff;
+          max-width: 100%;
+          margin: 0;
+          padding: 2rem 10px;
+          background-color: #070a0e;
           min-height: 100vh;
         }
 
-        .section-title {
-          color: #fff;
+        .page-section-title {
+          color: #f3f5f7;
           font-weight: 600;
           margin-bottom: 1.5rem;
-          font-size: clamp(1.25rem, 2vw, 1.5rem);
+          font-size: 2.8rem;
+          line-height: 3.8rem;
         }
 
-        .blogs-top-row {
+        .industry-top-row {
           display: grid;
           grid-template-columns: 1fr;
           gap: 2rem;
@@ -220,12 +223,12 @@ const IndustryPosts = () => {
 
         .featured-article-card {
           display: flex;
-          background: #000000ff;
+          background: linear-gradient(180deg, #0d1116 0%, #090c11 100%);
           border-radius: 12px;
           overflow: hidden;
           cursor: pointer;
           transition: transform 0.3s ease, box-shadow 0.3s ease;
-          border: none;
+          border: 1px solid rgba(255, 255, 255, 0.08);
           min-height: 100px;
           opacity: 0;
           transform: translateX(-50px);
@@ -237,7 +240,7 @@ const IndustryPosts = () => {
 
         .featured-article-card:hover {
           transform: translateY(-2px) scale(1.02);
-          box-shadow: 0 8px 25px rgba(0, 123, 255, 0.15);
+          box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
         }
 
         @keyframes slideInFromLeft {
@@ -271,20 +274,20 @@ const IndustryPosts = () => {
         }
 
         .featured-article-title {
-          font-size: clamp(1.6rem, 1.5vw, 1.1rem);
+          font-size: 1.8rem;
           font-weight: 600;
-          color: #fff;
+          color: #e8edf3;
           display: -webkit-box;
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
           overflow: hidden;
-          line-height: 1.3;
+          line-height: 2.6rem;
           margin: 0;
         }
 
         .read-more-link {
-          color: #007bff;
-          font-size: 0.8rem;
+          color: #d7c08a;
+          font-size: 1.3rem;
           font-weight: 500;
           margin-top: 0.5rem;
         }
@@ -296,12 +299,12 @@ const IndustryPosts = () => {
         }
 
         .latest-article-card {
-          background: #000000ff;
+          background: linear-gradient(180deg, #0d1116 0%, #090c11 100%);
           border-radius: 12px;
           overflow: hidden;
           cursor: pointer;
           transition: transform 0.3s ease, box-shadow 0.3s ease;
-          border: none;
+          border: 1px solid rgba(255, 255, 255, 0.08);
           display: flex;
           flex-direction: column;
           height: 350px;
@@ -315,7 +318,7 @@ const IndustryPosts = () => {
 
         .latest-article-card:hover {
           transform: translateY(-5px) scale(1.02);
-          box-shadow: 0 12px 30px rgba(0, 123, 255, 0.2);
+          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.36);
         }
 
         @keyframes slideInFromTop {
@@ -349,18 +352,18 @@ const IndustryPosts = () => {
         }
 
         .latest-article-title {
-          font-size: clamp(1.6rem, 1.5vw, 1.1rem);
+          font-size: 1.8rem;
           font-weight: 600;
-          color: #fff;
+          color: #e8edf3;
           display: -webkit-box;
           -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
           overflow: hidden;
-          line-height: 1.4;
+          line-height: 2.6rem;
           margin: 0;
         }
 
-        .blogs-bottom-row {
+        .industry-bottom-row {
           display: grid;
           grid-template-columns: 1fr;
           gap: 3rem;
@@ -373,12 +376,12 @@ const IndustryPosts = () => {
         }
 
         .remaining-article-card {
-          background: #000000ff;
+          background: linear-gradient(180deg, #0d1116 0%, #090c11 100%);
           border-radius: 12px;
           overflow: hidden;
           cursor: pointer;
           transition: transform 0.3s ease, box-shadow 0.3s ease;
-          border: none;
+          border: 1px solid rgba(255, 255, 255, 0.08);
           height: 300px;
           opacity: 0;
           transform: translateY(30px);
@@ -390,7 +393,7 @@ const IndustryPosts = () => {
 
         .remaining-article-card:hover {
           transform: translateY(-5px) scale(1.02);
-          box-shadow: 0 12px 30px rgba(0, 123, 255, 0.2);
+          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.36);
         }
 
         @keyframes slideInFromBottom {
@@ -420,14 +423,14 @@ const IndustryPosts = () => {
         }
 
         .remaining-article-title {
-          font-size: clamp(1.6rem, 1.5vw, 1rem);
+          font-size: 1.8rem;
           font-weight: 600;
-          color: #fff;
+          color: #e8edf3;
           display: -webkit-box;
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
           overflow: hidden;
-          line-height: 1.3;
+          line-height: 2.6rem;
           margin: 0;
         }
 
@@ -438,7 +441,8 @@ const IndustryPosts = () => {
         }
 
         .sidebar-widget {
-          background: #000000ff;
+          background: linear-gradient(180deg, #0d1116 0%, #090c11 100%);
+          border: 1px solid rgba(255, 255, 255, 0.08);
           padding: 1.5rem;
           border-radius: 12px;
           opacity: 0;
@@ -447,6 +451,14 @@ const IndustryPosts = () => {
 
         .sidebar-widget.animate-in {
           animation: slideInFromRight 0.6s ease forwards;
+        }
+
+        .widget-title {
+          color: #f3f5f7;
+          font-size: 2rem;
+          line-height: 2.8rem;
+          font-weight: 600;
+          margin-bottom: 1rem;
         }
 
         @keyframes slideInFromRight {
@@ -468,7 +480,7 @@ const IndustryPosts = () => {
         }
 
         .error-alert {
-          color: #dc3545;
+          color: #ff9b9b;
           background: rgba(220, 53, 69, 0.1);
           padding: 1rem;
           border-radius: 8px;
@@ -476,34 +488,14 @@ const IndustryPosts = () => {
           border: 1px solid rgba(220, 53, 69, 0.3);
         }
 
-        @media (max-width: 991px) {
-          .blogs-container {
-            padding-left: 1rem;
-            padding-right: 1rem;
-          }
-
-          .latest-articles-grid,
-          .remaining-articles-grid {
-            grid-template-columns: 1fr;
-            justify-items: stretch;
-          }
-
-          .featured-articles-grid {
-            align-items: stretch;
-          }
-
-          .featured-article-card,
-          .latest-article-card,
-          .remaining-article-card {
-            width: 100%;
-            max-width: 100%;
-            justify-self: stretch;
-          }
-        }
-
         @media (min-width: 768px) {
-          .blogs-container {
-            padding: 2rem 1.5rem;
+          .industry-page-container {
+            padding: 2rem 14px;
+          }
+
+          .page-section-title {
+            font-size: 2.6rem;
+            line-height: 3.4rem;
           }
 
           .latest-articles-grid {
@@ -516,16 +508,16 @@ const IndustryPosts = () => {
         }
 
         @media (min-width: 1024px) {
-          .blogs-container {
-            padding: 2rem 2rem;
+          .industry-page-container {
+            padding: 2rem 14px;
           }
 
-          .blogs-top-row {
+          .industry-top-row {
             grid-template-columns: 1fr 2fr;
             gap: 3rem;
           }
 
-          .blogs-bottom-row {
+          .industry-bottom-row {
             grid-template-columns: 2fr 1fr;
             gap: 3rem;
           }
@@ -552,10 +544,8 @@ const IndustryPosts = () => {
         }
 
         @media (min-width: 1440px) {
-          .blogs-container {
-            padding: 2rem 3rem;
-            max-width: 1400px;
-            margin: 0 auto;
+          .industry-page-container {
+            padding: 2rem 18px;
           }
 
           .featured-article-image {
@@ -576,9 +566,13 @@ const IndustryPosts = () => {
         }
 
         @media (max-width: 767px) {
-          .blogs-container {
-            padding-left: 1rem;
-            padding-right: 1rem;
+          .industry-page-container {
+            padding: 1rem 10px;
+          }
+
+          .page-section-title {
+            font-size: 2.3rem;
+            line-height: 3.1rem;
           }
 
           .featured-article-card {
@@ -593,6 +587,13 @@ const IndustryPosts = () => {
 
           .featured-article-content {
             padding: 0.75rem;
+          }
+
+          .featured-article-title,
+          .latest-article-title,
+          .remaining-article-title {
+            font-size: 1.6rem;
+            line-height: 2.3rem;
           }
 
           .latest-articles-grid {
@@ -616,12 +617,16 @@ const IndustryPosts = () => {
           .sidebar-widget {
             padding: 1rem;
           }
+
+          .widget-title {
+            font-size: 2rem;
+            line-height: 2.7rem;
+          }
         }
 
         @media (max-width: 480px) {
-          .blogs-container {
-            padding-left: 0.9rem;
-            padding-right: 0.9rem;
+          .industry-page-container {
+            padding: 0.5rem 10px;
           }
 
           .featured-article-image {
@@ -640,8 +645,10 @@ const IndustryPosts = () => {
             height: 140px;
           }
 
-          .section-title {
+          .page-section-title {
             margin-bottom: 1rem;
+            font-size: 2rem;
+            line-height: 2.7rem;
           }
         }
       `}</style>
