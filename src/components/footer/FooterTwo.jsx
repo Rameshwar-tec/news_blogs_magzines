@@ -229,8 +229,10 @@ const FooterTwo = () => {
 
       <style jsx>{`
         .ecf-root {
-          background: #090d13;
-          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          background:
+            radial-gradient(120% 140% at 0% 0%, rgba(212, 175, 55, 0.14) 0%, rgba(212, 175, 55, 0) 55%),
+            linear-gradient(180deg, #111822 0%, #090d13 100%);
+          border-top: 1px solid rgba(212, 175, 55, 0.34);
           margin-top: 30px;
         }
 
