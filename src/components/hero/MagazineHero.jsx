@@ -132,7 +132,7 @@ const MagazineHero = () => {
               if (Math.abs(position) > 4) return null;
               
               // Use progressive offsets so edge cards don't drift too far from neighbors
-              const offsetMap = [0, 150, 280, 390, 480];
+              const offsetMap = [0, 175, 325, 455, 565];
               const offset = (position < 0 ? -1 : 1) * offsetMap[Math.abs(position)];
               const scale = isCenter ? 1.0 : Math.max(0.2, 1.0 - Math.abs(position) * 0.2); // Progressive scaling: 100%, 80%, 60%, 40%, 20%
               const opacity = isCenter ? 1.0 : Math.max(0.2, 1.0 - Math.abs(position) * 0.2); // Progressive opacity: 100%, 80%, 60%, 40%, 20%
@@ -213,8 +213,8 @@ const MagazineHero = () => {
           overflow: hidden;
           background: transparent;
           box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-          width: 280px;
-          height: 380px;
+          width: 330px;
+          height: 450px;
           margin: 0;
           padding: 0;
           border: none;
@@ -249,6 +249,20 @@ const MagazineHero = () => {
         .magazine-card * {
           border: none !important;
           outline: none !important;
+        }
+
+        @media (max-width: 991px) {
+          .magazine-card {
+            width: 280px;
+            height: 390px;
+          }
+        }
+
+        @media (max-width: 767px) {
+          .magazine-card {
+            width: 240px;
+            height: 340px;
+          }
         }
       `}</style>
     </>
