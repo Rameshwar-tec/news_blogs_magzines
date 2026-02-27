@@ -35,8 +35,8 @@ const LogoSlider = ({ title = "Our Partner Brands", showTitle = true, wrapperCla
   ];
 
   return (
-    <div className={`container my-5 ${wrapperClassName}`.trim()}>
-      {showTitle ? <h2 className="text-center mb-4">{title}</h2> : null}
+    <div className={`container my-5 logo-slider-section ${wrapperClassName}`.trim()}>
+      {showTitle ? <h2 className="text-center mb-4" style={{ color: "#eef2f6" }}>{title}</h2> : null}
       <div className="row">
         <div className="col">
           <div className="logo-slider">
@@ -65,6 +65,9 @@ const LogoSlider = ({ title = "Our Partner Brands", showTitle = true, wrapperCla
           position: relative;
           overflow: hidden;
           padding: 10px 0;
+          background: linear-gradient(180deg, #0b0f14 0%, #090c11 100%);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 12px;
         }
         .logo-slide-track {
           display: flex;
@@ -80,16 +83,14 @@ const LogoSlider = ({ title = "Our Partner Brands", showTitle = true, wrapperCla
           justify-content: center;
         }
         .logo-container {
-          // background: #fff;
-          // padding: 10px 15px;
-          // border-radius: 6px;
-          // box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-          // display: flex;
-          // align-items: center;
-          // justify-content: center;
-          // height: 60px;
-          // width: 150px;
-          // border: 1px solid #e0e0e0;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.07);
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 60px;
+          width: 150px;
         }
         @keyframes scroll {
           0% {

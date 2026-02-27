@@ -111,7 +111,7 @@ const MagazineHero = () => {
 
 
   if (isLoading) return <Loader />;
-  if (error) return <div>Error loading magazines</div>;
+  if (error) return <div style={{ color: "#f3f5f7" }}>Error loading magazines</div>;
 
   return (
     <>

@@ -57,7 +57,50 @@ const Magazines = () => {
 
       <HeaderOne />
 
-      <div style={{ width: "100%", minHeight: "100vh", background: "#000" }}>
+      <div className="magazines-page" style={{ width: "100%", minHeight: "100vh", background: "#070A0E", color: "#DCE2EA" }}>
+        <style jsx global>{`
+          .magazines-page .magazines-search {
+            width: 100%;
+            max-width: 640px;
+            background: #0d1116;
+            color: #e8edf3;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            outline: none;
+            padding: 12px 16px;
+            border-radius: 10px;
+          }
+
+          .magazines-page .magazines-search::placeholder {
+            color: #8f98a3;
+          }
+
+          .magazines-page .year-chip {
+            width: 30%;
+            max-width: 40rem;
+            min-width: 220px;
+            height: 6rem;
+            border-radius: 10rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(180deg, #111720 0%, #0b1018 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+          }
+
+          .magazines-page .year-chip h2 {
+            font-size: 2.2rem;
+            margin: 0;
+            color: #e4c46d;
+            font-weight: 700;
+          }
+
+          .magazines-page .no-magazines {
+            color: #b8c1cc;
+            text-align: center;
+            width: 100%;
+          }
+        `}</style>
         {/* Simple local search (magazine titles only) */}
         <div style={{
           display: 'flex',
@@ -65,21 +108,12 @@ const Magazines = () => {
           padding: '2rem 1rem 0',
         }}>
           <input
+            className="magazines-search"
             type="text"
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
             placeholder="Search magazines by name..."
             aria-label="Search magazines by name"
-            style={{
-              width: '100%',
-              maxWidth: '640px',
-              background: '#000',
-              color: '#fff',
-              border: '1px solid #333',
-              outline: 'none',
-              padding: '12px 16px',
-              borderRadius: '8px',
-            }}
           />
         </div>
         {/* Hero / Text Section */}
@@ -137,28 +171,8 @@ const Magazines = () => {
             margin: "2rem 0",
           }}
         >
-          <div
-            style={{
-              width: "30%",
-              maxWidth: "40rem",
-              height: "6rem",
-              borderRadius: "10rem",
-              boxShadow:
-                "rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "#101820", // optional contrast
-            }}
-          >
-            <h2
-              style={{
-                fontSize: "2.2rem",
-                margin: 0,
-                color: "#ae8625", // golden color for visibility
-                fontWeight: "bold",
-              }}
-            >
+          <div className="year-chip">
+            <h2>
               {new Date().getFullYear()}
             </h2>
           </div>
@@ -180,13 +194,7 @@ const Magazines = () => {
               <PostLayoutformag data={post} key={index} />
             ))
           ) : (
-            <p
-              style={{
-                color: "white",
-                textAlign: "center",
-                width: "100%",
-              }}
-            >
+            <p className="no-magazines">
               No magazines found.
             </p>
           )}

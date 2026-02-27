@@ -5,7 +5,7 @@ import { client, urlFor } from "../../client";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../common/Loader";
 
-const WidgetCategory = () => {
+const WidgetCategory = ({ showTitle = true }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const categoriesPerPage = 4;
 
@@ -37,24 +37,24 @@ const WidgetCategory = () => {
   return (
     <div className="category-widget mb-4">
       <div className="d-flex justify-content-between align-items-center mb-3">
-        <h3 className="h4 mb-0">Categories</h3>
+        {showTitle ? <h3 className="h4 mb-0 category-title">Categories</h3> : <div />}
 
         <div className="owl-nav">
           <button
             className="custom-owl-prev"
             onClick={prevSlide}
             disabled={currentSlide === 0}
-            style={{ color: '#000' }}
+            aria-label="Previous categories"
           >
-            <i className="feather icon-chevron-left" style={{ color: '#000' }}></i>
+            <i className="feather icon-chevron-left"></i>
           </button>
           <button
             className="custom-owl-next"
             onClick={nextSlide}
             disabled={currentSlide === totalSlides}
-            style={{ color: '#000' }}
+            aria-label="Next categories"
           >
-            <i className="feather icon-chevron-right" style={{ color: '#000' }}></i>
+            <i className="feather icon-chevron-right"></i>
           </button>
         </div>
       </div>
@@ -109,9 +109,31 @@ const WidgetCategory = () => {
         </div>
       </div>
       <style jsx>{`
+        .category-title {
+          color: #e9edf2;
+        }
+
+        .category-widget .owl-nav button.custom-owl-prev,
+        .category-widget .owl-nav button.custom-owl-next {
+          background-color: rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(255, 255, 255, 0.14);
+        }
+
         .category-widget .owl-nav button.custom-owl-prev i,
         .category-widget .owl-nav button.custom-owl-next i {
-          color: #000 !important;
+          color: #d7dde5 !important;
+        }
+
+        .category-widget .owl-nav button.custom-owl-prev:hover,
+        .category-widget .owl-nav button.custom-owl-next:hover {
+          background-color: rgba(212, 175, 55, 0.22);
+          border-color: rgba(212, 175, 55, 0.45);
+        }
+
+        .category-widget .owl-nav button.custom-owl-prev:disabled,
+        .category-widget .owl-nav button.custom-owl-next:disabled {
+          opacity: 0.45;
+          cursor: not-allowed;
         }
       `}</style>
     </div>

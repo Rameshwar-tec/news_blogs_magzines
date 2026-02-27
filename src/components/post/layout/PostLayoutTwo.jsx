@@ -30,12 +30,12 @@ const PostLayoutTwo = ({ data, postSizeMd, postBgDark }) => {
             {data.category?.title}
           </Link>
         </div>
-        <h3 className="axil-post-title hover-line hover-line">
+        <h3 className="axil-post-title hover-line hover-line color-white" style={{ color: "#f3f5f7" }}>
           <Link href={`/post/${data.slug.current}`}>{data.title}</Link>
         </h3>
 
         {postSizeMd === true ? (
-          <p className="mid hide-in-small-devices">
+          <p className="mid hide-in-small-devices" style={{ color: "#b8bec6" }}>
             {data?.description && data.description.length > 50
               ? `${data.description.slice(0, 100)}...`
               : data.description}

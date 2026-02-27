@@ -118,8 +118,8 @@ const SliderOne = () => {
   };
 
   return (
-    <div className="banner banner__home-with-slider banner__home-with-slider-one section-gap-bottom" style={{
-      background: '#000000',
+    <div className="banner banner__home-with-slider banner__home-with-slider-one section-gap-bottom slider-one-section" style={{
+      background: '#070A0E',
       position: 'relative',
       overflow: 'hidden',
       borderTop: 'none',
@@ -201,8 +201,8 @@ const SliderOne = () => {
                         fontSize: 'clamp(2.5rem, 5vw, 4rem)',
                         fontWeight: '800',
                         lineHeight: '1.2',
-                        color: '#ffffff',
-                        textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
+                        color: '#f3f5f7',
+                        textShadow: '1px 1px 2px rgba(0,0,0,0.45)',
                         marginBottom: '2rem'
                       }}>
                         <Link href={`/magazine/${data.slug?.current || data.slug}`} style={{ 
@@ -222,6 +222,7 @@ const SliderOne = () => {
                           style={{
                             background: 'linear-gradient(45deg, #ae8625, #f4d03f)',
                             border: 'none',
+                            color: '#111315',
                             padding: '1rem 2rem',
                             borderRadius: '50px',
                             fontWeight: '600',
@@ -238,8 +239,8 @@ const SliderOne = () => {
                           className="btn btn-outline-light"
                           href="/magazines"
                           style={{
-                            border: '2px solid #ae8625',
-                            color: '#ae8625',
+                            border: '2px solid #7d6831',
+                            color: '#d7c08a',
                             padding: '1rem 2rem',
                             borderRadius: '50px',
                             fontWeight: '600',
@@ -428,6 +429,17 @@ const SliderOne = () => {
 
         </div>
       </div>
+      <style jsx global>{`
+        .slider-one-section .page-title a {
+          color: #f3f5f7 !important;
+        }
+
+        .slider-one-section .btn-outline-light:hover {
+          background: #d4af37 !important;
+          color: #111315 !important;
+          border-color: #d4af37 !important;
+        }
+      `}</style>
     </div>
   );
 };

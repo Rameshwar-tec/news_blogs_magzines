@@ -7,6 +7,20 @@ import LoadingPage from "../components/common/LoadingPage";
 import ScrollToTop from "../components/common/ScrollToTop";
 import { useState, useEffect } from "react";
 import Script from "next/script";
+import { Inter, Merriweather } from "next/font/google";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const merriweather = Merriweather({
+  subsets: ["latin"],
+  variable: "--font-merriweather",
+  weight: ["400", "700"],
+  display: "swap",
+});
 
 const queryClient = new QueryClient(); // Create a query client instance
 
@@ -23,7 +37,10 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   return (
-    <div style={{ background: '#000', color: '#fff', minHeight: '100vh' }}>
+    <div
+      className={`${inter.variable} ${merriweather.variable}`}
+      style={{ background: '#000', color: '#fff', minHeight: '100vh' }}
+    >
       <QueryClientProvider client={queryClient}>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-JVLEYSXEX7"

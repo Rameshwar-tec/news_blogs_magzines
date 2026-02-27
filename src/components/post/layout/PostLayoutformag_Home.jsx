@@ -8,9 +8,10 @@ const PostLayoutformag_Home = ({ data }) => {
         <div
           style={{
             padding: "10px", // adjust padding as needed
-            border: "3px solid #ccc", // adjust the border style and color
+            background: "linear-gradient(180deg, #0d1116 0%, #090c11 100%)",
+            border: "1px solid rgba(255, 255, 255, 0.08)",
             borderRadius: "8px", // adjust border radius for rounded corners
-            boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)", // add a subtle shadow
+            boxShadow: "0 8px 20px rgba(0, 0, 0, 0.25)", // add a subtle shadow
             overflow: "hidden",
             margin: "2rem",
           }}
@@ -30,13 +31,13 @@ const PostLayoutformag_Home = ({ data }) => {
               className="hover-line hover-line"
               style={{
                 fontSize: "1.3rem",
-                color: "#101820",
+                color: "#e8edf3",
                 textDecoration: "none",
                 marginTop: "2rem",
                 padding: "0",
               }}
             >
-              <span style={{ color: "#101820", textDecoration: "none" }}>
+              <span style={{ color: "#e8edf3", textDecoration: "none" }}>
                 {data.title}
               </span>
             </h4>

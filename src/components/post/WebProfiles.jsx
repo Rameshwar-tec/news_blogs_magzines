@@ -11,26 +11,32 @@ const WebProfiles = () => {
   const [selectedProfile, setSelectedProfile] = useState(0);
   
   const query = `
-*[_type == "post" && categories[0]._ref == *[_type == "category" && slug.current == "web-profiles"][0]._id] 
+*[
+  _type == "post" &&
+  "web-profiles" in categories[]->slug.current
+]
  {
     title,
     slug,
     'featureImg': mainImage.asset->url,
      'category': {
-    'title': categories[0]->title,
+    'title': "Web Profiles",
     altText,
-    'slug': categories[0]->slug.current,
+    'slug': "web-profiles",
     },
-    publishedAt
+    publishedAt,
+    _updatedAt
 
-} | order(publishedAt desc)[0...5] 
+} | order(coalesce(publishedAt, _updatedAt) desc, _updatedAt desc)[0...5]
 `;
   const { data, isLoading, error } = useQuery({
-    queryKey: ["web-profiles"],
+    queryKey: ["web-profiles-home"],
     queryFn: async () => {
       const response = await client.fetch(query);
       return response;
     },
+    refetchOnMount: "always",
+    refetchOnWindowFocus: true,
   });
 
   if (isLoading) return <Loader />;
@@ -38,55 +44,15 @@ const WebProfiles = () => {
 
   if (!data) return null;
 
-  // Reorder data: Magnolia Yace first, Devang Raja second, Aanchal Gupta third
-  const reorderedData = [...data];
-  
-  // Find and extract items
-  const magnoliaItem = reorderedData.find(item => 
-    item.title.toLowerCase().includes('magnolia') || 
-    item.title.toLowerCase().includes('yace')
-  );
-  
-  const devangItem = reorderedData.find(item => 
-    item.title.toLowerCase().includes('devang') || 
-    item.title.toLowerCase().includes('raja')
-  );
-  
-  const anchelItem = reorderedData.find(item => 
-    item.title.toLowerCase().includes('anchel') || 
-    item.title.toLowerCase().includes('aanchal') ||
-    item.title.toLowerCase().includes('gupta')
-  );
-  
-  // Remove found items from array
-  if (magnoliaItem) {
-    const index = reorderedData.indexOf(magnoliaItem);
-    if (index > -1) reorderedData.splice(index, 1);
-  }
-  if (devangItem) {
-    const index = reorderedData.indexOf(devangItem);
-    if (index > -1) reorderedData.splice(index, 1);
-  }
-  if (anchelItem) {
-    const index = reorderedData.indexOf(anchelItem);
-    if (index > -1) reorderedData.splice(index, 1);
-  }
-  
-  // Insert items at the beginning in the correct order
-  const orderedItems = [];
-  if (magnoliaItem) orderedItems.push(magnoliaItem);
-  if (devangItem) orderedItems.push(devangItem);
-  if (anchelItem) orderedItems.push(anchelItem);
-  
-  // Combine ordered items with remaining items
-  reorderedData.unshift(...orderedItems);
-
   const handleProfileClick = (index) => {
     setSelectedProfile(index);
   };
 
   return (
-    <div className="axil-video-posts section-gap section-gap-top__with-text" style={{ background: '#000', color: '#fff' }}>
+    <div
+      className="axil-video-posts section-gap section-gap-top__with-text web-profiles-section"
+      style={{ background: "#070A0E", color: "#DCE2EA" }}
+    >
       <div className="container">
         <SectionTitle
           btnUrl={`/category/${data[0]?.category?.slug}`}
@@ -96,12 +62,12 @@ const WebProfiles = () => {
         />
         <div className="row">
           <div className="col-lg-8">
-            <PostVideoOne data={reorderedData[selectedProfile]} />
+            <PostVideoOne data={data[selectedProfile]} />
           </div>
           <div className="col-lg-4">
             <div className="webprofile-names-list">
               <h4 className="names-list-title">Select Profile</h4>
-              {reorderedData.map((post, index) => (
+              {data.map((post, index) => (
                 <div
                   key={index}
                   className={`name-item ${selectedProfile === index ? 'active' : ''}`}
@@ -126,7 +92,24 @@ const WebProfiles = () => {
           </div>
         </div>
         
-        <style jsx>{`
+        <style jsx global>{`
+          .web-profiles-section .axil-title {
+            color: #f3f5f7 !important;
+          }
+
+          .web-profiles-section .btn-link {
+            color: #b8c1cc !important;
+          }
+
+          .web-profiles-section .btn-link:hover {
+            color: #f3f5f7 !important;
+          }
+
+          .web-profiles-section .media-body__big .axil-post-title,
+          .web-profiles-section .media-body__big .axil-post-title a {
+            color: #eef2f6 !important;
+          }
+
           .webprofile-main-image img {
             max-width: 250px;
             max-height: 180px;
@@ -135,14 +118,15 @@ const WebProfiles = () => {
           
           .webprofile-names-list {
             padding: 20px;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            background: linear-gradient(180deg, #0e1218 0%, #0a0d12 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             height: fit-content;
           }
           
           .names-list-title {
-            color: #D4AF37;
+            color: #e4c46d;
             font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 20px;
@@ -157,7 +141,7 @@ const WebProfiles = () => {
             justify-content: space-between;
             padding: 15px 20px;
             margin-bottom: 10px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.04);
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -188,7 +172,7 @@ const WebProfiles = () => {
           }
           
           .name-item:hover {
-            background: rgba(212, 175, 55, 0.1);
+            background: rgba(212, 175, 55, 0.08);
             transform: translateX(5px);
             border-color: rgba(212, 175, 55, 0.3);
           }
@@ -206,7 +190,7 @@ const WebProfiles = () => {
           }
           
           .name-text {
-            color: #fff;
+            color: #d7dee8;
             font-size: 1rem;
             font-weight: 500;
             transition: all 0.3s ease;

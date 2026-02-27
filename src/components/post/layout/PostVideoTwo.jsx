@@ -2,11 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 const PostVideoTwo = ({ data, pClass }) => {
+  const resolvedClass =
+    typeof pClass === "string" && pClass.trim().length > 0
+      ? pClass
+      : "post-block__on-dark-bg m-b-xs-30";
+
   return (
     <div
-      className={`media post-block post-block__small ${
-        pClass ?? "post-block__on-dark-bg m-b-xs-30"
-      }`}
+      className={`media post-block post-block__small ${resolvedClass}`}
     >
       <Link className="align-self-center" href={`/post/${data.slug.current}`}>
         <Image

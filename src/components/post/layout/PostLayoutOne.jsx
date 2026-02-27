@@ -43,7 +43,7 @@ const PostLayoutOne = ({ data }) => {
           </div>
         </figure>
         <div className="media-body" style={{ marginTop: 4 }}>
-          <h3 className="axil-post-title hover-line hover-line">
+          <h3 className="axil-post-title hover-line hover-line color-white" style={{ color: "#f3f5f7" }}>
             <Link href={`/post/${data?.slug.current}`}>{data?.title}</Link>
           </h3>
         </div>

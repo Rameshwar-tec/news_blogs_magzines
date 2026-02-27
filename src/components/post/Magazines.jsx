@@ -39,7 +39,30 @@ const Magazines = () => {
   if (!data) return null;
 
   return (
-    <div className="related-post mt-4">
+    <div className="related-post mt-4 magazines-section" style={{ background: "#070A0E", color: "#DCE2EA" }}>
+      <style jsx global>{`
+        .magazines-section .axil-title {
+          color: #f3f5f7 !important;
+        }
+
+        .magazines-section .btn-link {
+          color: #b8c1cc !important;
+        }
+
+        .magazines-section .btn-link:hover {
+          color: #f3f5f7 !important;
+        }
+
+        .magazines-section .splide__pagination__page {
+          background: #5d6470 !important;
+          opacity: 0.6;
+        }
+
+        .magazines-section .splide__pagination__page.is-active {
+          background: #d4af37 !important;
+          opacity: 1;
+        }
+      `}</style>
       <div className="container">
         <SectionTitle
           btnUrl={`/magazines`}

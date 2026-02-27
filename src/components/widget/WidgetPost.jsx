@@ -107,7 +107,7 @@ const WidgetPost = () => {
               webProfileData
                 .slice(0, 4)
                 .map((data, index) => (
-                  <PostVideoTwo data={data} pClass="" key={index} />
+                  <PostVideoTwo data={data} key={index} />
                 ))
             ) : (
               <p>No posts found.</p>
@@ -118,7 +118,7 @@ const WidgetPost = () => {
               marketNewsData
                 .slice(0, 4)
                 .map((data, index) => (
-                  <PostVideoTwo data={data} pClass="" key={index} />
+                  <PostVideoTwo data={data} key={index} />
                 ))
             ) : (
               <p>No posts found.</p>
@@ -129,7 +129,7 @@ const WidgetPost = () => {
               businessBulletinData
                 .slice(0, 4)
                 .map((data, index) => (
-                  <PostVideoTwo data={data} pClass="" key={index} />
+                  <PostVideoTwo data={data} key={index} />
                 ))
             ) : (
               <p>No posts found.</p>
@@ -137,6 +137,62 @@ const WidgetPost = () => {
           </Tab.Pane>
         </Tab.Content>
       </Tab.Container>
+      <style jsx>{`
+        :global(.sidebar-post-widget .nav-pills) {
+          border-color: rgba(255, 255, 255, 0.14);
+          margin-bottom: 1.25rem;
+        }
+
+        :global(.sidebar-post-widget .nav-pills .nav-item a) {
+          background: rgba(255, 255, 255, 0.03);
+          border-color: rgba(255, 255, 255, 0.12);
+          color: #b9c3cf;
+          font-size: 1.05rem;
+          letter-spacing: 0.05em;
+          padding: 0.9rem 0.5rem;
+        }
+
+        :global(.sidebar-post-widget .nav-pills .nav-item a:hover),
+        :global(.sidebar-post-widget .nav-pills .nav-item a.active) {
+          background-color: rgba(212, 175, 55, 0.2);
+          border-color: rgba(212, 175, 55, 0.42);
+          color: #f1e0b0;
+        }
+
+        :global(.sidebar-post-widget .tab-content) {
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
+          padding-top: 0.8rem;
+        }
+
+        :global(.sidebar-post-widget .post-block.post-block__small) {
+          margin-bottom: 1rem;
+          padding-bottom: 1rem;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        :global(.sidebar-post-widget .post-block.post-block__small:last-child) {
+          margin-bottom: 0;
+          padding-bottom: 0;
+          border-bottom: none;
+        }
+
+        :global(.sidebar-post-widget .post-block__on-dark-bg .axil-post-title a) {
+          color: #e7edf4;
+        }
+
+        :global(.sidebar-post-widget .post-block__on-dark-bg .axil-post-title a:hover) {
+          color: #d4af37;
+        }
+
+        :global(.sidebar-post-widget .post-block.post-block__small .bg-color-blue-one) {
+          color: #d3b46a;
+        }
+
+        :global(.sidebar-post-widget .tab-pane > p) {
+          color: #9eacbc;
+          margin: 0.5rem 0;
+        }
+      `}</style>
     </div>
   );
 };

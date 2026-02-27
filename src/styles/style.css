@@ -6,84 +6,26 @@ Date Created: Oct 14, 2022
 
 ==================================================== --*/
 
-/* Global Black Background and White Text */
-* {
-  color: #fff !important;
-}
-
+/* Base dark theme defaults (non-intrusive; component styles can override) */
+html,
 body {
-  background: #000 !important;
-  color: #fff !important;
+  background: #000;
+  color: #e6e8eb;
 }
 
-html {
-  background: #000 !important;
-}
-
-/* Ensure all text elements are white */
-h1, h2, h3, h4, h5, h6, p, span, div, a, li, td, th, label, input, textarea, select {
-  color: #fff !important;
-}
-
-/* Override any existing background colors */
-.container, .row, .col, .section, .content, .post, .article {
-  background: transparent !important;
-}
-
-/* Ensure links are visible */
 a {
-  color: #fff !important;
+  color: inherit;
 }
 
 a:hover {
-  color: #D4AF37 !important;
+  color: #d4af37;
 }
 
-/* WebProfiles Section - Fully Black */
-.axil-video-posts {
-  background: #000 !important;
-  color: #fff !important;
-}
-
-.axil-video-posts * {
-  background: transparent !important;
-  color: #fff !important;
-}
-
-.axil-video-posts .container {
-  background: transparent !important;
-}
-
-.axil-video-posts .row {
-  background: transparent !important;
-}
-
-.axil-video-posts .col-lg-8,
-.axil-video-posts .col-lg-4 {
-  background: transparent !important;
-}
-
-/* BusinessBulletin Section - Fully Black */
+/* Section-level defaults only */
+.axil-video-posts,
 .trending-stories {
-  background: #000 !important;
-  color: #fff !important;
-}
-
-.trending-stories * {
-  background: transparent !important;
-  color: #fff !important;
-}
-
-.trending-stories .container {
-  background: transparent !important;
-}
-
-.trending-stories .row {
-  background: transparent !important;
-}
-
-.trending-stories .col-lg-6 {
-  background: transparent !important;
+  background: #000;
+  color: #e6e8eb;
 }
 /*-- == Table of contents =====================
 
@@ -321,8 +263,8 @@ a:hover {
 }
 /*--Custom Variables--*/
 :root {
-  --primary-font: "Poppins", sans-serif;
-  --secondary-font: "Roboto", sans-serif;
+  --primary-font: var(--font-merriweather), Georgia, "Times New Roman", serif;
+  --secondary-font: var(--font-inter), "Segoe UI", Roboto, Arial, sans-serif;
   --font-awesome: "Font Awesome 5 Pro";
   --primary-color: #ad8523;
   --secondary-color: #ff9500;
@@ -387,6 +329,101 @@ a:hover {
   --shadow-light: 0 2px 6px 0 rgba(0, 0, 0, 0.05);
   --shadow-dark: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
   --cubic-easing: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+/* Editorial typography system */
+html,
+body {
+  font-family: var(--secondary-font);
+  font-size: 16px;
+  line-height: 1.65;
+  letter-spacing: 0.01em;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Body copy discipline */
+p,
+li,
+td,
+th,
+label,
+input,
+textarea,
+select {
+  font-family: var(--secondary-font);
+  font-weight: 400 !important;
+  line-height: 1.7;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.page-title,
+.section-title,
+.axil-post-title {
+  font-family: var(--primary-font) !important;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.axil-post-title {
+  font-weight: 700 !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+h1 *,
+h2 *,
+h3 *,
+h4 *,
+h5 *,
+h6 *,
+.page-title,
+.page-title *,
+.section-title,
+.section-title *,
+.axil-post-title,
+.axil-post-title * {
+  font-family: var(--primary-font) !important;
+}
+
+.post-cat,
+.suggestion-type,
+.read-more-link,
+.nav-link {
+  font-family: var(--secondary-font) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+/* Keep headings intentionally strong, not all text */
+h1,
+.h1 {
+  font-weight: 700 !important;
+}
+h2,
+.h2,
+h3,
+.h3 {
+  font-weight: 600 !important;
+}
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+  font-weight: 500 !important;
 }
 /*--Spacing--*/
 .m-xs-0 {

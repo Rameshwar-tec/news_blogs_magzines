@@ -41,7 +41,55 @@ const BusinessBulletin = () => {
   if (!data) return null;
 
   return (
-    <div className="section-gap section-gap-top__with-text trending-stories" style={{ background: '#000', color: '#fff' }}>
+    <div
+      className="section-gap section-gap-top__with-text trending-stories business-bulletin-section"
+      style={{ background: "#06080B", color: "#DCE2EA" }}
+    >
+      <style jsx global>{`
+        .business-bulletin-section .axil-title {
+          color: #f3f5f7 !important;
+        }
+
+        .business-bulletin-section .btn-link {
+          color: #b8c1cc !important;
+        }
+
+        .business-bulletin-section .btn-link:hover {
+          color: #f3f5f7 !important;
+        }
+
+        .business-bulletin-section .post-block {
+          background: linear-gradient(180deg, #0d1116 0%, #090c11 100%);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 12px;
+          padding: 10px;
+        }
+
+        .business-bulletin-section .post-cat.cat-btn {
+          background: #2f2613 !important;
+          border: 1px solid #6f5a2a !important;
+          color: #f0d58a !important;
+        }
+
+        .business-bulletin-section .post-cat.cat-btn:hover {
+          background: #d4af37 !important;
+          color: #111315 !important;
+          border-color: #d4af37 !important;
+        }
+
+        .business-bulletin-section .axil-post-title,
+        .business-bulletin-section .axil-post-title a {
+          color: #e8edf3 !important;
+        }
+
+        .business-bulletin-section .axil-post-title a:hover {
+          color: #ffffff !important;
+        }
+
+        .business-bulletin-section .mid {
+          color: #aeb6c1 !important;
+        }
+      `}</style>
       <div className="container">
         <SectionTitle
           title={data[0]?.category.title || "Business Bulletin"}
