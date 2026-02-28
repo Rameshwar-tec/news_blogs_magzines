@@ -41,6 +41,7 @@ const CompatImage = React.forwardRef(function CompatImage(props, ref) {
     unoptimized: _unoptimized,
     lazyBoundary: _lazyBoundary,
     lazyRoot: _lazyRoot,
+    fetchPriority: _fetchPriority,
     ...nativeRest
   } = rest;
 
