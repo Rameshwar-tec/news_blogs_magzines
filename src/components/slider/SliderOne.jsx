@@ -228,7 +228,7 @@ const SliderOne = () => {
         .featured-magazine-copy {
           width: min(100%, 620px);
           max-width: 620px;
-          padding: 1.25rem 1.4rem 1.25rem 1.1rem;
+          padding: 2rem 2rem 1.9rem;
           margin-left: 0;
           margin-right: 0;
           background: linear-gradient(180deg, rgba(255, 251, 244, 0.84) 0%, rgba(247, 239, 226, 0.78) 100%);
@@ -462,8 +462,7 @@ const SliderOne = () => {
           .featured-magazine-copy {
             max-width: 100%;
             text-align: center;
-            padding-right: 0;
-            padding-top: 0;
+            padding: 1.5rem;
           }
 
           .featured-magazine-left,

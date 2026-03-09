@@ -154,7 +154,7 @@ const MagazineHero = () => {
                   }}
                 >
                   <div className="magazine-card">
-                    <Link href={`/magazine/${magazine.slug?.current || magazine.slug}`}>
+                    <Link href={`/magazine/${magazine.slug?.current || magazine.slug}`} className="magazine-link">
                       <div className="image-container">
                         <Image
                           src={magazine.featureImg || magazine.image}
@@ -176,7 +176,7 @@ const MagazineHero = () => {
       <style jsx>{`
         .mag-hero-section {
           width: 100%;
-          height: 82vh;
+          min-height: 88vh;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -184,6 +184,7 @@ const MagazineHero = () => {
           overflow: hidden;
           isolation: isolate;
           background: #f6f2e8;
+          padding: 5.5rem 3.5rem 3rem;
         }
 
         .mag-hero-bg {
@@ -230,7 +231,7 @@ const MagazineHero = () => {
 
         .carousel-container {
           position: relative;
-          width: 100%;
+          width: min(calc(100% - 9rem), 1240px);
           height: 100%;
           overflow: visible;
           display: flex;
@@ -242,6 +243,7 @@ const MagazineHero = () => {
         .carousel-track {
           position: relative;
           width: 100%;
+          max-width: 1240px;
           height: 100%;
           display: flex;
           align-items: center;
@@ -272,19 +274,23 @@ const MagazineHero = () => {
           border-radius: 0.5rem;
           overflow: hidden;
           background: transparent;
-          box-shadow: 0 10px 26px rgba(126, 92, 35, 0.18);
+          box-shadow: none;
           width: 350px;
           height: 475px;
           margin: 0;
           padding: 0;
-          border: none;
-          outline: none;
           transition: all 0.3s ease;
         }
-        
+
+        .magazine-link {
+          display: block;
+          width: 100%;
+          height: 100%;
+          background: transparent !important;
+        }
+
         .magazine-card:hover {
           transform: scale(1.05);
-          box-shadow: 0 16px 44px rgba(126, 92, 35, 0.24);
         }
         
         .image-container {
@@ -304,8 +310,9 @@ const MagazineHero = () => {
           border-radius: 0.5rem;
           border: none;
           outline: none;
+          background: transparent !important;
         }
-        
+
         .magazine-card * {
           border: none !important;
           outline: none !important;
@@ -313,13 +320,23 @@ const MagazineHero = () => {
 
         @media (max-width: 1199px) {
           .mag-hero-section {
-            height: 76vh;
+            min-height: 82vh;
+            padding: 4.75rem 2.5rem 2.5rem;
+          }
+
+          .carousel-container {
+            width: min(calc(100% - 6rem), 1100px);
           }
         }
 
         @media (max-width: 991px) {
           .mag-hero-section {
-            height: 70vh;
+            min-height: 74vh;
+            padding: 4rem 1.5rem 2rem;
+          }
+
+          .carousel-container {
+            width: min(calc(100% - 3rem), 960px);
           }
 
           .magazine-card {
@@ -330,7 +347,12 @@ const MagazineHero = () => {
 
         @media (max-width: 767px) {
           .mag-hero-section {
-            height: 62vh;
+            min-height: 66vh;
+            padding: 3.25rem 1rem 1.5rem;
+          }
+
+          .carousel-container {
+            width: calc(100% - 2rem);
           }
 
           .mag-hero-vignette {
