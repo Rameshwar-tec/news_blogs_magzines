@@ -140,7 +140,7 @@ const MagazineHero = () => {
               const offsetMap = [0, 185, 345, 485, 605];
               const offset = (position < 0 ? -1 : 1) * offsetMap[Math.abs(position)];
               const scale = isCenter ? 1.0 : Math.max(0.2, 1.0 - Math.abs(position) * 0.2); // Progressive scaling: 100%, 80%, 60%, 40%, 20%
-              const opacity = isCenter ? 1.0 : Math.max(0.2, 1.0 - Math.abs(position) * 0.2); // Progressive opacity: 100%, 80%, 60%, 40%, 20%
+              const overlayOpacity = [0, 0.14, 0.28, 0.42, 0.56][Math.abs(position)];
               
               return (
                 <div
@@ -149,7 +149,7 @@ const MagazineHero = () => {
                   style={{
                     left: `calc(50% + ${offset}px)`,
                     transform: `translateX(-50%) translateY(-50%) scale(${scale})`,
-                    opacity: opacity,
+                    opacity: 1,
                     zIndex: isCenter ? 10 : Math.max(1, 10 - Math.abs(position)),
                   }}
                 >
@@ -162,6 +162,11 @@ const MagazineHero = () => {
                           width={1000}
                           height={1000}
                           className="img-fluid"
+                        />
+                        <span
+                          className="magazine-darkness"
+                          style={{ opacity: overlayOpacity }}
+                          aria-hidden="true"
                         />
                       </div>
                     </Link>
@@ -176,7 +181,7 @@ const MagazineHero = () => {
       <style jsx>{`
         .mag-hero-section {
           width: 100%;
-          min-height: 88vh;
+          min-height: 102vh;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -191,8 +196,11 @@ const MagazineHero = () => {
           position: absolute;
           inset: 0;
           background:
-            radial-gradient(60% 45% at 50% 56%, rgba(212, 175, 55, 0.16) 0%, rgba(212, 175, 55, 0) 70%),
-            linear-gradient(180deg, #fffaf1 0%, #f5eddf 48%, #f0e7d8 100%);
+            linear-gradient(180deg, rgba(255, 250, 241, 0.24) 0%, rgba(245, 237, 223, 0.28) 100%),
+            url("https://png.pngtree.com/thumb_back/fh260/background/20231229/pngtree-abstract-cream-gradient-background-with-brown-texture-image_13903979.png");
+          background-position: center;
+          background-size: cover;
+          background-repeat: no-repeat;
           z-index: 0;
         }
 
@@ -294,6 +302,7 @@ const MagazineHero = () => {
         }
         
         .image-container {
+          position: relative;
           width: 100%;
           height: 100%;
           transition: transform 0.3s ease-in-out;
@@ -313,6 +322,15 @@ const MagazineHero = () => {
           background: transparent !important;
         }
 
+        .magazine-darkness {
+          position: absolute;
+          inset: 0;
+          border-radius: 0.5rem;
+          background: rgba(0, 0, 0, 1);
+          pointer-events: none;
+          transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         .magazine-card * {
           border: none !important;
           outline: none !important;
@@ -320,7 +338,7 @@ const MagazineHero = () => {
 
         @media (max-width: 1199px) {
           .mag-hero-section {
-            min-height: 82vh;
+            min-height: 94vh;
             padding: 4.75rem 2.5rem 2.5rem;
           }
 
@@ -331,7 +349,7 @@ const MagazineHero = () => {
 
         @media (max-width: 991px) {
           .mag-hero-section {
-            min-height: 74vh;
+            min-height: 86vh;
             padding: 4rem 1.5rem 2rem;
           }
 
@@ -347,7 +365,7 @@ const MagazineHero = () => {
 
         @media (max-width: 767px) {
           .mag-hero-section {
-            min-height: 66vh;
+            min-height: 78vh;
             padding: 3.25rem 1rem 1.5rem;
           }
 
