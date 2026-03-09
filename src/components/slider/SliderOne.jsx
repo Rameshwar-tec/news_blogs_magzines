@@ -228,10 +228,14 @@ const SliderOne = () => {
         .featured-magazine-copy {
           width: min(100%, 620px);
           max-width: 620px;
-          padding-right: 0;
-          padding-top: 0;
+          padding: 1.25rem 1.4rem 1.25rem 1.1rem;
           margin-left: 0;
           margin-right: 0;
+          background: linear-gradient(180deg, rgba(255, 251, 244, 0.84) 0%, rgba(247, 239, 226, 0.78) 100%);
+          border: 1px solid rgba(126, 92, 35, 0.12);
+          border-radius: 20px;
+          box-shadow: 0 18px 42px rgba(126, 92, 35, 0.12);
+          backdrop-filter: blur(3px);
         }
 
         .featured-magazine-content-slider,
