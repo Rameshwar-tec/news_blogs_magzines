@@ -276,7 +276,7 @@ const MagazineHero = () => {
           background: transparent;
           box-shadow: none;
           width: 350px;
-          height: 475px;
+          aspect-ratio: 350 / 460;
           margin: 0;
           padding: 0;
           transition: all 0.3s ease;
@@ -341,7 +341,7 @@ const MagazineHero = () => {
 
           .magazine-card {
             width: 295px;
-            height: 410px;
+            aspect-ratio: 295 / 395;
           }
         }
 
@@ -361,7 +361,7 @@ const MagazineHero = () => {
 
           .magazine-card {
             width: 250px;
-            height: 355px;
+            aspect-ratio: 250 / 340;
           }
         }
       `}</style>
