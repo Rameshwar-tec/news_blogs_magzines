@@ -82,47 +82,47 @@ const ContactForm = () => {
 
       <style jsx global>{`
         .contact-form-card {
-          background: linear-gradient(180deg, #0d1116 0%, #090c11 100%) !important;
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%) !important;
+          border: 1px solid rgba(126, 92, 35, 0.14);
           border-radius: 12px;
         }
 
         .contact-form-card .section-title .axil-title {
-          color: #f3f6fa !important;
+          color: #1d2430 !important;
         }
 
         .contact-form-card .contact-form-note {
-          color: #b9c4cf;
+          color: #5e6876;
         }
 
         .contact-form-card .axil-contact-form input,
         .contact-form-card .axil-contact-form textarea,
         .contact-form-card .axil-contact-form .form-control {
-          background: #0a0d12 !important;
-          color: #eef2f6 !important;
-          border: 1px solid rgba(212, 175, 55, 0.5) !important;
+          background: rgba(255, 250, 241, 0.96) !important;
+          color: #1d2430 !important;
+          border: 1px solid rgba(126, 92, 35, 0.2) !important;
           border-radius: 8px;
           padding: 12px 15px;
         }
 
         .contact-form-card .axil-contact-form input::placeholder,
         .contact-form-card .axil-contact-form textarea::placeholder {
-          color: #a3afbc !important;
+          color: #8b8f96 !important;
           opacity: 1 !important;
         }
 
         .contact-form-card .axil-contact-form input:focus,
         .contact-form-card .axil-contact-form textarea:focus,
         .contact-form-card .axil-contact-form .form-control:focus {
-          background: #0a0d12 !important;
-          color: #eef2f6 !important;
+          background: #fffdf8 !important;
+          color: #1d2430 !important;
           border-color: #d4af37 !important;
           box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
           outline: none;
         }
 
         .contact-form-card .axil-contact-form label {
-          color: #e3e8ee !important;
+          color: #5e6876 !important;
         }
       `}</style>
     </div>

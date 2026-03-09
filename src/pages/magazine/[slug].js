@@ -105,40 +105,48 @@ const MagazineDetails = ({
       <HeadMetaDynamic metaData={magazineContent[0]} />
 
       <HeaderOne />
-      <div
-        style={{
-          position: "relative",
-          height: "90vh",
-          width: "100%",
-          paddingBottom: "0px",
-          background: "#f6f2e8",
-          border: "1px solid rgba(126, 92, 35, 0.16)",
-        }}
-      >
+      <div className="magazine-reader-shell">
         <iframe
           allow="clipboard-write"
           sandbox="allow-top-navigation allow-top-navigation-by-user-activation allow-downloads allow-scripts allow-same-origin allow-popups allow-modals allow-popups-to-escape-sandbox allow-forms"
           allowFullScreen={true}
-          style={{
-            position: "absolute",
-            border: "none",
-            width: "100%",
-            height: "100%",
-            left: 0,
-            right: 0,
-            top: 0,
-            bottom: 0,
-          }}
+          className="magazine-reader-frame"
           src={issuuLink}
         />
       </div>
-      <div style={{ marginTop: 0 }}>
+      <div className="magazine-detail-footer">
         <RelatedArticles
           currentMagArticle={currentMagArticle}
           allMagazinesArticles={allArticles}
         />
         <FooterTwo />
       </div>
+
+      <style jsx>{`
+        .magazine-reader-shell {
+          position: relative;
+          height: 90vh;
+          width: 100%;
+          padding-bottom: 0;
+          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
+          border-top: 1px solid rgba(126, 92, 35, 0.12);
+          border-bottom: 1px solid rgba(126, 92, 35, 0.12);
+        }
+
+        .magazine-reader-frame {
+          position: absolute;
+          inset: 0;
+          border: none;
+          width: 100%;
+          height: 100%;
+          background: #fffdf8;
+        }
+
+        .magazine-detail-footer {
+          margin-top: 0;
+          background: #f6f2e8;
+        }
+      `}</style>
     </>
   );
 };

@@ -151,8 +151,8 @@ const AdvertiseWithUs = () => {
       <FooterTwo />
       <style jsx>{`
         .advertise-page {
-          background: #070a0e;
-          color: #d5deea;
+          background: #f6f2e8;
+          color: #1d2430;
         }
 
         .advertise-shell {
@@ -177,7 +177,7 @@ const AdvertiseWithUs = () => {
           inset: 0;
           background:
             linear-gradient(180deg, rgba(6, 9, 13, 0.62) 0%, rgba(6, 9, 13, 0.88) 100%),
-            url("/images/Add.jpg") center/cover no-repeat;
+            url("https://vinayravindran.com/wp-content/uploads/2013/05/top-magazines1.jpg") center/cover no-repeat;
           z-index: 0;
         }
 
@@ -219,14 +219,14 @@ const AdvertiseWithUs = () => {
         }
 
         .intro-block {
-          background: linear-gradient(180deg, #0d1116 0%, #090c11 100%);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
+          border: 1px solid rgba(126, 92, 35, 0.14);
           border-radius: 14px;
           padding: 1.6rem;
         }
 
         .intro-block h2 {
-          color: #f2f6fb;
+          color: #1d2430;
           font-family: var(--primary-font);
           font-size: 2.8rem;
           line-height: 3.7rem;
@@ -240,28 +240,28 @@ const AdvertiseWithUs = () => {
         }
 
         .metric-card {
-          background: linear-gradient(180deg, #0d1116 0%, #090c11 100%);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
+          border: 1px solid rgba(126, 92, 35, 0.14);
           border-radius: 12px;
           padding: 1.1rem;
         }
 
         .metric-card h3 {
-          color: #f3f7fc;
+          color: #1d2430;
           font-size: 1.7rem;
           line-height: 2.4rem;
           margin-bottom: 0.5rem;
         }
 
         .metric-card p {
-          color: #b7c3d1;
+          color: #5e6876;
           font-size: 1.35rem;
           line-height: 2.1rem;
           margin: 0;
         }
 
         .advertise-heading {
-          color: #f2f5f8;
+          color: #1d2430;
           font-family: var(--primary-font);
           font-size: 2.8rem;
           line-height: 3.6rem;
@@ -270,7 +270,7 @@ const AdvertiseWithUs = () => {
         }
 
         .advertise-copy {
-          color: #c2ccd8;
+          color: #5e6876;
           font-family: var(--secondary-font);
           font-size: 1.55rem;
           line-height: 2.6rem;
@@ -287,11 +287,11 @@ const AdvertiseWithUs = () => {
         }
 
         .image-card {
-          background: linear-gradient(180deg, #0d1116 0%, #090c11 100%);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
+          border: 1px solid rgba(126, 92, 35, 0.14);
           border-radius: 12px;
           overflow: hidden;
-          box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+          box-shadow: 0 14px 30px rgba(126, 92, 35, 0.12);
         }
 
         .image-card--single {
@@ -317,22 +317,22 @@ const AdvertiseWithUs = () => {
         }
 
         .cta-wrap {
-          background: linear-gradient(180deg, #101723 0%, #0c1016 100%);
-          border: 1px solid rgba(212, 175, 55, 0.35);
+          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
+          border: 1px solid rgba(126, 92, 35, 0.16);
           border-radius: 14px;
           padding: 2rem 1.2rem;
           text-align: center;
         }
 
         .cta-wrap h2 {
-          color: #f4f8fd;
+          color: #1d2430;
           font-size: 2.6rem;
           line-height: 3.4rem;
           margin-bottom: 0.6rem;
         }
 
         .cta-wrap p {
-          color: #c4cfdb;
+          color: #5e6876;
           font-size: 1.45rem;
           line-height: 2.3rem;
           margin-bottom: 1rem;

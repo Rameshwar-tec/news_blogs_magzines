@@ -65,6 +65,22 @@ const PostFormatText = ({ postData, allData }) => {
             color: #1d2430;
           }
 
+          .post-detail-page > .container {
+            max-width: 1400px;
+            padding-left: 16px !important;
+            padding-right: 16px !important;
+          }
+
+          .post-detail-page > .container > .row {
+            margin-left: -8px;
+            margin-right: -8px;
+          }
+
+          .post-detail-page > .container > .row > [class*="col-"] {
+            padding-left: 8px;
+            padding-right: 8px;
+          }
+
           .post-detail-page .post-details {
             background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
             border: 1px solid rgba(126, 92, 35, 0.14);
@@ -183,6 +199,21 @@ const PostFormatText = ({ postData, allData }) => {
           }
 
           @media (max-width: 991px) {
+            .post-detail-page > .container {
+              padding-left: 12px !important;
+              padding-right: 12px !important;
+            }
+
+            .post-detail-page > .container > .row {
+              margin-left: -6px;
+              margin-right: -6px;
+            }
+
+            .post-detail-page > .container > .row > [class*="col-"] {
+              padding-left: 6px;
+              padding-right: 6px;
+            }
+
             .post-detail-page .post-details {
               padding: 0.9rem;
             }

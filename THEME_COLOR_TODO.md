@@ -32,7 +32,7 @@ Only color updates are in scope. No alignment, spacing, sizing, or structure cha
 - [ ] `src/components/post/BlogAndArticle.jsx`
 - [ ] `src/components/post/IndustryCategories.jsx`
 - [ ] `src/components/post/IndustryPosts.jsx`
-- [ ] `src/components/post/RelatedArticles.jsx`
+- [x] `src/components/post/RelatedArticles.jsx`
 - [ ] `src/components/post/RichTextComponent.jsx`
 - [ ] `src/components/post/VideoSection.jsx`
 
@@ -46,7 +46,7 @@ Only color updates are in scope. No alignment, spacing, sizing, or structure cha
 - [ ] `src/components/post/layout/PostLayoutSix.jsx`
 - [ ] `src/components/post/layout/PostLayoutSeven.jsx`
 - [ ] `src/components/post/layout/PostLayoutYT.jsx`
-- [ ] `src/components/post/layout/PostLayoutformag.jsx`
+- [x] `src/components/post/layout/PostLayoutformag.jsx`
 - [ ] `src/components/post/layout/PostLayoutformag_Home.jsx`
 - [ ] `src/components/post/layout/PostVideoOne.jsx`
 - [ ] `src/components/post/layout/PostVideoTwo.jsx`
@@ -57,9 +57,9 @@ Only color updates are in scope. No alignment, spacing, sizing, or structure cha
 - [x] `src/components/post/post-format/PostFormatText.jsx`
 - [ ] `src/components/post/post-format/VideoDetailLayout.jsx`
 - [ ] `src/components/post/post-format/elements/PostAuthor.jsx`
-- [ ] `src/components/post/post-format/elements/PostComment.jsx`
+- [x] `src/components/post/post-format/elements/PostComment.jsx`
 - [ ] `src/components/post/post-format/elements/SocialShareBottom.jsx`
-- [ ] `src/components/post/post-format/elements/SocialShareSide.jsx`
+- [x] `src/components/post/post-format/elements/SocialShareSide.jsx`
 - [ ] `src/components/post/post-format/elements/meta/MetaDataOne.jsx`
 - [ ] `src/components/post/post-format/elements/meta/MetaDataTwo.jsx`
 - [ ] `src/components/post/post-format/elements/meta/MetaDataThree.jsx`
@@ -83,8 +83,8 @@ Only color updates are in scope. No alignment, spacing, sizing, or structure cha
 - [ ] `src/components/common/Loader.jsx`
 - [ ] `src/components/common/LoadingPage.jsx`
 - [ ] `src/components/common/ScrollToTop.jsx`
-- [ ] `src/components/contact/ContactForm.jsx`
-- [ ] `src/components/contact/ContactInfo.jsx`
+- [x] `src/components/contact/ContactForm.jsx`
+- [x] `src/components/contact/ContactInfo.jsx`
 - [ ] `src/components/contact/FormGroup.jsx`
 - [ ] `src/components/FAQ/Faq.jsx`
 - [ ] `src/components/team/TeamOne.jsx`

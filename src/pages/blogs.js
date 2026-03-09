@@ -40,6 +40,7 @@ const Blogs = () => {
   });
 
   const [isVisible, setIsVisible] = useState(false);
+  const posts = Array.isArray(data) ? data : [];
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -79,7 +80,7 @@ const Blogs = () => {
               ) : error ? (
                 <div className="error-alert">Error fetching posts</div>
               ) : (
-                data?.slice(0, 3).map((post, index) => (
+                posts.slice(0, 3).map((post, index) => (
                   <div 
                     key={index} 
                     className={`featured-article-card ${isVisible ? 'animate-in' : ''}`}
@@ -119,7 +120,7 @@ const Blogs = () => {
               ) : error ? (
                 <div className="error-alert">Error fetching posts</div>
               ) : (
-                data?.slice(3, 6).map((post, index) => (
+                posts.slice(3, 6).map((post, index) => (
                   <div 
                     key={index} 
                     className={`latest-article-card ${isVisible ? 'animate-in' : ''}`}
@@ -158,7 +159,7 @@ const Blogs = () => {
               ) : error ? (
                 <div className="error-alert">Error fetching posts</div>
               ) : (
-                data?.slice(6).map((post, index) => (
+                posts.slice(6).map((post, index) => (
                   <div 
                     key={index} 
                     className={`remaining-article-card ${isVisible ? 'animate-in' : ''}`}
