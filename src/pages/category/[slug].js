@@ -87,7 +87,7 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
       <HeadMeta metaTitle={cateContent?.category?.title || "Category"} />
       <HeaderOne />
 
-      <div className="axil-video-posts" style={{ background: '#000', color: '#fff', paddingTop: '2rem', paddingBottom: '0' }}>
+      <div className="axil-video-posts" style={{ background: '#f6f2e8', color: '#1d2430', paddingTop: '2rem', paddingBottom: '0' }}>
         <div className="container">
           <SectionTitle
             btnUrl={`/category/${cateContent?.category?.slug || initialCategory}`}
@@ -127,7 +127,7 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
                       alignItems: 'center',
                       justifyContent: 'center',
                       position: 'relative',
-                      color: page === pageNumber - 1 ? '#D4AF37' : '#333',
+                      color: page === pageNumber - 1 ? '#D4AF37' : '#5e6876',
                       fontSize: '18px',
                       fontWeight: page === pageNumber - 1 ? 'bold' : 'normal',
                       minWidth: '30px'
@@ -140,7 +140,7 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
                         marginTop: '6px',
                         width: '30px',
                         height: '3px',
-                        backgroundColor: page === pageNumber - 1 ? '#D4AF37' : '#333',
+                        backgroundColor: page === pageNumber - 1 ? '#D4AF37' : '#8b97a3',
                         display: 'block',
                         visibility: 'visible',
                         opacity: 1,
@@ -178,7 +178,7 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
           display: none !important;
         }
         
-        /* Heading section styling - black background with white text */
+        /* Heading section styling */
         .axil-video-posts .section-title {
           display: flex !important;
           flex-direction: row !important;
@@ -191,12 +191,14 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
         .axil-video-posts .section-title .axil-title {
           text-align: left !important;
           margin-bottom: 0 !important;
+          color: #1d2430 !important;
         }
         
         .axil-video-posts .section-title .btn-link {
           margin-top: 0 !important;
           align-self: center !important;
           font-size: 1rem !important;
+          color: #7a5a24 !important;
         }
         
         /* Pagination Underline Styles - Force visibility */

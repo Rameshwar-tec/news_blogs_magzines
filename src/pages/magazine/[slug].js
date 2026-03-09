@@ -111,7 +111,8 @@ const MagazineDetails = ({
           height: "90vh",
           width: "100%",
           paddingBottom: "0px",
-          border: "2px solid black",
+          background: "#f6f2e8",
+          border: "1px solid rgba(126, 92, 35, 0.16)",
         }}
       >
         <iframe

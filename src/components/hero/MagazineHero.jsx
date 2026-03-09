@@ -111,11 +111,16 @@ const MagazineHero = () => {
 
 
   if (isLoading) return <Loader />;
-  if (error) return <div style={{ color: "#f3f5f7" }}>Error loading magazines</div>;
+  if (error) return <div style={{ color: "#1d2430" }}>Error loading magazines</div>;
 
   return (
     <>
-      <div style={{ width: "100%", height: "80vh", background: "linear-gradient(180deg, #000, #111 50%, #000)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <section className="mag-hero-section">
+        <div className="mag-hero-bg" />
+        <div className="mag-hero-vignette mag-hero-vignette--left" />
+        <div className="mag-hero-vignette mag-hero-vignette--right" />
+        <div className="mag-hero-core-glow" />
+
         {/* Custom Carousel */}
         <div className="carousel-container">
           <div className="carousel-track">
@@ -166,9 +171,63 @@ const MagazineHero = () => {
             })}
           </div>
         </div>
-      </div>
+      </section>
 
       <style jsx>{`
+        .mag-hero-section {
+          width: 100%;
+          height: 82vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          overflow: hidden;
+          isolation: isolate;
+          background: #f6f2e8;
+        }
+
+        .mag-hero-bg {
+          position: absolute;
+          inset: 0;
+          background:
+            radial-gradient(60% 45% at 50% 56%, rgba(212, 175, 55, 0.16) 0%, rgba(212, 175, 55, 0) 70%),
+            linear-gradient(180deg, #fffaf1 0%, #f5eddf 48%, #f0e7d8 100%);
+          z-index: 0;
+        }
+
+        .mag-hero-vignette {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          width: 18%;
+          z-index: 2;
+          pointer-events: none;
+        }
+
+        .mag-hero-vignette--left {
+          left: 0;
+          background: linear-gradient(90deg, rgba(246, 242, 232, 0.98) 0%, rgba(246, 242, 232, 0) 100%);
+        }
+
+        .mag-hero-vignette--right {
+          right: 0;
+          background: linear-gradient(270deg, rgba(246, 242, 232, 0.98) 0%, rgba(246, 242, 232, 0) 100%);
+        }
+
+        .mag-hero-core-glow {
+          position: absolute;
+          left: 50%;
+          top: 58%;
+          transform: translate(-50%, -50%);
+          width: min(74vw, 1000px);
+          height: min(50vw, 460px);
+          border-radius: 999px;
+          background: radial-gradient(closest-side, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0) 100%);
+          filter: blur(12px);
+          z-index: 1;
+          pointer-events: none;
+        }
+
         .carousel-container {
           position: relative;
           width: 100%;
@@ -177,6 +236,7 @@ const MagazineHero = () => {
           display: flex;
           align-items: center;
           justify-content: center;
+          z-index: 3;
         }
 
         .carousel-track {
@@ -212,7 +272,7 @@ const MagazineHero = () => {
           border-radius: 0.5rem;
           overflow: hidden;
           background: transparent;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 10px 26px rgba(126, 92, 35, 0.18);
           width: 350px;
           height: 475px;
           margin: 0;
@@ -224,7 +284,7 @@ const MagazineHero = () => {
         
         .magazine-card:hover {
           transform: scale(1.05);
-          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 16px 44px rgba(126, 92, 35, 0.24);
         }
         
         .image-container {
@@ -251,7 +311,17 @@ const MagazineHero = () => {
           outline: none !important;
         }
 
+        @media (max-width: 1199px) {
+          .mag-hero-section {
+            height: 76vh;
+          }
+        }
+
         @media (max-width: 991px) {
+          .mag-hero-section {
+            height: 70vh;
+          }
+
           .magazine-card {
             width: 295px;
             height: 410px;
@@ -259,6 +329,14 @@ const MagazineHero = () => {
         }
 
         @media (max-width: 767px) {
+          .mag-hero-section {
+            height: 62vh;
+          }
+
+          .mag-hero-vignette {
+            width: 24%;
+          }
+
           .magazine-card {
             width: 250px;
             height: 355px;

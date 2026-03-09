@@ -37,7 +37,7 @@ const WidgetCategory = ({ showTitle = true }) => {
   return (
     <div className="category-widget mb-4">
       <div className="d-flex justify-content-between align-items-center mb-3">
-        {showTitle ? <h3 className="h4 mb-0 category-title">Categories</h3> : <div />}
+        {showTitle ? <h3 className="h4 mb-0 category-title">Categories</h3> : null}
 
         <div className="owl-nav">
           <button
@@ -115,26 +115,28 @@ const WidgetCategory = ({ showTitle = true }) => {
 
         .category-widget .owl-nav button.custom-owl-prev,
         .category-widget .owl-nav button.custom-owl-next {
-          background-color: rgba(255, 255, 255, 0.08);
-          border: 1px solid rgba(255, 255, 255, 0.14);
+          background-color: #fffaf1;
+          border: 1px solid rgba(126, 92, 35, 0.22);
+          box-shadow: 0 6px 16px rgba(126, 92, 35, 0.12);
         }
 
         .category-widget .owl-nav button.custom-owl-prev i,
         .category-widget .owl-nav button.custom-owl-next i {
-          color: #d7dde5 !important;
+          color: #4d5b6c !important;
         }
 
         .category-widget .owl-nav button.custom-owl-prev:hover,
         .category-widget .owl-nav button.custom-owl-next:hover {
-          background-color: rgba(212, 175, 55, 0.22);
-          border-color: rgba(212, 175, 55, 0.45);
+          background-color: #f5ead3;
+          border-color: rgba(212, 175, 55, 0.6);
         }
 
         .category-widget .owl-nav button.custom-owl-prev:disabled,
         .category-widget .owl-nav button.custom-owl-next:disabled {
-          opacity: 0.45;
+          opacity: 0.68;
           cursor: not-allowed;
         }
+
       `}</style>
     </div>
   );

@@ -36,7 +36,7 @@ const LogoSlider = ({ title = "Our Partner Brands", showTitle = true, wrapperCla
 
   return (
     <div className={`container my-5 logo-slider-section ${wrapperClassName}`.trim()}>
-      {showTitle ? <h2 className="text-center mb-4" style={{ color: "#eef2f6" }}>{title}</h2> : null}
+      {showTitle ? <h2 className="text-center mb-4" style={{ color: "#1d2430" }}>{title}</h2> : null}
       <div className="row">
         <div className="col">
           <div className="logo-slider">
@@ -65,8 +65,8 @@ const LogoSlider = ({ title = "Our Partner Brands", showTitle = true, wrapperCla
           position: relative;
           overflow: hidden;
           padding: 10px 0;
-          background: linear-gradient(180deg, #0b0f14 0%, #090c11 100%);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
+          border: 1px solid rgba(126, 92, 35, 0.14);
           border-radius: 12px;
         }
         .logo-slide-track {
@@ -83,8 +83,8 @@ const LogoSlider = ({ title = "Our Partner Brands", showTitle = true, wrapperCla
           justify-content: center;
         }
         .logo-container {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.07);
+          background: rgba(255, 250, 241, 0.9);
+          border: 1px solid rgba(126, 92, 35, 0.12);
           border-radius: 8px;
           display: flex;
           align-items: center;

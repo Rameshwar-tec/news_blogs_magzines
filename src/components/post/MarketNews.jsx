@@ -45,47 +45,47 @@ const MarketNews = () => {
   return (
   <div
     className="recent-news-wrapper section-gap p-t-xs-15 p-t-sm-60 market-news-section"
-    style={{ background: "#070A0E", color: "#DCE2EA", paddingTop: "8px", paddingBottom: "8px" }}
+    style={{ background: "#f6f2e8", color: "#1d2430", paddingTop: "8px", paddingBottom: "8px" }}
   >
       <style jsx global>{`
         .market-news-section .axil-title {
-          color: #f3f5f7 !important;
+          color: #1d2430 !important;
         }
 
         .market-news-section .btn-link {
-          color: #b8c1cc !important;
+          color: #7a5a24 !important;
         }
 
         .market-news-section .btn-link:hover {
-          color: #f3f5f7 !important;
+          color: #8b641d !important;
         }
 
         .market-news-section .post-block {
-          background: linear-gradient(180deg, #0d1116 0%, #090c11 100%);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
+          border: 1px solid rgba(126, 92, 35, 0.14);
           border-radius: 12px;
           padding: 10px;
         }
 
         .market-news-section .post-cat.cat-btn {
-          background: #2f2613 !important;
-          border: 1px solid #6f5a2a !important;
-          color: #f0d58a !important;
+          background: #f5ead3 !important;
+          border: 1px solid #d8bc7b !important;
+          color: #7a5a24 !important;
         }
 
         .market-news-section .post-cat.cat-btn:hover {
           background: #d4af37 !important;
-          color: #111315 !important;
+          color: #3f2c0d !important;
           border-color: #d4af37 !important;
         }
 
         .market-news-section .axil-post-title,
         .market-news-section .axil-post-title a {
-          color: #e8edf3 !important;
+          color: #1d2430 !important;
         }
 
         .market-news-section .axil-post-title a:hover {
-          color: #ffffff !important;
+          color: #8b641d !important;
         }
       `}</style>
       <div className="container">

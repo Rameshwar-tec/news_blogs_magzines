@@ -230,9 +230,9 @@ const FooterTwo = () => {
       <style jsx>{`
         .ecf-root {
           background:
-            radial-gradient(120% 140% at 0% 0%, rgba(212, 175, 55, 0.14) 0%, rgba(212, 175, 55, 0) 55%),
-            linear-gradient(180deg, #111822 0%, #090d13 100%);
-          border-top: 1px solid rgba(212, 175, 55, 0.34);
+            radial-gradient(120% 140% at 0% 0%, rgba(212, 175, 55, 0.12) 0%, rgba(212, 175, 55, 0) 55%),
+            linear-gradient(180deg, #fbf8f1 0%, #f2ebdc 100%);
+          border-top: 1px solid rgba(126, 92, 35, 0.18);
           margin-top: 30px;
         }
 
@@ -275,13 +275,13 @@ const FooterTwo = () => {
         .ecf-brand-copy-wrap {
           margin-top: 8px;
           padding-top: 14px;
-          border-top: 1px solid rgba(255, 255, 255, 0.14);
+          border-top: 1px solid rgba(126, 92, 35, 0.14);
           max-width: 380px;
         }
 
         .ecf-brand-copy {
           margin: 0;
-          color: #bac5d2;
+          color: #5e6876;
           font-size: 15px;
           line-height: 1.72;
           font-weight: 400;
@@ -295,7 +295,7 @@ const FooterTwo = () => {
           text-transform: none;
           letter-spacing: 0.01em;
           font-weight: 700;
-          color: #f0f3f7;
+          color: #1d2430;
           font-family: var(--primary-font);
           text-decoration: underline;
           text-underline-offset: 5px;
@@ -312,7 +312,7 @@ const FooterTwo = () => {
         }
 
         .ecf-links a {
-          color: #d8e0e9;
+          color: #445162;
           text-decoration: none;
           font-size: 12.5px;
           line-height: 1.55;
@@ -321,7 +321,7 @@ const FooterTwo = () => {
         }
 
         .ecf-links a:hover {
-          color: #e0c67f;
+          color: #8b641d;
         }
 
         .ecf-mag-carousel {
@@ -333,8 +333,8 @@ const FooterTwo = () => {
         .ecf-mag-item {
           border-radius: 8px;
           overflow: hidden;
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          background: #0f131b;
+          border: 1px solid rgba(126, 92, 35, 0.14);
+          background: #fffaf1;
           display: block;
         }
 
@@ -360,9 +360,9 @@ const FooterTwo = () => {
           width: 28px;
           height: 28px;
           border-radius: 999px;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          background: #132030;
-          color: #dce4ed;
+          border: 1px solid rgba(126, 92, 35, 0.18);
+          background: #fffaf1;
+          color: #4d5b6c;
           display: inline-flex;
           align-items: center;
           justify-content: center;
@@ -386,7 +386,7 @@ const FooterTwo = () => {
           height: 8px;
           border-radius: 999px;
           border: none;
-          background: rgba(255, 255, 255, 0.3);
+          background: rgba(126, 92, 35, 0.24);
           padding: 0;
           cursor: pointer;
         }
@@ -397,7 +397,7 @@ const FooterTwo = () => {
 
         .ecf-muted {
           margin: 0;
-          color: #99a7b8;
+          color: #6e7886;
           font-size: 13px;
           font-family: var(--secondary-font);
         }
@@ -409,7 +409,7 @@ const FooterTwo = () => {
         }
 
         .ecf-contact span {
-          color: #8ea1b4;
+          color: #8b641d;
           font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.08em;
@@ -418,7 +418,7 @@ const FooterTwo = () => {
         }
 
         .ecf-contact a {
-          color: #d7dfe9;
+          color: #445162;
           text-decoration: none;
           font-size: 13px;
           line-height: 1.5;
@@ -427,7 +427,7 @@ const FooterTwo = () => {
         }
 
         .ecf-contact a:hover {
-          color: #e0c67f;
+          color: #8b641d;
         }
 
         .ecf-social {
@@ -442,9 +442,9 @@ const FooterTwo = () => {
           width: 34px;
           height: 34px;
           border-radius: 999px;
-          border: 1px solid rgba(255, 255, 255, 0.18);
-          background: #132030;
-          color: #dce4ed;
+          border: 1px solid rgba(126, 92, 35, 0.18);
+          background: #fffaf1;
+          color: #4d5b6c;
           display: inline-flex;
           align-items: center;
           justify-content: center;
@@ -464,7 +464,7 @@ const FooterTwo = () => {
         .ecf-bottom {
           margin-top: 24px;
           padding-top: 10px;
-          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          border-top: 1px solid rgba(126, 92, 35, 0.14);
           display: flex;
           flex-direction: column;
           gap: 6px;
@@ -473,14 +473,14 @@ const FooterTwo = () => {
 
         .ecf-bottom p {
           margin: 0;
-          color: #9ba8b7;
+          color: #6e7886;
           font-size: 12px;
           line-height: 1.5;
           font-family: var(--secondary-font);
         }
 
         .ecf-bottom a {
-          color: #d6deea;
+          color: #445162;
           text-decoration: underline;
         }
 
@@ -500,7 +500,7 @@ const FooterTwo = () => {
           }
 
           .ecf-col:not(.ecf-brand) {
-            border-left: 1px solid rgba(255, 255, 255, 0.08);
+            border-left: 1px solid rgba(126, 92, 35, 0.12);
             padding-left: 24px;
           }
 

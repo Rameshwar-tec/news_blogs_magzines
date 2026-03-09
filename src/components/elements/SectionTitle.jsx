@@ -7,7 +7,7 @@ const SectionTitle = ({ title, btnText, btnUrl, pClass }) => {
       <Link
         href={btnUrl ?? "#"}
         className="btn-link d-block d-md-inline-block"
-        style={{ color: "#d7dce2" }}
+        style={{ color: "#7a5a24" }}
       >
         {btnText}
       </Link>

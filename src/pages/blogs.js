@@ -7,8 +7,10 @@ import FooterTwo from "../components/footer/FooterTwo";
 import HeadMeta from "../components/elements/HeadMeta";
 import Image from "next/image";
 import SharedSidebarWidgets from "../components/widget/SharedSidebarWidgets";
+import { useRouter } from "next/router";
 
 const Blogs = () => {
+  const router = useRouter();
   const query = `
     *[
       _type == "post" &&
@@ -51,7 +53,7 @@ const Blogs = () => {
   }, []);
 
   const handlePostClick = (slug) => {
-    window.location.href = `/post/${slug}`;
+    router.push(`/post/${slug}`);
   };
 
   return (
@@ -90,7 +92,6 @@ const Blogs = () => {
                         alt={post.altText || post.title}
                         fill
                         sizes="(max-width: 767px) 100vw, 160px"
-                        unoptimized
                       />
                     </div>
                     <div className="featured-article-content">
@@ -131,7 +132,6 @@ const Blogs = () => {
                         alt={post.altText || post.title}
                         fill
                         sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
-                        unoptimized
                       />
                     </div>
                     <div className="latest-article-content">
@@ -171,7 +171,6 @@ const Blogs = () => {
                         alt={post.altText || post.title}
                         fill
                         sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
-                        unoptimized
                       />
                     </div>
                     <div className="remaining-article-content">
@@ -202,13 +201,13 @@ const Blogs = () => {
           max-width: 100%;
           margin: 0;
           padding: 2rem 10px;
-          background-color: #070a0e;
+          background-color: #f6f2e8;
           min-height: 100vh;
         }
 
         /* Section Titles */
         .section-title {
-          color: #f3f5f7;
+          color: #1d2430;
           font-weight: 600;
           margin-bottom: 1.5rem;
           font-size: 2.8rem;
@@ -232,12 +231,12 @@ const Blogs = () => {
 
         .featured-article-card {
           display: flex;
-          background: linear-gradient(180deg, #0d1116 0%, #090c11 100%);
+          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
           border-radius: 12px;
           overflow: hidden;
           cursor: pointer;
           transition: transform 0.3s ease, box-shadow 0.3s ease;
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(126, 92, 35, 0.14);
           min-height: 100px;
           opacity: 0;
           transform: translateX(-50px);
@@ -249,7 +248,7 @@ const Blogs = () => {
 
         .featured-article-card:hover {
           transform: translateY(-2px) scale(1.02);
-          box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+          box-shadow: 0 10px 24px rgba(126, 92, 35, 0.16);
         }
 
         @keyframes slideInFromLeft {
@@ -285,7 +284,7 @@ const Blogs = () => {
         .featured-article-title {
           font-size: 1.8rem;
           font-weight: 600;
-          color: #e8edf3;
+          color: #1d2430;
           display: -webkit-box;
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
@@ -295,7 +294,7 @@ const Blogs = () => {
         }
 
         .read-more-link {
-          color: #d7c08a;
+          color: #8b641d;
           font-size: 1.3rem;
           font-weight: 500;
           margin-top: 0.5rem;
@@ -309,12 +308,12 @@ const Blogs = () => {
         }
 
         .latest-article-card {
-          background: linear-gradient(180deg, #0d1116 0%, #090c11 100%);
+          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
           border-radius: 12px;
           overflow: hidden;
           cursor: pointer;
           transition: transform 0.3s ease, box-shadow 0.3s ease;
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(126, 92, 35, 0.14);
           display: flex;
           flex-direction: column;
           height: 350px;
@@ -328,7 +327,7 @@ const Blogs = () => {
 
         .latest-article-card:hover {
           transform: translateY(-5px) scale(1.02);
-          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.36);
+          box-shadow: 0 12px 28px rgba(126, 92, 35, 0.18);
         }
 
         @keyframes slideInFromTop {
@@ -364,7 +363,7 @@ const Blogs = () => {
         .latest-article-title {
           font-size: 1.8rem;
           font-weight: 600;
-          color: #e8edf3;
+          color: #1d2430;
           display: -webkit-box;
           -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
@@ -388,12 +387,12 @@ const Blogs = () => {
         }
 
         .remaining-article-card {
-          background: linear-gradient(180deg, #0d1116 0%, #090c11 100%);
+          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
           border-radius: 12px;
           overflow: hidden;
           cursor: pointer;
           transition: transform 0.3s ease, box-shadow 0.3s ease;
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(126, 92, 35, 0.14);
           height: 300px;
           opacity: 0;
           transform: translateY(30px);
@@ -405,7 +404,7 @@ const Blogs = () => {
 
         .remaining-article-card:hover {
           transform: translateY(-5px) scale(1.02);
-          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.36);
+          box-shadow: 0 12px 28px rgba(126, 92, 35, 0.18);
         }
 
         @keyframes slideInFromBottom {
@@ -437,7 +436,7 @@ const Blogs = () => {
         .remaining-article-title {
           font-size: 1.8rem;
           font-weight: 600;
-          color: #e8edf3;
+          color: #1d2430;
           display: -webkit-box;
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
@@ -454,9 +453,9 @@ const Blogs = () => {
         }
 
         .sidebar-widget,
-        .shared-sidebar-widget {
-          background: linear-gradient(180deg, #0d1116 0%, #090c11 100%);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+        .shared-sidebar-panel {
+          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
+          border: 1px solid rgba(126, 92, 35, 0.14);
           padding: 1.5rem;
           border-radius: 12px;
           opacity: 0;
@@ -464,7 +463,7 @@ const Blogs = () => {
         }
 
         .sidebar-widget.animate-in,
-        .shared-sidebar-widget.animate-in {
+        .shared-sidebar-panel.animate-in {
           animation: slideInFromRight 0.6s ease forwards;
         }
 
@@ -480,40 +479,40 @@ const Blogs = () => {
         }
 
         /* Hard-imposed home-style sidebar theme for blogs shared widgets */
-        .blogs-page :global(.blogs-shared-sidebar .shared-sidebar-widget) {
-          background: linear-gradient(180deg, #0d1116 0%, #090c11 100%);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+        .blogs-page :global(.blogs-shared-sidebar .shared-sidebar-panel) {
+          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
+          border: 1px solid rgba(126, 92, 35, 0.14);
           border-radius: 12px;
           padding: 12px;
         }
 
-        .blogs-page :global(.blogs-shared-sidebar .shared-sidebar-widget .section-title) {
-          color: #f3f5f7 !important;
+        .blogs-page :global(.blogs-shared-sidebar .shared-sidebar-panel .section-title) {
+          color: #1d2430 !important;
           margin-bottom: 0.9rem;
         }
 
         .blogs-page :global(.blogs-shared-sidebar .category-widget h3),
         .blogs-page :global(.blogs-shared-sidebar .post-widget .nav-link) {
-          color: #e8edf3 !important;
+          color: #1d2430 !important;
         }
 
         .blogs-page :global(.blogs-shared-sidebar .category-widget .owl-nav button.custom-owl-prev),
         .blogs-page :global(.blogs-shared-sidebar .category-widget .owl-nav button.custom-owl-next) {
-          background: #1b212a !important;
-          border: 1px solid rgba(255, 255, 255, 0.12) !important;
+          background: #fffaf1 !important;
+          border: 1px solid rgba(126, 92, 35, 0.14) !important;
         }
 
         .blogs-page :global(.blogs-shared-sidebar .category-widget .owl-nav button.custom-owl-prev i),
         .blogs-page :global(.blogs-shared-sidebar .category-widget .owl-nav button.custom-owl-next i) {
-          color: #cfd6df !important;
+          color: #4d5b6c !important;
         }
 
         .blogs-page :global(.blogs-shared-sidebar .post-block__on-dark-bg .axil-post-title a) {
-          color: #e8edf3 !important;
+          color: #1d2430 !important;
         }
 
         .blogs-page :global(.blogs-shared-sidebar .post-block__on-dark-bg .axil-post-title a:hover) {
-          color: #ffffff !important;
+          color: #8b641d !important;
         }
 
         .blogs-page :global(.blogs-shared-sidebar .sidebar-post-widget p),
@@ -521,7 +520,7 @@ const Blogs = () => {
         .blogs-page :global(.blogs-shared-sidebar .sidebar-post-widget .post-metas),
         .blogs-page :global(.blogs-shared-sidebar .sidebar-post-widget .post-metas ul),
         .blogs-page :global(.blogs-shared-sidebar .sidebar-post-widget .media-body p) {
-          color: #aeb6c1 !important;
+          color: #5e6876 !important;
         }
 
         /* Loader and Error States */
@@ -533,12 +532,12 @@ const Blogs = () => {
         }
 
         .error-alert {
-          color: #ff9b9b;
-          background: rgba(220, 53, 69, 0.1);
+          color: #8f2d2d;
+          background: rgba(220, 53, 69, 0.08);
           padding: 1rem;
           border-radius: 8px;
           text-align: center;
-          border: 1px solid rgba(220, 53, 69, 0.3);
+          border: 1px solid rgba(220, 53, 69, 0.22);
         }
 
         /* Tablet Styles */

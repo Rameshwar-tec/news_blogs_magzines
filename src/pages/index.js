@@ -14,14 +14,15 @@ import MagazineHero from "../components/hero/MagazineHero";
 import ScrollToTop from "../components/common/ScrollToTop";
 
 const Home = () => {
-  console.log("Home component rendering");
-
   useEffect(() => {
     return () => {};
   }, []);
   
   return (
-    <div suppressHydrationWarning style={{ background: '#000', color: '#fff', minHeight: '100vh' }}>
+    <div
+      suppressHydrationWarning
+      style={{ background: "#f6f3ec", color: "#1d2430", minHeight: "100vh" }}
+    >
       <Head>
         <meta name="google-site-verification" content="Hb-PBtfDrWImSPQKiNhfbw0JxtOLWsPKDEbfz_WJ8ZE" />
       </Head>

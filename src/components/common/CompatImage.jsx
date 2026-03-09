@@ -29,7 +29,7 @@ const CompatImage = React.forwardRef(function CompatImage(props, ref) {
   } = props;
 
   const imgSrc = toSrcString(src);
-  const computedLoading = priority ? "eager" : loading;
+  const computedLoading = priority ? "eager" : loading || "lazy";
   const computedFetchPriority = fetchPriority || (priority ? "high" : undefined);
 
   // Drop Next/Image-only props that are invalid for native <img>.
@@ -70,6 +70,7 @@ const CompatImage = React.forwardRef(function CompatImage(props, ref) {
       height={fill ? undefined : height}
       sizes={sizes}
       loading={computedLoading}
+      decoding="async"
       fetchpriority={computedFetchPriority}
       className={className}
       style={fillStyle}

@@ -43,51 +43,79 @@ const BusinessBulletin = () => {
   return (
     <div
       className="section-gap section-gap-top__with-text trending-stories business-bulletin-section"
-      style={{ background: "#06080B", color: "#DCE2EA" }}
+      style={{
+        background:
+          "linear-gradient(180deg, #fffdf7 0%, #f7f3e8 52%, #f2ebda 100%)",
+        color: "#1d2430",
+      }}
     >
       <style jsx global>{`
+        .business-bulletin-section {
+          border-top: 1px solid rgba(126, 92, 35, 0.12);
+          border-bottom: 1px solid rgba(126, 92, 35, 0.12);
+        }
+
         .business-bulletin-section .axil-title {
-          color: #f3f5f7 !important;
+          color: #1a2230 !important;
         }
 
         .business-bulletin-section .btn-link {
-          color: #b8c1cc !important;
+          color: #7a5a24 !important;
         }
 
         .business-bulletin-section .btn-link:hover {
-          color: #f3f5f7 !important;
+          color: #3f2c0d !important;
         }
 
         .business-bulletin-section .post-block {
-          background: linear-gradient(180deg, #0d1116 0%, #090c11 100%);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: rgba(255, 255, 255, 0.92);
+          border: 1px solid rgba(120, 90, 40, 0.14);
+          border-radius: 16px;
+          padding: 14px;
+          box-shadow: 0 18px 45px rgba(73, 54, 22, 0.08);
+          backdrop-filter: blur(6px);
+        }
+
+        .business-bulletin-section .post-block > a {
+          background: #fbf7ee;
           border-radius: 12px;
-          padding: 10px;
+          padding: 8px;
         }
 
         .business-bulletin-section .post-cat.cat-btn {
-          background: #2f2613 !important;
-          border: 1px solid #6f5a2a !important;
-          color: #f0d58a !important;
+          background: #f4ead2 !important;
+          border: 1px solid #dbc089 !important;
+          color: #775317 !important;
         }
 
         .business-bulletin-section .post-cat.cat-btn:hover {
-          background: #d4af37 !important;
-          color: #111315 !important;
-          border-color: #d4af37 !important;
+          background: #b88a2f !important;
+          color: #fffaf0 !important;
+          border-color: #b88a2f !important;
         }
 
         .business-bulletin-section .axil-post-title,
         .business-bulletin-section .axil-post-title a {
-          color: #e8edf3 !important;
+          color: #1f2937 !important;
         }
 
         .business-bulletin-section .axil-post-title a:hover {
-          color: #ffffff !important;
+          color: #8b641d !important;
         }
 
         .business-bulletin-section .mid {
-          color: #aeb6c1 !important;
+          color: #667085 !important;
+        }
+
+        .business-bulletin-section img {
+          background: transparent !important;
+        }
+
+        @media (max-width: 767px) {
+          .business-bulletin-section .post-block {
+            padding: 12px;
+            border-radius: 14px;
+          }
         }
       `}</style>
       <div className="container">
