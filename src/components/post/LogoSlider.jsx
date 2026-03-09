@@ -65,19 +65,19 @@ const LogoSlider = ({ title = "Our Partner Brands", showTitle = true, wrapperCla
           position: relative;
           overflow: hidden;
           padding: 10px 0;
-          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
-          border: 1px solid rgba(126, 92, 35, 0.14);
-          border-radius: 12px;
+          background: transparent;
+          border: none;
+          border-radius: 0;
         }
         .logo-slide-track {
           display: flex;
           animation: scroll 40s linear infinite;
-          width: calc(190px * ${images.length * 2});
+          width: calc(150px * ${images.length * 2});
         }
         .logo-slide {
-          height: 60px;
-          width: 150px;
-          margin: 0 20px;
+          height: 92px;
+          width: 92px;
+          margin: 0 29px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -89,15 +89,21 @@ const LogoSlider = ({ title = "Our Partner Brands", showTitle = true, wrapperCla
           display: flex;
           align-items: center;
           justify-content: center;
-          height: 60px;
-          width: 150px;
+          width: 92px;
+          aspect-ratio: 1 / 1;
+          padding: 10px;
+        }
+
+        .logo-container img {
+          max-width: 100%;
+          max-height: 100%;
         }
         @keyframes scroll {
           0% {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(calc(-190px * ${images.length}));
+            transform: translateX(calc(-150px * ${images.length}));
           }
         }
       `}</style>
