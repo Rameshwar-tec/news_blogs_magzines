@@ -51,7 +51,7 @@ const ContactPage = () => {
             <a href="#contact-form-section" className="btn btn-primary">
               Send Message
             </a>
-            <a href="#germany-map" className="btn btn-secondary">
+            <a href="#usa-map" className="btn btn-secondary">
               View Location
             </a>
           </div>
@@ -82,20 +82,20 @@ const ContactPage = () => {
           </div>
           <div className="location-grid location-grid--single">
             <div className="location-card">
-              <h3>Germany Office</h3>
-              <p>Heßstraße 36, 80798 München, Germany</p>
+              <h3>USA Office</h3>
+              <p>6605 Longshore St, Dublin, OH 43017, USA</p>
             </div>
-            <div id="germany-map" className="location-map-item">
+            <div id="usa-map" className="location-map-item">
               <div className="axil-map-wrapper location-map-wrapper">
                 <iframe
-                  src="https://www.google.com/maps?q=He%C3%9Fstra%C3%9Fe+36,+80798+M%C3%BCnchen,+Germany&output=embed"
+                  src="https://www.google.com/maps?q=6605+Longshore+St,+Dublin,+OH+43017,+USA&output=embed"
                   width="100%"
                   height={220}
                   style={{ border: 0, width: "100%", display: "block" }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Heßstraße 36, 80798 München, Germany"
+                  title="6605 Longshore St, Dublin, OH 43017, USA"
                 />
               </div>
             </div>

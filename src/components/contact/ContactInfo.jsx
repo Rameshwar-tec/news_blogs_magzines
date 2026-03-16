@@ -7,7 +7,7 @@ const ContactInfo = () => {
         <h2 className="h4 m-b-xs-10">Contact Information</h2>
         <div className="axil-contact-info">
           <address className="address">
-            <p className="mid m-b-xs-20">Heßstraße 36, 80798 München, Germany</p>
+            <p className="mid m-b-xs-20">6605 Longshore St, Dublin, OH 43017, USA</p>
 
             <p className="mid m-b-xs-30">
               Home Branch - office no 328B, Gera imperium Rise, Wipro circle,

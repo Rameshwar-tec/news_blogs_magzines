@@ -163,11 +163,11 @@ const FooterTwo = () => {
               <p>
                 <span>Address</span>
                 <a
-                  href="https://www.google.com/maps/search/?api=1&query=He%C3%9Fstra%C3%9Fe+36,+80798+M%C3%BCnchen,+Germany"
+                  href="https://www.google.com/maps/search/?api=1&query=6605+Longshore+St,+Dublin,+OH+43017,+USA"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Heßstraße 36, 80798 München, Germany
+                  6605 Longshore St, Dublin, OH 43017, USA
                 </a>
               </p>
               <p>
