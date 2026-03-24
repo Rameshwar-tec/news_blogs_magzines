@@ -93,7 +93,7 @@ const FooterTwo = () => {
             </ul>
           </section>
 
-          <section className="ecf-col">
+          <section className="ecf-col ecf-magazines">
             <h4 className="ecf-heading">Latest Magazines</h4>
             {magazines.length > 0 ? (
               <div className="ecf-mag-carousel">
@@ -328,6 +328,23 @@ const FooterTwo = () => {
           max-width: 250px;
           display: grid;
           gap: 8px;
+        }
+
+        .ecf-magazines {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+
+        .ecf-magazines .ecf-heading {
+          text-align: center;
+        }
+
+        .ecf-magazines .ecf-mag-carousel,
+        .ecf-magazines .ecf-muted {
+          margin-left: auto;
+          margin-right: auto;
         }
 
         .ecf-mag-item {
