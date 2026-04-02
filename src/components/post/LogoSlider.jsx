@@ -36,7 +36,18 @@ const LogoSlider = ({ title = "Our Partner Brands", showTitle = true, wrapperCla
 
   return (
     <div className={`container my-5 logo-slider-section ${wrapperClassName}`.trim()}>
-      {showTitle ? <h2 className="text-center mb-4" style={{ color: "#1d2430" }}>{title}</h2> : null}
+      {showTitle ? (
+        <h2
+          className="text-center mb-4"
+          style={{
+            color: "#1d2430",
+            fontSize: "var(--type-h2)",
+            fontFamily: "var(--primary-font)",
+          }}
+        >
+          {title}
+        </h2>
+      ) : null}
       <div className="row">
         <div className="col">
           <div className="logo-slider">

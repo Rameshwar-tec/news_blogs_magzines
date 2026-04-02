@@ -71,6 +71,7 @@ const MarketNews = () => {
           background: #f5ead3 !important;
           border: 1px solid #d8bc7b !important;
           color: #7a5a24 !important;
+          font-size: var(--type-caption) !important;
         }
 
         .market-news-section .post-cat.cat-btn:hover {
@@ -84,8 +85,30 @@ const MarketNews = () => {
           color: #1d2430 !important;
         }
 
+        .market-news-section .axil-latest-post .axil-post-title {
+          font-size: var(--type-h2);
+          line-height: 1.2;
+        }
+
+        .market-news-section .post-block .axil-post-title {
+          font-size: var(--type-h5);
+          line-height: 1.45;
+        }
+
         .market-news-section .axil-post-title a:hover {
           color: #8b641d !important;
+        }
+
+        @media (max-width: 991px) {
+          .market-news-section .axil-latest-post .axil-post-title {
+            font-size: var(--type-h3);
+            line-height: 1.25;
+          }
+
+          .market-news-section .post-block .axil-post-title {
+            font-size: var(--type-small);
+            line-height: 1.5;
+          }
         }
       `}</style>
       <div className="container">

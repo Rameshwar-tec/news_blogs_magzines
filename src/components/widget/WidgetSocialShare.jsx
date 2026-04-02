@@ -44,6 +44,15 @@ const WidgetSocialShare = () => {
         {/* End of .social-share-list */}
       </ul>
       {/* End of .social-share-list-wrapper */}
+      <style jsx>{`
+        .sidebar-social-share-widget {
+          font-family: var(--secondary-font);
+        }
+
+        .sidebar-social-share-widget .list-inner i {
+          font-size: var(--type-small);
+        }
+      `}</style>
     </div>
   );
 };

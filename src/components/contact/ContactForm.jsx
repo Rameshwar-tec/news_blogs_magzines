@@ -85,14 +85,21 @@ const ContactForm = () => {
           background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%) !important;
           border: 1px solid rgba(126, 92, 35, 0.14);
           border-radius: 12px;
+          font-family: var(--secondary-font);
         }
 
         .contact-form-card .section-title .axil-title {
           color: #1d2430 !important;
+          font-family: var(--primary-font);
+          font-size: var(--type-h3);
+          line-height: 1.25;
         }
 
         .contact-form-card .contact-form-note {
           color: #5e6876;
+          font-family: var(--secondary-font);
+          font-size: var(--type-small);
+          line-height: 1.6;
         }
 
         .contact-form-card .axil-contact-form input,
@@ -103,6 +110,8 @@ const ContactForm = () => {
           border: 1px solid rgba(126, 92, 35, 0.2) !important;
           border-radius: 8px;
           padding: 12px 15px;
+          font-family: var(--secondary-font);
+          font-size: var(--type-body);
         }
 
         .contact-form-card .axil-contact-form input::placeholder,
@@ -123,6 +132,18 @@ const ContactForm = () => {
 
         .contact-form-card .axil-contact-form label {
           color: #5e6876 !important;
+          font-family: var(--secondary-font);
+          font-size: var(--type-small);
+        }
+
+        .contact-form-card .btn {
+          font-family: var(--secondary-font);
+          font-size: var(--type-small);
+        }
+
+        .contact-form-card .success-msg {
+          font-family: var(--secondary-font);
+          font-size: var(--type-small);
         }
       `}</style>
     </div>

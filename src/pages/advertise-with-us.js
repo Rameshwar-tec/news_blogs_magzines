@@ -108,8 +108,8 @@ const AdvertiseWithUs = () => {
 
         <section className="advertise-section">
           <div className="advertise-shell">
-            <h2 className="advertise-heading">Digital Magazine Placement Advertise</h2>
-            <p className="advertise-copy">
+            <h2 className="advertise-heading advertise-heading--centered">Digital Magazine Placement Advertise</h2>
+            <p className="advertise-copy advertise-copy--centered">
               The space and dimension of the Ad on the print and digital platforms
               are mentioned below.
             </p>
@@ -153,6 +153,7 @@ const AdvertiseWithUs = () => {
         .advertise-page {
           background: #f6f2e8;
           color: #1d2430;
+          font-family: var(--secondary-font);
         }
 
         .advertise-shell {
@@ -195,16 +196,16 @@ const AdvertiseWithUs = () => {
           margin: 0 0 1rem;
           color: #f4f8fc;
           font-family: var(--primary-font);
-          font-size: clamp(3rem, 5vw, 5rem);
+          font-size: clamp(var(--type-h2), 5vw, var(--type-display));
           line-height: 1.1;
         }
 
         .advertise-hero__content p {
           margin: 0 auto;
           color: #d3dde9;
+          font-size: var(--type-body);
+          line-height: 1.7;
           font-family: var(--secondary-font);
-          font-size: 1.6rem;
-          line-height: 2.7rem;
           max-width: 960px;
         }
 
@@ -228,8 +229,8 @@ const AdvertiseWithUs = () => {
         .intro-block h2 {
           color: #1d2430;
           font-family: var(--primary-font);
-          font-size: 2.8rem;
-          line-height: 3.7rem;
+          font-size: var(--type-h2);
+          line-height: 1.2;
           margin-bottom: 1rem;
         }
 
@@ -248,35 +249,44 @@ const AdvertiseWithUs = () => {
 
         .metric-card h3 {
           color: #1d2430;
-          font-size: 1.7rem;
-          line-height: 2.4rem;
+          font-size: var(--type-h5);
+          line-height: 1.35;
+          font-family: var(--primary-font);
           margin-bottom: 0.5rem;
         }
 
         .metric-card p {
           color: #5e6876;
-          font-size: 1.35rem;
-          line-height: 2.1rem;
+          font-size: var(--type-small);
+          line-height: 1.6;
+          font-family: var(--secondary-font);
           margin: 0;
         }
 
         .advertise-heading {
           color: #1d2430;
           font-family: var(--primary-font);
-          font-size: 2.8rem;
-          line-height: 3.6rem;
-          font-weight: 600;
+          font-size: var(--type-h2);
+          line-height: 1.2;
+          font-weight: 700;
           margin: 0 0 1rem;
         }
 
         .advertise-copy {
           color: #5e6876;
+          font-size: var(--type-body);
+          line-height: 1.7;
           font-family: var(--secondary-font);
-          font-size: 1.55rem;
-          line-height: 2.6rem;
           font-weight: 400;
           max-width: 980px;
           margin-bottom: 0.9rem;
+        }
+
+        .advertise-heading--centered,
+        .advertise-copy--centered {
+          text-align: center;
+          margin-left: auto;
+          margin-right: auto;
         }
 
         .image-grid {
@@ -326,20 +336,24 @@ const AdvertiseWithUs = () => {
 
         .cta-wrap h2 {
           color: #1d2430;
-          font-size: 2.6rem;
-          line-height: 3.4rem;
+          font-size: var(--type-h3);
+          line-height: 1.2;
+          font-family: var(--primary-font);
           margin-bottom: 0.6rem;
         }
 
         .cta-wrap p {
           color: #5e6876;
-          font-size: 1.45rem;
-          line-height: 2.3rem;
+          font-size: var(--type-small);
+          line-height: 1.6;
+          font-family: var(--secondary-font);
           margin-bottom: 1rem;
         }
 
         .cta-wrap :global(.btn) {
           min-width: 180px;
+          font-family: var(--secondary-font);
+          font-size: var(--type-small);
         }
 
         @media (max-width: 991px) {
@@ -354,8 +368,8 @@ const AdvertiseWithUs = () => {
           }
 
           .advertise-hero__content p {
-            font-size: 1.35rem;
-            line-height: 2.2rem;
+            font-size: var(--type-small);
+            line-height: 1.6;
           }
 
           .intro-grid {
@@ -367,13 +381,12 @@ const AdvertiseWithUs = () => {
           }
 
           .advertise-heading {
-            font-size: 2.4rem;
-            line-height: 3.1rem;
+            font-size: var(--type-h3);
           }
 
           .advertise-copy {
-            font-size: 1.4rem;
-            line-height: 2.3rem;
+            font-size: var(--type-small);
+            line-height: 1.6;
           }
 
           .image-grid {
@@ -385,13 +398,12 @@ const AdvertiseWithUs = () => {
           }
 
           .cta-wrap h2 {
-            font-size: 2.2rem;
-            line-height: 3rem;
+            font-size: var(--type-h4);
           }
 
           .cta-wrap p {
-            font-size: 1.35rem;
-            line-height: 2.1rem;
+            font-size: var(--type-small);
+            line-height: 1.6;
           }
         }
 

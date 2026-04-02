@@ -41,7 +41,15 @@ const MasterTalks = ({ postData, adBanner, pClass }) => {
 
   if (!data) return null;
   return (
-  <div className="container master-talks-section" style={{ marginTop: "8px", background: "#f6f2e8", color: "#1d2430" }}>
+  <div
+    className="container master-talks-section"
+    style={{
+      marginTop: "8px",
+      background: "#f6f2e8",
+      color: "#1d2430",
+      fontFamily: "var(--secondary-font)",
+    }}
+  >
       <style jsx global>{`
         .master-talks-section .axil-title {
           color: #1d2430 !important;
@@ -66,6 +74,8 @@ const MasterTalks = ({ postData, adBanner, pClass }) => {
           background: #f5ead3 !important;
           border: 1px solid #d8bc7b !important;
           color: #7a5a24 !important;
+          font-size: var(--type-caption) !important;
+          font-family: var(--secondary-font) !important;
         }
 
         .master-talks-section .post-cat.cat-btn:hover {
@@ -77,6 +87,12 @@ const MasterTalks = ({ postData, adBanner, pClass }) => {
         .master-talks-section .axil-post-title,
         .master-talks-section .axil-post-title a {
           color: #1d2430 !important;
+          font-family: var(--primary-font) !important;
+        }
+
+        .master-talks-section .post-block__mid .axil-post-title {
+          font-size: var(--type-h4);
+          line-height: 1.3;
         }
 
         .master-talks-section .axil-post-title a:hover {
@@ -85,6 +101,9 @@ const MasterTalks = ({ postData, adBanner, pClass }) => {
 
         .master-talks-section .mid {
           color: #5e6876 !important;
+          font-size: var(--type-body);
+          font-family: var(--secondary-font);
+          line-height: 1.65;
         }
 
         .master-talks-section .post-sidebar > * {
@@ -108,6 +127,17 @@ const MasterTalks = ({ postData, adBanner, pClass }) => {
         .master-talks-section .category-widget .owl-nav button.custom-owl-prev i,
         .master-talks-section .category-widget .owl-nav button.custom-owl-next i {
           color: #4d5b6c !important;
+        }
+
+        @media (max-width: 991px) {
+          .master-talks-section .post-block__mid .axil-post-title {
+            font-size: var(--type-h5);
+            line-height: 1.4;
+          }
+
+          .master-talks-section .mid {
+            font-size: var(--type-small);
+          }
         }
       `}</style>
       <div className="row">

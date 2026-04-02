@@ -39,7 +39,10 @@ const Magazines = () => {
   if (!data) return null;
 
   return (
-    <div className="related-post mt-4 magazines-section" style={{ background: "#f6f2e8", color: "#1d2430" }}>
+    <div
+      className="related-post mt-4 magazines-section"
+      style={{ background: "#f6f2e8", color: "#1d2430", fontFamily: "var(--secondary-font)" }}
+    >
       <style jsx global>{`
         .magazines-section .axil-title {
           color: #1d2430 !important;

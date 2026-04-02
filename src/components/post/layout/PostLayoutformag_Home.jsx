@@ -30,7 +30,10 @@ const PostLayoutformag_Home = ({ data }) => {
             <h4
               className="hover-line hover-line"
               style={{
-                fontSize: "1.3rem",
+                fontSize: "var(--type-h5)",
+                fontFamily: "var(--primary-font)",
+                lineHeight: "1.35",
+                fontWeight: 700,
                 color: "#e8edf3",
                 textDecoration: "none",
                 marginTop: "2rem",

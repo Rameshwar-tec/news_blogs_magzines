@@ -184,6 +184,7 @@ const WebProfiles = () => {
           background: #f6f3ec;
           padding-top: 32px;
           padding-bottom: 32px;
+          font-family: var(--secondary-font);
         }
 
         .web-profiles-section .container {
@@ -225,7 +226,8 @@ const WebProfiles = () => {
 
         .web-profiles-heading h2 {
           margin: 0;
-          font-size: 2.15rem;
+          font-size: var(--type-h2);
+          font-family: var(--primary-font);
           line-height: 1;
           font-weight: 700;
           color: #181818;
@@ -251,7 +253,8 @@ const WebProfiles = () => {
           border-radius: 999px;
           background: #f7a400;
           color: #1f1606 !important;
-          font-size: 0.95rem;
+          font-size: var(--type-small);
+          font-family: var(--secondary-font);
           font-weight: 700;
           border: none;
           transition: background 0.2s ease;
@@ -311,7 +314,8 @@ const WebProfiles = () => {
         .featured-category,
         .profile-list-category {
           color: #e4a123;
-          font-size: 0.96rem;
+          font-size: var(--type-caption);
+          font-family: var(--secondary-font);
           font-weight: 700;
           letter-spacing: 0.01em;
         }
@@ -319,14 +323,16 @@ const WebProfiles = () => {
         .featured-date,
         .profile-list-date {
           color: #6c685f;
-          font-size: 0.96rem;
+          font-size: var(--type-caption);
+          font-family: var(--secondary-font);
           font-weight: 600;
         }
 
         .featured-title {
           margin: 10px 0 8px;
           max-width: 92%;
-          font-size: 2.55rem;
+          font-size: var(--type-h3);
+          font-family: var(--primary-font);
           line-height: 1.08;
           font-weight: 700;
           letter-spacing: -0.03em;
@@ -344,7 +350,8 @@ const WebProfiles = () => {
           margin: 0;
           max-width: 78%;
           color: #7a746a;
-          font-size: 1.02rem;
+          font-size: var(--type-body);
+          font-family: var(--secondary-font);
           line-height: 1.6;
         }
 
@@ -419,7 +426,8 @@ const WebProfiles = () => {
 
         .profile-list-title {
           color: #1b1b1b;
-          font-size: 1.24rem;
+          font-size: var(--type-h5);
+          font-family: var(--primary-font);
           line-height: 1.36;
           font-weight: 700;
           display: -webkit-box;
@@ -432,12 +440,12 @@ const WebProfiles = () => {
           width: 100%;
           min-height: 52px;
           margin-top: 16px;
-          font-size: 1.02rem;
+          font-size: var(--type-small);
         }
 
         @media (max-width: 1199px) {
           .featured-title {
-            font-size: 2.15rem;
+            font-size: var(--type-h3);
           }
 
           .featured-summary {
@@ -472,7 +480,7 @@ const WebProfiles = () => {
           }
 
           .web-profiles-heading h2 {
-            font-size: 1.7rem;
+            font-size: var(--type-h3);
           }
 
           .header-pill-button,
@@ -495,12 +503,12 @@ const WebProfiles = () => {
 
           .featured-title {
             max-width: 100%;
-            font-size: 1.9rem;
+            font-size: var(--type-h4);
           }
 
           .featured-summary {
             max-width: 100%;
-            font-size: 0.98rem;
+            font-size: var(--type-small);
           }
 
           .profile-list-item {
@@ -516,12 +524,12 @@ const WebProfiles = () => {
           }
 
           .profile-list-title {
-            font-size: 1.08rem;
+            font-size: var(--type-small);
           }
 
           .profile-list-category,
           .profile-list-date {
-            font-size: 0.86rem;
+            font-size: var(--type-caption);
           }
         }
       `}</style>

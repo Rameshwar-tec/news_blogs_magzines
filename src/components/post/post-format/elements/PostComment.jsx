@@ -7,13 +7,15 @@ const PostComment = () => {
       <style jsx global>{`
         .post-comment-area .comment-box h2 {
           color: #1d2430 !important;
-          font-size: clamp(2.2rem, 3vw, 3rem);
+          font-size: clamp(var(--type-h3), 3vw, var(--type-h2));
+          font-family: var(--primary-font);
           margin-bottom: 0.5rem;
         }
 
         .post-comment-area .comment-box p {
           color: #5e6876 !important;
-          font-size: 1.5rem;
+          font-size: var(--type-body);
+          font-family: var(--secondary-font);
           line-height: 2.4rem;
         }
 

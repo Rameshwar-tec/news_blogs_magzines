@@ -106,6 +106,7 @@ const ContactPage = () => {
           background: #f6f2e8;
           color: #1d2430;
           min-height: 100vh;
+          font-family: var(--secondary-font);
         }
 
         .contact-shell {
@@ -152,7 +153,8 @@ const ContactPage = () => {
           border-radius: 999px;
           border: 1px solid rgba(212, 175, 55, 0.6);
           color: #e5cc88;
-          font-size: 1.2rem;
+          font-size: var(--type-caption);
+          font-family: var(--secondary-font);
           line-height: 1;
           margin-bottom: 1rem;
           text-transform: uppercase;
@@ -162,16 +164,18 @@ const ContactPage = () => {
         .contact-hero__content h1 {
           margin: 0 0 1rem;
           color: #f4f7fb;
-          font-size: clamp(3rem, 5vw, 4.8rem);
+          font-size: clamp(var(--type-h2), 5vw, var(--type-display));
           line-height: 1.12;
+          font-family: var(--primary-font);
         }
 
         .contact-hero__content p {
           margin: 0 auto;
           color: #d1d9e3;
           max-width: 980px;
-          font-size: 1.6rem;
-          line-height: 2.7rem;
+          font-size: var(--type-body);
+          line-height: 1.7;
+          font-family: var(--secondary-font);
         }
 
         .contact-hero__actions {
@@ -201,22 +205,25 @@ const ContactPage = () => {
 
         .contact-section-head h2 {
           color: #1d2430;
-          font-size: 2.8rem;
-          line-height: 3.7rem;
+          font-size: var(--type-h2);
+          line-height: 1.2;
+          font-family: var(--primary-font);
           margin: 0;
         }
 
         .contact-section-head p {
           margin: 0.35rem 0 0;
           color: #5e6876;
-          font-size: 1.45rem;
-          line-height: 2.3rem;
+          font-size: var(--type-small);
+          line-height: 1.6;
+          font-family: var(--secondary-font);
         }
 
         .our-location .section-title .axil-title {
           color: #1d2430;
-          font-size: 2.8rem;
-          line-height: 3.6rem;
+          font-size: var(--type-h2);
+          line-height: 1.2;
+          font-family: var(--primary-font);
         }
 
         .location-section-wrap {
@@ -273,13 +280,12 @@ const ContactPage = () => {
         @media (max-width: 991px) {
           .our-location .section-title .axil-title,
           .contact-section-head h2 {
-            font-size: 2.4rem;
-            line-height: 3.2rem;
+            font-size: var(--type-h3);
           }
 
           .contact-hero__content p {
-            font-size: 1.35rem;
-            line-height: 2.2rem;
+            font-size: var(--type-small);
+            line-height: 1.6;
           }
 
           .location-grid--single {
@@ -308,6 +314,10 @@ const ContactPage = () => {
 
           .contact-hero__actions .btn {
             min-width: 140px;
+          }
+
+          .contact-hero__content h1 {
+            font-size: var(--type-h2);
           }
         }
       `}</style>

@@ -36,28 +36,38 @@ const SharedSidebarWidgets = ({
       <div
         className={`shared-sidebar-panel ${animate ? (isVisible ? "animate-in" : "") : ""}`.trim()}
       >
-        {sections.map((section) => (
-          <div
-            key={section.key}
-            className={`shared-sidebar-section shared-sidebar-section--${section.key}`}
-          >
-            {section.key !== "newsletter" && section.key !== "categories" ? (
-              <h4 className="section-title">{section.title}</h4>
-            ) : null}
-            {section.content}
-          </div>
-        ))}
+        {sections.map((section) =>
+          section.key === "newsletter" ? (
+            <div key={section.key} className="shared-sidebar-newsletter">
+              {section.content}
+            </div>
+          ) : (
+            <div
+              key={section.key}
+              className={`shared-sidebar-section shared-sidebar-section--${section.key}`}
+            >
+              {section.key !== "categories" ? (
+                <h4 className="section-title">{section.title}</h4>
+              ) : null}
+              {section.content}
+            </div>
+          )
+        )}
       </div>
       <style jsx>{`
         .shared-sidebar-panel :global(.section-title) {
           color: #1d2430;
           margin-bottom: 1rem;
+          font-family: var(--primary-font);
+          font-size: var(--type-h5);
+          line-height: 1.35;
         }
 
         .shared-sidebar-panel {
           display: flex;
           flex-direction: column;
           gap: 1.4rem;
+          font-family: var(--secondary-font);
         }
 
         .shared-sidebar-section {
@@ -68,6 +78,11 @@ const SharedSidebarWidgets = ({
         .shared-sidebar-section:last-child {
           padding-bottom: 0;
           border-bottom: none;
+        }
+
+        .shared-sidebar-newsletter {
+          padding: 0;
+          border: none;
         }
       `}</style>
     </div>

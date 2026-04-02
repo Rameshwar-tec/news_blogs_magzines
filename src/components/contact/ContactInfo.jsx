@@ -54,19 +54,28 @@ const ContactInfo = () => {
           border: 1px solid rgba(126, 92, 35, 0.14);
           border-radius: 12px;
           color: #1d2430;
+          font-family: var(--secondary-font);
         }
 
         .contact-info-card h2 {
           color: #1d2430;
+          font-family: var(--primary-font);
+          font-size: var(--type-h4);
+          line-height: 1.25;
         }
 
         .contact-info-card .mid {
           color: #5e6876;
           line-height: 1.65;
+          font-family: var(--secondary-font);
+          font-size: var(--type-body);
         }
 
         .contact-info-card .contact-availability {
           color: #1d2430;
+          font-family: var(--primary-font);
+          font-size: var(--type-h5);
+          line-height: 1.35;
         }
 
         .contact-info-card .tel {
@@ -74,6 +83,8 @@ const ContactInfo = () => {
           text-decoration: none;
           margin-left: 0;
           font-weight: 500;
+          font-family: var(--secondary-font);
+          font-size: var(--type-body);
         }
 
         .contact-info-card .tel i {
@@ -84,6 +95,9 @@ const ContactInfo = () => {
 
         .contact-info-card .axil-social-title {
           color: #1d2430;
+          font-family: var(--primary-font);
+          font-size: var(--type-h5);
+          line-height: 1.35;
         }
 
         .contact-info-card :global(.social-share__with-bg li a) {

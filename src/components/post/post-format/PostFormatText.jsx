@@ -63,6 +63,7 @@ const PostFormatText = ({ postData, allData }) => {
           .post-detail-page {
             background: #f6f2e8;
             color: #1d2430;
+            font-family: var(--secondary-font);
           }
 
           .post-detail-page > .container {
@@ -90,7 +91,8 @@ const PostFormatText = ({ postData, allData }) => {
 
           .post-detail-page .single-blog-wrapper .axil-post-title {
             color: #1d2430;
-            font-size: clamp(2.6rem, 4vw, 3.8rem);
+            font-size: clamp(var(--type-h2), 4vw, var(--type-h1));
+            font-family: var(--primary-font);
             line-height: 1.2;
             margin-bottom: 1rem;
           }
@@ -115,7 +117,8 @@ const PostFormatText = ({ postData, allData }) => {
           .post-detail-page .rich-text-content li,
           .post-detail-page .rich-text-content blockquote {
             color: #4d5b6c;
-            font-size: 1.7rem;
+            font-size: var(--type-body-lg);
+            font-family: var(--secondary-font);
             line-height: 2.9rem;
           }
 
@@ -132,17 +135,20 @@ const PostFormatText = ({ postData, allData }) => {
 
           .post-detail-page .rich-text-content h2,
           .post-detail-page .post-details h2 {
-            font-size: 2.6rem;
+            font-size: var(--type-h2);
+            font-family: var(--primary-font);
           }
 
           .post-detail-page .rich-text-content h3,
           .post-detail-page .post-details h3 {
-            font-size: 2.1rem;
+            font-size: var(--type-h3);
+            font-family: var(--primary-font);
           }
 
           .post-detail-page .rich-text-content h4,
           .post-detail-page .post-details h4 {
-            font-size: 1.8rem;
+            font-size: var(--type-h5);
+            font-family: var(--primary-font);
           }
 
           .post-detail-page .post-details a:not(.btn) {
@@ -165,7 +171,8 @@ const PostFormatText = ({ postData, allData }) => {
 
           .post-detail-page .post-shares .title {
             color: #4d5b6c;
-            font-size: 1.3rem;
+            font-size: var(--type-small);
+            font-family: var(--secondary-font);
             letter-spacing: 0.06em;
           }
 
@@ -222,7 +229,7 @@ const PostFormatText = ({ postData, allData }) => {
             .post-detail-page .post-details li,
             .post-detail-page .rich-text-content p,
             .post-detail-page .rich-text-content li {
-              font-size: 1.5rem;
+              font-size: var(--type-body);
               line-height: 2.5rem;
             }
           }

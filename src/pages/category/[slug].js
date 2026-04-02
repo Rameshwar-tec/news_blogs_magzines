@@ -87,7 +87,16 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
       <HeadMeta metaTitle={cateContent?.category?.title || "Category"} />
       <HeaderOne />
 
-      <div className="axil-video-posts" style={{ background: '#f6f2e8', color: '#1d2430', paddingTop: '2rem', paddingBottom: '0' }}>
+      <div
+        className="axil-video-posts"
+        style={{
+          background: '#f6f2e8',
+          color: '#1d2430',
+          paddingTop: '2rem',
+          paddingBottom: '0',
+          fontFamily: 'var(--secondary-font)',
+        }}
+      >
         <div className="container">
           <SectionTitle
             btnUrl={`/category/${cateContent?.category?.slug || initialCategory}`}
@@ -128,7 +137,8 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
                       justifyContent: 'center',
                       position: 'relative',
                       color: page === pageNumber - 1 ? '#D4AF37' : '#5e6876',
-                      fontSize: '18px',
+                      fontSize: 'var(--type-body-lg)',
+                      fontFamily: 'var(--secondary-font)',
                       fontWeight: page === pageNumber - 1 ? 'bold' : 'normal',
                       minWidth: '30px'
                     }}
@@ -197,7 +207,8 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
         .axil-video-posts .section-title .btn-link {
           margin-top: 0 !important;
           align-self: center !important;
-          font-size: 1rem !important;
+          font-size: var(--type-small) !important;
+          font-family: var(--secondary-font) !important;
           color: #7a5a24 !important;
         }
         

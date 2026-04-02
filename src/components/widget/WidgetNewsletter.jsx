@@ -118,7 +118,7 @@ const WidgetNewsletter = () => {
             animation: "pulse 2s ease-in-out infinite"
           }}
         >
-          <i className="feather icon-send" style={{ color: "#3f2c0d", fontSize: "1.5rem" }} />
+          <i className="feather icon-send" style={{ color: "#3f2c0d", fontSize: "var(--type-h5)" }} />
         </div>
 
         <div
@@ -135,7 +135,8 @@ const WidgetNewsletter = () => {
             className="axil-title"
             style={{
               color: "#ffffff",
-              fontSize: "2.2rem",
+              fontSize: "var(--type-h3)",
+              fontFamily: "var(--primary-font)",
               fontWeight: "700",
               marginBottom: "1rem",
               textShadow: "none",
@@ -151,7 +152,8 @@ const WidgetNewsletter = () => {
             className="mid"
             style={{
               color: "#ffffff",
-              fontSize: "1.15rem",
+              fontSize: "var(--type-small)",
+              fontFamily: "var(--secondary-font)",
               lineHeight: "1.6",
               margin: 0,
               display: "block",
@@ -183,7 +185,9 @@ const WidgetNewsletter = () => {
                   border: "2px solid rgba(240, 188, 52, 0.3)",
                   borderRadius: "50px",
                   color: "#fffdf7",
-                  fontSize: "1.08rem",
+                  fontSize: "var(--type-small)",
+                  fontFamily: "var(--secondary-font)",
+                  textAlign: "center",
                   letterSpacing: "0.02em",
                   outline: "none",
                   transition: "all 0.3s ease",
@@ -203,7 +207,8 @@ const WidgetNewsletter = () => {
                   padding: "1rem 2.5rem",
                   borderRadius: "50px",
                   color: "#ffffff",
-                  fontSize: "1.06rem",
+                  fontSize: "var(--type-small)",
+                  fontFamily: "var(--secondary-font)",
                   fontWeight: "600",
                   textTransform: "uppercase",
                   letterSpacing: "1px",
@@ -214,7 +219,7 @@ const WidgetNewsletter = () => {
                   minWidth: "150px"
                 }}
                 >
-                  <i className="feather icon-send" style={{ marginRight: "0.5rem" }}></i>
+                  <i className="feather icon-send" style={{ marginRight: "0.5rem", fontSize: "var(--type-small)" }}></i>
                   {loading ? "SUBSCRIBING..." : "SUBSCRIBE"}
                 </button>
 
@@ -230,7 +235,8 @@ const WidgetNewsletter = () => {
                         ? "#2e7d32"
                         : "#b42318",
                     fontWeight: 600,
-                    fontSize: "1rem"
+                    fontSize: "var(--type-body)",
+                    fontFamily: "var(--secondary-font)"
                   }}
                 >
                   {submitMessage}
@@ -241,6 +247,10 @@ const WidgetNewsletter = () => {
         </div>
       </div>
       <style jsx>{`
+        .newsletter-widget {
+          font-family: var(--secondary-font);
+        }
+
         .newsletter-widget,
         .newsletter-widget .axil-title,
         .newsletter-widget .mid,
@@ -257,6 +267,7 @@ const WidgetNewsletter = () => {
         .newsletter-widget input::placeholder {
           color: rgba(255, 253, 247, 0.82);
           letter-spacing: 0.02em;
+          text-align: center;
         }
 
         .newsletter-widget input:focus {

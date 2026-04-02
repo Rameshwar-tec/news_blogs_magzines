@@ -32,7 +32,10 @@ const IndustryPosts = () => {
   if (!data) return null;
 
   return (
-    <div className="section-gap section-gap-top__with-text" style={{ background: "#000", color: "#fff" }}>
+    <div
+      className="section-gap section-gap-top__with-text"
+      style={{ background: "#000", color: "#fff", fontFamily: "var(--secondary-font)" }}
+    >
       <div className="container">
         <SectionTitle
           title="Industry Posts"
@@ -71,10 +74,26 @@ const IndustryPosts = () => {
                       {post.category?.title}
                     </Link>
                   </div>
-                  <h3 className="axil-post-title hover-line hover-line color-white" style={{ marginBottom: 8 }}>
+                  <h3
+                    className="axil-post-title hover-line hover-line color-white"
+                    style={{
+                      marginBottom: 8,
+                      fontFamily: "var(--primary-font)",
+                      fontSize: "var(--type-h5)",
+                      lineHeight: "1.35",
+                    }}
+                  >
                     <Link href={`/industry-post/${post.slug?.current}`}>{post.title}</Link>
                   </h3>
-                  <p className="mid" style={{ marginBottom: 0, color: "rgba(255,255,255,0.85)" }}>
+                  <p
+                    className="mid"
+                    style={{
+                      marginBottom: 0,
+                      color: "rgba(255,255,255,0.85)",
+                      fontFamily: "var(--secondary-font)",
+                      fontSize: "var(--type-body)",
+                    }}
+                  >
                     {post?.description && post.description.length > 80
                       ? `${post.description.slice(0, 120)}...`
                       : post.description}

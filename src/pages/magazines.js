@@ -57,7 +57,16 @@ const Magazines = () => {
 
       <HeaderOne />
 
-      <div className="magazines-page" style={{ width: "100%", minHeight: "100vh", background: "#f6f2e8", color: "#1d2430" }}>
+      <div
+        className="magazines-page"
+        style={{
+          width: "100%",
+          minHeight: "100vh",
+          background: "#f6f2e8",
+          color: "#1d2430",
+          fontFamily: "var(--secondary-font)",
+        }}
+      >
         <style jsx global>{`
           .magazines-page .magazines-search {
             width: 100%;
@@ -90,7 +99,8 @@ const Magazines = () => {
           }
 
           .magazines-page .year-chip h2 {
-            font-size: 2.2rem;
+            font-size: var(--type-h3);
+            font-family: var(--primary-font);
             margin: 0;
             color: #8b641d;
             font-weight: 700;
@@ -98,6 +108,7 @@ const Magazines = () => {
 
           .magazines-page .no-magazines {
             color: #5e6876;
+            font-size: var(--type-body);
             text-align: center;
             width: 100%;
           }

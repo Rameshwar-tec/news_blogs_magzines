@@ -1163,7 +1163,7 @@ const HeaderOne = () => {
 
         .navbar-nav-links .nav-link {
           color: #fff !important;
-          font-size: 14px !important;
+          font-size: var(--type-small) !important;
           font-weight: 500;
           text-decoration: none;
           transition: all 0.3s ease;
@@ -1279,7 +1279,7 @@ const HeaderOne = () => {
 
         .nav-dropdown-item {
           color: #fff !important;
-          font-size: 14px !important;
+          font-size: var(--type-small) !important;
           font-weight: 500;
           padding: 10px 12px;
           border-radius: 8px;
@@ -1388,7 +1388,7 @@ const HeaderOne = () => {
         .search-suggestions-header h4 {
           color: #fff;
           margin: 0;
-          font-size: 14px;
+          font-size: var(--type-small);
         }
 
         .search-suggestions-list {
@@ -1450,7 +1450,7 @@ const HeaderOne = () => {
 
         .suggestion-type {
           color: #D4AF37;
-          font-size: 11px;
+          font-size: var(--type-caption);
           font-weight: bold;
           text-transform: uppercase;
           letter-spacing: 0.5px;
@@ -1518,7 +1518,7 @@ const HeaderOne = () => {
 
         .suggestion-text {
           color: #fff;
-          font-size: 14px;
+          font-size: var(--type-small);
           line-height: 1.3;
           font-weight: 500;
         }
@@ -1529,7 +1529,7 @@ const HeaderOne = () => {
 
         .suggestion-link span {
           color: #999;
-          font-size: 11px;
+          font-size: var(--type-caption);
           text-decoration: none;
         }
 
@@ -1539,7 +1539,7 @@ const HeaderOne = () => {
 
         .suggestion-description span {
           color: #D4AF37;
-          font-size: 12px;
+          font-size: var(--type-caption);
           font-style: italic;
         }
 
@@ -1549,7 +1549,7 @@ const HeaderOne = () => {
 
         .suggestion-page span {
           color: #4ECDC4;
-          font-size: 11px;
+          font-size: var(--type-caption);
           font-weight: 500;
         }
 
@@ -1561,7 +1561,7 @@ const HeaderOne = () => {
         .no-suggestions p {
           color: #999;
           margin: 0 0 10px 0;
-          font-size: 14px;
+          font-size: var(--type-small);
         }
         
         .search-tips {
@@ -1574,7 +1574,7 @@ const HeaderOne = () => {
         
         .search-tips p {
           color: #D4AF37;
-          font-size: 12px;
+          font-size: var(--type-caption);
           font-weight: bold;
           margin: 0 0 8px 0;
         }
@@ -1587,7 +1587,7 @@ const HeaderOne = () => {
         
         .search-tips li {
           color: #ccc;
-          font-size: 11px;
+          font-size: var(--type-caption);
           margin: 4px 0;
           padding-left: 5px;
         }
@@ -1694,7 +1694,7 @@ const HeaderOne = () => {
           padding: 12px 16px;
           color: #fff;
           text-decoration: none;
-          font-size: 16px;
+          font-size: var(--type-body);
           font-weight: 500;
           border-bottom: 1px solid #222;
           transition: all 0.3s ease;
@@ -1713,7 +1713,7 @@ const HeaderOne = () => {
           background: transparent;
           border: none;
           color: #fff;
-          font-size: 16px;
+          font-size: var(--type-body);
           font-weight: 600;
           cursor: pointer;
         }
@@ -1733,7 +1733,7 @@ const HeaderOne = () => {
 
         .mobile-submenu .mobile-nav-link {
           padding: 10px 16px;
-          font-size: 14px;
+          font-size: var(--type-small);
         }
         
         .mobile-nav-link:hover {
@@ -1804,7 +1804,7 @@ const HeaderOne = () => {
           }
 
           .nav-search-field-toggler {
-            font-size: 18px;
+            font-size: var(--type-h5);
             padding: 8px;
             line-height: 1;
           }
@@ -1832,13 +1832,13 @@ const HeaderOne = () => {
           }
           
           .hero-title {
-            font-size: 2.5rem !important;
+            font-size: var(--type-h3) !important;
             line-height: 1.2 !important;
             margin-bottom: 1rem !important;
           }
           
           .hero-subtitle {
-            font-size: 1.2rem !important;
+            font-size: var(--type-caption) !important;
             line-height: 1.4 !important;
             margin-bottom: 1.5rem !important;
           }
@@ -1863,7 +1863,7 @@ const HeaderOne = () => {
             width: 100% !important;
             max-width: 280px !important;
             padding: 12px 24px !important;
-            font-size: 14px !important;
+            font-size: var(--type-small) !important;
           }
         }
         
@@ -1900,12 +1900,12 @@ const HeaderOne = () => {
 
           .mobile-nav-link {
             padding: 10px 14px;
-            font-size: 14px;
+            font-size: var(--type-small);
           }
 
           .mobile-nav-accordion-toggle {
             padding: 10px 14px;
-            font-size: 14px;
+            font-size: var(--type-small);
           }
 
           .mobile-menu-dropdown {
@@ -1926,13 +1926,13 @@ const HeaderOne = () => {
           }
           
           .hero-title {
-            font-size: 2rem !important;
+            font-size: var(--type-h5) !important;
             line-height: 1.1 !important;
             margin-bottom: 0.8rem !important;
           }
           
           .hero-subtitle {
-            font-size: 1rem !important;
+            font-size: var(--type-caption) !important;
             line-height: 1.3 !important;
             margin-bottom: 1.2rem !important;
           }
@@ -1948,7 +1948,7 @@ const HeaderOne = () => {
           
           .hero-button {
             padding: 10px 20px !important;
-            font-size: 13px !important;
+            font-size: var(--type-caption) !important;
           }
         }
 
@@ -1972,8 +1972,10 @@ const HeaderOne = () => {
 
         .navbar,
         .main-navbar {
-          background: #fbf8f1 !important;
-          border-bottom: 1px solid rgba(126, 92, 35, 0.12) !important;
+          background:
+            radial-gradient(circle at top, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0) 42%),
+            linear-gradient(180deg, #17120b 0%, #0f0c08 100%) !important;
+          border-bottom: 1px solid rgba(212, 175, 55, 0.18) !important;
         }
 
         .navbar .nav-link,
@@ -1981,7 +1983,7 @@ const HeaderOne = () => {
         .navbar .nav-submenu-toggle,
         .navbar .nav-search-field-toggler,
         .navbar-extra-features button {
-          color: #1d2430 !important;
+          color: #f5efe4 !important;
         }
 
         .navbar .nav-link:hover,
@@ -1989,31 +1991,31 @@ const HeaderOne = () => {
         .navbar .nav-submenu-toggle:hover,
         .navbar .nav-search-field-toggler:hover,
         .navbar-extra-features button:hover {
-          color: #8b641d !important;
+          color: #e2bf63 !important;
         }
 
         .nav-dropdown-menu,
         .nav-submenu-menu,
         .search-suggestions-dropdown,
         .mobile-menu-dropdown {
-          background: #fffaf1 !important;
-          border-color: rgba(126, 92, 35, 0.14) !important;
-          box-shadow: 0 12px 30px rgba(126, 92, 35, 0.12) !important;
+          background: linear-gradient(180deg, #17120b 0%, #120e09 100%) !important;
+          border-color: rgba(212, 175, 55, 0.16) !important;
+          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28) !important;
         }
 
         .navbar .navbar-search-field,
         .navbar .navbar-search-field:focus {
-          background: #fffaf1 !important;
-          background-color: #fffaf1 !important;
-          color: #1d2430 !important;
-          border: 1px solid rgba(126, 92, 35, 0.16) !important;
+          background: rgba(255, 248, 235, 0.06) !important;
+          background-color: rgba(255, 248, 235, 0.06) !important;
+          color: #f5efe4 !important;
+          border: 1px solid rgba(212, 175, 55, 0.2) !important;
         }
 
         .navbar .navbar-search-field::placeholder,
         .navbar .navbar-search-field::-webkit-input-placeholder,
         .navbar .navbar-search-field::-moz-placeholder,
         .navbar .navbar-search-field:-ms-input-placeholder {
-          color: #7b8794 !important;
+          color: #b7ab98 !important;
         }
 
         .search-suggestions-header,
@@ -2028,31 +2030,31 @@ const HeaderOne = () => {
         .suggestion-text,
         .mobile-nav-link,
         .mobile-nav-accordion-toggle {
-          color: #1d2430 !important;
+          color: #f5efe4 !important;
         }
 
         .search-suggestion-item:hover,
         .mobile-nav-link:hover {
-          background: #f5ead3 !important;
-          color: #8b641d !important;
+          background: rgba(212, 175, 55, 0.08) !important;
+          color: #e2bf63 !important;
         }
 
         .suggestion-image,
         .search-tips,
         .mobile-submenu {
-          background: #f5eddf !important;
-          border-color: rgba(126, 92, 35, 0.12) !important;
+          background: rgba(255, 248, 235, 0.04) !important;
+          border-color: rgba(212, 175, 55, 0.12) !important;
         }
 
         .suggestion-link span {
-          color: #7b8794 !important;
+          color: #b7ab98 !important;
         }
 
         .hamburger {
           background: repeating-linear-gradient(
             to bottom,
-            #1d2430 0,
-            #1d2430 2px,
+            #f5efe4 0,
+            #f5efe4 2px,
             transparent 2px,
             transparent 6px
           ) !important;
@@ -2060,8 +2062,8 @@ const HeaderOne = () => {
 
         .hamburger span,
         .navbar .mobile-menu-toggle .hamburger span {
-          background: #1d2430 !important;
-          background-color: #1d2430 !important;
+          background: #f5efe4 !important;
+          background-color: #f5efe4 !important;
         }
 
         

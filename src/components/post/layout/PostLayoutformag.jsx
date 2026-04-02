@@ -20,7 +20,10 @@ const PostLayoutformag = ({ data }) => {
         <h4
           style={{
             marginTop: "1rem",
-            fontSize: "1.3rem",
+            fontSize: "var(--type-h5)",
+            fontFamily: "var(--primary-font)",
+            lineHeight: "1.35",
+            fontWeight: 700,
             color: "#1d2430",
             textAlign: "center",
           }}

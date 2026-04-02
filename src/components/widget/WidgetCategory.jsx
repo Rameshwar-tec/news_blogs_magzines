@@ -100,7 +100,7 @@ const WidgetCategory = ({ showTitle = true }) => {
                     className="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
                     style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
                   >
-                    <h4 className="text-white fs-4 fw-bold">{data.title}</h4>
+                    <h4 className="text-white fw-bold category-card-title">{data.title}</h4>
                   </div>
                 </Link>
               )}
@@ -109,8 +109,23 @@ const WidgetCategory = ({ showTitle = true }) => {
         </div>
       </div>
       <style jsx>{`
+        .category-widget {
+          font-family: var(--secondary-font);
+        }
+
         .category-title {
           color: #e9edf2;
+          font-family: var(--primary-font);
+          font-size: var(--type-h5);
+          line-height: 1.35;
+        }
+
+        .category-card-title {
+          margin: 0;
+          font-family: var(--primary-font);
+          font-size: var(--type-h4);
+          line-height: 1.2;
+          text-align: center;
         }
 
         .category-widget .owl-nav button.custom-owl-prev,
@@ -135,6 +150,12 @@ const WidgetCategory = ({ showTitle = true }) => {
         .category-widget .owl-nav button.custom-owl-next:disabled {
           opacity: 0.68;
           cursor: not-allowed;
+        }
+
+        @media (max-width: 767px) {
+          .category-card-title {
+            font-size: var(--type-h5);
+          }
         }
 
       `}</style>

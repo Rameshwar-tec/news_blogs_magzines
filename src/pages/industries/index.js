@@ -6,7 +6,14 @@ import IndustryCategories from "../../components/post/IndustryCategories";
 
 const IndustriesIndex = () => {
   return (
-    <div style={{ background: "#000", color: "#fff", minHeight: "100vh" }}>
+    <div
+      style={{
+        background: "#000",
+        color: "#fff",
+        minHeight: "100vh",
+        fontFamily: "var(--secondary-font)",
+      }}
+    >
       <HeadMeta metaTitle="Industries" />
       <HeaderOne />
       <IndustryCategories />

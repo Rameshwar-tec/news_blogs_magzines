@@ -78,13 +78,8 @@ const SliderOne = () => {
         <div className="featured-magazine-row">
           <div className="featured-magazine-left">
             {isLoading ? <Loader /> : null}
-            {error ? (
-              <div className="featured-magazine-state">
-                Unable to load featured magazines right now.
-              </div>
-            ) : null}
 
-            {data && data.length > 0 && !isLoading ? (
+            {data && data.length > 0 && !isLoading && !error ? (
               <Slider
                 asNavFor={navImage}
                 ref={(sliderRef) => setNavContent(sliderRef)}
@@ -170,6 +165,7 @@ const SliderOne = () => {
           background: #f6f2e8;
           margin-top: 0;
           border: none;
+          font-family: var(--secondary-font);
         }
 
         .featured-magazine-bg {
@@ -278,8 +274,9 @@ const SliderOne = () => {
           color: #3f2c0d;
           padding: 0.45rem 1rem;
           border-radius: 999px;
-          font-size: 1.15rem;
+          font-size: var(--type-caption);
           font-weight: 700;
+          font-family: var(--secondary-font);
           letter-spacing: 0.08em;
           text-transform: uppercase;
           margin-bottom: 1rem;
@@ -288,7 +285,8 @@ const SliderOne = () => {
         .featured-magazine-title {
           margin: 0 0 1rem;
           max-width: 24ch;
-          font-size: clamp(2.15rem, 2.75vw, 3.5rem);
+          font-size: clamp(var(--type-h3), 2.75vw, var(--type-h1));
+          font-family: var(--primary-font);
           line-height: 1.08;
           font-weight: 700;
           letter-spacing: -0.04em;
@@ -308,7 +306,8 @@ const SliderOne = () => {
           margin: 0;
           max-width: 76ch;
           color: #5e6876;
-          font-size: 1.2rem;
+          font-size: var(--type-body);
+          font-family: var(--secondary-font);
           line-height: 1.95rem;
         }
 
@@ -323,7 +322,8 @@ const SliderOne = () => {
           min-width: 210px;
           min-height: 56px;
           justify-content: center;
-          font-size: 1.08rem;
+          font-size: var(--type-small);
+          font-family: var(--secondary-font);
         }
 
         .featured-magazine-btn-outline {
@@ -414,7 +414,8 @@ const SliderOne = () => {
           border-radius: 10px;
           padding: 0.8rem 1rem;
           margin-bottom: 1rem;
-          font-size: 1.3rem;
+          font-size: var(--type-small);
+          font-family: var(--secondary-font);
         }
 
         .featured-magazine-image-item {
@@ -495,7 +496,7 @@ const SliderOne = () => {
 
           .featured-magazine-title {
             max-width: 100%;
-            font-size: clamp(2.3rem, 7vw, 3.4rem);
+            font-size: clamp(var(--type-h4), 7vw, var(--type-h2));
           }
 
           .featured-magazine-visual-wrap {

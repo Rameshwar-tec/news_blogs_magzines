@@ -144,6 +144,7 @@ const WidgetPost = () => {
           border-radius: 16px;
           padding: 14px;
           box-shadow: 0 12px 28px rgba(126, 92, 35, 0.12);
+          font-family: var(--secondary-font);
         }
 
         :global(.sidebar-post-widget .nav-pills) {
@@ -157,7 +158,8 @@ const WidgetPost = () => {
           border: 1px solid rgba(126, 92, 35, 0.16);
           border-radius: 12px;
           color: #5e6876;
-          font-size: 1.05rem;
+          font-size: var(--type-small);
+          font-family: var(--secondary-font);
           letter-spacing: 0.05em;
           padding: 0.9rem 0.5rem;
           font-weight: 600;
@@ -201,11 +203,30 @@ const WidgetPost = () => {
           border: 1px solid rgba(212, 175, 55, 0.28);
           border-radius: 999px;
           padding: 0.25rem 0.65rem;
+          font-size: var(--type-caption);
+          font-family: var(--secondary-font);
+        }
+
+        :global(.sidebar-post-widget .post-block.post-block__small .axil-post-title) {
+          font-size: var(--type-small);
+          font-family: var(--primary-font);
+          font-weight: 700;
+          line-height: 1.45;
+        }
+
+        :global(.sidebar-post-widget .post-block.post-block__small .axil-post-title a) {
+          font-family: var(--primary-font);
+        }
+
+        :global(.sidebar-post-widget .post-block.post-block__small .post-cat-group) {
+          font-family: var(--secondary-font);
         }
 
         :global(.sidebar-post-widget .tab-pane > p) {
           color: #5e6876;
           margin: 0.5rem 0;
+          font-family: var(--secondary-font);
+          font-size: var(--type-small);
         }
       `}</style>
     </div>
