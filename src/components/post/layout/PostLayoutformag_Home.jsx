@@ -24,6 +24,7 @@ const PostLayoutformag_Home = ({ data }) => {
               height={1000}
               className="img-fluid"
               style={{ display: "block" }}
+              priority
             />
           </div>
           <div className="caption-content">

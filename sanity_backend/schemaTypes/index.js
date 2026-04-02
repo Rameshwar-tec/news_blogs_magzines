@@ -5,9 +5,21 @@ import author from './author'
 
 import magazine from './magazine'
 import youtube from './youtube'
-import brandlogo from './brandlogo'
+import brandlogo from './OurPartnerBrands'
+import mediaKit from './mediaKit'
 
 import industryCategory from './industryCategory'
 import industryPost from './industryPost'
 
-export const schemaTypes = [post, category, magazine, author, youtube, blockContent, brandlogo, industryCategory, industryPost]
+export const schemaTypes = [
+  post,
+  category,
+  magazine,
+  mediaKit,
+  author,
+  youtube,
+  blockContent,
+  brandlogo,
+  industryCategory,
+  industryPost,
+]
