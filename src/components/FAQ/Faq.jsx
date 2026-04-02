@@ -50,9 +50,11 @@ const FAQSection = () => {
       {/* Inbuilt CSS */}
       <style jsx>{`
         .faq-section {
-          background-color: #000000; /* Completely black background */
-          color: white;
-          font-family: var(--primary-font);
+          background:
+            radial-gradient(circle at top, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0) 42%),
+            linear-gradient(180deg, #17120b 0%, #0f0c08 100%);
+          color: #f5efe4;
+          font-family: var(--secondary-font);
           line-height: 1.6;
           padding: 6rem 2rem;
           position: relative;
@@ -80,12 +82,13 @@ const FAQSection = () => {
         }
 
         .faq-title {
-          font-size: 2.8rem;
-          color: #d4af37;
+          font-size: var(--type-h2);
+          font-family: var(--primary-font);
+          color: #e2bf63;
           text-align: center;
           margin-bottom: 1rem;
           font-weight: 800;
-          text-shadow: 0 2px 10px rgba(212, 175, 55, 0.4);
+          text-shadow: 0 2px 10px rgba(212, 175, 55, 0.22);
           position: relative;
         }
 
@@ -103,8 +106,9 @@ const FAQSection = () => {
 
         .faq-subtitle {
           text-align: center;
-          color: #ccc;
-          font-size: 1.6rem;
+          color: #d6ccbc;
+          font-size: var(--type-body);
+          font-family: var(--secondary-font);
           margin-bottom: 3rem;
           max-width: 700px;
           margin-left: auto;
@@ -119,7 +123,7 @@ const FAQSection = () => {
         }
 
         .faq-item {
-          border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+          border-bottom: 1px solid rgba(212, 175, 55, 0.22);
           padding: 2rem 0;
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           position: relative;
@@ -147,8 +151,9 @@ const FAQSection = () => {
         }
 
         .faq-question {
-          font-size: 1.9rem;
-          color: white;
+          font-size: var(--type-h5);
+          font-family: var(--primary-font);
+          color: #f8f3ea;
           margin-bottom: 1.2rem;
           transition: all 0.3s ease;
           font-weight: 700;
@@ -158,8 +163,9 @@ const FAQSection = () => {
         }
 
         .faq-answer {
-          color: #e0e0e0;
-          font-size: 1.6rem;
+          color: #d8d0c3;
+          font-size: var(--type-body);
+          font-family: var(--secondary-font);
           transition: all 0.3s ease;
           position: relative;
           z-index: 1;
@@ -168,9 +174,9 @@ const FAQSection = () => {
         }
 
         .faq-item:hover .faq-question {
-          color: #d4af37;
-          text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
-          background: linear-gradient(45deg, #d4af37, #f4e4bc);
+          color: #e2bf63;
+          text-shadow: 0 0 15px rgba(212, 175, 55, 0.24);
+          background: linear-gradient(45deg, #e2bf63, #f2dfae);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -178,9 +184,9 @@ const FAQSection = () => {
 
         .faq-item:hover {
           transform: translateX(10px);
-          border-color: #d4af37;
-          background: rgba(212, 175, 55, 0.03);
-          box-shadow: 0 5px 20px rgba(212, 175, 55, 0.15);
+          border-color: rgba(226, 191, 99, 0.55);
+          background: rgba(212, 175, 55, 0.05);
+          box-shadow: 0 5px 20px rgba(212, 175, 55, 0.1);
         }
 
         @media (max-width: 1024px) {
@@ -189,19 +195,19 @@ const FAQSection = () => {
 
         @media (max-width: 768px) {
           .faq-section { padding: 3rem 1.5rem; }
-          .faq-title { font-size: 2rem; }
-          .faq-subtitle { font-size: 1.1rem; margin-bottom: 2rem; }
-          .faq-question { font-size: 1.4rem; }
-          .faq-answer { font-size: 1.2rem; }
+          .faq-title { font-size: var(--type-h3); }
+          .faq-subtitle { font-size: var(--type-small); margin-bottom: 2rem; }
+          .faq-question { font-size: var(--type-small); }
+          .faq-answer { font-size: var(--type-caption); }
           .faq-item { padding: 1.5rem 0; }
         }
 
         @media (max-width: 480px) {
           .faq-section { padding: 2rem 1rem; }
-          .faq-title { font-size: 1.8rem; }
-          .faq-subtitle { font-size: 1rem; }
-          .faq-question { font-size: 1.3rem; }
-          .faq-answer { font-size: 1.1rem; }
+          .faq-title { font-size: var(--type-h4); }
+          .faq-subtitle { font-size: var(--type-caption); }
+          .faq-question { font-size: var(--type-small); }
+          .faq-answer { font-size: var(--type-caption); }
           .faq-item { padding: 1.25rem 0; }
           .faq-item:hover { transform: translateX(5px); }
         }

@@ -54,7 +54,7 @@ const IndustryPosts = () => {
   }, [slug]);
 
   const handlePostClick = (postSlug) => {
-    window.location.href = `/industry-post/${postSlug}`;
+    router.push(`/industry-post/${postSlug}`);
   };
 
   const categoryTitle = data?.[0]?.category?.title || "Industry Posts";
@@ -67,7 +67,7 @@ const IndustryPosts = () => {
       <div className="industry-page-container">
         <div className="industry-top-row">
           <div className="featured-articles-section">
-            <h4 className="page-section-title">Featured Articles</h4>
+            <h4 className="page-section-title page-section-title--centered">Featured Articles</h4>
             <div className="featured-articles-grid">
               {isLoading ? (
                 <div className="loader-container">
@@ -91,7 +91,6 @@ const IndustryPosts = () => {
                         alt={post.altText || post.title}
                         fill
                         sizes="(max-width: 767px) 100vw, 160px"
-                        unoptimized
                       />
                     </div>
                     <div className="featured-article-content">
@@ -105,7 +104,7 @@ const IndustryPosts = () => {
           </div>
 
           <div className="latest-articles-section">
-            <h4 className="page-section-title">Latest Articles</h4>
+            <h4 className="page-section-title page-section-title--centered">Latest Articles</h4>
             <div className="latest-articles-grid">
               {isLoading ? (
                 <div className="loader-container">
@@ -127,7 +126,6 @@ const IndustryPosts = () => {
                         alt={post.altText || post.title}
                         fill
                         sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
-                        unoptimized
                       />
                     </div>
                     <div className="latest-article-content">
@@ -163,7 +161,6 @@ const IndustryPosts = () => {
                         alt={post.altText || post.title}
                         fill
                         sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
-                        unoptimized
                       />
                     </div>
                     <div className="remaining-article-content">
@@ -176,8 +173,7 @@ const IndustryPosts = () => {
           </div>
 
           <div className="sidebar-section">
-            <div className={`sidebar-widget ${isVisible ? "animate-in" : ""}`} style={{ animationDelay: "0.2s" }}>
-              <h4 className="widget-title">Subscribe To Our Weekly Newsletter</h4>
+            <div className={`${isVisible ? "animate-in" : ""}`} style={{ animationDelay: "0.2s" }}>
               <WidgetNewsletter />
             </div>
             <div className={`sidebar-widget ${isVisible ? "animate-in" : ""}`} style={{ animationDelay: "0.3s" }}>
@@ -196,16 +192,22 @@ const IndustryPosts = () => {
           max-width: 100%;
           margin: 0;
           padding: 2rem 10px;
-          background-color: #070a0e;
+          background-color: #f6f2e8;
           min-height: 100vh;
+          font-family: var(--secondary-font);
         }
 
         .page-section-title {
-          color: #f3f5f7;
-          font-weight: 600;
+          color: #1d2430;
+          font-weight: 700;
           margin-bottom: 1.5rem;
-          font-size: 2.8rem;
-          line-height: 3.8rem;
+          font-size: var(--type-h2);
+          line-height: 1.2;
+          font-family: var(--primary-font);
+        }
+
+        .page-section-title--centered {
+          text-align: center;
         }
 
         .industry-top-row {
@@ -218,20 +220,25 @@ const IndustryPosts = () => {
         .featured-articles-grid {
           display: flex;
           flex-direction: column;
-          gap: 1rem;
+          gap: 0;
+          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
+          border-radius: 12px;
+          overflow: hidden;
         }
 
         .featured-article-card {
           display: flex;
-          background: linear-gradient(180deg, #0d1116 0%, #090c11 100%);
-          border-radius: 12px;
-          overflow: hidden;
+          background: transparent;
           cursor: pointer;
           transition: transform 0.3s ease, box-shadow 0.3s ease;
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          min-height: 100px;
+          min-height: 116px;
           opacity: 0;
           transform: translateX(-50px);
+          border-bottom: 1px solid rgba(126, 92, 35, 0.16);
+        }
+
+        .featured-article-card:last-child {
+          border-bottom: none;
         }
 
         .featured-article-card.animate-in {
@@ -240,7 +247,7 @@ const IndustryPosts = () => {
 
         .featured-article-card:hover {
           transform: translateY(-2px) scale(1.02);
-          box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+          box-shadow: inset 0 0 0 999px rgba(255, 255, 255, 0.08);
         }
 
         @keyframes slideInFromLeft {
@@ -267,44 +274,46 @@ const IndustryPosts = () => {
 
         .featured-article-content {
           flex: 1;
-          padding: 1rem;
+          padding: 1.15rem 1rem;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
         }
 
         .featured-article-title {
-          font-size: 1.8rem;
-          font-weight: 600;
-          color: #e8edf3;
+          font-size: var(--type-h5);
+          font-weight: 700;
+          color: #1d2430;
           display: -webkit-box;
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
           overflow: hidden;
-          line-height: 2.6rem;
+          line-height: 1.35;
+          font-family: var(--primary-font);
           margin: 0;
         }
 
         .read-more-link {
-          color: #d7c08a;
-          font-size: 1.3rem;
+          color: #8b641d;
+          font-size: var(--type-small);
           font-weight: 500;
           margin-top: 0.5rem;
+          font-family: var(--secondary-font);
         }
 
         .latest-articles-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
           gap: 1.5rem;
+          position: relative;
         }
 
         .latest-article-card {
-          background: linear-gradient(180deg, #0d1116 0%, #090c11 100%);
+          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
           border-radius: 12px;
           overflow: hidden;
           cursor: pointer;
           transition: transform 0.3s ease, box-shadow 0.3s ease;
-          border: 1px solid rgba(255, 255, 255, 0.08);
           display: flex;
           flex-direction: column;
           height: 350px;
@@ -318,7 +327,7 @@ const IndustryPosts = () => {
 
         .latest-article-card:hover {
           transform: translateY(-5px) scale(1.02);
-          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.36);
+          box-shadow: 0 12px 28px rgba(126, 92, 35, 0.18);
         }
 
         @keyframes slideInFromTop {
@@ -349,17 +358,19 @@ const IndustryPosts = () => {
           flex: 1;
           display: flex;
           align-items: center;
+          border-top: 1px solid rgba(126, 92, 35, 0.16);
         }
 
         .latest-article-title {
-          font-size: 1.8rem;
-          font-weight: 600;
-          color: #e8edf3;
+          font-size: var(--type-h5);
+          font-weight: 700;
+          color: #1d2430;
           display: -webkit-box;
           -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
           overflow: hidden;
-          line-height: 2.6rem;
+          line-height: 1.35;
+          font-family: var(--primary-font);
           margin: 0;
         }
 
@@ -373,15 +384,15 @@ const IndustryPosts = () => {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
           gap: 1.5rem;
+          position: relative;
         }
 
         .remaining-article-card {
-          background: linear-gradient(180deg, #0d1116 0%, #090c11 100%);
+          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
           border-radius: 12px;
           overflow: hidden;
           cursor: pointer;
           transition: transform 0.3s ease, box-shadow 0.3s ease;
-          border: 1px solid rgba(255, 255, 255, 0.08);
           height: 300px;
           opacity: 0;
           transform: translateY(30px);
@@ -393,7 +404,7 @@ const IndustryPosts = () => {
 
         .remaining-article-card:hover {
           transform: translateY(-5px) scale(1.02);
-          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.36);
+          box-shadow: 0 12px 28px rgba(126, 92, 35, 0.18);
         }
 
         @keyframes slideInFromBottom {
@@ -420,17 +431,19 @@ const IndustryPosts = () => {
 
         .remaining-article-content {
           padding: 1rem;
+          border-top: 1px solid rgba(126, 92, 35, 0.16);
         }
 
         .remaining-article-title {
-          font-size: 1.8rem;
-          font-weight: 600;
-          color: #e8edf3;
+          font-size: var(--type-h5);
+          font-weight: 700;
+          color: #1d2430;
           display: -webkit-box;
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
           overflow: hidden;
-          line-height: 2.6rem;
+          line-height: 1.35;
+          font-family: var(--primary-font);
           margin: 0;
         }
 
@@ -441,8 +454,8 @@ const IndustryPosts = () => {
         }
 
         .sidebar-widget {
-          background: linear-gradient(180deg, #0d1116 0%, #090c11 100%);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
+          border: 1px solid rgba(126, 92, 35, 0.14);
           padding: 1.5rem;
           border-radius: 12px;
           opacity: 0;
@@ -454,11 +467,12 @@ const IndustryPosts = () => {
         }
 
         .widget-title {
-          color: #f3f5f7;
-          font-size: 2rem;
-          line-height: 2.8rem;
-          font-weight: 600;
+          color: #1d2430;
+          font-size: var(--type-h5);
+          line-height: 1.35;
+          font-weight: 700;
           margin-bottom: 1rem;
+          font-family: var(--primary-font);
         }
 
         @keyframes slideInFromRight {
@@ -480,12 +494,14 @@ const IndustryPosts = () => {
         }
 
         .error-alert {
-          color: #ff9b9b;
-          background: rgba(220, 53, 69, 0.1);
+          color: #8f2d2d;
+          background: rgba(220, 53, 69, 0.08);
           padding: 1rem;
           border-radius: 8px;
           text-align: center;
-          border: 1px solid rgba(220, 53, 69, 0.3);
+          border: 1px solid rgba(220, 53, 69, 0.22);
+          font-size: var(--type-small);
+          font-family: var(--secondary-font);
         }
 
         @media (min-width: 768px) {
@@ -494,16 +510,39 @@ const IndustryPosts = () => {
           }
 
           .page-section-title {
-            font-size: 2.6rem;
-            line-height: 3.4rem;
+            font-size: var(--type-h2);
           }
 
           .latest-articles-grid {
             grid-template-columns: repeat(2, 1fr);
           }
 
+          .latest-articles-grid::before {
+            content: "";
+            position: absolute;
+            top: 14px;
+            bottom: 14px;
+            left: 50%;
+            width: 1px;
+            background: rgba(58, 42, 18, 0.42);
+            pointer-events: none;
+            transform: translateX(-50%);
+          }
+
           .remaining-articles-grid {
             grid-template-columns: repeat(2, 1fr);
+          }
+
+          .remaining-articles-grid::before {
+            content: "";
+            position: absolute;
+            top: 14px;
+            bottom: 14px;
+            left: 50%;
+            width: 1px;
+            background: rgba(58, 42, 18, 0.42);
+            pointer-events: none;
+            transform: translateX(-50%);
           }
         }
 
@@ -526,8 +565,50 @@ const IndustryPosts = () => {
             grid-template-columns: repeat(3, 1fr);
           }
 
+          .latest-articles-grid::before,
+          .latest-articles-grid::after {
+            content: "";
+            position: absolute;
+            top: 14px;
+            bottom: 14px;
+            width: 1px;
+            background: rgba(58, 42, 18, 0.42);
+            pointer-events: none;
+          }
+
+          .latest-articles-grid::before {
+            left: calc(33.333% - 0.25rem);
+            transform: translateX(-50%);
+          }
+
+          .latest-articles-grid::after {
+            left: calc(66.666% + 0.25rem);
+            transform: translateX(-50%);
+          }
+
           .remaining-articles-grid {
             grid-template-columns: repeat(3, 1fr);
+          }
+
+          .remaining-articles-grid::before,
+          .remaining-articles-grid::after {
+            content: "";
+            position: absolute;
+            top: 14px;
+            bottom: 14px;
+            width: 1px;
+            background: rgba(58, 42, 18, 0.42);
+            pointer-events: none;
+          }
+
+          .remaining-articles-grid::before {
+            left: calc(33.333% - 0.25rem);
+            transform: translateX(-50%);
+          }
+
+          .remaining-articles-grid::after {
+            left: calc(66.666% + 0.25rem);
+            transform: translateX(-50%);
           }
 
           .featured-article-image {
@@ -567,12 +648,12 @@ const IndustryPosts = () => {
 
         @media (max-width: 767px) {
           .industry-page-container {
-            padding: 1rem 10px;
+            padding: 1rem 12px 1.5rem;
           }
 
           .page-section-title {
-            font-size: 2.3rem;
-            line-height: 3.1rem;
+            font-size: var(--type-h4);
+            line-height: 1.25;
           }
 
           .featured-article-card {
@@ -581,19 +662,20 @@ const IndustryPosts = () => {
           }
 
           .featured-article-image {
-            flex: 0 0 160px;
+            flex: 0 0 auto;
             width: 100%;
+            min-height: 180px;
           }
 
           .featured-article-content {
-            padding: 0.75rem;
+            padding: 0.9rem;
           }
 
           .featured-article-title,
           .latest-article-title,
           .remaining-article-title {
-            font-size: 1.6rem;
-            line-height: 2.3rem;
+            font-size: var(--type-body);
+            line-height: 1.45;
           }
 
           .latest-articles-grid {
@@ -601,12 +683,19 @@ const IndustryPosts = () => {
             gap: 1rem;
           }
 
+          .latest-articles-grid::before,
+          .latest-articles-grid::after {
+            content: none;
+          }
+
           .latest-article-card {
-            height: 300px;
+            height: auto;
+            min-height: 0;
           }
 
           .latest-article-image {
-            height: 180px;
+            height: auto;
+            aspect-ratio: 16 / 10;
           }
 
           .remaining-articles-grid {
@@ -614,41 +703,73 @@ const IndustryPosts = () => {
             gap: 1rem;
           }
 
+          .remaining-articles-grid::before,
+          .remaining-articles-grid::after {
+            content: none;
+          }
+
+          .remaining-article-card {
+            height: auto;
+            min-height: 0;
+          }
+
+          .remaining-article-image {
+            height: auto;
+            aspect-ratio: 16 / 10;
+          }
+
+          .remaining-article-content {
+            padding: 0.9rem;
+          }
+
+          .sidebar-section {
+            gap: 1.25rem;
+          }
+
           .sidebar-widget {
             padding: 1rem;
           }
 
           .widget-title {
-            font-size: 2rem;
-            line-height: 2.7rem;
+            font-size: var(--type-h5);
           }
         }
 
         @media (max-width: 480px) {
           .industry-page-container {
-            padding: 0.5rem 10px;
+            padding: 0.75rem 12px 1.25rem;
           }
 
           .featured-article-image {
-            flex: 0 0 120px;
+            min-height: 156px;
           }
 
           .latest-article-card {
-            height: 280px;
+            height: auto;
           }
 
           .latest-article-image {
-            height: 160px;
+            aspect-ratio: 16 / 10;
           }
 
           .remaining-article-image {
-            height: 140px;
+            aspect-ratio: 16 / 10;
           }
 
           .page-section-title {
             margin-bottom: 1rem;
-            font-size: 2rem;
-            line-height: 2.7rem;
+            font-size: var(--type-h4);
+            line-height: 1.25;
+          }
+
+          .featured-article-content,
+          .latest-article-content,
+          .remaining-article-content {
+            padding: 0.85rem;
+          }
+
+          .widget-title {
+            font-size: var(--type-body-lg);
           }
         }
       `}</style>

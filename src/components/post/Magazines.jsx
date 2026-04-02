@@ -39,22 +39,25 @@ const Magazines = () => {
   if (!data) return null;
 
   return (
-    <div className="related-post mt-4 magazines-section" style={{ background: "#070A0E", color: "#DCE2EA" }}>
+    <div
+      className="related-post mt-4 magazines-section"
+      style={{ background: "#f6f2e8", color: "#1d2430", fontFamily: "var(--secondary-font)" }}
+    >
       <style jsx global>{`
         .magazines-section .axil-title {
-          color: #f3f5f7 !important;
+          color: #1d2430 !important;
         }
 
         .magazines-section .btn-link {
-          color: #b8c1cc !important;
+          color: #7a5a24 !important;
         }
 
         .magazines-section .btn-link:hover {
-          color: #f3f5f7 !important;
+          color: #8b641d !important;
         }
 
         .magazines-section .splide__pagination__page {
-          background: #5d6470 !important;
+          background: rgba(126, 92, 35, 0.26) !important;
           opacity: 0.6;
         }
 

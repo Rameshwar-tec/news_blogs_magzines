@@ -36,7 +36,7 @@ const Magazines = () => {
   if (isLoading) return <Loader />;
   if (error)
     return (
-      <div style={{ color: "gold", textAlign: "center" }}>
+      <div style={{ color: "#8b641d", textAlign: "center", background: "#f6f2e8" }}>
         Error fetching magazines
       </div>
     );
@@ -57,21 +57,31 @@ const Magazines = () => {
 
       <HeaderOne />
 
-      <div className="magazines-page" style={{ width: "100%", minHeight: "100vh", background: "#070A0E", color: "#DCE2EA" }}>
+      <div
+        className="magazines-page"
+        style={{
+          width: "100%",
+          minHeight: "100vh",
+          background: "#f6f2e8",
+          color: "#1d2430",
+          fontFamily: "var(--secondary-font)",
+        }}
+      >
         <style jsx global>{`
           .magazines-page .magazines-search {
             width: 100%;
             max-width: 640px;
-            background: #0d1116;
-            color: #e8edf3;
-            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: rgba(255, 250, 241, 0.96);
+            color: #1d2430;
+            border: 1px solid rgba(126, 92, 35, 0.18);
             outline: none;
             padding: 12px 16px;
             border-radius: 10px;
+            box-shadow: 0 12px 28px rgba(126, 92, 35, 0.08);
           }
 
           .magazines-page .magazines-search::placeholder {
-            color: #8f98a3;
+            color: #7a6f61;
           }
 
           .magazines-page .year-chip {
@@ -83,20 +93,22 @@ const Magazines = () => {
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(180deg, #111720 0%, #0b1018 100%);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+            background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
+            border: 1px solid rgba(126, 92, 35, 0.16);
+            box-shadow: 0 12px 28px rgba(126, 92, 35, 0.12);
           }
 
           .magazines-page .year-chip h2 {
-            font-size: 2.2rem;
+            font-size: var(--type-h3);
+            font-family: var(--primary-font);
             margin: 0;
-            color: #e4c46d;
+            color: #8b641d;
             font-weight: 700;
           }
 
           .magazines-page .no-magazines {
-            color: #b8c1cc;
+            color: #5e6876;
+            font-size: var(--type-body);
             text-align: center;
             width: 100%;
           }

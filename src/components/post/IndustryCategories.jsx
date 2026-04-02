@@ -67,6 +67,7 @@ const IndustryCategories = () => {
         .industries-page-wrap {
           background: #070a0e;
           color: #e9eef4;
+          font-family: var(--secondary-font);
         }
 
         .industries-page-shell {
@@ -77,8 +78,9 @@ const IndustryCategories = () => {
         }
 
         .industries-page-wrap :global(.industries-heading) {
-          font-size: 2.8rem;
-          line-height: 3.8rem;
+          font-size: var(--type-h2);
+          line-height: 1.2;
+          font-family: var(--primary-font);
         }
 
         .industry-card-link {
@@ -113,9 +115,10 @@ const IndustryCategories = () => {
 
         .industry-card-title {
           color: #f2f6fb;
-          font-weight: 600;
-          font-size: 1.6rem;
-          line-height: 2.2rem;
+          font-weight: 700;
+          font-size: var(--type-h5);
+          line-height: 1.35;
+          font-family: var(--primary-font);
           margin: 0;
         }
 
@@ -123,6 +126,8 @@ const IndustryCategories = () => {
           background: #070a0e;
           color: #ff9b9b;
           padding: 1rem 10px;
+          font-size: var(--type-small);
+          font-family: var(--secondary-font);
         }
 
         @media (min-width: 768px) {
@@ -141,13 +146,11 @@ const IndustryCategories = () => {
 
         @media (max-width: 767px) {
           .industries-page-wrap :global(.industries-heading) {
-            font-size: 2.3rem;
-            line-height: 3.1rem;
+            font-size: var(--type-h3);
           }
 
           .industry-card-title {
-            font-size: 1.4rem;
-            line-height: 2rem;
+            font-size: var(--type-small);
           }
         }
       `}</style>

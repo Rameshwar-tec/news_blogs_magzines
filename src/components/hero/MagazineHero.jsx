@@ -111,11 +111,16 @@ const MagazineHero = () => {
 
 
   if (isLoading) return <Loader />;
-  if (error) return <div style={{ color: "#f3f5f7" }}>Error loading magazines</div>;
+  if (error) return <div style={{ color: "#1d2430" }}>Error loading magazines</div>;
 
   return (
     <>
-      <div style={{ width: "100%", height: "80vh", background: "linear-gradient(180deg, #000, #111 50%, #000)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <section className="mag-hero-section">
+        <div className="mag-hero-bg" />
+        <div className="mag-hero-vignette mag-hero-vignette--left" />
+        <div className="mag-hero-vignette mag-hero-vignette--right" />
+        <div className="mag-hero-core-glow" />
+
         {/* Custom Carousel */}
         <div className="carousel-container">
           <div className="carousel-track">
@@ -135,7 +140,7 @@ const MagazineHero = () => {
               const offsetMap = [0, 185, 345, 485, 605];
               const offset = (position < 0 ? -1 : 1) * offsetMap[Math.abs(position)];
               const scale = isCenter ? 1.0 : Math.max(0.2, 1.0 - Math.abs(position) * 0.2); // Progressive scaling: 100%, 80%, 60%, 40%, 20%
-              const opacity = isCenter ? 1.0 : Math.max(0.2, 1.0 - Math.abs(position) * 0.2); // Progressive opacity: 100%, 80%, 60%, 40%, 20%
+              const overlayOpacity = [0, 0.14, 0.28, 0.42, 0.56][Math.abs(position)];
               
               return (
                 <div
@@ -144,12 +149,12 @@ const MagazineHero = () => {
                   style={{
                     left: `calc(50% + ${offset}px)`,
                     transform: `translateX(-50%) translateY(-50%) scale(${scale})`,
-                    opacity: opacity,
+                    opacity: 1,
                     zIndex: isCenter ? 10 : Math.max(1, 10 - Math.abs(position)),
                   }}
                 >
                   <div className="magazine-card">
-                    <Link href={`/magazine/${magazine.slug?.current || magazine.slug}`}>
+                    <Link href={`/magazine/${magazine.slug?.current || magazine.slug}`} className="magazine-link">
                       <div className="image-container">
                         <Image
                           src={magazine.featureImg || magazine.image}
@@ -157,6 +162,11 @@ const MagazineHero = () => {
                           width={1000}
                           height={1000}
                           className="img-fluid"
+                        />
+                        <span
+                          className="magazine-darkness"
+                          style={{ opacity: overlayOpacity }}
+                          aria-hidden="true"
                         />
                       </div>
                     </Link>
@@ -166,22 +176,82 @@ const MagazineHero = () => {
             })}
           </div>
         </div>
-      </div>
+      </section>
 
       <style jsx>{`
+        .mag-hero-section {
+          width: 100%;
+          min-height: 102vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          overflow: hidden;
+          isolation: isolate;
+          background: #f6f2e8;
+          padding: 5.5rem 3.5rem 3rem;
+        }
+
+        .mag-hero-bg {
+          position: absolute;
+          inset: 0;
+          background:
+            linear-gradient(180deg, rgba(255, 250, 241, 0.24) 0%, rgba(245, 237, 223, 0.28) 100%),
+            url("https://png.pngtree.com/thumb_back/fh260/background/20231229/pngtree-abstract-cream-gradient-background-with-brown-texture-image_13903979.png");
+          background-position: center;
+          background-size: cover;
+          background-repeat: no-repeat;
+          z-index: 0;
+        }
+
+        .mag-hero-vignette {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          width: 18%;
+          z-index: 2;
+          pointer-events: none;
+        }
+
+        .mag-hero-vignette--left {
+          left: 0;
+          background: linear-gradient(90deg, rgba(246, 242, 232, 0.98) 0%, rgba(246, 242, 232, 0) 100%);
+        }
+
+        .mag-hero-vignette--right {
+          right: 0;
+          background: linear-gradient(270deg, rgba(246, 242, 232, 0.98) 0%, rgba(246, 242, 232, 0) 100%);
+        }
+
+        .mag-hero-core-glow {
+          position: absolute;
+          left: 50%;
+          top: 58%;
+          transform: translate(-50%, -50%);
+          width: min(74vw, 1000px);
+          height: min(50vw, 460px);
+          border-radius: 999px;
+          background: radial-gradient(closest-side, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0) 100%);
+          filter: blur(12px);
+          z-index: 1;
+          pointer-events: none;
+        }
+
         .carousel-container {
           position: relative;
-          width: 100%;
+          width: min(calc(100% - 9rem), 1240px);
           height: 100%;
           overflow: visible;
           display: flex;
           align-items: center;
           justify-content: center;
+          z-index: 3;
         }
 
         .carousel-track {
           position: relative;
           width: 100%;
+          max-width: 1240px;
           height: 100%;
           display: flex;
           align-items: center;
@@ -212,22 +282,27 @@ const MagazineHero = () => {
           border-radius: 0.5rem;
           overflow: hidden;
           background: transparent;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+          box-shadow: none;
           width: 350px;
-          height: 475px;
+          aspect-ratio: 350 / 460;
           margin: 0;
           padding: 0;
-          border: none;
-          outline: none;
           transition: all 0.3s ease;
         }
-        
+
+        .magazine-link {
+          display: block;
+          width: 100%;
+          height: 100%;
+          background: transparent !important;
+        }
+
         .magazine-card:hover {
           transform: scale(1.05);
-          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
         }
         
         .image-container {
+          position: relative;
           width: 100%;
           height: 100%;
           transition: transform 0.3s ease-in-out;
@@ -244,24 +319,67 @@ const MagazineHero = () => {
           border-radius: 0.5rem;
           border: none;
           outline: none;
+          background: transparent !important;
         }
-        
+
+        .magazine-darkness {
+          position: absolute;
+          inset: 0;
+          border-radius: 0.5rem;
+          background: rgba(0, 0, 0, 1);
+          pointer-events: none;
+          transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         .magazine-card * {
           border: none !important;
           outline: none !important;
         }
 
+        @media (max-width: 1199px) {
+          .mag-hero-section {
+            min-height: 94vh;
+            padding: 4.75rem 2.5rem 2.5rem;
+          }
+
+          .carousel-container {
+            width: min(calc(100% - 6rem), 1100px);
+          }
+        }
+
         @media (max-width: 991px) {
+          .mag-hero-section {
+            min-height: 86vh;
+            padding: 4rem 1.5rem 2rem;
+          }
+
+          .carousel-container {
+            width: min(calc(100% - 3rem), 960px);
+          }
+
           .magazine-card {
             width: 295px;
-            height: 410px;
+            aspect-ratio: 295 / 395;
           }
         }
 
         @media (max-width: 767px) {
+          .mag-hero-section {
+            min-height: 78vh;
+            padding: 3.25rem 1rem 1.5rem;
+          }
+
+          .carousel-container {
+            width: calc(100% - 2rem);
+          }
+
+          .mag-hero-vignette {
+            width: 24%;
+          }
+
           .magazine-card {
             width: 250px;
-            height: 355px;
+            aspect-ratio: 250 / 340;
           }
         }
       `}</style>

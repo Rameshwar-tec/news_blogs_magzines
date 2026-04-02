@@ -87,7 +87,7 @@ const WidgetPost = () => {
   });
 
   return (
-    <div className="post-widget sidebar-post-widget m-b-xs-40">
+    <div className="post-widget sidebar-post-widget">
       <Tab.Container id="widget-post" defaultActiveKey="recent">
         <Nav variant="pills" className="row no-gutters">
           <Nav.Item className="col">
@@ -138,36 +138,49 @@ const WidgetPost = () => {
         </Tab.Content>
       </Tab.Container>
       <style jsx>{`
+        :global(.sidebar-post-widget) {
+          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
+          border: 1px solid rgba(126, 92, 35, 0.14);
+          border-radius: 16px;
+          padding: 14px;
+          box-shadow: 0 12px 28px rgba(126, 92, 35, 0.12);
+          font-family: var(--secondary-font);
+        }
+
         :global(.sidebar-post-widget .nav-pills) {
-          border-color: rgba(255, 255, 255, 0.14);
+          border-color: rgba(126, 92, 35, 0.14);
           margin-bottom: 1.25rem;
+          gap: 8px;
         }
 
         :global(.sidebar-post-widget .nav-pills .nav-item a) {
-          background: rgba(255, 255, 255, 0.03);
-          border-color: rgba(255, 255, 255, 0.12);
-          color: #b9c3cf;
-          font-size: 1.05rem;
+          background: #fffaf1;
+          border: 1px solid rgba(126, 92, 35, 0.16);
+          border-radius: 12px;
+          color: #5e6876;
+          font-size: var(--type-small);
+          font-family: var(--secondary-font);
           letter-spacing: 0.05em;
           padding: 0.9rem 0.5rem;
+          font-weight: 600;
         }
 
         :global(.sidebar-post-widget .nav-pills .nav-item a:hover),
         :global(.sidebar-post-widget .nav-pills .nav-item a.active) {
-          background-color: rgba(212, 175, 55, 0.2);
-          border-color: rgba(212, 175, 55, 0.42);
-          color: #f1e0b0;
+          background-color: #f5ead3;
+          border-color: rgba(212, 175, 55, 0.52);
+          color: #7a5a24;
         }
 
         :global(.sidebar-post-widget .tab-content) {
-          border-top: 1px solid rgba(255, 255, 255, 0.08);
-          padding-top: 0.8rem;
+          border-top: 1px solid rgba(126, 92, 35, 0.14);
+          padding-top: 1rem;
         }
 
         :global(.sidebar-post-widget .post-block.post-block__small) {
           margin-bottom: 1rem;
           padding-bottom: 1rem;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+          border-bottom: 1px solid rgba(126, 92, 35, 0.12);
         }
 
         :global(.sidebar-post-widget .post-block.post-block__small:last-child) {
@@ -177,20 +190,43 @@ const WidgetPost = () => {
         }
 
         :global(.sidebar-post-widget .post-block__on-dark-bg .axil-post-title a) {
-          color: #e7edf4;
+          color: #1d2430;
         }
 
         :global(.sidebar-post-widget .post-block__on-dark-bg .axil-post-title a:hover) {
-          color: #d4af37;
+          color: #8b641d;
         }
 
         :global(.sidebar-post-widget .post-block.post-block__small .bg-color-blue-one) {
-          color: #d3b46a;
+          color: #8b641d;
+          background: #f5ead3;
+          border: 1px solid rgba(212, 175, 55, 0.28);
+          border-radius: 999px;
+          padding: 0.25rem 0.65rem;
+          font-size: var(--type-caption);
+          font-family: var(--secondary-font);
+        }
+
+        :global(.sidebar-post-widget .post-block.post-block__small .axil-post-title) {
+          font-size: var(--type-small);
+          font-family: var(--primary-font);
+          font-weight: 700;
+          line-height: 1.45;
+        }
+
+        :global(.sidebar-post-widget .post-block.post-block__small .axil-post-title a) {
+          font-family: var(--primary-font);
+        }
+
+        :global(.sidebar-post-widget .post-block.post-block__small .post-cat-group) {
+          font-family: var(--secondary-font);
         }
 
         :global(.sidebar-post-widget .tab-pane > p) {
-          color: #9eacbc;
+          color: #5e6876;
           margin: 0.5rem 0;
+          font-family: var(--secondary-font);
+          font-size: var(--type-small);
         }
       `}</style>
     </div>

@@ -20,12 +20,15 @@ const PostLayoutformag = ({ data }) => {
         <h4
           style={{
             marginTop: "1rem",
-            fontSize: "1.3rem",
-            color: "#ffffff",
+            fontSize: "var(--type-h5)",
+            fontFamily: "var(--primary-font)",
+            lineHeight: "1.35",
+            fontWeight: 700,
+            color: "#1d2430",
             textAlign: "center",
           }}
         >
-          <Link href={`/magazine/${data.slug.current}`} style={{ color: "#ffffff" }}>
+          <Link href={`/magazine/${data.slug.current}`} style={{ color: "#1d2430" }}>
             {data.title}
           </Link>
         </h4>
@@ -42,17 +45,19 @@ const PostLayoutformag = ({ data }) => {
           border-radius: 10px;
           overflow: hidden;
           transition: transform 0.3s ease, box-shadow 0.3s ease;
+          background: rgba(255, 250, 241, 0.9);
+          border: 1px solid rgba(126, 92, 35, 0.14);
         }
 
         .image-container:hover {
           transform: scale(1.03);
-          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 12px 28px rgba(126, 92, 35, 0.16);
         }
 
         .line {
           width: 100%;
           height: 4px;
-          background-color: #ffffff;
+          background-color: #d4af37;
           margin: 1rem 0;
         }
 

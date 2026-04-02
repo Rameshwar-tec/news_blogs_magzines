@@ -81,11 +81,7 @@ const ContactPage = () => {
             <h2 className="axil-title m-b-xs-40">Our Locations</h2>
           </div>
           <div className="location-grid location-grid--single">
-            <div className="location-card">
-              <h3>USA Office</h3>
-              <p>6605 Longshore St, Dublin, OH 43017, USA</p>
-            </div>
-            <div id="usa-map" className="location-map-item">
+            <div id="germany-map" className="location-map-item">
               <div className="axil-map-wrapper location-map-wrapper">
                 <iframe
                   src="https://www.google.com/maps?q=6605+Longshore+St,+Dublin,+OH+43017,+USA&output=embed"
@@ -107,9 +103,10 @@ const ContactPage = () => {
 
       <style jsx>{`
         .contact-page {
-          background: #070a0e;
-          color: #e5ebf2;
+          background: #f6f2e8;
+          color: #1d2430;
           min-height: 100vh;
+          font-family: var(--secondary-font);
         }
 
         .contact-shell {
@@ -133,7 +130,7 @@ const ContactPage = () => {
           inset: 0;
           background-image:
             linear-gradient(180deg, rgba(6, 9, 13, 0.58) 0%, rgba(6, 9, 13, 0.82) 100%),
-            url("/images/Contact_us.jpg");
+            url("https://vinayravindran.com/wp-content/uploads/2013/05/top-magazines1.jpg");
           background-repeat: no-repeat;
           background-size: cover;
           background-position: center 22%;
@@ -156,7 +153,8 @@ const ContactPage = () => {
           border-radius: 999px;
           border: 1px solid rgba(212, 175, 55, 0.6);
           color: #e5cc88;
-          font-size: 1.2rem;
+          font-size: var(--type-caption);
+          font-family: var(--secondary-font);
           line-height: 1;
           margin-bottom: 1rem;
           text-transform: uppercase;
@@ -166,16 +164,18 @@ const ContactPage = () => {
         .contact-hero__content h1 {
           margin: 0 0 1rem;
           color: #f4f7fb;
-          font-size: clamp(3rem, 5vw, 4.8rem);
+          font-size: clamp(var(--type-h2), 5vw, var(--type-display));
           line-height: 1.12;
+          font-family: var(--primary-font);
         }
 
         .contact-hero__content p {
           margin: 0 auto;
           color: #d1d9e3;
           max-width: 980px;
-          font-size: 1.6rem;
-          line-height: 2.7rem;
+          font-size: var(--type-body);
+          line-height: 1.7;
+          font-family: var(--secondary-font);
         }
 
         .contact-hero__actions {
@@ -195,8 +195,8 @@ const ContactPage = () => {
 
         .contact-form,
         .our-location {
-          background: #070a0e;
-          color: #e5ebf2;
+          background: #f6f2e8;
+          color: #1d2430;
         }
 
         .contact-section-head {
@@ -204,23 +204,26 @@ const ContactPage = () => {
         }
 
         .contact-section-head h2 {
-          color: #f3f6fa;
-          font-size: 2.8rem;
-          line-height: 3.7rem;
+          color: #1d2430;
+          font-size: var(--type-h2);
+          line-height: 1.2;
+          font-family: var(--primary-font);
           margin: 0;
         }
 
         .contact-section-head p {
           margin: 0.35rem 0 0;
-          color: #b9c5d3;
-          font-size: 1.45rem;
-          line-height: 2.3rem;
+          color: #5e6876;
+          font-size: var(--type-small);
+          line-height: 1.6;
+          font-family: var(--secondary-font);
         }
 
         .our-location .section-title .axil-title {
-          color: #f3f6fa;
-          font-size: 2.8rem;
-          line-height: 3.6rem;
+          color: #1d2430;
+          font-size: var(--type-h2);
+          line-height: 1.2;
+          font-family: var(--primary-font);
         }
 
         .location-section-wrap {
@@ -234,51 +237,8 @@ const ContactPage = () => {
         }
 
         .location-grid--single {
-          grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+          grid-template-columns: minmax(0, 1fr);
           align-items: stretch;
-        }
-
-        .location-card {
-          position: relative;
-          background:
-            radial-gradient(120% 120% at 0% 0%, rgba(212, 175, 55, 0.14) 0%, rgba(212, 175, 55, 0) 55%),
-            linear-gradient(180deg, #111822 0%, #0a0e14 100%);
-          border: 1px solid rgba(212, 175, 55, 0.38);
-          border-radius: 12px;
-          padding: 1.2rem 1.1rem 1.1rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          box-shadow: 0 14px 28px rgba(0, 0, 0, 0.34);
-          overflow: hidden;
-        }
-
-        .location-card::before {
-          content: "";
-          position: absolute;
-          left: 0;
-          top: 0;
-          width: 4px;
-          height: 100%;
-          background: linear-gradient(180deg, #d4af37 0%, #8f7422 100%);
-        }
-
-        .location-card h3 {
-          color: #f7fbff;
-          font-size: 2.1rem;
-          line-height: 2.9rem;
-          margin: 0 0 0.4rem;
-          padding-left: 0.55rem;
-          letter-spacing: 0.01em;
-        }
-
-        .location-card p {
-          color: #d3dbe6;
-          font-size: 1.45rem;
-          line-height: 2.25rem;
-          margin: 0;
-          padding-left: 0.55rem;
-          max-width: 25ch;
         }
 
         .location-map-item {
@@ -287,10 +247,10 @@ const ContactPage = () => {
 
         .location-map-wrapper {
           width: 100%;
-          border: 1px solid rgba(212, 175, 55, 0.65);
+          border: 1px solid rgba(126, 92, 35, 0.2);
           border-radius: 10px;
           overflow: hidden;
-          box-shadow: 0 10px 22px rgba(0, 0, 0, 0.32);
+          box-shadow: 0 10px 22px rgba(126, 92, 35, 0.12);
         }
 
         @media (min-width: 768px) {
@@ -320,13 +280,12 @@ const ContactPage = () => {
         @media (max-width: 991px) {
           .our-location .section-title .axil-title,
           .contact-section-head h2 {
-            font-size: 2.4rem;
-            line-height: 3.2rem;
+            font-size: var(--type-h3);
           }
 
           .contact-hero__content p {
-            font-size: 1.35rem;
-            line-height: 2.2rem;
+            font-size: var(--type-small);
+            line-height: 1.6;
           }
 
           .location-grid--single {
@@ -355,6 +314,10 @@ const ContactPage = () => {
 
           .contact-hero__actions .btn {
             min-width: 140px;
+          }
+
+          .contact-hero__content h1 {
+            font-size: var(--type-h2);
           }
         }
       `}</style>

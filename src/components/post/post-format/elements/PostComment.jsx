@@ -6,41 +6,43 @@ const PostComment = () => {
     <div className="post-comment-area">
       <style jsx global>{`
         .post-comment-area .comment-box h2 {
-          color: #f1f5fa !important;
-          font-size: clamp(2.2rem, 3vw, 3rem);
+          color: #1d2430 !important;
+          font-size: clamp(var(--type-h3), 3vw, var(--type-h2));
+          font-family: var(--primary-font);
           margin-bottom: 0.5rem;
         }
 
         .post-comment-area .comment-box p {
-          color: #b9c5d2 !important;
-          font-size: 1.5rem;
+          color: #5e6876 !important;
+          font-size: var(--type-body);
+          font-family: var(--secondary-font);
           line-height: 2.4rem;
         }
 
         .comment-form input[type="text"],
         .comment-form input[type="email"],
         .comment-form textarea {
-          color: #ffffff !important;
-          background: #0a0d12 !important;
-          border-color: rgba(212, 175, 55, 0.75) !important;
+          color: #1d2430 !important;
+          background: rgba(255, 250, 241, 0.96) !important;
+          border-color: rgba(126, 92, 35, 0.2) !important;
           border-width: 1px !important;
         }
         .comment-form input[type="text"]::placeholder,
         .comment-form input[type="email"]::placeholder,
         .comment-form textarea::placeholder {
-          color: #999999 !important;
+          color: #8b8f96 !important;
           opacity: 1 !important;
         }
         .comment-form input[type="text"]:focus,
         .comment-form input[type="email"]:focus,
         .comment-form textarea:focus {
-          color: #ffffff !important;
-          background: #0a0d12 !important;
-          border-color: #D4AF37 !important;
+          color: #1d2430 !important;
+          background: #fffdf8 !important;
+          border-color: #d4af37 !important;
           box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2) !important;
         }
         .comment-form .form-group label {
-          color: #ffffff !important;
+          color: #5e6876 !important;
           background: transparent !important;
         }
         .comment-form .form-group:not(.focused) label {
@@ -49,8 +51,8 @@ const PostComment = () => {
           z-index: -1 !important;
         }
         .comment-form .form-group.focused label {
-          background: #0a0d12 !important;
-          color: #D4AF37 !important;
+          background: #fffdf8 !important;
+          color: #8b641d !important;
           opacity: 1 !important;
           z-index: 10 !important;
         }

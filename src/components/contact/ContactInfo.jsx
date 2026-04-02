@@ -50,30 +50,41 @@ const ContactInfo = () => {
 
       <style jsx>{`
         .contact-info-card {
-          background: linear-gradient(180deg, #0d1116 0%, #090c11 100%) !important;
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%) !important;
+          border: 1px solid rgba(126, 92, 35, 0.14);
           border-radius: 12px;
-          color: #e7ecf3;
+          color: #1d2430;
+          font-family: var(--secondary-font);
         }
 
         .contact-info-card h2 {
-          color: #f3f6fa;
+          color: #1d2430;
+          font-family: var(--primary-font);
+          font-size: var(--type-h4);
+          line-height: 1.25;
         }
 
         .contact-info-card .mid {
-          color: #b9c4cf;
+          color: #5e6876;
           line-height: 1.65;
+          font-family: var(--secondary-font);
+          font-size: var(--type-body);
         }
 
         .contact-info-card .contact-availability {
-          color: #e7ecf3;
+          color: #1d2430;
+          font-family: var(--primary-font);
+          font-size: var(--type-h5);
+          line-height: 1.35;
         }
 
         .contact-info-card .tel {
-          color: #f0d58a;
+          color: #8b641d;
           text-decoration: none;
           margin-left: 0;
           font-weight: 500;
+          font-family: var(--secondary-font);
+          font-size: var(--type-body);
         }
 
         .contact-info-card .tel i {
@@ -83,13 +94,16 @@ const ContactInfo = () => {
         }
 
         .contact-info-card .axil-social-title {
-          color: #e7ecf3;
+          color: #1d2430;
+          font-family: var(--primary-font);
+          font-size: var(--type-h5);
+          line-height: 1.35;
         }
 
         .contact-info-card :global(.social-share__with-bg li a) {
-          background: #121a25;
-          border: 1px solid rgba(255, 255, 255, 0.14);
-          color: #d9e1ea;
+          background: #fffaf1;
+          border: 1px solid rgba(126, 92, 35, 0.16);
+          color: #6b7685;
         }
 
         .contact-info-card :global(.social-share__with-bg li a:hover) {

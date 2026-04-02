@@ -41,73 +41,103 @@ const MasterTalks = ({ postData, adBanner, pClass }) => {
 
   if (!data) return null;
   return (
-  <div className="container master-talks-section" style={{ marginTop: "8px", background: "#070A0E", color: "#DCE2EA" }}>
+  <div
+    className="container master-talks-section"
+    style={{
+      marginTop: "8px",
+      background: "#f6f2e8",
+      color: "#1d2430",
+      fontFamily: "var(--secondary-font)",
+    }}
+  >
       <style jsx global>{`
         .master-talks-section .axil-title {
-          color: #f3f5f7 !important;
+          color: #1d2430 !important;
         }
 
         .master-talks-section .btn-link {
-          color: #b8c1cc !important;
+          color: #7a5a24 !important;
         }
 
         .master-talks-section .btn-link:hover {
-          color: #f3f5f7 !important;
+          color: #8b641d !important;
         }
 
         .master-talks-section .axil-content .post-block {
-          background: linear-gradient(180deg, #0d1116 0%, #090c11 100%);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
+          border: 1px solid rgba(126, 92, 35, 0.14);
           border-radius: 12px;
           padding: 10px;
         }
 
         .master-talks-section .post-cat.cat-btn {
-          background: #2f2613 !important;
-          border: 1px solid #6f5a2a !important;
-          color: #f0d58a !important;
+          background: #f5ead3 !important;
+          border: 1px solid #d8bc7b !important;
+          color: #7a5a24 !important;
+          font-size: var(--type-caption) !important;
+          font-family: var(--secondary-font) !important;
         }
 
         .master-talks-section .post-cat.cat-btn:hover {
           background: #d4af37 !important;
-          color: #111315 !important;
+          color: #3f2c0d !important;
           border-color: #d4af37 !important;
         }
 
         .master-talks-section .axil-post-title,
         .master-talks-section .axil-post-title a {
-          color: #e8edf3 !important;
+          color: #1d2430 !important;
+          font-family: var(--primary-font) !important;
+        }
+
+        .master-talks-section .post-block__mid .axil-post-title {
+          font-size: var(--type-h4);
+          line-height: 1.3;
         }
 
         .master-talks-section .axil-post-title a:hover {
-          color: #ffffff !important;
+          color: #8b641d !important;
         }
 
         .master-talks-section .mid {
-          color: #aeb6c1 !important;
+          color: #5e6876 !important;
+          font-size: var(--type-body);
+          font-family: var(--secondary-font);
+          line-height: 1.65;
         }
 
         .master-talks-section .post-sidebar > * {
-          background: linear-gradient(180deg, #0d1116 0%, #090c11 100%);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
+          border: 1px solid rgba(126, 92, 35, 0.14);
           border-radius: 12px;
           padding: 12px;
         }
 
         .master-talks-section .category-widget h3,
         .master-talks-section .post-widget .nav-link {
-          color: #e8edf3 !important;
+          color: #1d2430 !important;
         }
 
         .master-talks-section .category-widget .owl-nav button.custom-owl-prev,
         .master-talks-section .category-widget .owl-nav button.custom-owl-next {
-          background: #1b212a !important;
-          border: 1px solid rgba(255, 255, 255, 0.12);
+          background: #fffaf1 !important;
+          border: 1px solid rgba(126, 92, 35, 0.14);
         }
 
         .master-talks-section .category-widget .owl-nav button.custom-owl-prev i,
         .master-talks-section .category-widget .owl-nav button.custom-owl-next i {
-          color: #cfd6df !important;
+          color: #4d5b6c !important;
+        }
+
+        @media (max-width: 991px) {
+          .master-talks-section .post-block__mid .axil-post-title {
+            font-size: var(--type-h5);
+            line-height: 1.4;
+          }
+
+          .master-talks-section .mid {
+            font-size: var(--type-small);
+          }
         }
       `}</style>
       <div className="row">

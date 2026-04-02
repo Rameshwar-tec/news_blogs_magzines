@@ -4,7 +4,7 @@ import SocialLink from '../../data/social/SocialLink.json';
 const WidgetSocialShare = () => {
 
   return (
-    <div className="sidebar-social-share-widget m-b-xs-40">
+    <div className="sidebar-social-share-widget">
       <ul className="social-share-list-wrapper">
         <li className="social-share-list text-center perfect-square">
           <a href={SocialLink.fb.url} className="list-inner bg-color-facebook">
@@ -44,6 +44,15 @@ const WidgetSocialShare = () => {
         {/* End of .social-share-list */}
       </ul>
       {/* End of .social-share-list-wrapper */}
+      <style jsx>{`
+        .sidebar-social-share-widget {
+          font-family: var(--secondary-font);
+        }
+
+        .sidebar-social-share-widget .list-inner i {
+          font-size: var(--type-small);
+        }
+      `}</style>
     </div>
   );
 };

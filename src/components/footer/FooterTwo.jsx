@@ -93,7 +93,7 @@ const FooterTwo = () => {
             </ul>
           </section>
 
-          <section className="ecf-col ecf-magazines">
+          <section className="ecf-col ecf-col--magazines">
             <h4 className="ecf-heading">Latest Magazines</h4>
             {magazines.length > 0 ? (
               <div className="ecf-mag-carousel">
@@ -213,7 +213,7 @@ const FooterTwo = () => {
         </div>
 
         <div className="ecf-bottom">
-          <p>Copyright 2025 The Entrepreneurial Chronicles. All rights reserved.</p>
+          <p>Copyright 2026 The Entrepreneurial Chronicles. All rights reserved.</p>
           <p>
             Designed by{" "}
             <a
@@ -221,7 +221,7 @@ const FooterTwo = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              team Intellisys
+              Team Intellisys
             </a>
           </p>
         </div>
@@ -230,10 +230,11 @@ const FooterTwo = () => {
       <style jsx>{`
         .ecf-root {
           background:
-            radial-gradient(120% 140% at 0% 0%, rgba(212, 175, 55, 0.14) 0%, rgba(212, 175, 55, 0) 55%),
-            linear-gradient(180deg, #111822 0%, #090d13 100%);
-          border-top: 1px solid rgba(212, 175, 55, 0.34);
+            radial-gradient(circle at top, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0) 42%),
+            linear-gradient(180deg, #17120b 0%, #0f0c08 100%);
+          border-top: 1px solid rgba(212, 175, 55, 0.18);
           margin-top: 30px;
+          font-family: var(--secondary-font);
         }
 
         .ecf-wrap {
@@ -251,6 +252,13 @@ const FooterTwo = () => {
         .ecf-col {
           min-width: 0;
           align-self: start;
+        }
+
+        .ecf-col--magazines {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
         }
 
         .ecf-brand {
@@ -275,32 +283,31 @@ const FooterTwo = () => {
         .ecf-brand-copy-wrap {
           margin-top: 8px;
           padding-top: 14px;
-          border-top: 1px solid rgba(255, 255, 255, 0.14);
+          border-top: 1px solid rgba(212, 175, 55, 0.12);
           max-width: 380px;
         }
 
         .ecf-brand-copy {
           margin: 0;
-          color: #bac5d2;
-          font-size: 15px;
+          color: #d6ccbc;
+          font-size: var(--type-body);
           line-height: 1.72;
           font-weight: 400;
-          font-family: var(--secondary-font);
         }
 
         .ecf-heading {
           margin: 0 0 14px;
-          font-size: 19px;
+          font-size: var(--type-h5);
           line-height: 1.3;
           text-transform: none;
           letter-spacing: 0.01em;
           font-weight: 700;
-          color: #f0f3f7;
+          color: #e2bf63;
           font-family: var(--primary-font);
           text-decoration: underline;
           text-underline-offset: 5px;
           text-decoration-thickness: 1px;
-          text-decoration-color: rgba(212, 175, 55, 0.9);
+          text-decoration-color: rgba(226, 191, 99, 0.7);
         }
 
         .ecf-links {
@@ -311,23 +318,23 @@ const FooterTwo = () => {
           gap: 8px;
         }
 
-        .ecf-links a {
-          color: #d8e0e9;
+        .ecf-links :global(a) {
+          color: #f8f3ea;
           text-decoration: none;
-          font-size: 12.5px;
+          font-size: var(--type-small);
           line-height: 1.55;
           font-weight: 400;
-          font-family: var(--secondary-font);
         }
 
-        .ecf-links a:hover {
-          color: #e0c67f;
+        .ecf-links :global(a:hover) {
+          color: #e2bf63;
         }
 
         .ecf-mag-carousel {
           max-width: 250px;
           display: grid;
           gap: 8px;
+          margin: 0 auto;
         }
 
         .ecf-magazines {
@@ -350,13 +357,14 @@ const FooterTwo = () => {
         .ecf-mag-item {
           border-radius: 8px;
           overflow: hidden;
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          background: #0f131b;
+          border: 1px solid rgba(212, 175, 55, 0.16);
+          background: rgba(255, 248, 235, 0.04);
           display: block;
         }
 
         .ecf-mag-item--single {
           max-width: 250px;
+          margin: 0 auto;
         }
 
         .ecf-mag-item :global(img) {
@@ -377,9 +385,9 @@ const FooterTwo = () => {
           width: 28px;
           height: 28px;
           border-radius: 999px;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          background: #132030;
-          color: #dce4ed;
+          border: 1px solid rgba(212, 175, 55, 0.18);
+          background: rgba(255, 248, 235, 0.06);
+          color: #f5efe4;
           display: inline-flex;
           align-items: center;
           justify-content: center;
@@ -387,9 +395,9 @@ const FooterTwo = () => {
         }
 
         .ecf-mag-arrow:hover {
-          background: #d4af37;
-          border-color: #d4af37;
-          color: #0f141b;
+          background: #e2bf63;
+          border-color: #e2bf63;
+          color: #17120b;
         }
 
         .ecf-mag-dots {
@@ -403,20 +411,19 @@ const FooterTwo = () => {
           height: 8px;
           border-radius: 999px;
           border: none;
-          background: rgba(255, 255, 255, 0.3);
+          background: rgba(212, 175, 55, 0.24);
           padding: 0;
           cursor: pointer;
         }
 
         .ecf-mag-dot.is-active {
-          background: #d4af37;
+          background: #e2bf63;
         }
 
         .ecf-muted {
           margin: 0;
-          color: #99a7b8;
-          font-size: 13px;
-          font-family: var(--secondary-font);
+          color: #d6ccbc;
+          font-size: var(--type-small);
         }
 
         .ecf-contact p {
@@ -426,25 +433,23 @@ const FooterTwo = () => {
         }
 
         .ecf-contact span {
-          color: #8ea1b4;
-          font-size: 12px;
+          color: #e2bf63;
+          font-size: var(--type-small);
           text-transform: uppercase;
           letter-spacing: 0.08em;
           font-weight: 600;
-          font-family: var(--secondary-font);
         }
 
-        .ecf-contact a {
-          color: #d7dfe9;
+        .ecf-contact :global(a) {
+          color: #f5efe4;
           text-decoration: none;
-          font-size: 13px;
+          font-size: var(--type-small);
           line-height: 1.5;
-          font-family: var(--secondary-font);
           word-break: break-word;
         }
 
-        .ecf-contact a:hover {
-          color: #e0c67f;
+        .ecf-contact :global(a:hover) {
+          color: #e2bf63;
         }
 
         .ecf-social {
@@ -455,33 +460,33 @@ const FooterTwo = () => {
           gap: 8px;
         }
 
-        .ecf-social a {
+        .ecf-social :global(a) {
           width: 34px;
           height: 34px;
           border-radius: 999px;
-          border: 1px solid rgba(255, 255, 255, 0.18);
-          background: #132030;
-          color: #dce4ed;
+          border: 1px solid rgba(212, 175, 55, 0.18);
+          background: rgba(255, 248, 235, 0.06);
+          color: #f5efe4;
           display: inline-flex;
           align-items: center;
           justify-content: center;
           text-decoration: none;
         }
 
-        .ecf-social a:hover {
-          background: #d4af37;
-          border-color: #d4af37;
-          color: #0f141b;
+        .ecf-social :global(a:hover) {
+          background: #e2bf63;
+          border-color: #e2bf63;
+          color: #17120b;
         }
 
         .ecf-social i {
-          font-size: 14px;
+          font-size: var(--type-small);
         }
 
         .ecf-bottom {
           margin-top: 24px;
           padding-top: 10px;
-          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          border-top: 1px solid rgba(212, 175, 55, 0.12);
           display: flex;
           flex-direction: column;
           gap: 6px;
@@ -490,15 +495,18 @@ const FooterTwo = () => {
 
         .ecf-bottom p {
           margin: 0;
-          color: #9ba8b7;
-          font-size: 12px;
+          color: #d6ccbc;
+          font-size: var(--type-small);
           line-height: 1.5;
-          font-family: var(--secondary-font);
         }
 
-        .ecf-bottom a {
-          color: #d6deea;
+        .ecf-bottom :global(a) {
+          color: #67a8ff;
           text-decoration: underline;
+        }
+
+        .ecf-bottom :global(a:hover) {
+          color: #9dc4ff;
         }
 
         @media (min-width: 768px) {
@@ -517,7 +525,7 @@ const FooterTwo = () => {
           }
 
           .ecf-col:not(.ecf-brand) {
-            border-left: 1px solid rgba(255, 255, 255, 0.08);
+            border-left: 1px solid rgba(212, 175, 55, 0.12);
             padding-left: 24px;
           }
 
@@ -530,8 +538,10 @@ const FooterTwo = () => {
 
           .ecf-bottom {
             flex-direction: row;
-            justify-content: space-between;
-            text-align: left;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+            text-align: center;
           }
         }
       `}</style>

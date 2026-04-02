@@ -36,7 +36,18 @@ const LogoSlider = ({ title = "Our Partner Brands", showTitle = true, wrapperCla
 
   return (
     <div className={`container my-5 logo-slider-section ${wrapperClassName}`.trim()}>
-      {showTitle ? <h2 className="text-center mb-4" style={{ color: "#eef2f6" }}>{title}</h2> : null}
+      {showTitle ? (
+        <h2
+          className="text-center mb-4"
+          style={{
+            color: "#1d2430",
+            fontSize: "var(--type-h2)",
+            fontFamily: "var(--primary-font)",
+          }}
+        >
+          {title}
+        </h2>
+      ) : null}
       <div className="row">
         <div className="col">
           <div className="logo-slider">
@@ -65,39 +76,45 @@ const LogoSlider = ({ title = "Our Partner Brands", showTitle = true, wrapperCla
           position: relative;
           overflow: hidden;
           padding: 10px 0;
-          background: linear-gradient(180deg, #0b0f14 0%, #090c11 100%);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: 12px;
+          background: transparent;
+          border: none;
+          border-radius: 0;
         }
         .logo-slide-track {
           display: flex;
           animation: scroll 40s linear infinite;
-          width: calc(190px * ${images.length * 2});
+          width: calc(150px * ${images.length * 2});
         }
         .logo-slide {
-          height: 60px;
-          width: 150px;
-          margin: 0 20px;
+          height: 92px;
+          width: 92px;
+          margin: 0 29px;
           display: flex;
           align-items: center;
           justify-content: center;
         }
         .logo-container {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.07);
+          background: rgba(255, 250, 241, 0.9);
+          border: 1px solid rgba(126, 92, 35, 0.12);
           border-radius: 8px;
           display: flex;
           align-items: center;
           justify-content: center;
-          height: 60px;
-          width: 150px;
+          width: 92px;
+          aspect-ratio: 1 / 1;
+          padding: 10px;
+        }
+
+        .logo-container img {
+          max-width: 100%;
+          max-height: 100%;
         }
         @keyframes scroll {
           0% {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(calc(-190px * ${images.length}));
+            transform: translateX(calc(-150px * ${images.length}));
           }
         }
       `}</style>
