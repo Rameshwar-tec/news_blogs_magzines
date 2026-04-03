@@ -195,12 +195,7 @@ const MagazineHero = () => {
         .mag-hero-bg {
           position: absolute;
           inset: 0;
-          background:
-            linear-gradient(180deg, rgba(255, 250, 241, 0.24) 0%, rgba(245, 237, 223, 0.28) 100%),
-            url("https://png.pngtree.com/thumb_back/fh260/background/20231229/pngtree-abstract-cream-gradient-background-with-brown-texture-image_13903979.png");
-          background-position: center;
-          background-size: cover;
-          background-repeat: no-repeat;
+          background: #f6f2e8;
           z-index: 0;
         }
 
@@ -231,7 +226,7 @@ const MagazineHero = () => {
           width: min(74vw, 1000px);
           height: min(50vw, 460px);
           border-radius: 999px;
-          background: radial-gradient(closest-side, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0) 100%);
+          background: radial-gradient(closest-side, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0) 100%);
           filter: blur(12px);
           z-index: 1;
           pointer-events: none;

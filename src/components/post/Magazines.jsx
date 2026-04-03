@@ -46,6 +46,7 @@ const Magazines = () => {
       <style jsx global>{`
         .magazines-section .axil-title {
           color: #1d2430 !important;
+          font-size: var(--type-h3);
         }
 
         .magazines-section .btn-link {

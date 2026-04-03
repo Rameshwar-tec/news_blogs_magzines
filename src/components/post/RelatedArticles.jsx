@@ -36,6 +36,7 @@ const RelatedArticles = ({ currentMagArticle, allMagazinesArticles }) => {
         .related-articles-light .section-title h2,
         .related-articles-light .section-title h3 {
           color: #1d2430 !important;
+          font-size: var(--type-h3);
         }
 
         .related-articles-light .section-title .btn,

@@ -22,7 +22,7 @@ const Magazines = () => {
   `;
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["allMagazines"],
+    queryKey: ["allMagazinesPage"],
     queryFn: async () => {
       const response = await client.fetch(query);
       return response.sort((a, b) => {
@@ -112,6 +112,7 @@ const Magazines = () => {
             text-align: center;
             width: 100%;
           }
+
         `}</style>
         {/* Simple local search (magazine titles only) */}
         <div style={{
@@ -215,7 +216,9 @@ const Magazines = () => {
 
       <Faq/>
 
-      <FooterTwo />
+      <div className="magazines-footer" style={{ marginTop: "-30px" }}>
+        <FooterTwo />
+      </div>
     </>
   );
 };

@@ -41,7 +41,7 @@ const LogoSlider = ({ title = "Our Partner Brands", showTitle = true, wrapperCla
           className="text-center mb-4"
           style={{
             color: "#1d2430",
-            fontSize: "var(--type-h2)",
+            fontSize: "var(--type-h3)",
             fontFamily: "var(--primary-font)",
           }}
         >
@@ -86,8 +86,8 @@ const LogoSlider = ({ title = "Our Partner Brands", showTitle = true, wrapperCla
           width: calc(150px * ${images.length * 2});
         }
         .logo-slide {
-          height: 92px;
-          width: 92px;
+          height: 100px;
+          width: 100px;
           margin: 0 29px;
           display: flex;
           align-items: center;
@@ -100,9 +100,9 @@ const LogoSlider = ({ title = "Our Partner Brands", showTitle = true, wrapperCla
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 92px;
+          width: 100px;
           aspect-ratio: 1 / 1;
-          padding: 10px;
+          padding: 0;
         }
 
         .logo-container img {

@@ -7,12 +7,12 @@ const PostLayoutformag_Home = ({ data }) => {
       <Link href={`/magazine/${data.slug.current}`}>
         <div
           style={{
-            padding: "10px", // adjust padding as needed
-            background: "linear-gradient(180deg, #0d1116 0%, #090c11 100%)",
-            border: "1px solid rgba(255, 255, 255, 0.08)",
-            borderRadius: "8px", // adjust border radius for rounded corners
-            boxShadow: "0 8px 20px rgba(0, 0, 0, 0.25)", // add a subtle shadow
-            overflow: "hidden",
+            padding: "0",
+            background: "transparent",
+            border: "none",
+            borderRadius: "0",
+            boxShadow: "none",
+            overflow: "visible",
             margin: "2rem",
           }}
         >
@@ -35,13 +35,13 @@ const PostLayoutformag_Home = ({ data }) => {
                 fontFamily: "var(--primary-font)",
                 lineHeight: "1.35",
                 fontWeight: 700,
-                color: "#e8edf3",
+                color: "#1d2430",
                 textDecoration: "none",
-                marginTop: "2rem",
+                marginTop: "1.25rem",
                 padding: "0",
               }}
             >
-              <span style={{ color: "#e8edf3", textDecoration: "none" }}>
+              <span style={{ color: "#1d2430", textDecoration: "none" }}>
                 {data.title}
               </span>
             </h4>

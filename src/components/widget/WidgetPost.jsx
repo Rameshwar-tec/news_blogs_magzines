@@ -107,7 +107,7 @@ const WidgetPost = () => {
               webProfileData
                 .slice(0, 4)
                 .map((data, index) => (
-                  <PostVideoTwo data={data} key={index} />
+                  <PostVideoTwo data={data} key={index} hideCategory />
                 ))
             ) : (
               <p>No posts found.</p>
@@ -118,7 +118,7 @@ const WidgetPost = () => {
               marketNewsData
                 .slice(0, 4)
                 .map((data, index) => (
-                  <PostVideoTwo data={data} key={index} />
+                  <PostVideoTwo data={data} key={index} hideCategory />
                 ))
             ) : (
               <p>No posts found.</p>
@@ -129,7 +129,7 @@ const WidgetPost = () => {
               businessBulletinData
                 .slice(0, 4)
                 .map((data, index) => (
-                  <PostVideoTwo data={data} key={index} />
+                  <PostVideoTwo data={data} key={index} hideCategory />
                 ))
             ) : (
               <p>No posts found.</p>
@@ -174,12 +174,12 @@ const WidgetPost = () => {
 
         :global(.sidebar-post-widget .tab-content) {
           border-top: 1px solid rgba(126, 92, 35, 0.14);
-          padding-top: 1rem;
+          padding-top: 0.45rem;
         }
 
         :global(.sidebar-post-widget .post-block.post-block__small) {
-          margin-bottom: 1rem;
-          padding-bottom: 1rem;
+          margin-bottom: 0.35rem;
+          padding-bottom: 0.35rem;
           border-bottom: 1px solid rgba(126, 92, 35, 0.12);
         }
 
@@ -212,10 +212,17 @@ const WidgetPost = () => {
           font-family: var(--primary-font);
           font-weight: 700;
           line-height: 1.45;
+          margin-bottom: 0;
         }
 
         :global(.sidebar-post-widget .post-block.post-block__small .axil-post-title a) {
           font-family: var(--primary-font);
+        }
+
+        :global(.sidebar-post-widget .post-block.post-block__small .media-body) {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
         }
 
         :global(.sidebar-post-widget .post-block.post-block__small .post-cat-group) {

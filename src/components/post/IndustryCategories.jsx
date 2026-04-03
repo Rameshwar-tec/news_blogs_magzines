@@ -78,7 +78,7 @@ const IndustryCategories = () => {
         }
 
         .industries-page-wrap :global(.industries-heading) {
-          font-size: var(--type-h2);
+          font-size: var(--type-h3);
           line-height: 1.2;
           font-family: var(--primary-font);
         }

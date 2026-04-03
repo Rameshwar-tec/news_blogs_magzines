@@ -1,7 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const PostLayoutOne = ({ data }) => {
+const PostLayoutOne = ({
+  data,
+  descriptionLimit = 260,
+  separateMoreLink = false,
+}) => {
+  const description = data?.description?.trim() || "";
+  const descriptionPreview =
+    description.length > descriptionLimit
+      ? `${description.slice(0, Math.max(descriptionLimit - 3, 0)).trimEnd()}...`
+      : description;
+
   return (
     <div
       className="axil-latest-post"
@@ -13,7 +23,7 @@ const PostLayoutOne = ({ data }) => {
     >
       <div className="media post-block m-b-xs-20">
         <figure className="fig-container" style={{ position: "relative", display: "inline-block", margin: 0 }}>
-          <Link href={`/Magazine/${data?.slug.current}`}>
+          <Link href={`/post/${data?.slug.current}`}>
             <Image
               src={data?.featureImg}
               alt={data?.altText || data?.title}
@@ -22,7 +32,7 @@ const PostLayoutOne = ({ data }) => {
               sizes="100vw"
               placeholder="blur"
               blurDataURL="/images/placeholder.png"
-              style={{ width: "100%", height: "auto", objectFit: "contain" }}
+              style={{ width: "100%", height: "auto", objectFit: "cover" }}
             />
           </Link>
           <div
@@ -30,7 +40,7 @@ const PostLayoutOne = ({ data }) => {
             style={{
               position: "absolute",
               left: 16,
-              bottom: -12,
+              bottom: 16,
               zIndex: 2
             }}
           >
@@ -42,10 +52,31 @@ const PostLayoutOne = ({ data }) => {
             </Link>
           </div>
         </figure>
-        <div className="media-body" style={{ marginTop: 4 }}>
+        <div className="media-body" style={{ marginTop: 0 }}>
           <h3 className="axil-post-title hover-line hover-line color-white" style={{ color: "#f3f5f7" }}>
             <Link href={`/post/${data?.slug.current}`}>{data?.title}</Link>
           </h3>
+          {descriptionPreview ? (
+            <>
+              <p className="market-news-feature-desc">{descriptionPreview}</p>
+              <Link
+                href={`/post/${data?.slug.current}`}
+                className="market-news-feature-more"
+              >
+                More...
+              </Link>
+            </>
+          ) : separateMoreLink ? (
+            <Link href={`/post/${data?.slug.current}`} className="market-news-feature-more">
+              More...
+            </Link>
+          ) : (
+            <p className="market-news-feature-desc">
+              <Link href={`/post/${data?.slug.current}`} className="market-news-feature-more">
+                More...
+              </Link>
+            </p>
+          )}
         </div>
       </div>
       {/* End of .post-block */}

@@ -53,6 +53,7 @@ const MasterTalks = ({ postData, adBanner, pClass }) => {
       <style jsx global>{`
         .master-talks-section .axil-title {
           color: #1d2430 !important;
+          font-size: var(--type-h3);
         }
 
         .master-talks-section .btn-link {
@@ -110,12 +111,125 @@ const MasterTalks = ({ postData, adBanner, pClass }) => {
           background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
           border: 1px solid rgba(126, 92, 35, 0.14);
           border-radius: 12px;
-          padding: 12px;
+          padding: 8px;
         }
 
         .master-talks-section .category-widget h3,
         .master-talks-section .post-widget .nav-link {
           color: #1d2430 !important;
+          font-size: 12px !important;
+        }
+
+        .master-talks-section .post-sidebar .section-title {
+          font-size: var(--type-small) !important;
+          line-height: 1.35 !important;
+          margin-bottom: 0.8rem !important;
+        }
+
+        .master-talks-section .post-sidebar .post-widget .media.post-block {
+          padding: 0 !important;
+        }
+
+        .master-talks-section .post-sidebar .post-widget .axil-post-title {
+          font-size: 13px !important;
+          line-height: 1.45 !important;
+        }
+
+        .master-talks-section .post-sidebar .post-widget .post-cat.cat-btn {
+          font-size: 10px !important;
+          padding: 2px 6px !important;
+        }
+
+        .master-talks-section .post-sidebar .post-widget img {
+          max-width: 8.2rem !important;
+        }
+
+        .master-talks-section .post-sidebar .shared-sidebar-panel {
+          gap: 0.7rem !important;
+        }
+
+        .master-talks-section .post-sidebar .sidebar-post-widget .nav-pills {
+          gap: 6px !important;
+          margin-bottom: 0.9rem !important;
+        }
+
+        .master-talks-section .post-sidebar .sidebar-post-widget .nav-pills .nav-item a {
+          font-size: 10px !important;
+          padding: 0.65rem 0.35rem !important;
+          border-radius: 10px !important;
+        }
+
+        .master-talks-section .post-sidebar .sidebar-post-widget .tab-content {
+          padding-top: 0.35rem !important;
+        }
+
+        .master-talks-section .post-sidebar .sidebar-post-widget .post-block.post-block__small {
+          margin-bottom: 0.2rem !important;
+          padding-bottom: 0.2rem !important;
+        }
+
+        .master-talks-section .post-sidebar .sidebar-post-widget .post-block.post-block__small > a,
+        .master-talks-section .post-sidebar .sidebar-post-widget .post-block.post-block__small figure > a {
+          margin-right: 1rem !important;
+        }
+
+        .master-talks-section .post-sidebar .sidebar-post-widget .post-block.post-block__small .media-body {
+          margin-top: 0 !important;
+          margin-bottom: 0 !important;
+        }
+
+        .master-talks-section .post-sidebar .newsletter-widget .axil-title,
+        .master-talks-section .post-sidebar .newsletter-widget h3,
+        .master-talks-section .post-sidebar .category-widget .widget-title {
+          font-size: var(--type-small) !important;
+          line-height: 1.35 !important;
+        }
+
+        .master-talks-section .post-sidebar .newsletter-widget p,
+        .master-talks-section .post-sidebar .newsletter-widget input,
+        .master-talks-section .post-sidebar .newsletter-widget button,
+        .master-talks-section .post-sidebar .category-widget li,
+        .master-talks-section .post-sidebar .widget-social-share a {
+          font-size: 12px !important;
+        }
+
+        .master-talks-section .post-sidebar .category-widget .single-cat {
+          padding: 8px !important;
+        }
+
+        .master-talks-section .post-sidebar .category-widget .single-cat .inner {
+          padding: 8px !important;
+        }
+
+        .master-talks-section .post-sidebar .category-widget .cat-content {
+          padding: 8px 10px !important;
+        }
+
+        .master-talks-section .post-sidebar .category-widget .cat-content .cat-title,
+        .master-talks-section .post-sidebar .category-widget .cat-content h4,
+        .master-talks-section .post-sidebar .category-widget .cat-content a {
+          font-size: 12px !important;
+          line-height: 1.35 !important;
+        }
+
+        .master-talks-section .post-sidebar .category-widget .category-slider {
+          height: 860px !important;
+        }
+
+        .master-talks-section .post-sidebar .category-widget .category-item {
+          margin-bottom: 0.9rem !important;
+        }
+
+        .master-talks-section .post-sidebar .category-widget .category-item > a,
+        .master-talks-section .post-sidebar .category-widget .category-item :global(a.d-block.position-relative) {
+          height: 145px !important;
+          border-radius: 10px !important;
+        }
+
+        .master-talks-section .post-sidebar .category-widget .category-card-title {
+          font-size: var(--type-small) !important;
+          line-height: 1.25 !important;
+          padding: 0 10px !important;
         }
 
         .master-talks-section .category-widget .owl-nav button.custom-owl-prev,
@@ -141,7 +255,7 @@ const MasterTalks = ({ postData, adBanner, pClass }) => {
         }
       `}</style>
       <div className="row">
-        <div className="col-lg-8">
+        <div className="col-lg-9">
           <SectionTitle
             title={data[0]?.category.title || "Master Talks"}
             btnText="ALL Posts"
@@ -156,7 +270,7 @@ const MasterTalks = ({ postData, adBanner, pClass }) => {
             ))}
           </div>
         </div>
-        <div className="col-lg-4">
+        <div className="col-lg-3">
           <SharedSidebarWidgets className="post-sidebar" />
         </div>
       </div>

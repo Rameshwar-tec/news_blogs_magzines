@@ -2,14 +2,42 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const PostLayoutTwo = ({ data, postSizeMd, postBgDark }) => {
+const PostLayoutTwo = ({
+  data,
+  postSizeMd,
+  postBgDark,
+  tagAboveImage = false,
+  tagInContent = false,
+  showDescription = false,
+  hideCategory = false,
+}) => {
+  const description = data?.description?.trim() || "";
+  const descriptionPreview =
+    description.length > 120 ? `${description.slice(0, 117).trimEnd()}...` : description;
+
   return (
     <div
       className={`media post-block  ${
         postSizeMd === true ? "post-block__mid" : ""
-      } ${postBgDark === true ? "post-block__on-dark-bg" : ""}`}
+      } ${postBgDark === true ? "post-block__on-dark-bg" : ""} ${
+        tagAboveImage || tagInContent ? "market-news-stack-card" : ""
+      }`}
     >
-      <Link className="align-self-center" href={`/post/${data.slug.current}`}>
+      {tagAboveImage && !hideCategory ? (
+        <div className="post-cat-group market-news-stack-card-tag">
+          <Link
+            className={`post-cat cat-btn ${"bg-color-blue-one"}`}
+            href={`/category/${data.category?.slug}`}
+          >
+            {data.category?.title}
+          </Link>
+        </div>
+      ) : null}
+
+      <Link
+        className={tagAboveImage ? undefined : "align-self-center"}
+        href={`/post/${data.slug.current}`}
+      >
         <Image
           src={data.featureImg}
           alt={data.altText || data.title}
@@ -22,17 +50,32 @@ const PostLayoutTwo = ({ data, postSizeMd, postBgDark }) => {
       </Link>
 
       <div className="media-body my-auto">
-        <div className="post-cat-group m-b-xs-10">
-          <Link
-            className={`post-cat cat-btn ${"bg-color-blue-one"}`}
-            href={`/category/${data.category?.slug}`}
-          >
-            {data.category?.title}
-          </Link>
-        </div>
+        {tagInContent && !hideCategory ? (
+          <div className="post-cat-group m-b-xs-10">
+            <Link
+              className={`post-cat cat-btn ${"bg-color-blue-one"}`}
+              href={`/category/${data.category?.slug}`}
+            >
+              {data.category?.title}
+            </Link>
+          </div>
+        ) : null}
+        {!tagAboveImage && !tagInContent && !hideCategory ? (
+          <div className="post-cat-group m-b-xs-10">
+            <Link
+              className={`post-cat cat-btn ${"bg-color-blue-one"}`}
+              href={`/category/${data.category?.slug}`}
+            >
+              {data.category?.title}
+            </Link>
+          </div>
+        ) : null}
         <h3 className="axil-post-title hover-line hover-line color-white" style={{ color: "#f3f5f7" }}>
           <Link href={`/post/${data.slug.current}`}>{data.title}</Link>
         </h3>
+        {showDescription && descriptionPreview ? (
+          <p className="market-news-stack-desc">{descriptionPreview}</p>
+        ) : null}
 
         {postSizeMd === true ? (
           <p className="mid hide-in-small-devices" style={{ color: "#b8bec6" }}>

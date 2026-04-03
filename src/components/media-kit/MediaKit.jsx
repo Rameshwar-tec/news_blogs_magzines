@@ -1,7 +1,4 @@
-import React, { useMemo, useState } from "react";
-import { Document, Page, pdfjs } from "react-pdf";
-
-pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+import React, { useState } from "react";
 
 const featureCards = [
   {
@@ -47,16 +44,8 @@ const audience = [
 const MediaKit = ({ mediaKit }) => {
   const pdfTitle = mediaKit?.mediaKitTitle || mediaKit?.mediaKitPdfName || "Media Kit PDF";
   const pdfUrl = mediaKit?.mediaKitPdfUrl || "";
-  const [numPages, setNumPages] = useState(0);
-
-  const pageNumbers = useMemo(
-    () => Array.from({ length: numPages }, (_, index) => index + 1),
-    [numPages]
-  );
-
-  const heroPages = useMemo(() => pageNumbers.slice(0, 8), [pageNumbers]);
-  const thumbPages = useMemo(() => pageNumbers.slice(0, 8), [pageNumbers]);
-  const miniPages = useMemo(() => pageNumbers.slice(0, 4), [pageNumbers]);
+  const coverImage = mediaKit?.coverImage || "";
+  const [showPreview, setShowPreview] = useState(false);
 
   return (
     <div className="media-kit-page">
@@ -71,74 +60,62 @@ const MediaKit = ({ mediaKit }) => {
         </div>
       ) : null}
 
-      {pdfUrl ? (
-        <Document
-          file={pdfUrl}
-          onLoadSuccess={({ numPages: loadedPages }) => setNumPages(loadedPages)}
-          loading={null}
-          error={null}
-          className="mk-document-source"
-        />
-      ) : null}
-
-      <section className="mk-hero-strip">
-        <div className="mk-hero-strip__inner">
-          {pdfUrl && heroPages.length ? (
-            <Document
-              file={pdfUrl}
-              loading={<HeroPlaceholders count={4} />}
-              error={<HeroPlaceholders count={4} />}
-            >
+      <section className="mk-section mk-section--light mk-single-section">
+        <div className="mk-shell">
+          {showPreview && pdfUrl ? (
+            <div className="mk-preview-frame-wrap">
+              <iframe
+                src={pdfUrl}
+                title={pdfTitle}
+                className="mk-preview-frame"
+                loading="lazy"
+              />
+            </div>
+          ) : coverImage ? (
+            <div className="mk-hero-strip__inner">
               <div className="mk-hero-strip__track">
-                {[...heroPages, ...heroPages].map((pageNumber, index) => (
-                  <div key={`${pageNumber}-${index}`} className="mk-hero-strip__card">
-                    <Page
-                      pageNumber={pageNumber}
-                      width={380}
-                      loading={<div className="mk-page-placeholder mk-page-placeholder--hero" />}
-                      renderAnnotationLayer={false}
-                      renderTextLayer={false}
+                {Array.from({ length: 4 }, (_, index) => (
+                  <div key={index} className="mk-hero-strip__card">
+                    <img
+                      src={coverImage}
+                      alt={pdfTitle}
+                      className="mk-hero-strip__image"
                     />
                   </div>
                 ))}
               </div>
-            </Document>
+            </div>
           ) : (
-            <HeroPlaceholders count={4} />
+            <div className="mk-hero-fallback">
+              <div className="mk-hero-fallback__eyebrow">Media Kit</div>
+              <h1 className="mk-hero-fallback__title">Explore our brand and advertising kit</h1>
+              <p className="mk-hero-fallback__copy">
+                Discover our audience reach, campaign opportunities, and brand presentation in one polished media kit.
+              </p>
+              <div className="mk-hero-fallback__actions">
+                {pdfUrl ? (
+                  <>
+                    <button
+                      type="button"
+                      className="mk-load-more-btn"
+                      onClick={() => setShowPreview(true)}
+                    >
+                      View Media Kit
+                    </button>
+                    <a
+                      href={pdfUrl}
+                      download={mediaKit?.mediaKitPdfName || "media-kit.pdf"}
+                      className="mk-load-more-btn mk-load-more-btn--secondary"
+                    >
+                      Download Media Kit
+                    </a>
+                  </>
+                ) : null}
+              </div>
+            </div>
           )}
         </div>
       </section>
-
-      {pdfUrl && pageNumbers.length ? (
-        <section className="mk-section mk-section--light">
-          <div className="mk-shell">
-            <Document
-              file={pdfUrl}
-              loading={<PagesPlaceholders />}
-              error={<div className="mk-empty-panel">Unable to load media kit pages.</div>}
-            >
-              <div className="mk-pages-grid">
-                {pageNumbers.map((pageNumber) => (
-                  <article
-                    key={pageNumber}
-                    className={`mk-page-card ${pageNumber === 4 ? "mk-page-card--featured" : ""}`}
-                  >
-                    <div className="mk-page-card__body">
-                      <Page
-                        pageNumber={pageNumber}
-                        width={900}
-                        loading={<div className="mk-page-placeholder mk-page-placeholder--page" />}
-                        renderAnnotationLayer={false}
-                        renderTextLayer={false}
-                      />
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </Document>
-          </div>
-        </section>
-      ) : null}
 
       <style jsx global>{`
         body {
@@ -306,16 +283,6 @@ const MediaKit = ({ mediaKit }) => {
           display: inline-block;
         }
 
-        .mk-document-source {
-          display: none;
-        }
-
-        .mk-hero-strip__inner :global(.react-pdf__Document),
-        .mk-promo-list :global(.react-pdf__Document),
-        .mk-pages-grid :global(.react-pdf__Document) {
-          display: contents;
-        }
-
         .mk-shell {
           width: min(1180px, calc(100% - 2rem));
           margin: 0 auto;
@@ -356,6 +323,55 @@ const MediaKit = ({ mediaKit }) => {
           overflow: hidden;
           border-radius: 28px;
           line-height: 0;
+        }
+
+        .mk-hero-strip__image {
+          display: block;
+          width: 100%;
+          height: auto;
+        }
+
+        .mk-hero-fallback {
+          width: min(960px, calc(100% - 2rem));
+          margin: 0 auto;
+          padding: 3rem 2rem;
+          border-radius: 28px;
+          background: linear-gradient(180deg, rgba(255, 252, 247, 0.98), rgba(250, 236, 220, 0.94));
+          border: 1px solid rgba(179, 105, 41, 0.18);
+          box-shadow: 0 18px 36px rgba(93, 56, 23, 0.14);
+          text-align: center;
+        }
+
+        .mk-hero-fallback__eyebrow {
+          margin-bottom: 0.75rem;
+          color: #be7028;
+          font-size: 1rem;
+          font-weight: 800;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+        }
+
+        .mk-hero-fallback__title {
+          margin: 0 0 1rem;
+          font-size: clamp(2.2rem, 4vw, 3.6rem);
+          line-height: 1.08;
+          color: #af6321;
+        }
+
+        .mk-hero-fallback__copy {
+          margin: 0 auto;
+          max-width: 720px;
+          color: #443329;
+          font-size: 1.2rem;
+          line-height: 1.8;
+        }
+
+        .mk-hero-fallback__actions {
+          display: flex;
+          justify-content: center;
+          gap: 1rem;
+          flex-wrap: wrap;
+          margin-top: 1.5rem;
         }
 
         .mk-hero-strip__card :global(.react-pdf__Page) {
@@ -415,6 +431,86 @@ const MediaKit = ({ mediaKit }) => {
         .mk-section,
         .mk-band {
           padding: 2.8rem 0;
+        }
+
+        .mk-load-more-wrap {
+          display: flex;
+          justify-content: center;
+          margin-top: 2rem;
+        }
+
+        .mk-load-more-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 52px;
+          padding: 0.95rem 1.6rem;
+          border: 1px solid #bf6c22;
+          border-radius: 999px;
+          background: linear-gradient(180deg, #db8c39, #b76522);
+          color: #fffaf4;
+          font-size: 1rem;
+          font-weight: 800;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+          box-shadow: 0 12px 28px rgba(183, 101, 34, 0.22);
+        }
+
+        .mk-load-more-btn--secondary {
+          background: rgba(255, 244, 232, 0.4);
+          color: #8f4f1c;
+          text-decoration: none;
+        }
+
+        .mk-preview-gate {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 360px;
+          padding: 2rem;
+          border-radius: 26px;
+          background: linear-gradient(180deg, rgba(255, 252, 247, 0.98), rgba(255, 246, 237, 0.96));
+          border: 1px solid rgba(179, 105, 41, 0.14);
+          box-shadow:
+            0 20px 48px rgba(93, 56, 23, 0.09),
+            inset 0 1px 0 rgba(255, 255, 255, 0.75);
+        }
+
+        .mk-preview-gate__content {
+          max-width: 760px;
+          text-align: center;
+        }
+
+        .mk-preview-gate__content h2 {
+          margin: 0 0 1rem;
+          font-size: clamp(2rem, 4vw, 3.2rem);
+          line-height: 1.08;
+          color: #af6321;
+        }
+
+        .mk-preview-gate__content p {
+          margin: 0;
+          color: #443329;
+          font-size: 1.15rem;
+          line-height: 1.85;
+        }
+
+        .mk-preview-frame-wrap {
+          border-radius: 26px;
+          overflow: hidden;
+          border: 1px solid rgba(179, 105, 41, 0.14);
+          box-shadow:
+            0 20px 48px rgba(93, 56, 23, 0.09),
+            inset 0 1px 0 rgba(255, 255, 255, 0.75);
+          background: #fff;
+        }
+
+        .mk-preview-frame {
+          display: block;
+          width: 100%;
+          min-height: 88vh;
+          border: 0;
+          background: #fff;
         }
 
         .mk-section--light {

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const PostVideoTwo = ({ data, pClass }) => {
+const PostVideoTwo = ({ data, pClass, hideCategory = false }) => {
   const resolvedClass =
     typeof pClass === "string" && pClass.trim().length > 0
       ? pClass
@@ -22,14 +22,16 @@ const PostVideoTwo = ({ data, pClass }) => {
       </Link>
 
       <div className="media-body my-auto">
-        <div className="post-cat-group">
-          <Link
-            className={`post-cat ${"bg-color-blue-one"}`}
-            href={`/category/${data.category?.slug}`}
-          >
-            {data.category?.title}
-          </Link>
-        </div>
+        {!hideCategory ? (
+          <div className="post-cat-group">
+            <Link
+              className={`post-cat ${"bg-color-blue-one"}`}
+              href={`/category/${data.category?.slug}`}
+            >
+              {data.category?.title}
+            </Link>
+          </div>
+        ) : null}
         <h3 className="axil-post-title hover-line hover-line">
           <Link href={`/post/${data?.slug.current}`}>{data?.title}</Link>
         </h3>

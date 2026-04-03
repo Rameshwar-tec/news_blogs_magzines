@@ -1,45 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import Loader from "../common/Loader";
 import { client } from "../../client";
-
-const formatRelativeTime = (dateString) => {
-  if (!dateString) return "Recently added";
-
-  const publishedTime = new Date(dateString).getTime();
-
-  if (Number.isNaN(publishedTime)) return "Recently added";
-
-  const diffMs = Date.now() - publishedTime;
-  const minute = 60 * 1000;
-  const hour = 60 * minute;
-  const day = 24 * hour;
-  const week = 7 * day;
-
-  if (diffMs < hour) {
-    const minutes = Math.max(1, Math.floor(diffMs / minute));
-    return `${minutes} min ago`;
-  }
-
-  if (diffMs < day) {
-    const hours = Math.floor(diffMs / hour);
-    return `${hours} hr ago`;
-  }
-
-  if (diffMs < week) {
-    const days = Math.floor(diffMs / day);
-    return `${days} day${days > 1 ? "s" : ""} ago`;
-  }
-
-  const weeks = Math.floor(diffMs / week);
-  return `${weeks} wk${weeks > 1 ? "s" : ""} ago`;
-};
+import PostLayoutOne from "./layout/PostLayoutOne";
+import PostLayoutTwo from "./layout/PostLayoutTwo";
 
 const WebProfiles = () => {
-  const [selectedProfile, setSelectedProfile] = useState(0);
-
   const query = `
 *[
   _type == "post" &&
@@ -50,12 +16,13 @@ const WebProfiles = () => {
   slug,
   altText,
   'featureImg': mainImage.asset->url,
+  publishedAt,
+  _updatedAt,
+  description,
   'category': {
     'title': "Web Profiles",
     'slug': "web-profiles"
-  },
-  publishedAt,
-  _updatedAt
+  }
 } | order(coalesce(publishedAt, _updatedAt) desc, _updatedAt desc)[0...5]
 `;
 
@@ -73,108 +40,46 @@ const WebProfiles = () => {
   if (error) return <div>Error fetching posts</div>;
   if (!data?.length) return null;
 
-  const selectedPost = data[selectedProfile] || data[0];
-
   return (
     <section className="web-profiles-section section-gap section-gap-top__with-text">
       <div className="container">
-        <div className="web-profiles-shell">
-          <div className="web-profiles-header">
-            <div className="web-profiles-heading">
-              <span className="heading-dot" />
-              <h2>{selectedPost?.category?.title || "Web Profiles"}</h2>
-            </div>
-            <Link
-              href={`/category/${selectedPost?.category?.slug || "web-profiles"}`}
-              className="header-pill-button"
-            >
-              View All
-            </Link>
+        <div className="web-profiles-header">
+          <div className="web-profiles-heading">
+            <span className="heading-dot" />
+            <h2>{data[0]?.category?.title || "Web Profiles"}</h2>
           </div>
+          <Link
+            href={`/category/${data[0]?.category?.slug || "web-profiles"}`}
+            className="header-pill-button"
+          >
+            View All
+          </Link>
+        </div>
 
-          <div className="web-profiles-grid">
-            <article className="featured-profile-card">
-              <Link
-                href={`/post/${selectedPost.slug.current}`}
-                className="featured-profile-image"
-              >
-                <Image
-                  src={selectedPost.featureImg}
-                  alt={selectedPost.altText || selectedPost.title}
-                  width={900}
-                  height={620}
-                  priority={selectedProfile === 0}
-                />
-              </Link>
-
-              <div className="featured-profile-copy">
-                <div className="featured-meta-row">
-                  <span className="featured-category">
-                    {selectedPost?.category?.title || "Web Profiles"}
-                  </span>
-                  <span className="featured-date">
-                    {formatRelativeTime(
-                      selectedPost.publishedAt || selectedPost._updatedAt
-                    )}
-                  </span>
-                </div>
-
-                <h3 className="featured-title">
-                  <Link href={`/post/${selectedPost.slug.current}`}>
-                    {selectedPost.title}
-                  </Link>
-                </h3>
-
-                <p className="featured-summary">
-                  Explore the latest web profile from our editorial selection and
-                  browse the rest of the stories from the panel.
-                </p>
-              </div>
-            </article>
-
-            <aside className="profile-list-panel">
-              <div className="profile-list">
-                {data.map((post, index) => (
-                  <button
-                    key={post.slug.current}
-                    type="button"
-                    className={`profile-list-item ${
-                      selectedProfile === index ? "active" : ""
-                    }`}
-                    onClick={() => setSelectedProfile(index)}
-                  >
-                    <span className="profile-list-thumb">
-                      <Image
-                        src={post.featureImg}
-                        alt={post.altText || post.title}
-                        width={88}
-                        height={68}
-                        unoptimized
-                      />
-                    </span>
-
-                    <span className="profile-list-copy">
-                      <span className="profile-list-meta">
-                        <span className="profile-list-category">
-                          {post?.category?.title || "Web Profiles"}
-                        </span>
-                        <span className="profile-list-date">
-                          {formatRelativeTime(post.publishedAt || post._updatedAt)}
-                        </span>
-                      </span>
-                      <span className="profile-list-title">{post.title}</span>
-                    </span>
-                  </button>
+        <div className="row no-gutters web-profiles-grid">
+          <div className="col-lg-7" style={{ display: "flex" }}>
+            <div className="web-profiles-feature">
+              <PostLayoutOne
+                data={data[0]}
+                descriptionLimit={1200}
+                separateMoreLink
+              />
+            </div>
+          </div>
+          <div className="col-lg-5" style={{ display: "flex" }}>
+            <div className="axil-recent-news web-profiles-stack">
+              <div className="axil-content">
+                {data.slice(1).map((post, index) => (
+                  <div key={post.slug?.current || index} className="web-profiles-stack-item">
+                    <PostLayoutTwo
+                      data={post}
+                      tagInContent
+                      showDescription
+                    />
+                  </div>
                 ))}
               </div>
-
-              <Link
-                href={`/category/${selectedPost?.category?.slug || "web-profiles"}`}
-                className="panel-footer-button"
-              >
-                See All Profiles
-              </Link>
-            </aside>
+            </div>
           </div>
         </div>
       </div>
@@ -182,8 +87,8 @@ const WebProfiles = () => {
       <style jsx global>{`
         .web-profiles-section {
           background: #f6f3ec;
-          padding-top: 32px;
-          padding-bottom: 32px;
+          padding-top: 18px !important;
+          padding-bottom: 18px !important;
           font-family: var(--secondary-font);
         }
 
@@ -191,20 +96,12 @@ const WebProfiles = () => {
           max-width: 1180px;
         }
 
-        .web-profiles-shell {
-          background: transparent;
-          border: none;
-          border-radius: 0;
-          padding: 0;
-          box-shadow: none;
-        }
-
         .web-profiles-header {
           display: flex;
           align-items: center;
           justify-content: space-between;
           gap: 16px;
-          margin-bottom: 18px;
+          margin-bottom: 20px;
         }
 
         .web-profiles-heading {
@@ -226,7 +123,7 @@ const WebProfiles = () => {
 
         .web-profiles-heading h2 {
           margin: 0;
-          font-size: var(--type-h2);
+          font-size: var(--type-h3);
           font-family: var(--primary-font);
           line-height: 1;
           font-weight: 700;
@@ -239,223 +136,325 @@ const WebProfiles = () => {
           height: 8px;
           border-radius: 999px;
           background: #f0a313;
-          box-shadow: none;
           flex-shrink: 0;
         }
 
-        .header-pill-button,
-        .panel-footer-button {
+        .header-pill-button {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          min-height: 44px;
-          padding: 0 26px;
+          min-height: 34px;
+          padding: 0 16px;
           border-radius: 999px;
           background: #f7a400;
           color: #1f1606 !important;
-          font-size: var(--type-small);
+          font-size: var(--type-caption);
           font-family: var(--secondary-font);
           font-weight: 700;
           border: none;
           transition: background 0.2s ease;
-          box-shadow: none;
         }
 
-        .header-pill-button:hover,
-        .panel-footer-button:hover {
+        .header-pill-button:hover {
           background: #eb9800;
           color: #1f1606 !important;
           transform: none;
         }
 
-        .web-profiles-grid {
-          display: grid;
-          grid-template-columns: minmax(0, 1.65fr) minmax(320px, 0.95fr);
-          gap: 22px;
-          align-items: stretch;
-        }
-
-        .featured-profile-card {
-          background: transparent;
+        .web-profiles-section .post-block {
+          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
           border: none;
           border-radius: 0;
-          padding: 0;
-          box-shadow: none;
+          padding: 10px;
         }
 
-        .featured-profile-image {
-          display: block;
-          width: 100%;
-          aspect-ratio: 1.43 / 1;
-          border-radius: 10px;
-          overflow: hidden;
-          background: #ece7dc;
+        .web-profiles-section .axil-recent-news .post-block {
+          margin-bottom: 0 !important;
         }
 
-        .featured-profile-image img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          display: block;
+        .web-profiles-section .post-cat.cat-btn {
+          background: #f7a400 !important;
+          border: 1px solid #f7a400 !important;
+          color: #1f1606 !important;
+          font-size: var(--type-caption) !important;
         }
 
-        .featured-profile-copy {
-          padding: 12px 0 0;
+        .web-profiles-section .post-cat.cat-btn:hover {
+          background: #eb9800 !important;
+          color: #1f1606 !important;
+          border-color: #eb9800 !important;
         }
 
-        .featured-meta-row,
-        .profile-list-meta {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          flex-wrap: wrap;
+        .web-profiles-section .post-block > a:hover img,
+        .web-profiles-section .post-block figure > a:hover img,
+        .web-profiles-section .featured-profile-image:hover img,
+        .web-profiles-section .profile-list-thumb:hover img {
+          transform: none !important;
         }
 
-        .featured-category,
-        .profile-list-category {
-          color: #e4a123;
-          font-size: var(--type-caption);
-          font-family: var(--secondary-font);
-          font-weight: 700;
-          letter-spacing: 0.01em;
+        .web-profiles-section .post-block:hover > a img,
+        .web-profiles-section .post-block:hover figure > a img,
+        .web-profiles-section .featured-profile-card:hover img,
+        .web-profiles-section .profile-list-item:hover img {
+          transform: none !important;
         }
 
-        .featured-date,
-        .profile-list-date {
-          color: #6c685f;
-          font-size: var(--type-caption);
-          font-family: var(--secondary-font);
-          font-weight: 600;
-        }
-
-        .featured-title {
-          margin: 10px 0 8px;
-          max-width: 92%;
-          font-size: var(--type-h3);
-          font-family: var(--primary-font);
-          line-height: 1.08;
-          font-weight: 700;
-          letter-spacing: -0.03em;
-        }
-
-        .featured-title a {
+        .web-profiles-section .axil-post-title,
+        .web-profiles-section .axil-post-title a {
           color: #161616 !important;
         }
 
-        .featured-title a:hover {
+        .web-profiles-section .axil-latest-post .axil-post-title {
+          font-size: var(--type-h2);
+          line-height: 1.2;
+        }
+
+        .web-profiles-section .post-block .axil-post-title {
+          font-size: var(--type-h5);
+          line-height: 1.45;
+        }
+
+        .web-profiles-section .axil-post-title a:hover {
           color: #7e5310 !important;
         }
 
-        .featured-summary {
-          margin: 0;
-          max-width: 78%;
-          color: #7a746a;
-          font-size: var(--type-body);
-          font-family: var(--secondary-font);
-          line-height: 1.6;
+        .web-profiles-section .axil-recent-news {
+          margin-top: 0 !important;
         }
 
-        .profile-list-panel {
-          display: flex;
-          flex-direction: column;
-          gap: 14px;
-          min-height: 100%;
-          background: transparent;
-          border: none;
-          border-radius: 0;
-          padding: 0;
-          box-shadow: none;
+        .web-profiles-section .web-profiles-grid {
+          align-items: stretch;
+          margin-left: 0;
+          margin-right: 0;
         }
 
-        .profile-list {
-          display: flex;
-          flex: 1;
-          flex-direction: column;
-          gap: 0;
-          justify-content: space-between;
+        .web-profiles-section .web-profiles-grid > [class*="col"] {
+          padding-left: 0;
+          padding-right: 0;
         }
 
-        .profile-list-item {
+        .web-profiles-section .web-profiles-feature {
           width: 100%;
-          display: grid;
-          grid-template-columns: 78px minmax(0, 1fr);
-          gap: 18px;
-          align-items: center;
-          padding: 15px 0;
-          background: transparent;
-          border: none;
-          border-bottom: 1px solid #e7e0d2;
-          border-radius: 0;
-          text-align: left;
-          transition: opacity 0.2s ease;
-        }
-
-        .profile-list-item:hover {
-          background: transparent;
-          border-color: #e7e0d2;
-          transform: none;
-          opacity: 0.82;
-        }
-
-        .profile-list-item.active {
-          background: transparent;
-          border-color: #e7e0d2;
-          box-shadow: none;
-        }
-
-        .profile-list-thumb {
-          display: block;
-          border-radius: 10px;
-          overflow: hidden;
-          background: #ece7dc;
-        }
-
-        .profile-list-thumb img {
-          width: 78px;
-          height: 60px;
-          object-fit: cover;
-          display: block;
-        }
-
-        .profile-list-copy {
-          min-width: 0;
+          height: 100%;
           display: flex;
           flex-direction: column;
-          gap: 8px;
         }
 
-        .profile-list-title {
-          color: #1b1b1b;
-          font-size: var(--type-h5);
-          font-family: var(--primary-font);
-          line-height: 1.36;
-          font-weight: 700;
+        .web-profiles-section .web-profiles-feature .axil-latest-post {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .web-profiles-section .web-profiles-feature .axil-latest-post .post-block {
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 0 !important;
+          background: transparent;
+          padding: 0;
+        }
+
+        .web-profiles-section .web-profiles-feature .fig-container {
+          width: 100%;
+          margin: 0 !important;
+        }
+
+        .web-profiles-section .web-profiles-feature .fig-container .post-cat-group {
+          position: static !important;
+          left: auto !important;
+          bottom: auto !important;
+          z-index: auto !important;
+          margin: 12px 0 4px !important;
+        }
+
+        .web-profiles-section .web-profiles-feature .fig-container > a {
+          display: block;
+          margin: 0 !important;
+        }
+
+        .web-profiles-section .web-profiles-feature .fig-container img {
+          width: 100% !important;
+          aspect-ratio: 16 / 10.6;
+          object-fit: cover !important;
+          display: block;
+        }
+
+        .web-profiles-section .web-profiles-feature .media-body {
+          margin-top: 0 !important;
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+        }
+
+        .web-profiles-section .web-profiles-feature .media-body .post-cat-group {
+          order: -1;
+          align-self: flex-start;
+        }
+
+        .web-profiles-section .web-profiles-feature .axil-post-title {
+          margin-bottom: 5px !important;
+        }
+
+        .web-profiles-section .market-news-feature-desc {
+          margin: 0;
+          color: #7a746a;
+          font-size: var(--type-small);
+          line-height: 1.75;
           display: -webkit-box;
           -webkit-box-orient: vertical;
+          -webkit-line-clamp: 4;
           overflow: hidden;
-          -webkit-line-clamp: 2;
         }
 
-        .panel-footer-button {
+        .web-profiles-section .market-news-feature-more {
+          display: inline-flex;
+          margin-top: 6px;
+          color: #e4a123 !important;
+          font-weight: 700;
+          text-decoration: none;
+          white-space: nowrap;
+        }
+
+        .web-profiles-section .market-news-feature-more:hover {
+          color: #7e5310 !important;
+          text-decoration: underline;
+        }
+
+        .web-profiles-section .web-profiles-stack {
           width: 100%;
-          min-height: 52px;
-          margin-top: 16px;
-          font-size: var(--type-small);
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          padding-top: 0 !important;
+          padding-bottom: 0 !important;
         }
 
-        @media (max-width: 1199px) {
-          .featured-title {
-            font-size: var(--type-h3);
-          }
+        .web-profiles-section .web-profiles-stack .axil-content {
+          display: flex;
+          flex-direction: column;
+          gap: 0;
+          flex: 1;
+          padding-top: 0 !important;
+          padding-bottom: 0 !important;
+          border-top: 1px solid #e7e0d2;
+          border-bottom: 1px solid #e7e0d2;
+        }
 
-          .featured-summary {
-            max-width: 100%;
-          }
+        .web-profiles-section .web-profiles-stack-item {
+          margin-bottom: 0 !important;
+          display: flex;
+        }
+
+        .web-profiles-section .web-profiles-stack-item + .web-profiles-stack-item {
+          border-top: 1px solid #e7e0d2;
+        }
+
+        .web-profiles-section .web-profiles-stack .post-block {
+          background: transparent;
+          padding: 12px;
+          width: 100%;
+        }
+
+        .web-profiles-section .web-profiles-stack-item:first-child .post-block {
+          padding-top: 12px;
+          border-top-left-radius: 12px;
+          border-top-right-radius: 12px;
+        }
+
+        .web-profiles-section .web-profiles-stack-item:last-child .post-block {
+          padding-bottom: 0;
+        }
+
+        .web-profiles-section .web-profiles-stack-item:last-child {
+          flex: 1;
+        }
+
+        .web-profiles-section .web-profiles-stack-item:last-child .post-block {
+          min-height: 100%;
+          display: flex;
+          align-items: flex-start;
+        }
+
+        .web-profiles-section .web-profiles-stack .market-news-stack-card {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: flex-start;
+          gap: 10px 0;
+        }
+
+        .web-profiles-section .web-profiles-stack .market-news-stack-card > a {
+          margin-right: 18px;
+          align-self: flex-start;
+        }
+
+        .web-profiles-section .web-profiles-stack .market-news-stack-card > a :global(img) {
+          width: 190px !important;
+          height: 130px !important;
+          max-width: none;
+          object-fit: cover !important;
+        }
+
+        .web-profiles-section .web-profiles-stack .market-news-stack-card .media-body {
+          flex: 1;
+          min-width: 0;
+          margin-top: 0 !important;
+          margin-bottom: 0 !important;
+          align-self: flex-start;
+        }
+
+        .web-profiles-section .web-profiles-stack .market-news-stack-card .post-cat-group {
+          margin-bottom: 8px !important;
+        }
+
+        .web-profiles-section .web-profiles-stack .market-news-stack-card .axil-post-title {
+          margin-bottom: 10px;
+        }
+
+        .web-profiles-section .web-profiles-stack .market-news-stack-desc {
+          margin: 0;
+          color: #7a746a;
+          font-size: calc(var(--type-small) - 1px);
+          line-height: 1.65;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          overflow: hidden;
         }
 
         @media (max-width: 991px) {
-          .web-profiles-grid {
-            grid-template-columns: 1fr;
+          .web-profiles-header {
+            margin-bottom: 16px;
+          }
+
+          .web-profiles-heading h2 {
+            font-size: var(--type-h3);
+          }
+
+          .web-profiles-section .axil-latest-post .axil-post-title {
+            font-size: var(--type-h3);
+            line-height: 1.25;
+          }
+
+          .web-profiles-section .post-block .axil-post-title {
+            font-size: var(--type-small);
+            line-height: 1.5;
+          }
+
+          .web-profiles-section .web-profiles-feature .fig-container img {
+            aspect-ratio: 16 / 10;
+          }
+
+          .web-profiles-section .market-news-feature-desc {
+            -webkit-line-clamp: 4;
+          }
+
+          .web-profiles-section .web-profiles-stack .market-news-stack-card > a {
+            margin-right: 14px;
+          }
+
+          .web-profiles-section .web-profiles-stack .market-news-stack-card > a :global(img) {
+            width: 160px !important;
+            height: 110px !important;
           }
         }
 
@@ -465,71 +464,14 @@ const WebProfiles = () => {
             padding-bottom: 24px;
           }
 
-          .web-profiles-shell {
-            padding: 0;
-          }
-
           .web-profiles-header {
             align-items: stretch;
             flex-direction: column;
             gap: 12px;
           }
 
-          .web-profiles-heading {
+          .header-pill-button {
             width: 100%;
-          }
-
-          .web-profiles-heading h2 {
-            font-size: var(--type-h3);
-          }
-
-          .header-pill-button,
-          .panel-footer-button {
-            width: 100%;
-          }
-
-          .featured-profile-card,
-          .profile-list-panel {
-            border-radius: 0;
-          }
-
-          .featured-profile-image {
-            aspect-ratio: 1.4 / 1;
-          }
-
-          .featured-profile-copy {
-            padding: 12px 0 0;
-          }
-
-          .featured-title {
-            max-width: 100%;
-            font-size: var(--type-h4);
-          }
-
-          .featured-summary {
-            max-width: 100%;
-            font-size: var(--type-small);
-          }
-
-          .profile-list-item {
-            grid-template-columns: 68px minmax(0, 1fr);
-            gap: 12px;
-            padding: 12px 0;
-            border-radius: 0;
-          }
-
-          .profile-list-thumb img {
-            width: 68px;
-            height: 52px;
-          }
-
-          .profile-list-title {
-            font-size: var(--type-small);
-          }
-
-          .profile-list-category,
-          .profile-list-date {
-            font-size: var(--type-caption);
           }
         }
       `}</style>
