@@ -65,10 +65,24 @@ const MasterTalks = ({ postData, adBanner, pClass }) => {
         }
 
         .master-talks-section .axil-content .post-block {
-          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
-          border: 1px solid rgba(126, 92, 35, 0.14);
-          border-radius: 12px;
-          padding: 10px;
+          background: transparent;
+          border: none;
+          border-radius: 0;
+          padding: 6px 0;
+          margin-bottom: 0 !important;
+        }
+
+        .master-talks-section .axil-content {
+          border-top: 1px solid rgba(126, 92, 35, 0.12);
+          border-bottom: 1px solid rgba(126, 92, 35, 0.12);
+        }
+
+        .master-talks-section .axil-content > div {
+          margin-bottom: 0 !important;
+        }
+
+        .master-talks-section .axil-content > div + div {
+          border-top: 1px solid rgba(126, 92, 35, 0.12);
         }
 
         .master-talks-section .post-cat.cat-btn {
@@ -91,20 +105,45 @@ const MasterTalks = ({ postData, adBanner, pClass }) => {
           font-family: var(--primary-font) !important;
         }
 
-        .master-talks-section .post-block__mid .axil-post-title {
-          font-size: var(--type-h4);
-          line-height: 1.3;
+        .master-talks-section .axil-content .post-block .axil-post-title {
+          font-size: var(--type-h5);
+          line-height: 1.45;
+          margin-bottom: 0.35rem;
         }
 
         .master-talks-section .axil-post-title a:hover {
           color: #8b641d !important;
         }
 
-        .master-talks-section .mid {
+        .master-talks-section .market-news-stack-desc {
           color: #5e6876 !important;
-          font-size: var(--type-body);
+          font-size: var(--type-small);
           font-family: var(--secondary-font);
-          line-height: 1.65;
+          line-height: 1.4;
+          margin-bottom: 0;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          overflow: hidden;
+        }
+
+        .master-talks-section .axil-content .post-block > a,
+        .master-talks-section .axil-content .post-block figure > a {
+          margin-right: 1rem;
+        }
+
+        .master-talks-section .axil-content .post-block img {
+          max-width: 9.5rem;
+        }
+
+        .master-talks-section .axil-content .post-block .media-body {
+          align-self: flex-start;
+          margin-top: 0 !important;
+          margin-bottom: 0 !important;
+        }
+
+        .master-talks-section .axil-content .post-block p {
+          margin-bottom: 0 !important;
         }
 
         .master-talks-section .post-sidebar > * {
@@ -213,7 +252,7 @@ const MasterTalks = ({ postData, adBanner, pClass }) => {
         }
 
         .master-talks-section .post-sidebar .category-widget .category-slider {
-          height: 860px !important;
+          height: calc((145px * 4) + (0.9rem * 3)) !important;
         }
 
         .master-talks-section .post-sidebar .category-widget .category-item {
@@ -244,13 +283,26 @@ const MasterTalks = ({ postData, adBanner, pClass }) => {
         }
 
         @media (max-width: 991px) {
-          .master-talks-section .post-block__mid .axil-post-title {
-            font-size: var(--type-h5);
-            line-height: 1.4;
+          .master-talks-section .axil-content .post-block .axil-post-title {
+            font-size: var(--type-small);
+            line-height: 1.5;
           }
 
-          .master-talks-section .mid {
-            font-size: var(--type-small);
+          .master-talks-section .market-news-stack-desc {
+            font-size: var(--type-caption);
+          }
+
+          .master-talks-section .axil-content .post-block {
+            padding: 6px 0;
+          }
+
+          .master-talks-section .axil-content .post-block > a,
+          .master-talks-section .axil-content .post-block figure > a {
+            margin-right: 0.8rem;
+          }
+
+          .master-talks-section .axil-content .post-block img {
+            max-width: 7.2rem;
           }
         }
       `}</style>
@@ -264,8 +316,8 @@ const MasterTalks = ({ postData, adBanner, pClass }) => {
           />
           <div className="axil-content">
             {data.slice(0, 8).map((post, index) => (
-              <div key={index} style={{ marginBottom: "8px" }}>
-                <PostLayoutTwo data={post} postSizeMd={true} />
+              <div key={index}>
+                <PostLayoutTwo data={post} showDescription />
               </div>
             ))}
           </div>

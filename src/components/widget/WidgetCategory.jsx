@@ -37,30 +37,11 @@ const WidgetCategory = ({ showTitle = true }) => {
   return (
     <div className="category-widget mb-4">
       <div className="d-flex justify-content-between align-items-center mb-3">
-        {showTitle ? <h3 className="h4 mb-0 category-title">Categories</h3> : null}
-
-        <div className="owl-nav">
-          <button
-            className="custom-owl-prev"
-            onClick={prevSlide}
-            disabled={currentSlide === 0}
-            aria-label="Previous categories"
-          >
-            <i className="feather icon-chevron-left"></i>
-          </button>
-          <button
-            className="custom-owl-next"
-            onClick={nextSlide}
-            disabled={currentSlide === totalSlides}
-            aria-label="Next categories"
-          >
-            <i className="feather icon-chevron-right"></i>
-          </button>
-        </div>
+        {showTitle ? <h4 className="section-title mb-0 category-title">Categories</h4> : null}
       </div>
       <div
         className="category-slider position-relative overflow-hidden"
-        style={{ height: "1000px" }}
+        style={{ height: "calc((180px * 4) + (1.5rem * 3))" }}
       >
         <div
           className="category-slide-inner transition"
@@ -108,15 +89,33 @@ const WidgetCategory = ({ showTitle = true }) => {
           ))}
         </div>
       </div>
+      <div className="owl-nav category-nav-bottom">
+        <button
+          className="custom-owl-prev"
+          onClick={prevSlide}
+          disabled={currentSlide === 0}
+          aria-label="Previous categories"
+        >
+          <i className="feather icon-chevron-up"></i>
+        </button>
+        <button
+          className="custom-owl-next"
+          onClick={nextSlide}
+          disabled={currentSlide === totalSlides}
+          aria-label="Next categories"
+        >
+          <i className="feather icon-chevron-down"></i>
+        </button>
+      </div>
       <style jsx>{`
         .category-widget {
           font-family: var(--secondary-font);
         }
 
         .category-title {
-          color: #e9edf2;
+          color: #1d2430;
           font-family: var(--primary-font);
-          font-size: var(--type-h5);
+          font-size: var(--type-small);
           line-height: 1.35;
         }
 
@@ -150,6 +149,13 @@ const WidgetCategory = ({ showTitle = true }) => {
         .category-widget .owl-nav button.custom-owl-next:disabled {
           opacity: 0.68;
           cursor: not-allowed;
+        }
+
+        .category-nav-bottom {
+          display: flex;
+          justify-content: center;
+          gap: 0.75rem;
+          margin-top: 1rem;
         }
 
         @media (max-width: 767px) {

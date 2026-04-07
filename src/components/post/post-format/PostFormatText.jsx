@@ -1,9 +1,6 @@
 import Image from "next/image";
 // import WidgetAd from "../../widget/WidgetAd";
-import WidgetInstagram from "../../widget/WidgetInstagram";
-import WidgetNewsletter from "../../widget/WidgetNewsletter";
-import WidgetPost from "../../widget/WidgetPost";
-import WidgetSocialShare from "../../widget/WidgetSocialShare";
+import SharedSidebarWidgets from "../../widget/SharedSidebarWidgets";
 import { RichTextComponent } from "../RichTextComponent";
 import PostComment from "./elements/PostComment";
 import SocialShareBottom from "./elements/SocialShareBottom";
@@ -16,7 +13,7 @@ const PostFormatText = ({ postData, allData }) => {
       <div className="post-single-wrapper p-t-xs-60 post-detail-page">
         <div className="container">
           <div className="row">
-            <div className="col-lg-8">
+            <div className="col-lg-9">
               <main className="site-main">
                 <article className="post-details">
                   <div className="single-blog-wrapper">
@@ -49,13 +46,8 @@ const PostFormatText = ({ postData, allData }) => {
                 <PostComment />
               </main>
             </div>
-            <div className="col-lg-4">
-              <div className="post-sidebar">
-                <WidgetNewsletter />
-                <WidgetSocialShare />
-                <WidgetPost dataPost={allData} />
-                {/* <WidgetInstagram /> */}
-              </div>
+            <div className="col-lg-3">
+              <SharedSidebarWidgets className="post-sidebar" />
             </div>
           </div>
         </div>
@@ -83,15 +75,15 @@ const PostFormatText = ({ postData, allData }) => {
           }
 
           .post-detail-page .post-details {
-            background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
-            border: 1px solid rgba(126, 92, 35, 0.14);
-            border-radius: 12px;
+            background: transparent;
+            border: none;
+            border-radius: 0;
             padding: 1.1rem;
           }
 
           .post-detail-page .single-blog-wrapper .axil-post-title {
             color: #1d2430;
-            font-size: clamp(var(--type-h2), 4vw, var(--type-h1));
+            font-size: var(--type-h3);
             font-family: var(--primary-font);
             line-height: 1.2;
             margin-bottom: 1rem;
@@ -176,11 +168,16 @@ const PostFormatText = ({ postData, allData }) => {
             letter-spacing: 0.06em;
           }
 
+          .post-detail-page .post-shares {
+            margin-top: 2.4rem !important;
+            margin-bottom: 0 !important;
+          }
+
           .post-detail-page .post-shares li a {
             border-radius: 8px;
-            width: 46px;
-            height: 46px;
-            min-width: 46px;
+            width: 38px;
+            height: 38px;
+            min-width: 38px;
             padding: 0;
             display: inline-flex;
             align-items: center;
@@ -192,17 +189,145 @@ const PostFormatText = ({ postData, allData }) => {
             line-height: 1;
             margin: 0;
             transform: translateY(0);
+            font-size: 1.7rem;
           }
 
           .post-detail-page hr {
             border-color: rgba(126, 92, 35, 0.14);
+            margin-top: 1.6rem !important;
+            margin-bottom: 2rem !important;
           }
 
           .post-detail-page .post-sidebar > * {
             background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
             border: 1px solid rgba(126, 92, 35, 0.14);
             border-radius: 12px;
-            padding: 12px;
+            padding: 8px;
+          }
+
+          .post-detail-page .post-sidebar .shared-sidebar-panel {
+            gap: 0.7rem;
+          }
+
+          .post-detail-page .post-sidebar .section-title {
+            font-size: var(--type-small) !important;
+            line-height: 1.35 !important;
+            margin-bottom: 0.8rem !important;
+          }
+
+          .post-detail-page .post-sidebar .post-widget .media.post-block {
+            padding: 0 !important;
+          }
+
+          .post-detail-page .post-sidebar .post-widget .axil-post-title {
+            font-size: 13px !important;
+            line-height: 1.45 !important;
+          }
+
+          .post-detail-page .post-sidebar .post-widget img {
+            max-width: 8.2rem !important;
+          }
+
+          .post-detail-page .post-sidebar .sidebar-post-widget .nav-pills {
+            gap: 6px !important;
+            margin-bottom: 0.9rem !important;
+          }
+
+          .post-detail-page .post-sidebar .sidebar-post-widget .nav-pills .nav-item a {
+            font-size: 10px !important;
+            padding: 0.65rem 0.35rem !important;
+            border-radius: 10px !important;
+          }
+
+          .post-detail-page .post-sidebar .sidebar-post-widget .tab-content {
+            padding-top: 0.35rem !important;
+          }
+
+          .post-detail-page .post-sidebar .sidebar-post-widget .post-block.post-block__small {
+            margin-bottom: 0.2rem !important;
+            padding-bottom: 0.2rem !important;
+          }
+
+          .post-detail-page .post-sidebar .sidebar-post-widget .post-block.post-block__small > a,
+          .post-detail-page .post-sidebar .sidebar-post-widget .post-block.post-block__small figure > a {
+            margin-right: 1rem !important;
+          }
+
+          .post-detail-page .post-sidebar .sidebar-post-widget .post-block.post-block__small .media-body {
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+          }
+
+          .post-detail-page .post-sidebar .category-widget .category-title {
+            font-size: var(--type-small) !important;
+            line-height: 1.35 !important;
+            color: #1d2430 !important;
+            font-family: var(--primary-font) !important;
+            margin-bottom: 0 !important;
+          }
+
+          .post-detail-page .post-sidebar .newsletter-widget .axil-title,
+          .post-detail-page .post-sidebar .newsletter-widget h3 {
+            font-size: var(--type-small) !important;
+            line-height: 1.35 !important;
+          }
+
+          .post-detail-page .post-sidebar .newsletter-widget p,
+          .post-detail-page .post-sidebar .newsletter-widget input,
+          .post-detail-page .post-sidebar .newsletter-widget button,
+          .post-detail-page .post-sidebar .category-widget li,
+          .post-detail-page .post-sidebar .widget-social-share a {
+            font-size: 12px !important;
+          }
+
+          .post-detail-page .post-sidebar .category-widget .single-cat {
+            padding: 8px !important;
+          }
+
+          .post-detail-page .post-sidebar .category-widget .single-cat .inner {
+            padding: 8px !important;
+          }
+
+          .post-detail-page .post-sidebar .category-widget .cat-content {
+            padding: 8px 10px !important;
+          }
+
+          .post-detail-page .post-sidebar .category-widget .cat-content .cat-title,
+          .post-detail-page .post-sidebar .category-widget .cat-content h4,
+          .post-detail-page .post-sidebar .category-widget .cat-content a {
+            font-size: 12px !important;
+            line-height: 1.35 !important;
+          }
+
+          .post-detail-page .post-sidebar .category-widget .category-slider {
+            height: calc((145px * 4) + (0.9rem * 3)) !important;
+          }
+
+          .post-detail-page .post-sidebar .category-widget .category-item {
+            margin-bottom: 0.9rem !important;
+          }
+
+          .post-detail-page .post-sidebar .category-widget .category-item > a,
+          .post-detail-page .post-sidebar .category-widget .category-item :global(a.d-block.position-relative) {
+            height: 145px !important;
+            border-radius: 10px !important;
+          }
+
+          .post-detail-page .post-sidebar .category-widget .category-card-title {
+            font-size: var(--type-small) !important;
+            line-height: 1.25 !important;
+            padding: 0 10px !important;
+          }
+
+          .post-detail-page .category-widget .owl-nav button.custom-owl-prev,
+          .post-detail-page .category-widget .owl-nav button.custom-owl-next {
+            background: #fffaf1 !important;
+            border: 1px solid rgba(126, 92, 35, 0.14);
+          }
+
+          .post-detail-page .category-widget .owl-nav button.custom-owl-prev i,
+          .post-detail-page .category-widget .owl-nav button.custom-owl-next i {
+            color: #4d5b6c !important;
           }
 
           @media (max-width: 991px) {

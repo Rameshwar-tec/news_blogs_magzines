@@ -15,20 +15,20 @@ const SharedSidebarWidgets = ({
       content: <WidgetNewsletter />,
     },
     {
-      key: "categories",
-      title: "Categories",
-      content: <WidgetCategory showTitle={true} />,
-    },
-    {
       key: "social-share",
       title: "Social Share",
       content: <WidgetSocialShare />,
     },
     {
-      key: "web-profile",
-      title: "Web Profile",
-      content: <WidgetPost />,
+      key: "categories",
+      title: "Categories",
+      content: <WidgetCategory showTitle={true} />,
     },
+    // {
+    //   key: "web-profile",
+    //   title: "Web Profile",
+    //   content: <WidgetPost />,
+    // },
   ];
 
   return (

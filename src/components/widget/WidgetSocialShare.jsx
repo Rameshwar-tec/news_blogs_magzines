@@ -50,7 +50,7 @@ const WidgetSocialShare = () => {
         }
 
         .sidebar-social-share-widget .list-inner i {
-          font-size: var(--type-small);
+          font-size: calc(var(--type-small) * 2);
         }
       `}</style>
     </div>

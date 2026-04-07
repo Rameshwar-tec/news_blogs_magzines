@@ -157,9 +157,6 @@ const WidgetNewsletter = () => {
               lineHeight: "1.6",
               margin: 0,
               display: "block",
-              background: "rgba(32, 22, 6, 0.48)",
-              padding: "0.35rem 0.8rem",
-              borderRadius: "10px",
               textAlign: "center",
               maxWidth: "100%",
               letterSpacing: "0.02em"
