@@ -184,6 +184,14 @@ const PostFormatText = ({ postData, allData }) => {
             justify-content: center;
           }
 
+          .post-detail-page .post-shares li a.bg-color-facebook {
+            background: linear-gradient(135deg, #1877f2 0%, #0f5cc0 100%) !important;
+          }
+
+          .post-detail-page .post-shares li a.bg-color-linkedin {
+            background: linear-gradient(135deg, #0a66c2 0%, #084b8f 100%) !important;
+          }
+
           .post-detail-page .post-shares li a i {
             display: block;
             line-height: 1;
