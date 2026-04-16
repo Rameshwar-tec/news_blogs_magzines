@@ -32,6 +32,11 @@ const LogoSlider = ({ title = "Our Partner Brands", showTitle = true, wrapperCla
     { src: LogoMagnolia, alt: "Magnolia" },
     { src: LogoDevang, alt: "Devang" },
     { src: LogoBen, alt: "Ben" },
+    { src: "/assest/Kevin Wooldridge.jpg", alt: "Kevin Wooldridge" },
+    { src: "/assest/Margarita Eberline.jpg", alt: "Margarita Eberline" },
+    { src: "/assest/Rinki Pramanik.jpg", alt: "Rinki Pramanik" },
+    { src: "/assest/Shilpa Bhasin Mehra.jpg", alt: "Shilpa Bhasin Mehra" },
+    { src: "/assest/Alysson Foti Bourque.jpg", alt: "Alysson Foti Bourque" },
   ];
 
   return (
@@ -57,7 +62,7 @@ const LogoSlider = ({ title = "Our Partner Brands", showTitle = true, wrapperCla
                   <div className="logo-container">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={image.src.src}
+                      src={typeof image.src === 'string' ? image.src : image.src.src}
                       alt={image.alt}
                       width={image.customWidth || 80}
                       height={image.customHeight || 80}
