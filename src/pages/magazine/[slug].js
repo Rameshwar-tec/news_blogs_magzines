@@ -18,7 +18,8 @@ const getEmbeddedPublicationUrl = (publicationUrl) => {
 
     // PubHTML5 recommends using the index.html path for secure embeds.
     if (hostname === "online.pubhtml5.com") {
-      return `https://s3.amazonaws.com${url.pathname.endsWith("/") ? url.pathname : `${url.pathname}/`}index.html`;
+      const normalizedPath = url.pathname.endsWith("/") ? url.pathname : `${url.pathname}/`;
+      return `https://s3.amazonaws.com/online.pubhtml5.com${normalizedPath}index.html`;
     }
 
     if (hostname.includes("pubhtml5.com") && !pathname.endsWith("/index.html")) {
