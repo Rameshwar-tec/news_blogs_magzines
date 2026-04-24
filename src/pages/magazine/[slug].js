@@ -8,8 +8,32 @@ import { client } from "../../client";
 import Loader from "../../components/common/Loader";
 import HeadMetaDynamic from "../../components/elements/HeadMetaDynamic";
 
+const getEmbeddedPublicationUrl = (publicationUrl) => {
+  if (!publicationUrl) return "";
+
+  try {
+    const url = new URL(publicationUrl);
+    const hostname = url.hostname.toLowerCase();
+    const pathname = url.pathname.replace(/\/+$/, "");
+
+    // PubHTML5 recommends using the index.html path for secure embeds.
+    if (hostname === "online.pubhtml5.com") {
+      return `https://s3.amazonaws.com${url.pathname.endsWith("/") ? url.pathname : `${url.pathname}/`}index.html`;
+    }
+
+    if (hostname.includes("pubhtml5.com") && !pathname.endsWith("/index.html")) {
+      url.pathname = `${pathname}/index.html`;
+      return url.toString();
+    }
+
+    return url.toString();
+  } catch (error) {
+    return publicationUrl;
+  }
+};
+
 const fetchMagazineContent = async (slug) => {
-  const magazineContentQuery = `*[_type == "magazine" && slug.current == '${slug}']{
+  const magazineContentQuery = `*[_type == "magazine" && slug.current == $slug]{
     title,
     slug,
     keywords,
@@ -17,7 +41,7 @@ const fetchMagazineContent = async (slug) => {
     'featureImg': mainImage.asset->url,
     issuuLink
   }`;
-  return await client.fetch(magazineContentQuery);
+  return await client.fetch(magazineContentQuery, { slug });
 };
 
 const fetchAllArticles = async () => {
@@ -35,12 +59,12 @@ const fetchAllArticles = async () => {
 };
 
 const fetchCurrentMagArticle = async (slug) => {
-  const currentMagArticleQuery = `*[_type == "post" && _id == *[_type == "magazine" && slug.current == '${slug}'][0].linkedArticle[0]._ref]{
+  const currentMagArticleQuery = `*[_type == "post" && _id == *[_type == "magazine" && slug.current == $slug][0].linkedArticle[0]._ref]{
     title,
     slug,
     'featureImg': mainImage.asset->url
   }`;
-  return await client.fetch(currentMagArticleQuery);
+  return await client.fetch(currentMagArticleQuery, { slug });
 };
 
 const MagazineDetails = ({
@@ -99,6 +123,7 @@ const MagazineDetails = ({
     return <div>No magazine content found</div>;
 
   const { issuuLink } = magazineContent[0];
+  const embeddedPublicationUrl = getEmbeddedPublicationUrl(issuuLink);
 
   return (
     <>
@@ -111,7 +136,9 @@ const MagazineDetails = ({
           sandbox="allow-top-navigation allow-top-navigation-by-user-activation allow-downloads allow-scripts allow-same-origin allow-popups allow-modals allow-popups-to-escape-sandbox allow-forms"
           allowFullScreen={true}
           className="magazine-reader-frame"
-          src={issuuLink}
+          referrerPolicy="strict-origin-when-cross-origin"
+          src={embeddedPublicationUrl}
+          title={magazineContent[0]?.title || "Publication"}
         />
       </div>
       <div className="magazine-detail-footer">
