@@ -13,8 +13,18 @@ const getEmbeddedPublicationUrl = (publicationUrl) => {
 
   try {
     const url = new URL(publicationUrl);
-    const hostname = url.hostname.toLowerCase();
-    const pathname = url.pathname.replace(/\/+$/, "");
+    let hostname = url.hostname.toLowerCase();
+    let pathname = url.pathname.replace(/\/+$/, "");
+
+    if (
+      hostname === "s3.amazonaws.com" &&
+      pathname.startsWith("/online.pubhtml5.com/")
+    ) {
+      url.hostname = "online.pubhtml5.com";
+      url.pathname = pathname.replace(/^\/online\.pubhtml5\.com/, "");
+      hostname = url.hostname.toLowerCase();
+      pathname = url.pathname.replace(/\/+$/, "");
+    }
 
     if (hostname.includes("pubhtml5.com") && !pathname.endsWith("/index.html")) {
       url.pathname = `${pathname}/index.html`;
@@ -188,6 +198,7 @@ export async function getStaticProps({ params }) {
       initialAllArticles,
       initialCurrentMagArticle,
     },
+    revalidate: 60,
   };
 }
 
