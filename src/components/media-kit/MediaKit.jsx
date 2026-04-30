@@ -82,8 +82,8 @@ const MediaKit = () => {
           grid-template-columns: 1fr;
           gap: 0;
           margin-top: 0;
-          width: 100vw;
-          margin-left: calc(-50vw + 50%);
+          width: 100%;
+          max-width: 100%;
         }
 
         .media-kit-card {
@@ -107,13 +107,15 @@ const MediaKit = () => {
           transition: all 0.3s ease;
           cursor: pointer;
           box-shadow: none;
-          width: 100vw;
+          width: 100%;
+          max-width: 100%;
         }
 
         .media-kit-image {
-          width: 100vw;
+          width: 100%;
+          max-width: 100%;
           height: auto;
-          object-fit: cover;
+          object-fit: contain;
           background: transparent;
           display: block;
         }
@@ -129,19 +131,31 @@ const MediaKit = () => {
         @media (max-width: 768px) {
           .media-kit-grid {
             grid-template-columns: 1fr;
-            gap: 20px;
+            gap: 10px;
           }
 
           .media-kit-content {
-            padding: 20px;
+            padding: 15px;
           }
 
           .media-kit-title {
-            font-size: 1.1rem;
+            font-size: 1rem;
           }
 
           .media-kit-image {
-            height: 200px;
+            width: 100%;
+            height: auto;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .media-kit-grid {
+            gap: 5px;
+          }
+
+          .media-kit-card:not(:last-child)::after {
+            margin: 15px 0;
+            height: 2px;
           }
         }
       `}</style>
