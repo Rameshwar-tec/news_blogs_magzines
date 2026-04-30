@@ -16,12 +16,6 @@ const getEmbeddedPublicationUrl = (publicationUrl) => {
     const hostname = url.hostname.toLowerCase();
     const pathname = url.pathname.replace(/\/+$/, "");
 
-    // PubHTML5 recommends using the index.html path for secure embeds.
-    if (hostname === "online.pubhtml5.com") {
-      const normalizedPath = url.pathname.endsWith("/") ? url.pathname : `${url.pathname}/`;
-      return `https://s3.amazonaws.com/online.pubhtml5.com${normalizedPath}index.html`;
-    }
-
     if (hostname.includes("pubhtml5.com") && !pathname.endsWith("/index.html")) {
       url.pathname = `${pathname}/index.html`;
       return url.toString();
