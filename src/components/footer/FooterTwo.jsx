@@ -170,17 +170,7 @@ const FooterTwo = () => {
                   6605 Longshore St, Dublin, OH 43017, USA
                 </a>
               </p>
-              <p>
-                <span>Home Branch</span>
-                <a
-                  href="https://www.google.com/maps/search/?api=1&query=office+no+328B,+Gera+imperium+Rise,+Wipro+circle,+Hinjewadi+phase+2,+Pune"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  office no 328B, Gera imperium Rise, Wipro circle, opp to
-                  wipro company, Hinjewadi phase 2, Pune
-                </a>
-              </p>
+              
             </div>
 
             <ul className="ecf-social">
