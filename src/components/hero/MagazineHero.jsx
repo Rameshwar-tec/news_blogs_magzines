@@ -7,18 +7,20 @@ import Loader from "../common/Loader";
 
 const MagazineHero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
   
   // Fetch real magazine data from Sanity
   const { data: magazineData, isLoading, error } = useQuery({
     queryKey: ["magazine-hero"],
     queryFn: async () => {
-      const query = `*[_type == "magazine"] | order(publishedAt desc) [0...9] {
+      const query = `*[_type == "magazine"] | order(coalesce(publishedAt, _updatedAt, _createdAt) desc) [0...9] {
         title,
         slug,
         'featureImg': mainImage.asset->url,
         description,
-        publishedAt
+        publishedAt,
+        _updatedAt,
+        _createdAt
       }`;
       return await client.fetch(query);
     },
@@ -94,21 +96,22 @@ const MagazineHero = () => {
   // Use Sanity data if available, otherwise use fallback
   const displayData = magazineData && magazineData.length > 0 ? magazineData : fallbackData;
 
-  // Auto-advance carousel every 3 seconds
+  useEffect(() => {
+    if (displayData && displayData.length > 0) {
+      setCurrentIndex(0);
+      setHasLoaded(true);
+    }
+  }, [displayData]);
+
   useEffect(() => {
     if (!displayData || displayData.length === 0) return;
-    
+
     const interval = setInterval(() => {
-      setIsTransitioning(true);
-      setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % displayData.length);
-        setIsTransitioning(false);
-      }, 300);
-    }, 3000);
+      setCurrentIndex((prev) => (prev + 1) % displayData.length);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [displayData]);
-
 
   if (isLoading) return <Loader />;
   if (error) return <div style={{ color: "#1d2430" }}>Error loading magazines</div>;
@@ -123,7 +126,7 @@ const MagazineHero = () => {
 
         {/* Custom Carousel */}
         <div className="carousel-container">
-          <div className="carousel-track">
+          <div className={`carousel-track ${hasLoaded ? 'loaded' : ''}`}>
             {displayData.map((magazine, index) => {
               const isCenter = index === currentIndex;
               const relativePosition = index - currentIndex;
@@ -147,8 +150,8 @@ const MagazineHero = () => {
                   key={`${magazine.slug?.current || magazine.slug}-${index}`}
                   className={`carousel-item ${isCenter ? 'center' : 'side'}`}
                   style={{
-                    left: `calc(50% + ${offset}px)`,
-                    transform: `translateX(-50%) translateY(-50%) scale(${scale})`,
+                    left: "50%",
+                    transform: `translateX(calc(-50% + ${offset}px)) translateY(-50%) scale(${scale})`,
                     opacity: 1,
                     zIndex: isCenter ? 10 : Math.max(1, 10 - Math.abs(position)),
                   }}
@@ -255,7 +258,7 @@ const MagazineHero = () => {
 
         .carousel-item {
           position: absolute;
-          transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+          transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -263,6 +266,11 @@ const MagazineHero = () => {
           top: 50%;
           bottom: 50%;
           transform: translateY(-50%);
+          opacity: 0;
+        }
+
+        .carousel-track.loaded .carousel-item {
+          opacity: 1;
         }
 
         .carousel-item.center {

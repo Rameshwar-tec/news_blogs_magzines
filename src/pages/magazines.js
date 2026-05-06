@@ -18,7 +18,7 @@ const Magazines = () => {
       'featureImg': mainImage.asset->url,
       publishedAt,
       _createdAt
-    } | order(_createdAt desc)
+    } | order(publishedAt desc)
   `;
 
   const { data, isLoading, error } = useQuery({
@@ -26,8 +26,8 @@ const Magazines = () => {
     queryFn: async () => {
       const response = await client.fetch(query);
       return response.sort((a, b) => {
-        const aKey = a._createdAt || a.publishedAt || 0;
-        const bKey = b._createdAt || b.publishedAt || 0;
+        const aKey = a.publishedAt || a._createdAt || 0;
+        const bKey = b.publishedAt || b._createdAt || 0;
         return new Date(bKey) - new Date(aKey);
       });
     },
@@ -82,28 +82,6 @@ const Magazines = () => {
 
           .magazines-page .magazines-search::placeholder {
             color: #7a6f61;
-          }
-
-          .magazines-page .year-chip {
-            width: 30%;
-            max-width: 40rem;
-            min-width: 220px;
-            height: 6rem;
-            border-radius: 10rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
-            border: 1px solid rgba(126, 92, 35, 0.16);
-            box-shadow: 0 12px 28px rgba(126, 92, 35, 0.12);
-          }
-
-          .magazines-page .year-chip h2 {
-            font-size: var(--type-h3);
-            font-family: var(--primary-font);
-            margin: 0;
-            color: #8b641d;
-            font-weight: 700;
           }
 
           .magazines-page .no-magazines {
@@ -175,21 +153,6 @@ const Magazines = () => {
             </p>
           </div>
         </div> */}
-
-        {/* Year Badge */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            margin: "2rem 0",
-          }}
-        >
-          <div className="year-chip">
-            <h2>
-              {new Date().getFullYear()}
-            </h2>
-          </div>
-        </div>
 
         {/* Magazine Grid */}
         <div

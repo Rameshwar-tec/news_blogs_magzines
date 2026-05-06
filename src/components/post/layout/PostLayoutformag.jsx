@@ -38,7 +38,7 @@ const PostLayoutformag = ({ data }) => {
         .post-container {
           width: 100%;
           max-width: 340px; /* slightly increased from 300px */
-          margin: 1rem auto;
+          margin: 30px auto 0;
         }
 
         .image-container {
