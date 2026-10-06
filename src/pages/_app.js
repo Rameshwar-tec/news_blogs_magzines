@@ -1,4 +1,3 @@
-
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/style.css";
 import "../styles/magazines.css";
@@ -54,6 +53,7 @@ function MyApp({ Component, pageProps }) {
             `,
           }}
         />
+
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-CFTSB5X8JY"
           strategy="afterInteractive"
@@ -70,24 +70,27 @@ function MyApp({ Component, pageProps }) {
             `,
           }}
         />
+
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-6JVLFGZYXP"
+          src="https://www.googletagmanager.com/gtag/js?id=G-9BLJG2TCXV"
           strategy="afterInteractive"
         />
         <Script
-          id="ga-6jvlfgzyxp"
+          id="ga-9bljg2tcxv"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-6JVLFGZYXP');
+              gtag('config', 'G-9BLJG2TCXV');
             `,
           }}
         />
+
         <Component {...pageProps} />
         <ScrollToTop />
+
         {process.env.NODE_ENV === "development" ? (
           <ReactQueryDevtools initialIsOpen={false} />
         ) : null}
@@ -97,4 +100,3 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp;
-
