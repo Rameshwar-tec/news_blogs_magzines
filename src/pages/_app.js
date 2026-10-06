@@ -1,3 +1,4 @@
+
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/style.css";
 import "../styles/magazines.css";
@@ -69,6 +70,22 @@ function MyApp({ Component, pageProps }) {
             `,
           }}
         />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-6JVLFGZYXP"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="ga-6jvlfgzyxp"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-6JVLFGZYXP');
+            `,
+          }}
+        />
         <Component {...pageProps} />
         <ScrollToTop />
         {process.env.NODE_ENV === "development" ? (
@@ -80,3 +97,4 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp;
+
