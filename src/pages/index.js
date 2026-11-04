@@ -38,7 +38,7 @@ const Home = () => {
       style={{ background: "#f6f3ec", color: "#1d2430", minHeight: "100vh" }}
     >
       <Head>
-<meta name="google-site-verification" content="CjydQL7tcjjHskUo7eWI-7yf5UWQw5OtiRgmSC6A1B0" />      </Head>
+<meta name="google-site-verification" content="CjydQL7tcjjHskUo7eWI-7yf5UWQw5OtiRgmSC6A1B0" />     </Head>
       <HeadMeta
         metaTitle="The Entrepreneurial Chronicles: A Business Magazine for Inspiring Entrepreneur Stories"
         metaDesc="The Entrepreneurial Chronicles is a business magazine that brings inspiring stories of entrepreneurs who have turned their dreams into reality."
