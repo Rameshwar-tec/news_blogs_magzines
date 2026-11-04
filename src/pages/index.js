@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Script from "next/script";
 import { useEffect, useState } from "react";
 import HeadMeta from "../components/elements/HeadMeta";
 import FooterTwo from "../components/footer/FooterTwo";
@@ -20,6 +21,19 @@ const Home = () => {
   
   return (
     <div
+  <Script
+  src="https://www.googletagmanager.com/gtag/js?id=G-69R5THHZN6"
+  strategy="afterInteractive"
+/>
+
+<Script id="google-analytics" strategy="afterInteractive">
+  {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){window.dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-69R5THHZN6');
+  `}
+</Script>
       suppressHydrationWarning
       style={{ background: "#f6f3ec", color: "#1d2430", minHeight: "100vh" }}
     >
