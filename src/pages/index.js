@@ -1,3 +1,4 @@
+
 import Head from "next/head";
 import Script from "next/script";
 import { useEffect, useState } from "react";
@@ -18,56 +19,73 @@ const Home = () => {
   useEffect(() => {
     return () => {};
   }, []);
-  
+
   return (
     <div
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-69R5THHZN6"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-69R5THHZN6');
-</script>
-    
-  <Script
-  src="https://www.googletagmanager.com/gtag/js?id=G-69R5THHZN6"
-  strategy="afterInteractive"
-/>
-
-<Script id="google-analytics" strategy="afterInteractive">
-  {`
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){window.dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-69R5THHZN6');
-  `}
-</Script>
       suppressHydrationWarning
-      style={{ background: "#f6f3ec", color: "#1d2430", minHeight: "100vh" }}
+      style={{
+        background: "#f6f3ec",
+        color: "#1d2430",
+        minHeight: "100vh",
+      }}
     >
+      {/* Google Analytics */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-69R5THHZN6"
+        strategy="afterInteractive"
+      />
+
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window.dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-69R5THHZN6');
+        `}
+      </Script>
+
+      {/* Google Search Console Verification */}
       <Head>
-         <meta name="google-site-verification" content="CjydQL7tcjjHskUo7eWI-7yf5UWQw5OtiRgmSC6A1B0" />     
+        <meta
+          name="google-site-verification"
+          content="Hb-PBtfDrWImSPQKiNhfbw0JxtOLWsPKDEbfz_WJ8ZE"
+        />
+
+        <meta
+          name="google-site-verification"
+          content="CjydQL7tcjjHskUo7eWI-7yf5UWQw5OtiRgmSC6A1B0"
+        />
       </Head>
+
       <HeadMeta
         metaTitle="The Entrepreneurial Chronicles: A Business Magazine for Inspiring Entrepreneur Stories"
         metaDesc="The Entrepreneurial Chronicles is a business magazine that brings inspiring stories of entrepreneurs who have turned their dreams into reality."
       />
+
       <HeaderOne />
 
       <MagazineHero />
+
       <div className="home-main-fullwidth">
         <BusinessBulletin />
+
         {/* <LogoSlider /> */}
+
         <SliderOne />
+
         <LogoSlider title="Our Partner Brands" showTitle={true} />
+
         <WebProfiles />
+
         <MarketNews />
+
         <Magazines />
+
         <MasterTalks />
       </div>
+
       <FooterTwo />
+
       <ScrollToTop />
 
       <style jsx global>{`
@@ -95,6 +113,7 @@ const Home = () => {
             padding-left: 14px !important;
             padding-right: 14px !important;
           }
+
           .home-main-fullwidth .row > [class*="col"] {
             padding-left: 8px !important;
             padding-right: 8px !important;
@@ -107,12 +126,12 @@ const Home = () => {
             padding-left: 18px !important;
             padding-right: 18px !important;
           }
+
           .home-main-fullwidth .row > [class*="col"] {
             padding-left: 10px !important;
             padding-right: 10px !important;
           }
         }
-
       `}</style>
     </div>
   );
